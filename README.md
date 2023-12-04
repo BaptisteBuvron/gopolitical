@@ -28,14 +28,6 @@ go test '-coverprofile=coverage.txt' -v ./...
 go tool cover '-html=coverage.txt'
 ```
 
-## Development
-
-```bash
-pip install pipx
-pipx install pre-commit
-pre-commit install
-```
-
 ## Loop
 
 ```mermaid
