@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "golang.go",
+    "aaron-bond.better-comments",
+    "DavidAnson.vscode-markdownlint",
+    "github.vscode-github-actions",
+    "jebbs.plantuml",
+    "redhat.vscode-yaml",
+    "streetsidesoftware.code-spell-checker",
+    "tamasfe.even-better-toml",
+    "usernamehw.errorlens",
+    "VisualStudioExptTeam.vscodeintellicode"
+  ],
+  "unwantedRecommendations": [
+    "bungcip.better-toml"
+  ]
+}

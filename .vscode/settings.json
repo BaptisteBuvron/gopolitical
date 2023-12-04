@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+      "settings.json": "jsonc",
+    },
+    "editor.rulers": [100],
+    "cSpell.language": "fr,en",
+    "cSpell.words": [
+      "Buvron",
+      "coverprofile",
+      "Dashstrom",
+      "github",
+      "gopolitical",
+      "Gopolitical",
+      "pipx",
+      "Soudarsane"
+    ],
+    "go.testFlags": ["-v"]
+}
