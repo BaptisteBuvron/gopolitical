@@ -8,6 +8,8 @@ import (
 
 func main() {
 	simulation, err := agt.LoadSimulation("resources/data.json")
+	simulation.Start()
+
 	if err != nil {
 		fmt.Printf("Error: %s", err)
 	} else {

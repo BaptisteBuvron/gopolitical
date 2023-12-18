@@ -3,6 +3,7 @@ package gopolitical
 import (
 	"encoding/json"
 	"os"
+	"sync"
 )
 
 type PartialResource struct {
@@ -41,13 +42,14 @@ type PartialSimulation struct {
 
 func (s *PartialSimulation) ToSimulation() Simulation {
 	prices := make(map[ResourceType]float64, len(s.Resources))
+	wg := new(sync.WaitGroup)
 	for _, resource := range s.Resources {
 		prices[resource.Name] = resource.Price
 	}
 
 	countries := make(map[string]Country, len(s.Countries))
 	for _, country := range s.Countries {
-		countries[country.ID] = NewCountry(country.ID, country.Name, country.Color, nil, country.Money)
+		countries[country.ID] = NewCountry(country.ID, country.Name, country.Color, nil, country.Money, wg)
 	}
 
 	territories := make([]Territory, len(s.Territories))
@@ -61,7 +63,7 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 		country.Territories = append(country.Territories, territories[i])
 	}
 
-	return NewSimulation(s.SecondByDay, prices, countries, territories)
+	return NewSimulation(s.SecondByDay, prices, countries, territories, wg)
 }
 
 func LoadSimulation(path string) (Simulation, error) {
