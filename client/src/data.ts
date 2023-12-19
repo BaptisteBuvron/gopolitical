@@ -3,7 +3,7 @@
 export const data = {
   "secondByDay": 24.0,
   "resources": [
-    { "name": "petrol", "price": 30 },
+    { "name": "petrol", "price": 30},
     { "name": "water", "price": 1},
     { "name": "food", "price": 2}
   ],
@@ -72,7 +72,7 @@ export const data = {
     {
       "x": 2,
       "y": 1,
-      "country": null,
+      "country": "ru",
       "variations": [
         { "name": "food", "value": 10 },
         { "name": "water", "value": 5 }
@@ -81,7 +81,7 @@ export const data = {
     {
       "x": 2,
       "y": 1,
-      "country": null,
+      "country": "us",
       "variations": [
         { "name": "food", "value": 10 },
         { "name": "water", "value": 5 }

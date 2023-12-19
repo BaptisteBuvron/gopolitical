@@ -1,6 +1,6 @@
 import React from "react";
 import {data} from "../data";
-import {getCountryColor} from "../utilities";
+import {getCountryColor} from "../utils";
 
 
 function TerritoryComponent() {

@@ -1,0 +1,21 @@
+.flag-icon {
+  width: 60%;
+  float: right;
+}
+
+.country-card {
+  background-color: #4D4D4D !important;
+  color: #FFFFFF !important;
+}
+
+.country-card hr {
+  height: 3px;
+  color: #ffc107;
+  background-color: #ffc107;
+  opacity: 1;
+}
+
+.territory-card {
+  background-color: #D9D9D9 !important;
+  color: #000000 !important;
+}
