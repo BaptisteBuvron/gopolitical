@@ -1,9 +1,6 @@
 import React from 'react';
 import './App.css';
-import CountryComponent from './CountryComponent';
-import { countries } from './CountryList';
 import TerritoryComponent from "./territories/TerritoryComponent";
-import {data} from "./data";
 
 function App() {
 
