@@ -13,7 +13,6 @@ function App() {
         <div className="App">
           <header className="App-header">
               <h1>Liste des pays du monde</h1>
-              <CountryComponent countries={countries} />
               <TerritoryComponent />
           </header>
         </div>
