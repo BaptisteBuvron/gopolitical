@@ -49,7 +49,9 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 
 	countries := make(map[string]Country, len(s.Countries))
 	for _, country := range s.Countries {
-		countries[country.ID] = NewCountry(country.ID, country.Name, country.Color, nil, country.Money, wg)
+		in := make(Channel)
+		out := make(Channel)
+		countries[country.ID] = NewCountry(country.ID, country.Name, country.Color, nil, country.Money, wg, in, out)
 	}
 
 	territories := make([]Territory, len(s.Territories))

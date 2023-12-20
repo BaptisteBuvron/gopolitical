@@ -1,6 +1,9 @@
 package gopolitical
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+)
 
 type Country struct {
 	Agent
@@ -12,28 +15,27 @@ type Country struct {
 	Out         Channel
 }
 
-func NewCountry(id string, name string, color string, territories []Territory, money float64, wg *sync.WaitGroup) Country {
-	return Country{Agent{id, name}, color, territories, money, wg}
+func NewCountry(id string, name string, color string, territories []Territory, money float64, wg *sync.WaitGroup, in Channel, out Channel) Country {
+	return Country{Agent{id, name}, color, territories, money, wg, in, out}
 }
 
 func (c Country) Start() {
-	for {
-		c.Percept()
-		c.Deliberate()
-		c.Act()
-		c.wg.Done()
-		c.wg.Wait()
-	}
+	fmt.Printf("Country %s started\n", c.Name)
+
+	c.Percept()
+	c.Deliberate()
+	c.Act()
+	c.wg.Done()
 }
 
 func (c Country) Percept() {
-
+	fmt.Printf("Country %s percept\n", c.Name)
 }
 
 func (c Country) Deliberate() {
-
+	fmt.Printf("Country %s deliberate\n", c.Name)
 }
 
 func (c Country) Act() {
-
+	fmt.Printf("Country %s act\n", c.Name)
 }

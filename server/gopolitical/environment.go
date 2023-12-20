@@ -23,7 +23,6 @@ func NewEnvironment(countries map[string]Country, territories []Territory, price
 	}
 }
 
-
 func (e *Environment) Start() {
 	for _, country := range e.Countries {
 		select {

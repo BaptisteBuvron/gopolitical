@@ -1,6 +1,10 @@
 package gopolitical
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+	"time"
+)
 
 type Simulation struct {
 	SecondByDay float64
@@ -23,18 +27,24 @@ func NewSimulation(
 func (s *Simulation) Start() {
 	//Launch all agents and added a channel to the environment
 
-	s.wg.Add(len(s.Countries))
-	for _, country := range s.Countries {
-		go country.Start()
-	}
+	fmt.Println("Start of the simulation : ")
+	fmt.Println("Number of countries : ", len(s.Countries))
+
 	for {
+		//Restart all agents
+		fmt.Println("Start of a new day")
+		for _, country := range s.Countries {
+			s.wg.Add(1)
+			go country.Start()
+		}
 		//Wait for all agents to finish their actions
 		s.wg.Wait()
+		fmt.Println("End of the day")
 		//Update the environment
 		s.Environment.Update()
 
-		//Restart all agents
-		s.wg.Add(len(s.Countries))
+		//Wait the other day
+		time.Sleep(time.Duration(s.SecondByDay) * time.Second)
 	}
 }
 

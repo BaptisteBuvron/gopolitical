@@ -1,5 +1,5 @@
 {
-  "secondByDay": 24.0,
+  "secondByDay": 2.0,
   "resources": [
     { "name": "petrol", "price": 30 },
     { "name": "water", "price": 1},
