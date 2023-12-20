@@ -69,23 +69,5 @@ export const data = {
         { "name": "water", "value": 5 }
       ]
     },
-    {
-      "x": 2,
-      "y": 1,
-      "country": "ru",
-      "variations": [
-        { "name": "food", "value": 10 },
-        { "name": "water", "value": 5 }
-      ]
-    },
-    {
-      "x": 2,
-      "y": 1,
-      "country": "us",
-      "variations": [
-        { "name": "food", "value": 10 },
-        { "name": "water", "value": 5 }
-      ]
-    }
   ]
 };

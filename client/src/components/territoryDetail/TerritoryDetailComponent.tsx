@@ -1,8 +1,15 @@
 import React from "react";
-import {Data, Territory, Variation} from "../models/types";
+import {Data, Territory, Variation} from "../../models/types";
 import './TerritoryDetailComponent.css';
-import {getCountryById, getCountryFlagById, getResourceIconPath} from "../utils";
+import '../../App.css'
+import {getCountryById, getCountryFlagById, getResourceIconPath} from "../../utils";
 import {ClockHistory} from 'react-bootstrap-icons';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+import Image from 'react-bootstrap/Image';
+import CountryActionsModal from "../territoryActionsModal/CountryActionsModal";
+import {Button} from "react-bootstrap";
+
 
 // TerritoryDetailComponent props
 interface TerritoryDetailProps {
@@ -12,6 +19,7 @@ interface TerritoryDetailProps {
 }
 
 function TerritoryDetailComponent({data, x, y}: TerritoryDetailProps) {
+    const [modalShow, setModalShow] = React.useState(false);
     const territory = data["territories"].find((t: Territory) => t.x === x && t.y === y);
     if(territory === undefined) {
         return invalidDataResponse;
@@ -19,16 +27,19 @@ function TerritoryDetailComponent({data, x, y}: TerritoryDetailProps) {
     else {
         const country = getCountryById(territory.country);
         if(country !== undefined) {
+
             return (
-                <div className="card col-6 m-3 country-card">
+                <div className="card col-5 dark-mode">
                     <div className="card-body">
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="col-10">
-                                <h5 className="card-title">{country.name}</h5>
-                                <button className="btn btn-warning mt-2">Historique des actions <ClockHistory className="mb-1"></ClockHistory></button>
+                                <h4 className="card-title">{country.name}</h4>
+                                <Button variant="warning" className="mt-2" onClick={() => setModalShow(true)}>
+                                    <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des actions
+                                </Button>
                             </div>
                             <div className="col-2">
-                                <img className="flag-icon" src={getCountryFlagById(country.id)} alt={country.name + "flag"}/>
+                                <Image src={getCountryFlagById(country.id)} alt={country.name + " flag"} fluid />
                             </div>
                         </div>
                         <hr />
@@ -37,14 +48,29 @@ function TerritoryDetailComponent({data, x, y}: TerritoryDetailProps) {
                                 {
                                     territory.variations.map((variation: Variation, index) => (
                                         <li key={index} className="list-group-item">
-                                            <img src={getResourceIconPath(variation.name)} alt={variation.name + " icon"}/>
-                                             <b>{variation.name}</b> Value: {variation.value}
+                                            <OverlayTrigger
+                                                key="bottom"
+                                                placement="bottom"
+                                                overlay={
+                                                    <Tooltip>
+                                                        {variation.name.charAt(0).toUpperCase() + variation.name.slice(1)}
+                                                    </Tooltip>
+                                                }
+                                            >
+                                                <img src={getResourceIconPath(variation.name)} className="me-2" alt={variation.name + " icon"} />
+                                            </OverlayTrigger>
+                                            Value: {variation.value}
                                         </li>
                                     ))
                                 }
                             </ul>
                         </div>
                         <p className="card-text">Il est possible de voir la liste détaillée de tous les pays sur une autre page !</p>
+                        <CountryActionsModal
+                            show={modalShow}
+                            onHide ={() => setModalShow(false)}
+                            country={country}
+                        />
                     </div>
                 </div>
             );

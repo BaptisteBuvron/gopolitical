@@ -1,9 +1,9 @@
 import React from "react";
-import {data} from "../data";
-import {getCountryColor} from "../utils";
+import {data} from "../../data";
+import {getCountryColor} from "../../utils";
 
 
-function TerritoryComponent() {
+function TerritoriesComponent() {
     return (
         <div className="Country-tab" style={{marginTop: "10%"}}>
             {data["territories"].map((territory, index) => (
@@ -24,4 +24,4 @@ function TerritoryComponent() {
     )
 }
 
-export default TerritoryComponent;
+export default TerritoriesComponent;

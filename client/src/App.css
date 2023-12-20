@@ -1,5 +1,6 @@
-.App {
-  text-align: center;
+.app {
+  background-color: #1c1f25;
+  color: white;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -8,15 +9,7 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.header {
   text-align: center;
 }
 
@@ -49,4 +42,16 @@
   align-items: center;
   justify-content: center;
   border: 3px solid #fff;
+}
+
+.dark-mode {
+  background-color: #4D4D4D !important;
+  color: #FFFFFF !important;
+}
+
+.dark-mode hr {
+  height: 3px;
+  color: #ffc107;
+  background-color: #ffc107;
+  opacity: 1;
 }
