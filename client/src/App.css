@@ -36,17 +36,12 @@
 
 .Country-tab {
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 1000px;
 }
 
 .Country {
-  width: calc(25% - 20px);
-  height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 3px solid #fff;
+  box-sizing: border-box;
 }
