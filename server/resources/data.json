@@ -1,9 +1,10 @@
 {
-  "secondByDay": 24.0,
+  "secondByDay": 2.0,
   "resources": [
     { "name": "petrol", "price": 30 },
     { "name": "water", "price": 1},
-    { "name": "food", "price": 2}
+    { "name": "food", "price": 2},
+    { "name": "armement", "price": 10}
   ],
   "countries": [
     { "name": "Russie", "id": "ru", "color": "FF0000", "money": 100.0 },
@@ -17,6 +18,9 @@
       "x": 0,
       "y": 0,
       "country": "ru",
+      "stocks": [
+        { "name": "armement", "value": 10}
+      ],
       "variations": [
         { "name": "petrol", "value": 10 },
         { "name": "water", "value": 5 }
