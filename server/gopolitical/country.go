@@ -29,6 +29,15 @@ func (c Country) Start() {
 }
 
 func (c Country) Percept() {
+	perceptRequest := PerceptRequest{from: c}
+	c.Out <- perceptRequest
+	perceptResponse := <-c.In
+
+	//Downcast to a PerceptResponse
+	if perceptResponse, ok := perceptResponse.(PerceptResponse); ok {
+		fmt.Println(len(perceptResponse.events))
+	}
+
 	fmt.Printf("Country %s percept\n", c.Name)
 }
 

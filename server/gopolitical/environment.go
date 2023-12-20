@@ -24,22 +24,34 @@ func NewEnvironment(countries map[string]Country, territories []Territory, price
 }
 
 func (e *Environment) Start() {
+	log.Println("Start of the environment")
+	for {
+		e.handleRequests()
+	}
+}
+
+func (e *Environment) handleMarketRequest(req MarketBuyRequest) {
+	e.Market.handleRequest(req)
+}
+
+func (e *Environment) handleRequests() {
 	for _, country := range e.Countries {
 		select {
-		case req := <-country.In:
+		case req := <-country.Out:
 			//Try downcasting to a MarketRessourceRequest
 			e.lock.Lock()
-			if marketReq, ok := req.(MarketBuyRequest); ok {
-				e.Market.handleRequest(marketReq)
-			} else {
+			switch req := req.(type) {
+			case MarketBuyRequest:
+				e.handleMarketRequest(req)
+			case PerceptRequest:
+				fromCountry := req.from
+				responsePercept := PerceptResponse{events: []Request{}}
+				fromCountry.In <- responsePercept
+			default:
 				log.Println("Une requete n'a pas pu etre traitee")
 			}
 			e.lock.Unlock()
 		default:
 		}
 	}
-}
-
-func (e *Environment) handleMarketRequest(req MarketBuyRequest) {
-	e.Market.handleRequest(req)
 }

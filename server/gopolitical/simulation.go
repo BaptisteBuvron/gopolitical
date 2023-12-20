@@ -30,6 +30,8 @@ func (s *Simulation) Start() {
 	fmt.Println("Start of the simulation : ")
 	fmt.Println("Number of countries : ", len(s.Countries))
 
+	go s.Environment.Start()
+
 	for {
 		//Restart all agents
 		fmt.Println("Start of a new day")
