@@ -29,6 +29,11 @@ func (s *Simulation) Start() {
 
 	fmt.Println("Start of the simulation : ")
 	fmt.Println("Number of countries : ", len(s.Countries))
+	fmt.Println("Number of territories : ", len(s.Territories))
+
+	for _, country := range s.Countries {
+		fmt.Println("Nombre de territoires dans  : ", country.Name, " : ", len(country.Territories))
+	}
 
 	go s.Environment.Start()
 
