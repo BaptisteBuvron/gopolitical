@@ -21,10 +21,9 @@ func NewCountry(id string, name string, color string, territories []Territory, m
 
 func (c Country) Start() {
 	fmt.Printf("Country %s started\n", c.Name)
-
 	c.Percept()
-	c.Deliberate()
-	c.Act()
+	requests := c.Deliberate()
+	c.Act(requests)
 	c.wg.Done()
 }
 
@@ -41,10 +40,14 @@ func (c Country) Percept() {
 	fmt.Printf("Country %s percept\n", c.Name)
 }
 
-func (c Country) Deliberate() {
+func (c Country) Deliberate() []Request {
 	fmt.Printf("Country %s deliberate\n", c.Name)
+
+	//Si le pays a plus de ressources que ce qu'il lui faut, il vend le surplus
+
+	return nil
 }
 
-func (c Country) Act() {
+func (c Country) Act(requests []Request) {
 	fmt.Printf("Country %s act\n", c.Name)
 }
