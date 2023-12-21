@@ -5,11 +5,11 @@ type Territory struct {
 	Y          int
 	Variations []Variation
 	Stock      map[ResourceType]int
-	Country    Country
+	Country    *Country
 }
 
-func NewTerritory(x int, y int, variations []Variation, stock map[ResourceType]int, country Country) Territory {
-	return Territory{x, y, variations, stock, country}
+func NewTerritory(x int, y int, variations []Variation, stock map[ResourceType]int, country *Country) *Territory {
+	return &Territory{x, y, variations, stock, country}
 }
 
 func (c Territory) Start() {

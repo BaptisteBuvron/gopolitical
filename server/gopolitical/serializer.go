@@ -2,7 +2,6 @@ package gopolitical
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"sync"
 )
@@ -48,15 +47,16 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 		prices[resource.Name] = resource.Price
 	}
 
-	countries := make(map[string]Country, len(s.Countries))
+	countries := make(map[string]*Country, len(s.Countries))
 	for _, country := range s.Countries {
 		in := make(Channel)
 		out := make(Channel)
+		//create slice of territories
 		territories := make([]*Territory, 0)
 		countries[country.ID] = NewCountry(country.ID, country.Name, country.Color, territories, country.Money, wg, in, out)
 	}
 
-	territories := make([]Territory, len(s.Territories))
+	territories := make([]*Territory, len(s.Territories))
 	for i, territory := range s.Territories {
 		var variations []Variation
 		for _, variation := range territory.Variations {
@@ -68,10 +68,9 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 			stock[resource.Name] = 0
 		}
 		territories[i] = NewTerritory(territory.X, territory.Y, variations, stock, country)
-		country.Territories = append(country.Territories, &territories[i])
-	}
-	for _, country := range countries {
-		fmt.Println("Nombre de territoires dans  : ", country.Name, " : ", len(country.Territories))
+		if country != nil {
+			country.Territories = append(country.Territories, territories[i])
+		}
 	}
 	return NewSimulation(s.SecondByDay, prices, countries, territories, wg)
 }

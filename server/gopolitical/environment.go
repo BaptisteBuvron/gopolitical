@@ -7,15 +7,15 @@ import (
 )
 
 type Environment struct {
-	Countries   map[string]Country
-	Territories []Territory
+	Countries   map[string]*Country
+	Territories []*Territory
 	Market      Market
 	wg          *sync.WaitGroup
 	lock        sync.Mutex
 	Percept     map[string][]Request
 }
 
-func NewEnvironment(countries map[string]Country, territories []Territory, prices Prices, wg *sync.WaitGroup) Environment {
+func NewEnvironment(countries map[string]*Country, territories []*Territory, prices Prices, wg *sync.WaitGroup) Environment {
 	//Map des perceptions que recoivent les pays à chaque tour
 	percept := make(map[string][]Request)
 	for _, country := range countries {

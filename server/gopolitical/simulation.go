@@ -9,16 +9,16 @@ import (
 type Simulation struct {
 	SecondByDay float64
 	Environment Environment
-	Territories []Territory
-	Countries   map[string]Country
+	Territories []*Territory
+	Countries   map[string]*Country
 	wg          *sync.WaitGroup
 }
 
 func NewSimulation(
 	secondByDay float64,
 	prices Prices,
-	countries map[string]Country,
-	territories []Territory,
+	countries map[string]*Country,
+	territories []*Territory,
 	wg *sync.WaitGroup,
 ) Simulation {
 	return Simulation{secondByDay, NewEnvironment(countries, territories, prices, wg), territories, countries, wg}

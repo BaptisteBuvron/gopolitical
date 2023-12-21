@@ -16,8 +16,8 @@ type Country struct {
 	Out         Channel
 }
 
-func NewCountry(id string, name string, color string, territories []*Territory, money float64, wg *sync.WaitGroup, in Channel, out Channel) Country {
-	return Country{Agent{id, name}, color, territories, money, wg, in, out}
+func NewCountry(id string, name string, color string, territories []*Territory, money float64, wg *sync.WaitGroup, in Channel, out Channel) *Country {
+	return &Country{Agent{id, name}, color, territories, money, wg, in, out}
 }
 
 func (c *Country) getTotalStock() map[ResourceType]int {
@@ -30,13 +30,6 @@ func (c *Country) getTotalStock() map[ResourceType]int {
 	}
 	fmt.Println(stock)
 	return stock
-}
-
-func (c *Country) PrintTerritories() {
-	fmt.Println("Territoire de : ", c.Name)
-	for _, territory := range c.Territories {
-		fmt.Println(territory.X)
-	}
 }
 
 func (c *Country) Start() {
@@ -63,7 +56,6 @@ func (c *Country) Percept() {
 
 func (c *Country) Deliberate() []Request {
 	fmt.Printf("Country %s deliberate\n", c.Name)
-	fmt.Println(c.getTotalStock())
 	time.Sleep(1 * time.Second)
 
 	//Si le pays a plus de ressources que ce qu'il lui faut, il vend le surplus
