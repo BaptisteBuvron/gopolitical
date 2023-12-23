@@ -76,7 +76,6 @@ func (c *Country) Deliberate() []Request {
 			sellRequest := MarketSellRequest{from: c, territoire: territory, resources: resource, amount: quantity}
 			log.Println("Ordre de vente de", quantity, " ", resource, " de ", c.Name, " pour le territoire ", territory.X, " ", territory.Y)
 			//retirer les ressources du stock du territoire
-			territory.Stock[resource] -= quantity
 			c.Out <- sellRequest
 		}
 	}

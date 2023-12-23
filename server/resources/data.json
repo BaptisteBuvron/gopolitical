@@ -1,5 +1,5 @@
 {
-  "secondByDay": 5.0,
+  "secondByDay": 2.0,
   "resources": [
     {
       "name": "petrol",
@@ -75,6 +75,10 @@
         {
           "name": "food",
           "value": 5
+        },
+        {
+          "name": "water",
+          "value": 5
         }
       ]
     },
@@ -90,7 +94,7 @@
         },
         {
           "name": "water",
-          "value": 10
+          "value": 15
         }
       ]
     },
@@ -103,10 +107,6 @@
         {
           "name": "petrol",
           "value": 10
-        },
-        {
-          "name": "water",
-          "value": 5
         },
         {
           "name": "food",
@@ -139,10 +139,6 @@
         {
           "name": "food",
           "value": 10
-        },
-        {
-          "name": "water",
-          "value": 5
         }
       ]
     },

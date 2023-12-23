@@ -66,8 +66,12 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 
 	//vérifier que le pays acheteur a assez d'argent
 	if buy.from.Money < executed*m.prices[buy.resources] {
-		//si il n'a pas assez d'argent, on annule la transaction
-		return
+		//on change la quantité executée
+		executed = buy.from.Money / m.prices[buy.resources]
+		if executed <= 0 {
+			log.Println("Transaction annulée : ", buy.from.Name, " n'a pas assez d'argent pour acheter ", executed, " ", buy.resources, " à ", sell.from.Name)
+			return
+		}
 	}
 
 	if executed == buy.amount {
