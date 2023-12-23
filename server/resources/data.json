@@ -7,7 +7,7 @@
     },
     {
       "name": "water",
-      "price": 1
+      "price": 1.5
     },
     {
       "name": "food",
@@ -78,7 +78,7 @@
         },
         {
           "name": "water",
-          "value": 5
+          "value": 10
         }
       ]
     },
@@ -102,7 +102,7 @@
       "x": 1,
       "y": 0,
       "country": "us",
-      "habitants": 10,
+      "habitants": 20,
       "variations": [
         {
           "name": "petrol",
