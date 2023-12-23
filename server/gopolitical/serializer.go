@@ -25,6 +25,7 @@ type PartialTerritory struct {
 	X          int                `json:"x"`
 	Y          int                `json:"y"`
 	Country    string             `json:"country"`
+	Habitants  int                `json:"habitants"`
 	Variations []PartialVariation `json:"variations"`
 }
 
@@ -63,11 +64,11 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 			variations = append(variations, Variation{variation.Name, variation.Value})
 		}
 		country := countries[territory.Country]
-		stock := make(map[ResourceType]int)
+		stock := make(map[ResourceType]float64)
 		for _, resource := range s.Resources {
 			stock[resource.Name] = 0
 		}
-		territories[i] = NewTerritory(territory.X, territory.Y, variations, stock, country)
+		territories[i] = NewTerritory(territory.X, territory.Y, variations, stock, country, territory.Habitants)
 		if country != nil {
 			country.Territories = append(country.Territories, territories[i])
 		}

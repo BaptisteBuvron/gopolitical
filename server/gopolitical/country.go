@@ -2,15 +2,16 @@ package gopolitical
 
 import (
 	"fmt"
+	"log"
 	"sync"
 	"time"
 )
 
 type Country struct {
-	Agent
-	Color       string
-	Territories []*Territory
-	Money       float64
+	Agent       `json:"agent"`
+	Color       string       `json:"color"`
+	Territories []*Territory `json:"territories"`
+	Money       float64      `json:"money"`
 	wg          *sync.WaitGroup
 	In          Channel
 	Out         Channel
@@ -20,21 +21,28 @@ func NewCountry(id string, name string, color string, territories []*Territory, 
 	return &Country{Agent{id, name}, color, territories, money, wg, in, out}
 }
 
-func (c *Country) getTotalStock() map[ResourceType]int {
-	stock := make(map[ResourceType]int)
+func (c *Country) GetTotalStock() map[ResourceType]float64 {
+	stockCountry := make(map[ResourceType]float64)
 	for _, territory := range c.Territories {
 		fmt.Println(territory.X)
 		for resource, quantity := range territory.Stock {
-			stock[resource] += quantity
+			stockCountry[resource] += quantity
 		}
 	}
-	fmt.Println(stock)
-	return stock
+	fmt.Println(stockCountry)
+	return stockCountry
+}
+
+func (c *Country) GetTotalHabitants() int {
+	totalHabitants := 0
+	for _, territory := range c.Territories {
+		totalHabitants += territory.Habitants
+	}
+	return totalHabitants
 }
 
 func (c *Country) Start() {
 	fmt.Printf("Country %s started\n", c.Name)
-	fmt.Println("Territoire : ", c.Territories)
 	c.Percept()
 	requests := c.Deliberate()
 	c.Act(requests)
@@ -42,27 +50,75 @@ func (c *Country) Start() {
 }
 
 func (c *Country) Percept() {
-	perceptRequest := PerceptRequest{from: *c}
+	perceptRequest := PerceptRequest{from: c}
 	c.Out <- perceptRequest
 	perceptResponse := <-c.In
 
 	//Downcast to a PerceptResponse
 	if perceptResponse, ok := perceptResponse.(PerceptResponse); ok {
 		fmt.Println(perceptResponse.events)
+		if len(perceptResponse.events) > 0 {
+			fmt.Println(perceptResponse.events)
+		}
 	}
 
-	fmt.Printf("Country %s percept\n", c.Name)
+	fmt.Printf("Country %s percepted\n", c.Name)
 }
 
 func (c *Country) Deliberate() []Request {
 	fmt.Printf("Country %s deliberate\n", c.Name)
+	fmt.Println("Stock total : ", c.GetTotalStock())
 	time.Sleep(1 * time.Second)
 
-	//Si le pays a plus de ressources que ce qu'il lui faut, il vend le surplus
+	//TODO : Faire des virements de ressources entre territoires du pays si besoin
+
+	//Le pays regarde si des territoires ont plus de ressources que ce qu'il leur faut, si oui, il les vend
+	for _, territory := range c.Territories {
+		surplus := territory.GetSurplus()
+		fmt.Println("Surplus de ", territory.X, " ", territory.Y, " ( ", c.Name, " ) : ", surplus)
+
+		//Faire un ordre de vente pour chaque ressource en surplus
+		for resource, quantity := range surplus {
+			sellRequest := MarketSellRequest{from: c, territoire: territory, resources: resource, amount: quantity}
+			log.Println("Ordre de vente de ", quantity, " ", resource, " de ", c.Name, " pour le territoire ", territory.X, " ", territory.Y)
+			//retirer les ressources du stock du territoire
+			territory.Stock[resource] -= quantity
+			c.Out <- sellRequest
+		}
+	}
+
+	//Le pays regarde s'il lui manque des ressources, si oui, il les achète
+	for _, territory := range c.Territories {
+		needFood := (float64(territory.Habitants) * FOOD_BY_HABITANT) - territory.Stock["food"]
+		needWater := (float64(territory.Habitants) * WATER_BY_HABITANT) - territory.Stock["water"]
+
+		if territory.Stock["food"] < float64(territory.Habitants)*FOOD_BY_HABITANT {
+			buyRequest := MarketBuyRequest{from: c, territoire: territory, resources: "food", amount: needFood}
+			log.Println("Ordre d'achat de ", needFood, " food de ", c.Name, " pour le territoire ", territory.X, " ", territory.Y)
+			c.Out <- buyRequest
+		}
+
+		if territory.Stock["water"] < float64(territory.Habitants)*WATER_BY_HABITANT {
+			buyRequest := MarketBuyRequest{from: c, territoire: territory, resources: "water", amount: needWater}
+			log.Println("Ordre d'achat de ", needWater, " water de ", c.Name, " pour le territoire ", territory.X, " ", territory.Y)
+			c.Out <- buyRequest
+		}
+
+	}
 
 	return nil
 }
 
 func (c *Country) Act(requests []Request) {
 	fmt.Printf("Country %s act\n", c.Name)
+}
+
+func (c *Country) GetConsumption() map[ResourceType]float64 {
+	consumption := make(map[ResourceType]float64)
+	totalHabitants := c.GetTotalHabitants()
+
+	consumption["foot"] = float64(totalHabitants) * FOOD_BY_HABITANT
+	consumption["water"] = float64(totalHabitants) * WATER_BY_HABITANT
+
+	return consumption
 }

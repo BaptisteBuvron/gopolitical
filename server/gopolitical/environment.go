@@ -1,7 +1,6 @@
 package gopolitical
 
 import (
-	"fmt"
 	"log"
 	"sync"
 )
@@ -9,7 +8,7 @@ import (
 type Environment struct {
 	Countries   map[string]*Country
 	Territories []*Territory
-	Market      Market
+	Market      *Market
 	wg          *sync.WaitGroup
 	lock        sync.Mutex
 	Percept     map[string][]Request
@@ -49,7 +48,6 @@ func (e *Environment) handleRequests() {
 				e.Market.handleRequest(req)
 				break
 			case PerceptRequest:
-				fmt.Println("Une requete a ete traitee")
 				fromCountry := req.from
 				responsePercept := PerceptResponse{events: e.Percept[fromCountry.Name]}
 				e.Percept[fromCountry.Name] = []Request{}
@@ -67,4 +65,27 @@ func (e *Environment) handleRequests() {
 
 func Respond(toChannel Channel, res Request) {
 	toChannel <- res
+}
+
+func (e *Environment) UpdateStocksFromVariation() {
+	//Mettre à jour les stocks des territoires à partir des variations
+	for _, territory := range e.Territories {
+		for _, variation := range territory.Variations {
+			territory.Stock[variation.Ressource] += variation.Amount
+		}
+	}
+}
+
+func (e *Environment) UpdateStocksFromConsumption() {
+	//Mettre à jour les stocks des territoires à partir des consommations
+	for _, country := range e.Countries {
+		for _, territory := range country.Territories {
+			foodConsumption := float64(territory.Habitants) * FOOD_BY_HABITANT
+			territory.Stock["food"] -= foodConsumption
+
+			waterConsumption := float64(territory.Habitants) * WATER_BY_HABITANT
+			territory.Stock["water"] -= waterConsumption
+		}
+	}
+
 }

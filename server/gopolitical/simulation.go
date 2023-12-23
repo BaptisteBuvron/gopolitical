@@ -14,6 +14,11 @@ type Simulation struct {
 	wg          *sync.WaitGroup
 }
 
+const (
+	WATER_BY_HABITANT = 0.5
+	FOOD_BY_HABITANT  = 0.5
+)
+
 func NewSimulation(
 	secondByDay float64,
 	prices Prices,
@@ -47,16 +52,17 @@ func (s *Simulation) Start() {
 		//Wait for all agents to finish their actions
 		s.wg.Wait()
 		fmt.Println("End of the day")
-		//Update the environment
-		s.Environment.Update()
+		//Mettre à jour les stocks des territoires à partir des variations
+		s.Environment.UpdateStocksFromVariation()
+		//Mettre à jour les stocks des territoires à partir des consommations des habitants
+		s.Environment.UpdateStocksFromConsumption()
+
+		//On fait corrrespondre les ordres d'achats et de ventes
+		s.Environment.Market.HandleRequests()
 
 		//Wait the other day
 		time.Sleep(time.Duration(s.SecondByDay) * time.Second)
 	}
-}
-
-func (e *Environment) Update() {
-	// Add your implementation here
 }
 
 func (s *Simulation) Run() {
