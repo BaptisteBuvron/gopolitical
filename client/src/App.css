@@ -33,9 +33,9 @@
   }
 }
 
-
 .Country-tab {
-  position: relative;
+  /*position: relative;
+  border: 2px solid #ffffff;*/
 }
 
 .Country {
@@ -44,4 +44,8 @@
   justify-content: center;
   border: 3px solid #fff;
   box-sizing: border-box;
+}
+
+.custom-modal-container {
+  background-color: white;
 }
