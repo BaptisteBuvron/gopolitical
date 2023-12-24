@@ -22,9 +22,10 @@ type PartialRelation struct {
 }
 
 type PartialTerritory struct {
-	X          int                `json:"id"`
-	Y          int                `json:"color"`
+	X          int                `json:"x"`
+	Y          int                `json:"y"`
 	Country    string             `json:"country"`
+	Habitants  int                `json:"habitants"`
 	Variations []PartialVariation `json:"variations"`
 }
 
@@ -47,24 +48,31 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 		prices[resource.Name] = resource.Price
 	}
 
-	countries := make(map[string]Country, len(s.Countries))
+	countries := make(map[string]*Country, len(s.Countries))
 	for _, country := range s.Countries {
 		in := make(Channel)
 		out := make(Channel)
-		countries[country.ID] = NewCountry(country.ID, country.Name, country.Color, nil, country.Money, wg, in, out)
+		//create slice of territories
+		territories := make([]*Territory, 0)
+		countries[country.ID] = NewCountry(country.ID, country.Name, country.Color, territories, country.Money, wg, in, out)
 	}
 
-	territories := make([]Territory, len(s.Territories))
+	territories := make([]*Territory, len(s.Territories))
 	for i, territory := range s.Territories {
 		var variations []Variation
 		for _, variation := range territory.Variations {
 			variations = append(variations, Variation{variation.Name, variation.Value})
 		}
 		country := countries[territory.Country]
-		territories[i] = NewTerritory(territory.X, territory.Y, variations, country)
-		country.Territories = append(country.Territories, territories[i])
+		stock := make(map[ResourceType]float64)
+		for _, resource := range s.Resources {
+			stock[resource.Name] = 0
+		}
+		territories[i] = NewTerritory(territory.X, territory.Y, variations, stock, country, territory.Habitants)
+		if country != nil {
+			country.Territories = append(country.Territories, territories[i])
+		}
 	}
-
 	return NewSimulation(s.SecondByDay, prices, countries, territories, wg)
 }
 

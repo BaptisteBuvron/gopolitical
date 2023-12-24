@@ -51,9 +51,11 @@ Somme()
 
 #### Gestion du marché
 
+Un pays fait une demande d'achat ou de vente au marché, il indique également le territoire concerné par la demande. Le marché met à jour les ordres d'achat et de vente du territoire concerné.
+
 - Lorsque l'environnement recoit une demande de ventes par un pays, il met à jour l'ordre d'achat du marché.
-- Lorsque l'environnement recoit une demande d'achat par un pays, il met à jour l'ordre de vente du marché.
+- Lorsque l'environnement recoit une demande d'achat par un pays, il met à jour l'ordre de vente du marché. 
   
 A chaque fin de tour, l'environnement essaye de faire correspondre les ordres d'achat et de vente. Si un ordre d'achat est supérieur ou égal à un ordre de vente, alors l'environnement effectue la transaction et met à jour les stocks des pays concernés. Si un ordre d'achat est inférieur à un ordre de vente, alors l'environnement ne fait rien.
 
-L'environnement stock ensuite les transactions effectuées dans un talbeau de transactions. Ce tableau est ensuite envoyé à chaque pays lors du tour suivant (la perception de chaque pays) afin qu'ils puissent mettre à jour leurs stocks.
+L'environnement stock ensuite les transactions effectuées dans un talbeau de transactions. Ce tableau est ensuite envoyé à chaque pays lors du tour suivant (la perception de chaque pays).
