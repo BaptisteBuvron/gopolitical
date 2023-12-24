@@ -66,11 +66,28 @@
 
 .selected-territory {
   border: solid 3px black !important;
-  opacity: 0.6;
+  opacity: 1 ;
+  background: repeating-linear-gradient(45deg, transparent, black 10px);
+}
+
+.modal-backdrop .show {
+  opacity: 1 !important;
 }
 
 .custom-modal-container .modal-dialog {
   position: absolute;
+}
+
+.custom-modal-container {
+  --bs-modal-margin: 0px !important;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.modal-dialog { /* Width */
+  max-width: 100% !important;
+  width: auto !important;
+  display: inline-block;
 }
 
 .dark-mode {

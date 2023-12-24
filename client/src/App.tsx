@@ -39,9 +39,9 @@ function App() {
         </Container>*/
     <div className="App">
         <header className="App-header">
-            <h1>Liste des pays du monde</h1>
+            {/*<h1>Liste des pays du monde</h1>
             <CountryComponent countries={countries} />
-            <h1>Carte du monde</h1>
+            <h1>Carte du monde</h1>*/}
             <TerritoryComponent />
         </header>
     </div>

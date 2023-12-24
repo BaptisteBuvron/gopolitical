@@ -21,8 +21,13 @@ function TerritoryComponent() {
         if (selectedTerritory && selectedTerritory === territory) {
             setShowModal(false);
             setSelectedTerritory(null);
-            document.getElementById("territory-" + index)?.classList.add("selected-territory");
+            document.getElementById("territory-" + index)?.classList.remove("selected-territory");
         } else {
+            let territories: HTMLCollectionOf<Element> = document.getElementsByClassName("territory");
+            // @ts-ignore
+            for (let territory of territories) {
+                territory.classList.remove("selected-territory");
+            }
             document.getElementById("territory-" + index)?.classList.add("selected-territory");
             setSelectedTerritory(territory);
             setModalPosition({ x, y });
@@ -56,6 +61,7 @@ function TerritoryComponent() {
                         height: `${30}px`,
                         position: "absolute",
                         border: "solid 1px black",
+
                     }}
                     //*30 pour que les coordonnées du territoire (x=1, y=3 devient x=30, y=90 sur la map)
                     //+30 pour que le modal ne s'affiche pas sur la case du pays à côté
@@ -75,6 +81,8 @@ function TerritoryComponent() {
                         left: `${modalPosition.x}px`,
                     }}
                     className="custom-modal-container"
+                    animation={false}
+                    backdrop={false}
                 >
                     <Modal.Header closeButton>
                         <Modal.Title>Country : {selectedTerritory && selectedTerritory.country}</Modal.Title>
