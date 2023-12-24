@@ -13,4 +13,6 @@ func main() {
 	} else {
 		fmt.Printf("Simulation loaded%v\n", simulation)
 	}
+	simulation.Start()
+
 }

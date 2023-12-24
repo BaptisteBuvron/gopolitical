@@ -2,17 +2,18 @@ import React from 'react';
 import './App.css';
 import CountryComponent from './components/CountryComponent';
 import { countries } from './CountryList';
-import TerritoriesComponent from "./components/territories/TerritoriesComponent";
+import TerritoryComponent from "./components/territories/TerritoriesComponent";
 import {data} from "./data";
+import {Container} from "react-bootstrap";
 import TerritoryDetailComponent from "./components/territoryDetail/TerritoryDetailComponent";
 import {Territory} from "./models/types";
-import Container from 'react-bootstrap/Container';
 
 function App() {
     return (
         <Container id="app" fluid>
             <header className="header p-3">
                 <h1>Liste des territoires du monde</h1>
+                <TerritoryComponent />
             </header>
           {/*
 

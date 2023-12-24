@@ -1,8 +1,8 @@
 package gopolitical
 
 type Agent struct {
-	ID   string
-	Name string
+	ID   string `json:"id"`
+	Name string `json:"name"`
 }
 
 type AgentI interface {
