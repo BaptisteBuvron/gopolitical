@@ -10,25 +10,41 @@ import {Territory} from "./models/types";
 
 function App() {
     return (
-        <Container id="app" fluid>
-            <header className="header p-3">
+        /*<Container id="app" fluid>
+            {/!*<header className="header p-3">
                 <h1>Liste des territoires du monde</h1>
                 <TerritoryComponent />
-            </header>
-          {/*
+            </header>*!/}
+          {/!*
 
               <CountryComponent countries={countries} />
               <TerritoriesComponent />
 
-          */}
-            <div className="row justify-content-evenly g-4 col-12 pb-5">
+          *!/}
+            {/!*<div className="row justify-content-evenly g-4 col-12 pb-5">
                 {
                     data["territories"].map((territory: Territory, index) => (
                         <TerritoryDetailComponent key={index} data={data} x={territory.x} y={territory.y} />
                     ))
                 }
+            </div>*!/}
+            <div className="App">
+                <header className="App-header">
+                    <h1>Liste des pays du monde</h1>
+                    <CountryComponent countries={countries} />
+                    <h1>Carte du monde</h1>
+                    <TerritoryComponent />
+                </header>
             </div>
-        </Container>
+        </Container>*/
+    <div className="App">
+        <header className="App-header">
+            <h1>Liste des pays du monde</h1>
+            <CountryComponent countries={countries} />
+            <h1>Carte du monde</h1>
+            <TerritoryComponent />
+        </header>
+    </div>
       );
 }
 

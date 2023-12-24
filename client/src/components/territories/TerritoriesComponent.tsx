@@ -15,13 +15,15 @@ function TerritoryComponent() {
     const [selectedTerritory, setSelectedTerritory] = useState<Territory | null>(null);
     const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
 
-    const handleTerritoryClick = (territory: Territory, x: number, y: number) => {
+    const handleTerritoryClick = (territory: Territory, x: number, y: number, index: number) => {
         //Si on reclique sur le même territoire = fermeture modal
         //Sinon, ouverture du modal
         if (selectedTerritory && selectedTerritory === territory) {
             setShowModal(false);
             setSelectedTerritory(null);
+            document.getElementById("territory-" + index)?.classList.add("selected-territory");
         } else {
+            document.getElementById("territory-" + index)?.classList.add("selected-territory");
             setSelectedTerritory(territory);
             setModalPosition({ x, y });
             setShowModal(true);
@@ -30,6 +32,11 @@ function TerritoryComponent() {
 
     //Cache le modal quand on appuye sur le bouton Fermer
     const handleCloseModal = () => {
+        let territories: HTMLCollectionOf<Element> = document.getElementsByClassName("territory");
+        // @ts-ignore
+        for (let territory of territories) {
+            territory.classList.remove("selected-territory");
+        }
         setShowModal(false);
         setSelectedTerritory(null);
     };
@@ -38,6 +45,7 @@ function TerritoryComponent() {
         <div className="Country-tab">
             {data["territories"].map((territory, index) => (
                 <div
+                    id={"territory-" + index.toString()}
                     key={index}
                     className="territory"
                     style={{
@@ -47,12 +55,13 @@ function TerritoryComponent() {
                         width: `${30}px`,
                         height: `${30}px`,
                         position: "absolute",
+                        border: "solid 1px black",
                     }}
                     //*30 pour que les coordonnées du territoire (x=1, y=3 devient x=30, y=90 sur la map)
                     //+30 pour que le modal ne s'affiche pas sur la case du pays à côté
-                    onClick={() => handleTerritoryClick(territory, territory.x * 30 +30, territory.y * 30+30)}
+                    onClick={() => handleTerritoryClick(territory, territory.x*30, territory.y*30, index)}
                 >
-                    1
+
                 </div>
             ))}
 

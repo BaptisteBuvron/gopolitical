@@ -43,8 +43,8 @@
 }
 
 
-.Country-tab {
-  /*position: relative;
+.Country-tab {/*
+  position: relative;
   border: 2px solid #ffffff;*/
 }
 
@@ -56,8 +56,21 @@
   box-sizing: border-box;
 }
 
-.custom-modal-container {
+/*.custom-modal-container {
   background-color: white;
+}*/
+
+.territory:hover {
+  border: solid 3px black !important;
+}
+
+.selected-territory {
+  border: solid 3px black !important;
+  opacity: 0.6;
+}
+
+.custom-modal-container .modal-dialog {
+  position: absolute;
 }
 
 .dark-mode {
