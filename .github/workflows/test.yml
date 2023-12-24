@@ -22,6 +22,6 @@ jobs:
       - name: Install Dependencies
         run: |
           cd server
-          GOPROXY=https://proxy.golang.org,direct go get -v -t -d ./...
+          go get .
       - name: Test with the Go CLI
         run: cd server && go test -v ./...
