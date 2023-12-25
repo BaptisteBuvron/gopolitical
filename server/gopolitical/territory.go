@@ -1,12 +1,12 @@
 package gopolitical
 
 type Territory struct {
-	X          int
-	Y          int
-	Variations []Variation
-	Stock      map[ResourceType]float64
-	Country    *Country
-	Habitants  int
+	X          int                      `json:"x"`
+	Y          int                      `json:"y"`
+	Variations []Variation              `json:"variations"`
+	Stock      map[ResourceType]float64 `json:"stock"`
+	Country    *Country                 `json:"country"`
+	Habitants  int                      `json:"habitants"`
 }
 
 func NewTerritory(x int, y int, variations []Variation, stock map[ResourceType]float64, country *Country, habitant int) *Territory {

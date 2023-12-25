@@ -10,11 +10,11 @@ type Prices map[ResourceType]float64
 type Market struct {
 	sells   map[int]*MarketSellRequest
 	buys    map[int]*MarketBuyRequest
-	prices  Prices
+	Prices  Prices `json:"prices"`
 	IdSell  int
 	IdBuy   int
 	percept map[string][]Request
-	History []*MarketInteraction
+	History []*MarketInteraction `json:"history"`
 }
 
 func NewMarket(prices Prices, percept map[string][]Request) *Market {
@@ -65,9 +65,9 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 	}
 
 	//vérifier que le pays acheteur a assez d'argent
-	if buy.from.Money < executed*m.prices[buy.resources] {
+	if buy.from.Money < executed*m.Prices[buy.resources] {
 		//on change la quantité executée
-		executed = buy.from.Money / m.prices[buy.resources]
+		executed = buy.from.Money / m.Prices[buy.resources]
 		if executed <= 0 {
 			log.Println("Transaction annulée : ", buy.from.Name, " n'a pas assez d'argent pour acheter ", executed, " ", buy.resources, " à ", sell.from.Name)
 			return
@@ -88,10 +88,10 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 		delete(m.buys, buy.BuyID)
 
 		//on envoie la reponse au pays acheteur
-		m.percept[buy.from.Name] = append(m.percept[buy.from.Name], MarketBuyResponse{buy, buy.from, executed, executed * m.prices[buy.resources]})
+		m.percept[buy.from.Name] = append(m.percept[buy.from.Name], MarketBuyResponse{buy, buy.from, executed, executed * m.Prices[buy.resources]})
 
 		//on envoie la reponse au pays vendeur
-		m.percept[sell.from.Name] = append(m.percept[sell.from.Name], MarketSellResponse{sell, sell.from, executed, executed * m.prices[sell.resources]})
+		m.percept[sell.from.Name] = append(m.percept[sell.from.Name], MarketSellResponse{sell, sell.from, executed, executed * m.Prices[sell.resources]})
 
 	} else {
 		//Achat partiel
@@ -106,19 +106,19 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 
 		//on envoie la reponse au pays acheteur
 
-		m.percept[buy.from.Name] = append(m.percept[buy.from.Name], MarketBuyResponse{buy, buy.from, executed, executed * m.prices[buy.resources]})
+		m.percept[buy.from.Name] = append(m.percept[buy.from.Name], MarketBuyResponse{buy, buy.from, executed, executed * m.Prices[buy.resources]})
 
 		//on envoie la reponse au pays vendeur
-		m.percept[sell.from.Name] = append(m.percept[sell.from.Name], MarketSellResponse{sell, sell.from, executed, executed * m.prices[sell.resources]})
+		m.percept[sell.from.Name] = append(m.percept[sell.from.Name], MarketSellResponse{sell, sell.from, executed, executed * m.Prices[sell.resources]})
 	}
 
 	//on met à jour les stocks des pays et leur argent
-	cost := executed * m.prices[buy.resources]
+	cost := executed * m.Prices[buy.resources]
 	buy.from.Money -= cost
 	sell.from.Money += cost
 
 	buy.territoire.Stock[buy.resources] += executed
 	sell.territoire.Stock[sell.resources] -= executed
-	log.Println("Transaction effectuée : ", buy.from.Name, " achete ", executed, " ", buy.resources, " à ", sell.from.Name, " pour ", executed*m.prices[buy.resources])
-	m.History = append(m.History, &MarketInteraction{time.Now(), buy.resources, executed, m.prices[buy.resources], buy.from, sell.from})
+	log.Println("Transaction effectuée : ", buy.from.Name, " achete ", executed, " ", buy.resources, " à ", sell.from.Name, " pour ", executed*m.Prices[buy.resources])
+	m.History = append(m.History, &MarketInteraction{time.Now(), buy.resources, executed, m.Prices[buy.resources], buy.from, sell.from})
 }

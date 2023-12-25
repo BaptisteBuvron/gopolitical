@@ -6,12 +6,12 @@ import (
 )
 
 type Environment struct {
-	Countries   map[string]*Country
-	Territories []*Territory
-	Market      *Market
+	Countries   map[string]*Country `json:"-"`
+	Territories []*Territory        `json:"-"`
+	Market      *Market             `json:"market"`
 	wg          *sync.WaitGroup
 	lock        sync.Mutex
-	Percept     map[string][]Request
+	Percept     map[string][]Request `json:"-"`
 }
 
 func NewEnvironment(countries map[string]*Country, territories []*Territory, prices Prices, wg *sync.WaitGroup) Environment {

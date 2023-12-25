@@ -9,12 +9,12 @@ import (
 
 type Country struct {
 	Agent       `json:"agent"`
-	Color       string       `json:"color"`
-	Territories []*Territory `json:"territories"`
-	Money       float64      `json:"money"`
-	wg          *sync.WaitGroup
-	In          Channel
-	Out         Channel
+	Color       string          `json:"color"`
+	Territories []*Territory    `json:"-"`
+	Money       float64         `json:"money"`
+	wg          *sync.WaitGroup `json:"-"`
+	In          Channel         `json:"-"`
+	Out         Channel         `json:"-"`
 }
 
 func NewCountry(id string, name string, color string, territories []*Territory, money float64, wg *sync.WaitGroup, in Channel, out Channel) *Country {
