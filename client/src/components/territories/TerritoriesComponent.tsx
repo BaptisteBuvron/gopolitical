@@ -1,19 +1,14 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
 import { data } from "../../data";
-import {getCountryById, getCountryColor, getCountryFlagById} from "../../utils";
+import {getCountryColor} from "../../utils";
 import TerritoryDetailComponent from "../territoryDetail/TerritoryDetailComponent";
 import {Territory} from "../../models/types";
-import {ClockHistory} from "react-bootstrap-icons";
-import Image from "react-bootstrap/Image";
-import TestComponent from "../TestComponent";
 
 function TerritoryComponent() {
     const [showModal, setShowModal] = useState(false);
     const [selectedTerritory, setSelectedTerritory] = useState<Territory | null>(null);
-    const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
 
-    const handleTerritoryClick = (territory: Territory, x: number, y: number, index: number) => {
+    const handleTerritoryClick = (territory: Territory, index: number) => {
         //Si on reclique sur le même territoire = fermeture modal
         //Sinon, ouverture du modal
         if (selectedTerritory && selectedTerritory === territory) {
@@ -28,7 +23,6 @@ function TerritoryComponent() {
             }
             document.getElementById("territory-" + index)?.classList.add("selected-territory");
             setSelectedTerritory(territory);
-            setModalPosition({ x, y });
             setShowModal(true);
         }
     };
@@ -61,42 +55,17 @@ function TerritoryComponent() {
                         border: "solid 1px black",
 
                     }}
-                    //*30 pour que les coordonnées du territoire (x=1, y=3 devient x=30, y=90 sur la map)
-                    //+30 pour que le modal ne s'affiche pas sur la case du pays à côté
-                    onClick={() => handleTerritoryClick(territory, territory.x*30, territory.y*30, index)}
+                    onClick={() => handleTerritoryClick(territory, index)}
                 >
                 </div>
             ))}
 
             {showModal && (
-                <TestComponent showModal={showModal} handleCloseModal={handleCloseModal} territory={selectedTerritory}></TestComponent>
-                /*<Modal
-                    show={showModal}
-                    onHide={handleCloseModal}
-                    style={{
-                        /!*position: "absolute",
-                        top: `${modalPosition.y}px`,
-                        left: `${modalPosition.x}px`,*!/
-                    }}
-                    animation={false}
-                    backdrop={true}
-                    centered
-                    className="bg-dark text-light"
-                >
-                    <Modal.Header >
-
-                    </Modal.Header>
-                    <Modal.Body className="bg-dark text-light">
-                        { selectedTerritory && (
-                            <TerritoryDetailComponent {...selectedTerritory} />
-                        )}
-                    </Modal.Body>
-                    <Modal.Footer className="bg-dark text-light">
-                        <Button variant="secondary" onClick={handleCloseModal}>
-                            Fermer
-                        </Button>
-                    </Modal.Footer>
-                </Modal>*/
+                <TerritoryDetailComponent
+                    showModal={showModal}
+                    handleCloseModal={handleCloseModal}
+                    territory={selectedTerritory}
+                />
             )}
         </div>
     );

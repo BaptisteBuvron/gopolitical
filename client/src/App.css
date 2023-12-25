@@ -62,6 +62,7 @@
 
 .territory:hover {
   border: solid 3px black !important;
+  cursor: pointer;
 }
 
 .selected-territory {
