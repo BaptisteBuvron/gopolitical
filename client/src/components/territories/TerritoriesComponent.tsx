@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { data } from "../../data";
-import { getCountryColor } from "../../utils";
-
-interface Territory {
-    x: number;
-    y: number;
-    country: string;
-    variations: { name: string; value: number }[];
-}
+import {getCountryById, getCountryColor, getCountryFlagById} from "../../utils";
+import TerritoryDetailComponent from "../territoryDetail/TerritoryDetailComponent";
+import {Territory} from "../../models/types";
+import {ClockHistory} from "react-bootstrap-icons";
+import Image from "react-bootstrap/Image";
+import TestComponent from "../TestComponent";
 
 function TerritoryComponent() {
     const [showModal, setShowModal] = useState(false);
@@ -67,39 +65,38 @@ function TerritoryComponent() {
                     //+30 pour que le modal ne s'affiche pas sur la case du pays à côté
                     onClick={() => handleTerritoryClick(territory, territory.x*30, territory.y*30, index)}
                 >
-
                 </div>
             ))}
 
             {showModal && (
-                <Modal
+                <TestComponent showModal={showModal} handleCloseModal={handleCloseModal} territory={selectedTerritory}></TestComponent>
+                /*<Modal
                     show={showModal}
                     onHide={handleCloseModal}
                     style={{
-                        position: "absolute",
+                        /!*position: "absolute",
                         top: `${modalPosition.y}px`,
-                        left: `${modalPosition.x}px`,
+                        left: `${modalPosition.x}px`,*!/
                     }}
-                    className="custom-modal-container"
                     animation={false}
-                    backdrop={false}
+                    backdrop={true}
+                    centered
+                    className="bg-dark text-light"
                 >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Country : {selectedTerritory && selectedTerritory.country}</Modal.Title>
+                    <Modal.Header >
+
                     </Modal.Header>
-                    <Modal.Body>
-                        {selectedTerritory && (
-                            <div>
-                                {`X : ${selectedTerritory.x}, Y : ${selectedTerritory.y}`}
-                            </div>
+                    <Modal.Body className="bg-dark text-light">
+                        { selectedTerritory && (
+                            <TerritoryDetailComponent {...selectedTerritory} />
                         )}
                     </Modal.Body>
-                    <Modal.Footer>
+                    <Modal.Footer className="bg-dark text-light">
                         <Button variant="secondary" onClick={handleCloseModal}>
                             Fermer
                         </Button>
                     </Modal.Footer>
-                </Modal>
+                </Modal>*/
             )}
         </div>
     );

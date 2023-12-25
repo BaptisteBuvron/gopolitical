@@ -10,73 +10,59 @@ import Image from 'react-bootstrap/Image';
 import CountryActionsModal from "../territoryActionsModal/CountryActionsModal";
 import {Button} from "react-bootstrap";
 
-
-// TerritoryDetailComponent props
-interface TerritoryDetailProps {
-    data: Data;
-    x: number;
-    y: number;
-}
-
-function TerritoryDetailComponent({data, x, y}: TerritoryDetailProps) {
+function TerritoryDetailComponent(territory: Territory) {
     const [modalShow, setModalShow] = React.useState(false);
-    const territory = data["territories"].find((t: Territory) => t.x === x && t.y === y);
-    if(territory === undefined) {
-        return invalidDataResponse;
-    }
-    else {
-        const country = getCountryById(territory.country);
-        if(country !== undefined) {
+    const country = getCountryById(territory.country);
+    if(country !== undefined) {
 
-            return (
-                <div className="card col-5 dark-mode">
-                    <div className="card-body">
-                        <div className="d-flex justify-content-between align-items-center">
-                            <div className="col-10">
-                                <h4 className="card-title">{country.name}</h4>
-                                <Button variant="warning" className="mt-2" onClick={() => setModalShow(true)}>
-                                    <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des actions
-                                </Button>
-                            </div>
-                            <div className="col-2">
-                                <Image src={getCountryFlagById(country.id)} alt={country.name + " flag"} fluid />
-                            </div>
+        return (
+            <div className="card dark-mode">
+                <div className="card-body">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <div className="col-10">
+                            <h4 className="card-title">{country.name}</h4>
+                            <Button variant="warning" className="mt-2" onClick={() => setModalShow(true)}>
+                                <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des actions
+                            </Button>
                         </div>
-                        <hr />
-                        <div className="card territory-card">
-                            <ul className="list-group list-group-flush">
-                                {
-                                    territory.variations.map((variation: Variation, index) => (
-                                        <li key={index} className="list-group-item">
-                                            <OverlayTrigger
-                                                key="bottom"
-                                                placement="bottom"
-                                                overlay={
-                                                    <Tooltip>
-                                                        {variation.name.charAt(0).toUpperCase() + variation.name.slice(1)}
-                                                    </Tooltip>
-                                                }
-                                            >
-                                                <img src={getResourceIconPath(variation.name)} className="me-2" alt={variation.name + " icon"} />
-                                            </OverlayTrigger>
-                                            Value: {variation.value}
-                                        </li>
-                                    ))
-                                }
-                            </ul>
+                        <div className="col-2">
+                            <Image src={getCountryFlagById(country.id)} alt={country.name + " flag"} fluid />
                         </div>
-                        <p className="card-text">Il est possible de voir la liste détaillée de tous les pays sur une autre page !</p>
-                        <CountryActionsModal
-                            show={modalShow}
-                            onHide ={() => setModalShow(false)}
-                            country={country}
-                        />
                     </div>
+                    <hr />
+                    <div className="card territory-card">
+                        <ul className="list-group list-group-flush">
+                            {
+                                territory.variations.map((variation: Variation, index) => (
+                                    <li key={index} className="list-group-item">
+                                        <OverlayTrigger
+                                            key="bottom"
+                                            placement="bottom"
+                                            overlay={
+                                                <Tooltip>
+                                                    {variation.name.charAt(0).toUpperCase() + variation.name.slice(1)}
+                                                </Tooltip>
+                                            }
+                                        >
+                                            <img src={getResourceIconPath(variation.name)} className="me-2" alt={variation.name + " icon"} />
+                                        </OverlayTrigger>
+                                        Value: {variation.value}
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+                    <p className="card-text">Il est possible de voir la liste détaillée de tous les pays sur une autre page !</p>
+                    <CountryActionsModal
+                        show={modalShow}
+                        onHide ={() => setModalShow(false)}
+                        country={country}
+                    />
                 </div>
-            );
-        }
-        else return invalidDataResponse;
+            </div>
+        );
     }
+    else return invalidDataResponse;
 
 }
 
