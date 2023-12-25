@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import TerritoryComponent from "./territories/TerritoryComponent";
+import TerritoryComponent from "./components/territories/TerritoriesComponent";
 import {data} from "./data";
 import {Simulation} from "./Entity";
 import {json} from "stream/consumers";
