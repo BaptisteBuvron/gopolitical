@@ -7,11 +7,12 @@ import (
 )
 
 type Simulation struct {
-	SecondByDay float64
-	Environment Environment
-	Territories []*Territory
-	Countries   map[string]*Country
+	SecondByDay float64             `json:"secondByDay"`
+	Environment Environment         `json:"environment"`
+	Territories []*Territory        `json:"territories"`
+	Countries   map[string]*Country `json:"countries"`
 	wg          *sync.WaitGroup
+	WebSocket   *WebSocket `json:"-"`
 }
 
 const (
@@ -26,11 +27,14 @@ func NewSimulation(
 	territories []*Territory,
 	wg *sync.WaitGroup,
 ) Simulation {
-	return Simulation{secondByDay, NewEnvironment(countries, territories, prices, wg), territories, countries, wg}
+	return Simulation{secondByDay, NewEnvironment(countries, territories, prices, wg), territories, countries, wg, nil}
 }
 
 func (s *Simulation) Start() {
 	//Launch all agents and added a channel to the environment
+
+	s.WebSocket = NewWebSocket(s)
+	go s.WebSocket.Start()
 
 	fmt.Println("Start of the simulation : ")
 	fmt.Println("Number of countries : ", len(s.Countries))
@@ -62,9 +66,7 @@ func (s *Simulation) Start() {
 
 		//Wait the other day
 		time.Sleep(time.Duration(s.SecondByDay) * time.Second)
+		//Send update to the websocket
+		s.WebSocket.SendUpdate()
 	}
-}
-
-func (s *Simulation) Run() {
-	go s.Start()
 }
