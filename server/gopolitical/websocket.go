@@ -1,6 +1,5 @@
 package gopolitical
 
-import "C"
 import (
 	"encoding/json"
 	"fmt"
