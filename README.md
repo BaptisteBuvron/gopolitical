@@ -7,6 +7,8 @@
 
 ## Installation
 
+### Server
+
 Install [Go](https://golang.org/doc/install).
 
 Clone the repository:
@@ -26,6 +28,14 @@ Run tests:
 ```bash
 go test '-coverprofile=coverage.txt' -v ./...
 go tool cover '-html=coverage.txt'
+```
+
+### Client
+
+```bash
+cd client
+npm i
+npm run start
 ```
 
 ## Loop
