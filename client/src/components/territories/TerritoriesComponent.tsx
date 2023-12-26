@@ -3,8 +3,13 @@ import { data } from "../../data";
 import {getCountryColor} from "../../utils";
 import TerritoryDetailComponent from "../territoryDetail/TerritoryDetailComponent";
 import {Territory} from "../../models/types";
+import {Simulation} from "../../Entity";
 
-function TerritoryComponent() {
+interface TerritoryComponentProps {
+    simulation: Simulation | undefined; // Define the simulation prop
+}
+
+function TerritoryComponent({ simulation }: TerritoryComponentProps) {
     const [showModal, setShowModal] = useState(false);
     const [selectedTerritory, setSelectedTerritory] = useState<Territory | null>(null);
 
@@ -26,6 +31,10 @@ function TerritoryComponent() {
             setShowModal(true);
         }
     };
+
+    if (simulation) {
+        console.log(simulation);
+    }
 
     //Cache le modal quand on appuye sur le bouton Fermer
     const handleCloseModal = () => {

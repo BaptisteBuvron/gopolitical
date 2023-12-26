@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Modal, Row} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
 import {Country} from "../../models/types";
 import Image from "react-bootstrap/Image";
 import {getCountryFlagById} from "../../utils";

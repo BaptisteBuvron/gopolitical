@@ -1045,7 +1045,7 @@ export const data = {
         },
         {
             "x": 19,
-            "y": 10,
+            "y": 14,
             "country": "us",
             "variations": [
                 {

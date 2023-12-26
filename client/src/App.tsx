@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import TerritoryComponent from "./components/territories/TerritoriesComponent";
-import {data} from "./data";
 import {Simulation} from "./Entity";
-import {json} from "stream/consumers";
 
 function App() {
 
@@ -72,7 +70,7 @@ function App() {
             {/*<h1>Liste des pays du monde</h1>
             <CountryComponent countries={countries} />
             <h1>Carte du monde</h1>*/}
-            <TerritoryComponent />
+            <TerritoryComponent simulation={simulation} />
         </header>
     </div>
       );
