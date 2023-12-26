@@ -11,10 +11,18 @@
 
 Install [Go](https://golang.org/doc/install).
 
-Clone the repository:
+#### With git clone
 
 ```bash
 go install github.com/BaptisteBuvron/gopolitical/server@v1.0.0
+```
+
+#### Without git clone
+
+```bash
+git clone https://github.com/BaptisteBuvron/gopolitical
+sudo go install .
+# Start-Process powershell -Verb runAs -ArgumentList "cd $(Get-Location); go install"
 ```
 
 Run the server:

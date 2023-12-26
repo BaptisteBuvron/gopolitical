@@ -61,7 +61,7 @@ func (s *Simulation) Start() {
 		//Mettre à jour les stocks des territoires à partir des consommations des habitants
 		s.Environment.UpdateStocksFromConsumption()
 
-		//On fait corrrespondre les ordres d'achats et de ventes
+		//On fait correspondre les ordres d'achats et de ventes
 		s.Environment.Market.HandleRequests()
 
 		//Wait the other day
