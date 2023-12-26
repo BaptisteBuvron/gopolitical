@@ -7,12 +7,22 @@
 
 ## Installation
 
+### Server
+
 Install [Go](https://golang.org/doc/install).
 
-Clone the repository:
+#### With git clone
 
 ```bash
 go install github.com/BaptisteBuvron/gopolitical/server@v1.0.0
+```
+
+#### Without git clone
+
+```bash
+git clone https://github.com/BaptisteBuvron/gopolitical
+sudo go install .
+# Start-Process powershell -Verb runAs -ArgumentList "cd $(Get-Location); go install"
 ```
 
 Run the server:
@@ -26,6 +36,14 @@ Run tests:
 ```bash
 go test '-coverprofile=coverage.txt' -v ./...
 go tool cover '-html=coverage.txt'
+```
+
+### Client
+
+```bash
+cd client
+npm i
+npm run start
 ```
 
 ## Loop

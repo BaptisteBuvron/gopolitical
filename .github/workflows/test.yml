@@ -21,7 +21,10 @@ jobs:
           go-version: '1.21'
       - name: Install Dependencies
         run: |
+          apt-get update -y
+          apt-get install ca-certificates -y
+          update-ca-certificates
           cd server
-          go get .
+          go install .
       - name: Test with the Go CLI
         run: cd server && go test -v ./...
