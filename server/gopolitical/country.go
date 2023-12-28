@@ -47,7 +47,7 @@ func (c *Country) Start() {
 		c.Act(requests)
 		c.wg.Done()
 		//Wait for the end of the day
-		_ = <-c.In
+		<-c.In
 	}
 }
 
