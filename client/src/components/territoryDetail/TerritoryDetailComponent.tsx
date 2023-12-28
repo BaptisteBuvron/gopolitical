@@ -84,7 +84,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                                         </Tooltip>
                                                                     }
                                                                 >
-                                                                    <img />
+                                                                    <img src={getResourceIconPath(variation.resource)} className="me-2" alt={variation.resource + " icon"} />
                                                                 </OverlayTrigger>
                                                                 Value: {variation.amount}
                                                             </li>
