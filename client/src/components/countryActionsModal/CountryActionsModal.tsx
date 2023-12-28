@@ -1,17 +1,24 @@
 import React from "react";
 import {Button, Modal} from "react-bootstrap";
-import {Country} from "../../models/types";
+import {Country, CountryFlagService} from "../../Entity";
 import Image from "react-bootstrap/Image";
-import {getCountryFlagById} from "../../utils";
 import "../../App.css";
+import {countryFlags} from "../../countryFlags";
 
 interface CountryActionsModalProps {
     onHide: () => void;
-    country: Country; // Remplacez YourTerritoryType par le type exact de votre objet Territory
+    country: Country | null;
     show: boolean;
 }
 
 function CountryActionsModal({ onHide, country, show }: CountryActionsModalProps) {
+
+    // Fonction pour obtenir le flag du country
+    const countryFlagService = new CountryFlagService(countryFlags);
+    const getCountryFlagById = (countryId: string): string => {
+        return countryFlagService.getCountryFlagById(countryId);
+    };
+
     return (
         <Modal
             show={show}
@@ -23,11 +30,11 @@ function CountryActionsModal({ onHide, country, show }: CountryActionsModalProps
             <Modal.Header className="bg-dark text-light">
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="col-10">
-                        <h3 className="card-title mb-3">{country.name}</h3>
+                        <h3 className="card-title mb-3">{country?.agent.name}</h3>
                         <h4 className={"text-warning"}>Historique des actions</h4>
                     </div>
                     <div className="col-2">
-                        <Image src={getCountryFlagById(country.id)} alt={country.name + " flag"} fluid />
+                        <Image src={getCountryFlagById(String(country?.agent.id))} alt={country?.agent.name + " flag"} fluid />
                     </div>
                 </div>
             </Modal.Header>

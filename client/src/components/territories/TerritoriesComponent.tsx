@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import {getCountryColor} from "../../utils";
 import TerritoryDetailComponent from "../territoryDetail/TerritoryDetailComponent";
 import {Territory} from "../../Entity";
 import {Simulation} from "../../Entity";
@@ -22,6 +21,7 @@ function TerritoryComponent({ simulation }: TerritoryComponentProps) {
             document.getElementById("territory-" + index)?.classList.remove("selected-territory");
         } else {
             let territories: HTMLCollectionOf<Element> = document.getElementsByClassName("territory");
+
             // @ts-ignore
             for (let territory of territories) {
                 territory.classList.remove("selected-territory");
@@ -55,7 +55,7 @@ function TerritoryComponent({ simulation }: TerritoryComponentProps) {
                     key={index}
                     className="territory"
                     style={{
-                        backgroundColor: getCountryColor(String(territory.country?.agent.id)),
+                        backgroundColor: "#" + territory.country?.color,
                         left: `${territory.x * 30}px`,
                         top: `${territory.y * 30}px`,
                         width: `${30}px`,
@@ -69,7 +69,7 @@ function TerritoryComponent({ simulation }: TerritoryComponentProps) {
                 </div>
             ))}
 
-            {showModal && (
+            {showModal && selectedTerritory != null && (
                 <TerritoryDetailComponent
                     showModal={showModal}
                     handleCloseModal={handleCloseModal}

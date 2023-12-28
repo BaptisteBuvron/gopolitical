@@ -121,4 +121,33 @@ class Simulation {
     }
 }
 
-export { Simulation, Territory, Country, Resource, Variation, Agent, MarketInteraction, Market, Environment };
+
+class CountryFlagService {
+    private countryFlags: any[];
+
+    constructor(countryFlags: any[]) {
+        this.countryFlags = countryFlags;
+    }
+
+    getCountryFlagById(countryId: string): string {
+        const country = this.countryFlags.find((c) => c.country === countryId);
+        return country ? country.flag : "";
+    }
+}
+
+class ResourceIconService {
+    private resourceIcons: any[];
+
+    constructor(resourceIcons: any[]) {
+        this.resourceIcons = resourceIcons;
+    }
+
+    getResourceIconPath(resource: string): string {
+        const resourceIcon = this.resourceIcons.find((r) => r.resource === resource);
+        return resourceIcon ? resourceIcon.iconPath : "";
+    }
+}
+
+
+
+export { Simulation, Territory, Country, Resource, Variation, Agent, MarketInteraction, Market, Environment, CountryFlagService, ResourceIconService};

@@ -1,17 +1,18 @@
-import {Territory, Variation} from "../../Entity";
+import {Territory, Variation, CountryFlagService, ResourceIconService} from "../../Entity";
 import React from "react";
-import {getCountryById, getCountryFlagById, getResourceIconPath} from "../../utils";
 import {Button, Modal} from "react-bootstrap";
 import {ClockHistory} from "react-bootstrap-icons";
 import Image from "react-bootstrap/Image";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import CountryActionsModal from "../countryActionsModal/CountryActionsModal";
+import {countryFlags} from "../../countryFlags";
+import {resourceIcons} from "../../resourceIcons";
 
 interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
     showModal: boolean,
-    territory: Territory | null,
+    territory: Territory,
 }
 
 function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
@@ -26,7 +27,21 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
             />
         );
     }
-    const country = getCountryById(String(territory.country?.agent.id));
+    const country = territory.country;
+
+    // Fonction pour obtenir le flag du country
+    const countryFlagService = new CountryFlagService(countryFlags);
+    const getCountryFlagById = (countryId: string): string => {
+        return countryFlagService.getCountryFlagById(countryId);
+    };
+
+    // Fonction pour obtenir l'icône de ressource par nom de ressource
+    const resourceIconService = new ResourceIconService(resourceIcons);
+    const getResourceIconPath = (resource: string): string => {
+        return resourceIconService.getResourceIconPath(resource);
+    };
+
+
 
     // si on trouve un pays à partir de l'id du territoire, alors on affiche le détail du territoire
     // sinon, on affiche un modal avec un message d'erreur
@@ -42,13 +57,13 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                 <Modal.Header className="bg-dark text-light">
                     <div className="d-flex justify-content-between align-items-center">
                         <div className="col-10">
-                            <h4 className="card-title">{country.name + " [" + territory.x + "-" + territory.y+"]"} </h4>
+                            <h4 className="card-title">{country?.agent.name + " [" + territory.x + "-" + territory.y+"]"} </h4>
                             <Button variant="warning" className="mt-2" onClick={() => setModalShow(true)}>
                                 <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des actions
                             </Button>
                         </div>
                         <div className="col-2">
-                            <Image src={getCountryFlagById(country.id)} alt={country.name + " flag"} fluid />
+                            <Image src={getCountryFlagById(String(country?.agent.id))} alt={country?.agent.name + " flag"} fluid />
                         </div>
                     </div>
                 </Modal.Header>
