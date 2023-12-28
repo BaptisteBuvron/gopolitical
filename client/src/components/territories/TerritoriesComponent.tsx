@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { data } from "../../data";
 import {getCountryColor} from "../../utils";
 import TerritoryDetailComponent from "../territoryDetail/TerritoryDetailComponent";
-import {Territory} from "../../models/types";
+import {Territory} from "../../Entity";
 import {Simulation} from "../../Entity";
 
 interface TerritoryComponentProps {
-    simulation: Simulation | undefined; // Define the simulation prop
+    simulation: Simulation;
 }
 
 function TerritoryComponent({ simulation }: TerritoryComponentProps) {
@@ -16,6 +15,7 @@ function TerritoryComponent({ simulation }: TerritoryComponentProps) {
     const handleTerritoryClick = (territory: Territory, index: number) => {
         //Si on reclique sur le même territoire = fermeture modal
         //Sinon, ouverture du modal
+        console.log(territory)
         if (selectedTerritory && selectedTerritory === territory) {
             setShowModal(false);
             setSelectedTerritory(null);
@@ -49,13 +49,13 @@ function TerritoryComponent({ simulation }: TerritoryComponentProps) {
 
     return (
         <div className="Country-tab">
-            {data["territories"].map((territory, index) => (
+            {simulation["territories"].map((territory, index) => (
                 <div
                     id={"territory-" + index.toString()}
                     key={index}
                     className="territory"
                     style={{
-                        backgroundColor: getCountryColor(territory.country),
+                        backgroundColor: getCountryColor(String(territory.country?.agent.id)),
                         left: `${territory.x * 30}px`,
                         top: `${territory.y * 30}px`,
                         width: `${30}px`,

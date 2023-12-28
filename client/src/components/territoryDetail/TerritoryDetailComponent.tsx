@@ -1,4 +1,4 @@
-import {Territory, Variation} from "../../models/types";
+import {Territory, Variation} from "../../Entity";
 import React from "react";
 import {getCountryById, getCountryFlagById, getResourceIconPath} from "../../utils";
 import {Button, Modal} from "react-bootstrap";
@@ -26,7 +26,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
             />
         );
     }
-    const country = getCountryById(territory.country);
+    const country = getCountryById(String(territory.country?.agent.id));
 
     // si on trouve un pays à partir de l'id du territoire, alors on affiche le détail du territoire
     // sinon, on affiche un modal avec un message d'erreur
@@ -56,22 +56,44 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                             <div className="card territory-card">
                                 <ul className="list-group list-group-flush">
                                     {
-                                        territory.variations.map((variation: Variation, index) => (
-                                            <li key={index} className="list-group-item">
-                                                <OverlayTrigger
-                                                    key="bottom"
-                                                    placement="bottom"
-                                                    overlay={
-                                                        <Tooltip>
-                                                            {variation.name.charAt(0).toUpperCase() + variation.name.slice(1)}
-                                                        </Tooltip>
-                                                    }
-                                                >
-                                                    <img src={getResourceIconPath(variation.name)} className="me-2" alt={variation.name + " icon"} />
-                                                </OverlayTrigger>
-                                                Value: {variation.value}
-                                            </li>
-                                        ))
+                                        <div className="card territory-card">
+                                            <ul className="list-group list-group-flush">
+                                                <li className="list-group-item">
+                                                    <strong>Position:</strong> {`(${territory.x}, ${territory.y})`}
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <strong>Country:</strong> {territory.country?.agent.name} ({territory.country?.agent.id})
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <strong>Habitants:</strong> {territory.habitants}
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <strong>Argent:</strong> {territory.country?.money}
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <strong>Variations:</strong>
+                                                    <ul>
+                                                        {territory.variations.map((variation: Variation, index) => (
+                                                            <li key={index}>
+                                                                <OverlayTrigger
+                                                                    key="bottom"
+                                                                    placement="bottom"
+                                                                    overlay={
+                                                                        <Tooltip>
+                                                                            {/* {variation.resource.charAt(0).toUpperCase() + variation.resource.slice(1)} */}
+                                                                        </Tooltip>
+                                                                    }
+                                                                >
+                                                                    <img />
+                                                                </OverlayTrigger>
+                                                                Value: {variation.amount}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+
                                     }
                                 </ul>
                             </div>

@@ -70,7 +70,7 @@ function App() {
             {/*<h1>Liste des pays du monde</h1>
             <CountryComponent countries={countries} />
             <h1>Carte du monde</h1>*/}
-            <TerritoryComponent simulation={simulation} />
+            {simulation && <TerritoryComponent simulation={simulation} />}
         </header>
     </div>
       );
