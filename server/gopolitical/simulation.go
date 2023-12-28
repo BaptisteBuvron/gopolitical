@@ -12,6 +12,7 @@ type Simulation struct {
 	Environment Environment         `json:"environment"`
 	Territories []*Territory        `json:"territories"`
 	Countries   map[string]*Country `json:"countries"`
+	CurrentDay  int                 `json:"currentDay"`
 	wg          *sync.WaitGroup
 	WebSocket   *WebSocket `json:"-"`
 }
@@ -28,7 +29,7 @@ func NewSimulation(
 	territories []*Territory,
 	wg *sync.WaitGroup,
 ) Simulation {
-	return Simulation{secondByDay, NewEnvironment(countries, territories, prices, wg), territories, countries, wg, nil}
+	return Simulation{secondByDay, NewEnvironment(countries, territories, prices, wg), territories, countries, 0, wg, nil}
 }
 
 func (s *Simulation) Start() {
@@ -52,8 +53,8 @@ func (s *Simulation) Start() {
 	}
 
 	for {
-		//Restart all agents
-		log.Println("Start of a new day")
+		s.CurrentDay++
+		log.Println("Day : ", s.CurrentDay)
 
 		//Wait for all agents to finish their actions
 		s.wg.Wait()
@@ -67,7 +68,7 @@ func (s *Simulation) Start() {
 		//Mettre à jour les stocks des territoires à partir des consommations des habitants
 		s.Environment.UpdateStocksFromConsumption()
 
-		log.Println("End of the day")
+		log.Println("End of the day : ", s.CurrentDay)
 		fmt.Print("\n\n\n")
 
 		//Wait the other day

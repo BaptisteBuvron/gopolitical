@@ -44,7 +44,7 @@
       "x": 0,
       "y": 0,
       "country": "ru",
-      "habitants": 10,
+      "habitants": 15,
       "stocks": [
         {
           "name": "armement",
@@ -78,7 +78,7 @@
         },
         {
           "name": "water",
-          "value": 10
+          "value": 15
         }
       ]
     },

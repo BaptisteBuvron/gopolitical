@@ -1,3 +1,34 @@
+// Define EventType as an interface
+interface EventType {}
+
+// Implement the CountryEvent class
+class CountryEvent {
+    day: number;
+    eventType: EventType | undefined;
+
+    constructor(data: any, country?: Country) {
+        this.day = data.day;
+        //Check the type of the event TraitementEvent or TransferResourceEvent
+        if (data.event === "transferResource") {
+            this.eventType = new TransferResourceEvent(data, country);
+        }
+    }
+}
+
+// Implement the TransferResourceEvent class
+class TransferResourceEvent implements EventType{
+    from: Territory;
+    to: Territory;
+    resource: string;
+    amount: number;
+
+    constructor(data: any, country?: Country) {
+        this.from = new Territory(data.from, country);
+        this.to = new Territory(data.to, country);
+        this.resource = data.resource;
+        this.amount = data.amount;
+    }
+}
 
 class Resource {
     id: number;
@@ -38,11 +69,15 @@ class Country {
     agent: Agent;
     color: string;
     money: number;
+    history: CountryEvent[];
+    territories: Territory[];
 
     constructor(data: any) {
         this.agent = new Agent(data.agent);
         this.color = data.color;
         this.money = data.money;
+        this.history = data.history.map((eventData: any) => new CountryEvent(eventData, this));
+        this.territories = data.territories.map((territoryData: any) => new Territory(territoryData, this));
     }
 }
 
@@ -51,16 +86,16 @@ class Territory {
     y: number;
     variations: Variation[];
     stock: Map<string, number>;
-    country: Country | null;
     habitants: number;
+    country: Country | undefined;
 
-    constructor(data: any) {
+    constructor(data: any, country?: Country) {
         this.x = data.x;
         this.y = data.y;
         this.variations = data.variations.map((variationData: any) => new Variation(variationData));
         this.stock = new Map<string, number>(Object.entries(data.stock));
-        this.country = data.country ? new Country(data.country) : null;
         this.habitants = data.habitants;
+        this.country = country;
     }
 }
 
@@ -107,6 +142,7 @@ class Simulation {
     environment: Environment;
     territories: Territory[];
     countries: Map<string, Country>;
+    currentDay: number;
 
     constructor(data: any) {
         this.secondByDay = data.secondByDay;
@@ -118,6 +154,16 @@ class Simulation {
                 new Country(countryData),
             ])
         );
+        for (let territory of this.territories) {
+            for (let country of this.countries.values()) {
+                for (let countryTerritory of country.territories) {
+                    if (territory.x === countryTerritory.x && territory.y === countryTerritory.y) {
+                        territory.country = country;
+                    }
+                }
+            }
+        }
+        this.currentDay = data.currentDay;
     }
 }
 
