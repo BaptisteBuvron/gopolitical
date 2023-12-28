@@ -25,7 +25,7 @@ class Variation {
 
 
 class Agent {
-    id: number;
+    id: string;
     name: string;
 
     constructor(data: any) {
@@ -129,7 +129,7 @@ class CountryFlagService {
         this.countryFlags = countryFlags;
     }
 
-    getCountryFlagById(countryId: string): string {
+    getCountryFlagById(countryId: string | undefined): string {
         const country = this.countryFlags.find((c) => c.country === countryId);
         return country ? country.flag : "";
     }

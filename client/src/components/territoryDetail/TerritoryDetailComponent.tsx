@@ -31,7 +31,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
 
     // Fonction pour obtenir le flag du country
     const countryFlagService = new CountryFlagService(countryFlags);
-    const getCountryFlagById = (countryId: string): string => {
+    const getCountryFlagById = (countryId: string | undefined): string => {
         return countryFlagService.getCountryFlagById(countryId);
     };
 
@@ -63,7 +63,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                             </Button>
                         </div>
                         <div className="col-2">
-                            <Image src={getCountryFlagById(String(country?.agent.id))} alt={country?.agent.name + " flag"} fluid />
+                            <Image src={getCountryFlagById(country?.agent.id)} alt={country?.agent.name + " flag"} fluid />
                         </div>
                     </div>
                 </Modal.Header>
