@@ -32,10 +32,6 @@ function TerritoryComponent({ simulation }: TerritoryComponentProps) {
         }
     };
 
-    if (simulation) {
-        console.log(simulation);
-    }
-
     //Cache le modal quand on appuye sur le bouton Fermer
     const handleCloseModal = () => {
         let territories: HTMLCollectionOf<Element> = document.getElementsByClassName("territory");
