@@ -1,5 +1,5 @@
 package gopolitical
 
 type Information struct {
-	ressource Ressource
+	ressource Resource
 }
