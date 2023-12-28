@@ -1,17 +1,16 @@
 package main
 
 import (
-	"fmt"
-
 	agt "github.com/BaptisteBuvron/gopolitical/server/gopolitical"
+	"log"
 )
 
 func main() {
 	simulation, err := agt.LoadSimulation("resources/data.json")
 	if err != nil {
-		fmt.Printf("Error: %s", err)
+		log.Printf("Error: %s", err)
 	} else {
-		fmt.Printf("Simulation loaded%v\n", simulation)
+		log.Printf("Simulation loaded\n")
 	}
 	simulation.Start()
 

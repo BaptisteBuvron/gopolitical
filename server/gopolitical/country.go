@@ -1,7 +1,6 @@
 package gopolitical
 
 import (
-	"fmt"
 	"log"
 	"sync"
 	"time"
@@ -40,11 +39,16 @@ func (c *Country) GetTotalHabitants() int {
 }
 
 func (c *Country) Start() {
-	fmt.Printf("Country %s started\n", c.Name)
-	c.Percept()
-	requests := c.Deliberate()
-	c.Act(requests)
-	c.wg.Done()
+	log.Printf("Country %s started\n", c.Name)
+	for {
+		c.wg.Add(1)
+		c.Percept()
+		requests := c.Deliberate()
+		c.Act(requests)
+		c.wg.Done()
+		//Wait for the end of the day
+		_ = <-c.In
+	}
 }
 
 func (c *Country) Percept() {
@@ -58,12 +62,12 @@ func (c *Country) Percept() {
 		//TODO : Faire un traitement des events
 	}
 
-	fmt.Printf("Country %s percepted\n", c.Name)
+	log.Printf("Country %s percepted\n", c.Name)
 }
 
 func (c *Country) Deliberate() []Request {
-	fmt.Printf("Country %s deliberate\n", c.Name)
-	fmt.Println("Stock total de ", c.Name, " : ", c.GetTotalStock())
+	log.Printf("Country %s deliberate\n", c.Name)
+	log.Println("Stock total de ", c.Name, " : ", c.GetTotalStock())
 	time.Sleep(1 * time.Second)
 
 	//TODO : Faire des virements de ressources entre territoires du pays si besoin
@@ -103,7 +107,7 @@ func (c *Country) Deliberate() []Request {
 }
 
 func (c *Country) Act(requests []Request) {
-	fmt.Printf("Country %s act\n", c.Name)
+	log.Printf("Country %s act\n", c.Name)
 }
 
 func (c *Country) GetConsumption() map[ResourceType]float64 {

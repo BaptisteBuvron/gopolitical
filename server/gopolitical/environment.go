@@ -6,12 +6,13 @@ import (
 )
 
 type Environment struct {
-	Countries   map[string]*Country `json:"-"`
-	Territories []*Territory        `json:"-"`
-	Market      *Market             `json:"market"`
-	wg          *sync.WaitGroup
-	lock        sync.Mutex
-	Percept     map[string][]Request `json:"-"`
+	Countries      map[string]*Country `json:"-"`
+	Territories    []*Territory        `json:"-"`
+	Market         *Market             `json:"market"`
+	wg             *sync.WaitGroup
+	lock           sync.Mutex
+	Percept        map[string][]Request `json:"-"`
+	WaitingNextDay bool
 }
 
 func NewEnvironment(countries map[string]*Country, territories []*Territory, prices Prices, wg *sync.WaitGroup) Environment {
@@ -21,12 +22,13 @@ func NewEnvironment(countries map[string]*Country, territories []*Territory, pri
 		percept[country.Name] = []Request{}
 	}
 	return Environment{
-		Countries:   countries,
-		Territories: territories,
-		Market:      NewMarket(prices, percept),
-		wg:          wg,
-		lock:        sync.Mutex{},
-		Percept:     percept,
+		Countries:      countries,
+		Territories:    territories,
+		Market:         NewMarket(prices, percept),
+		wg:             wg,
+		lock:           sync.Mutex{},
+		Percept:        percept,
+		WaitingNextDay: false,
 	}
 }
 
