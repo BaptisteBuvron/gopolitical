@@ -1,6 +1,6 @@
 package gopolitical
 
 type Variation struct {
-	Ressource ResourceType
-	Amount    float64
+	Ressource ResourceType `json:"resource"`
+	Amount    float64      `json:"amount"`
 }

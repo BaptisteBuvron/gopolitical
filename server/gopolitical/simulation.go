@@ -2,6 +2,7 @@ package gopolitical
 
 import (
 	"fmt"
+	"log"
 	"sync"
 	"time"
 )
@@ -36,37 +37,46 @@ func (s *Simulation) Start() {
 	s.WebSocket = NewWebSocket(s)
 	go s.WebSocket.Start()
 
-	fmt.Println("Start of the simulation : ")
-	fmt.Println("Number of countries : ", len(s.Countries))
-	fmt.Println("Number of territories : ", len(s.Territories))
+	log.Println("Start of the simulation : ")
+	log.Println("Number of countries : ", len(s.Countries))
+	log.Println("Number of territories : ", len(s.Territories))
 
 	for _, country := range s.Countries {
-		fmt.Println("Nombre de territoires dans  : ", country.Name, " : ", len(country.Territories))
+		log.Println("Nombre de territoires dans  : ", country.Name, " : ", len(country.Territories))
 	}
 
 	go s.Environment.Start()
 
+	for _, country := range s.Countries {
+		go country.Start()
+	}
+
 	for {
 		//Restart all agents
-		fmt.Println("Start of a new day")
-		for _, country := range s.Countries {
-			s.wg.Add(1)
-			go country.Start()
-		}
+		log.Println("Start of a new day")
+
 		//Wait for all agents to finish their actions
 		s.wg.Wait()
-		fmt.Println("End of the day")
-		//Mettre à jour les stocks des territoires à partir des variations
-		s.Environment.UpdateStocksFromVariation()
-		//Mettre à jour les stocks des territoires à partir des consommations des habitants
-		s.Environment.UpdateStocksFromConsumption()
 
 		//On fait correspondre les ordres d'achats et de ventes
 		s.Environment.Market.HandleRequests()
+
+		//Mettre à jour les stocks des territoires à partir des variations
+		s.Environment.UpdateStocksFromVariation()
+
+		//Mettre à jour les stocks des territoires à partir des consommations des habitants
+		s.Environment.UpdateStocksFromConsumption()
+
+		log.Println("End of the day")
+		fmt.Print("\n\n\n")
 
 		//Wait the other day
 		time.Sleep(time.Duration(s.SecondByDay) * time.Second)
 		//Send update to the websocket
 		s.WebSocket.SendUpdate()
+		//Unlock all agents
+		for _, country := range s.Countries {
+			country.In <- true
+		}
 	}
 }

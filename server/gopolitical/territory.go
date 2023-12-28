@@ -13,28 +13,28 @@ func NewTerritory(x int, y int, variations []Variation, stock map[ResourceType]f
 	return &Territory{x, y, variations, stock, country, habitant}
 }
 
-func (c Territory) Start() {
+func (t Territory) Start() {
 
 }
 
-func (c Territory) Percept() {
+func (t Territory) Percept() {
 
 }
 
-func (c Territory) Deliberate() {
+func (t Territory) Deliberate() {
 
 }
 
-func (c Territory) Act() {
+func (t Territory) Act() {
 
 }
 
-func (c *Territory) GetSurplus() map[ResourceType]float64 {
+func (t *Territory) GetSurplus() map[ResourceType]float64 {
 	//TODO: Rendre générique pour toutes les ressources
 	surplus := make(map[ResourceType]float64)
 	//On garde 3 jours de surplus
-	surplusFood := c.Stock["food"] - (float64(c.Habitants)*FOOD_BY_HABITANT)*3
-	surplusWater := c.Stock["water"] - (float64(c.Habitants)*WATER_BY_HABITANT)*3
+	surplusFood := t.Stock["food"] - (float64(t.Habitants)*FOOD_BY_HABITANT)*3
+	surplusWater := t.Stock["water"] - (float64(t.Habitants)*WATER_BY_HABITANT)*3
 
 	if surplusFood > 0 {
 		surplus["food"] = surplusFood
