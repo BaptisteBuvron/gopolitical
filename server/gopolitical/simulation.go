@@ -53,7 +53,7 @@ func (s *Simulation) Start() {
 	}
 
 	for {
-		s.CurrentDay++
+		s.incrementDay()
 		log.Println("Day : ", s.CurrentDay)
 
 		//Wait for all agents to finish their actions
@@ -77,6 +77,8 @@ func (s *Simulation) Start() {
 		s.Environment.UpdateStockHistory(s.CurrentDay)
 		s.Environment.UpdateMoneyHistory(s.CurrentDay)
 		s.Environment.UpdateHabitantsHistory(s.CurrentDay)
+		s.Environment.Percept = s.Environment.Market.Percept
+		s.Environment.Market.Percept = make(map[string][]Request)
 
 		//Send update to the websocket
 		s.WebSocket.SendUpdate()
@@ -85,4 +87,9 @@ func (s *Simulation) Start() {
 			country.In <- true
 		}
 	}
+}
+
+func (s *Simulation) incrementDay() {
+	s.CurrentDay++
+	s.Environment.Market.currentDay++
 }

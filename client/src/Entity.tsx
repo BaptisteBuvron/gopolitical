@@ -12,8 +12,44 @@ class CountryEvent {
         if (data.event === "transferResource") {
             this.eventType = new TransferResourceEvent(data, country);
         }
+        if (data.event === "sellEvent") {
+            this.eventType = new MarketSellEvent(data);
+        }
+        if (data.event === "buyEvent") {
+            this.eventType = new MarketBuyEvent(data);
+        }
     }
 }
+
+class MarketSellEvent implements EventType{
+    resource: string;
+    amount: number;
+    gain: number;
+    to : string;
+
+    constructor(data: any) {
+        this.resource = data.resourceType;
+        this.amount = data.amountExecuted;
+        this.gain = data.gain;
+        this.to = data.to;
+    }
+}
+
+class MarketBuyEvent implements EventType{
+    resource: string;
+    amount: number;
+    cost: number;
+    from : string;
+
+    constructor(data: any) {
+        this.resource = data.resourceType;
+        this.amount = data.amountExecuted;
+        this.cost = data.cost;
+        this.from = data.from;
+    }
+}
+
+
 
 // Implement the TransferResourceEvent class
 class TransferResourceEvent implements EventType{
@@ -110,7 +146,7 @@ class Territory {
 }
 
 class MarketInteraction {
-    dateTransaction: string; // Adjust the type based on your actual data type for time.Time
+    dateTransaction: string;
     resourceType: string;
     amount: number;
     price: number;
@@ -118,7 +154,7 @@ class MarketInteraction {
     seller: Country;
 
     constructor(data: any) {
-        this.dateTransaction = data.dateTransaction; // Adjust the field name based on the actual JSON structure
+        this.dateTransaction = data.dateTransaction;
         this.resourceType = data.resourceType;
         this.amount = data.amount;
         this.price = data.price;

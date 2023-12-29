@@ -23,6 +23,24 @@ type TransferResourceEvent struct {
 	Amount   float64      `json:"amount"`
 }
 
+type BuyResourceEvent struct {
+	CountryEvent
+	From     *Territory   `json:"from"`
+	To       *Territory   `json:"to"`
+	Resource ResourceType `json:"resource"`
+	Amount   float64      `json:"amount"`
+	Price    float64      `json:"price"`
+}
+
+type SellResourceEvent struct {
+	CountryEvent
+	From     *Territory   `json:"from"`
+	To       *Territory   `json:"to"`
+	Resource ResourceType `json:"resource"`
+	Amount   float64      `json:"amount"`
+	Price    float64      `json:"price"`
+}
+
 type Country struct {
 	Agent        `json:"agent"`
 	Color        string          `json:"color"`
@@ -68,7 +86,7 @@ func (c *Country) Start() {
 		c.wg.Done()
 		//Wait for the end of the day
 		<-c.In
-		//TODO: get the day from the environment (percept)
+		//TODO: get the day from the environment (Percept)
 		c.currentDay++
 	}
 }
@@ -80,7 +98,14 @@ func (c *Country) Percept() {
 
 	//Downcast to a PerceptResponse
 	if perceptResponse, ok := perceptResponse.(PerceptResponse); ok {
-		_ = perceptResponse
+		for _, event := range perceptResponse.events {
+			switch event := event.(type) {
+			case MarketBuyResponse, MarketSellResponse:
+				c.History = append(c.History, event)
+				break
+			}
+
+		}
 		//TODO : Faire un traitement des events
 	}
 

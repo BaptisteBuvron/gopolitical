@@ -2,23 +2,23 @@ package gopolitical
 
 import (
 	"log"
-	"time"
 )
 
 type Prices map[ResourceType]float64
 
 type Market struct {
-	sells   map[int]*MarketSellRequest
-	buys    map[int]*MarketBuyRequest
-	Prices  Prices `json:"prices"`
-	IdSell  int
-	IdBuy   int
-	percept map[string][]Request
-	History []*MarketInteraction `json:"history"`
+	sells      map[int]*MarketSellRequest
+	buys       map[int]*MarketBuyRequest
+	Prices     Prices `json:"prices"`
+	IdSell     int
+	IdBuy      int
+	Percept    map[string][]Request `json:"-"`
+	History    []*MarketInteraction `json:"history"`
+	currentDay int
 }
 
 func NewMarket(prices Prices, percept map[string][]Request) *Market {
-	return &Market{make(map[int]*MarketSellRequest), make(map[int]*MarketBuyRequest), prices, 0, 0, percept, []*MarketInteraction{}}
+	return &Market{make(map[int]*MarketSellRequest), make(map[int]*MarketBuyRequest), prices, 0, 0, percept, []*MarketInteraction{}, 0}
 }
 
 func (m *Market) handleRequest(req MarketRequest) {
@@ -87,12 +87,6 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 		//on retire la demande d'achat de la liste des achats
 		delete(m.buys, buy.BuyID)
 
-		//on envoie la reponse au pays acheteur
-		m.percept[buy.from.Name] = append(m.percept[buy.from.Name], MarketBuyResponse{buy, buy.from, executed, executed * m.Prices[buy.resources]})
-
-		//on envoie la reponse au pays vendeur
-		m.percept[sell.from.Name] = append(m.percept[sell.from.Name], MarketSellResponse{sell, sell.from, executed, executed * m.Prices[sell.resources]})
-
 	} else {
 		//Achat partiel
 
@@ -104,13 +98,13 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 		//on modifie la demande d'achat
 		buy.amount -= executed
 
-		//on envoie la reponse au pays acheteur
-
-		m.percept[buy.from.Name] = append(m.percept[buy.from.Name], MarketBuyResponse{buy, buy.from, executed, executed * m.Prices[buy.resources]})
-
-		//on envoie la reponse au pays vendeur
-		m.percept[sell.from.Name] = append(m.percept[sell.from.Name], MarketSellResponse{sell, sell.from, executed, executed * m.Prices[sell.resources]})
 	}
+
+	//on envoie la reponse au pays acheteur
+	m.Percept[buy.from.Name] = append(m.Percept[buy.from.Name], MarketBuyResponse{new(Request), "buyEvent", m.currentDay, buy.resources, sell.from.Name, executed, executed * m.Prices[buy.resources]})
+	//on envoie la reponse au pays vendeur
+
+	m.Percept[sell.from.Name] = append(m.Percept[sell.from.Name], MarketSellResponse{new(Request), "sellEvent", m.currentDay, sell.resources, buy.from.Name, executed, executed * m.Prices[sell.resources]})
 
 	//on met à jour les stocks des pays et leur argent
 	cost := executed * m.Prices[buy.resources]
@@ -120,5 +114,5 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 	buy.territoire.Stock[buy.resources] += executed
 	sell.territoire.Stock[sell.resources] -= executed
 	log.Println("Transaction effectuée : ", buy.from.Name, " achete ", executed, " ", buy.resources, " à ", sell.from.Name, " pour ", executed*m.Prices[buy.resources])
-	m.History = append(m.History, &MarketInteraction{time.Now(), buy.resources, executed, m.Prices[buy.resources], buy.from, sell.from})
+	m.History = append(m.History, &MarketInteraction{m.currentDay, buy.resources, executed, m.Prices[buy.resources], buy.from, sell.from})
 }
