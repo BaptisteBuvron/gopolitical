@@ -21,7 +21,7 @@ function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
     const handleTerritoryClick = (territory: Territory, index: number) => {
         //Si on reclique sur le même territoire = fermeture modal
         //Sinon, ouverture du modal
-        console.log(territory)
+        //console.log(territory)
         if (selectedTerritory && selectedTerritory === territory) {
             setShowModal(false);
             setSelectedTerritory(null);
