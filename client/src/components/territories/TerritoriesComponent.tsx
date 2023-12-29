@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import TerritoryDetailComponent from "../territoryDetail/TerritoryDetailComponent";
 import {Territory} from "../../Entity";
 import {Simulation} from "../../Entity";
-import {Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import SimulationErrorComponent from "../SimulationErrorComponent";
 
