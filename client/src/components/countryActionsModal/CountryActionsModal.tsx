@@ -1,9 +1,9 @@
 import React from "react";
 import {Button, Modal} from "react-bootstrap";
-import {Country, CountryFlagService} from "../../Entity";
+import {Country } from "../../Entity";
+import {CountryFlagService} from "../../services/CountryFlagService";
 import Image from "react-bootstrap/Image";
 import "../../App.css";
-import {countryFlags} from "../../countryFlags";
 
 interface CountryActionsModalProps {
     onHide: () => void;
@@ -14,7 +14,7 @@ interface CountryActionsModalProps {
 function CountryActionsModal({ onHide, country, show }: CountryActionsModalProps) {
 
     // Fonction pour obtenir le flag du country
-    const countryFlagService = new CountryFlagService(countryFlags);
+    const countryFlagService = new CountryFlagService();
     const getCountryFlagById = (countryId: string | undefined): string => {
         return countryFlagService.getCountryFlagById(countryId);
     };

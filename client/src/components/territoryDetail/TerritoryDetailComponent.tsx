@@ -1,4 +1,6 @@
-import {Territory, Variation, CountryFlagService, ResourceIconService} from "../../Entity";
+import {Territory, Variation} from "../../Entity";
+import {ResourceIconService} from "../../services/ResourceIconService";
+import {CountryFlagService} from "../../services/CountryFlagService";
 import React from "react";
 import {Button, Modal} from "react-bootstrap";
 import {ClockHistory} from "react-bootstrap-icons";
@@ -6,8 +8,6 @@ import Image from "react-bootstrap/Image";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import CountryActionsModal from "../countryActionsModal/CountryActionsModal";
-import {countryFlags} from "../../countryFlags";
-import {resourceIcons} from "../../resourceIcons";
 
 interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
@@ -30,13 +30,13 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
     const country = territory.country;
 
     // Fonction pour obtenir le flag du country
-    const countryFlagService = new CountryFlagService(countryFlags);
+    const countryFlagService = new CountryFlagService();
     const getCountryFlagById = (countryId: string | undefined): string => {
         return countryFlagService.getCountryFlagById(countryId);
     };
 
     // Fonction pour obtenir l'icône de ressource par nom de ressource
-    const resourceIconService = new ResourceIconService(resourceIcons);
+    const resourceIconService = new ResourceIconService();
     const getResourceIconPath = (resource: string): string => {
         return resourceIconService.getResourceIconPath(resource);
     };
@@ -87,15 +87,14 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                 </li>
                                                 <li className="list-group-item">
                                                     <strong>Variations:</strong>
-                                                    <ul>
+                                                    <ul className="mt-1">
                                                         {territory.variations.map((variation: Variation, index) => (
-                                                            <li key={index}>
+                                                            <li key={index} style={{listStyle: "none"}} className="mb-2">
                                                                 <OverlayTrigger
-                                                                    key="bottom"
-                                                                    placement="bottom"
+                                                                    placement="left"
                                                                     overlay={
                                                                         <Tooltip>
-                                                                            {/* {variation.resource.charAt(0).toUpperCase() + variation.resource.slice(1)} */}
+                                                                             {variation.resource.charAt(0).toUpperCase() + variation.resource.slice(1)}
                                                                         </Tooltip>
                                                                     }
                                                                 >
