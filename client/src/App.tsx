@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import TerritoryComponent from "./components/territories/TerritoriesComponent";
 import {Simulation} from "./Entity";
+import {Route, Routes} from "react-router-dom";
+import LayoutComponent from "./components/LayoutComponent";
 
 function App() {
-
     const [simulation, setSimulation] = useState<Simulation>();
 
     useEffect(() => {
@@ -34,45 +35,23 @@ function App() {
         // Fermer la connexion WebSocket lors du démontage du composant
         return () => socket.close();
     }, []); // Effect sera exécuté une seule fois après le rendu initial
-
-
-
     return (
-        /*<Container id="app" fluid>
-            {/!*<header className="header p-3">
-                <h1>Liste des territoires du monde</h1>
-                <TerritoryComponent />
-            </header>*!/}
-          {/!*
-
-              <CountryComponent countries={countries} />
-              <TerritoriesComponent />
-
-          *!/}
-            {/!*<div className="row justify-content-evenly g-4 col-12 pb-5">
-                {
-                    data["territories"].map((territory: Territory, index) => (
-                        <TerritoryDetailComponent key={index} data={data} x={territory.x} y={territory.y} />
-                    ))
-                }
-            </div>*!/}
-            <div className="App">
-                <header className="App-header">
-                    <h1>Liste des pays du monde</h1>
-                    <CountryComponent countries={countries} />
-                    <h1>Carte du monde</h1>
-                    <TerritoryComponent />
-                </header>
-            </div>
-        </Container>*/
-    <div className="App">
+        <Routes>
+            <Route path="/" element={<LayoutComponent simulation={simulation}/>}>
+                {/*<Route index element={<Home />} />
+                <Route path="blogs" element={<Blogs />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="*" element={<NoPage />} />*/}
+            </Route>
+        </Routes>
+    /*<div className="App">
         <header className="App-header">
-            {/*<h1>Liste des pays du monde</h1>
+            <h1>Liste des pays du monde</h1>
             <CountryComponent countries={countries} />
-            <h1>Carte du monde</h1>*/}
+            <h1>Carte du monde</h1>
             {simulation && <TerritoryComponent simulation={simulation} />}
         </header>
-    </div>
+    </div>*/
       );
 }
 
