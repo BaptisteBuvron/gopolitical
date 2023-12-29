@@ -2,15 +2,22 @@ import React, { useState } from "react";
 import TerritoryDetailComponent from "../territoryDetail/TerritoryDetailComponent";
 import {Territory} from "../../Entity";
 import {Simulation} from "../../Entity";
+import Container from "react-bootstrap/Container";
+import SimulationErrorComponent from "../SimulationErrorComponent";
 
-interface TerritoryComponentProps {
-    simulation: Simulation;
+interface TerritoriesComponentProps {
+    simulation: Simulation | undefined;
 }
 
-function TerritoryComponent({ simulation }: TerritoryComponentProps) {
+function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
     const [showModal, setShowModal] = useState(false);
     const [selectedTerritory, setSelectedTerritory] = useState<Territory | null>(null);
 
+    if(simulation === undefined) {
+        return (
+            <SimulationErrorComponent />
+        )
+    }
     const handleTerritoryClick = (territory: Territory, index: number) => {
         //Si on reclique sur le même territoire = fermeture modal
         //Sinon, ouverture du modal
@@ -44,36 +51,39 @@ function TerritoryComponent({ simulation }: TerritoryComponentProps) {
     };
 
     return (
-        <div className="Country-tab">
-            {simulation["territories"].map((territory, index) => (
-                <div
-                    id={"territory-" + index.toString()}
-                    key={index}
-                    className="territory"
-                    style={{
-                        backgroundColor: "#" + territory.country?.color,
-                        left: `${territory.x * 30}px`,
-                        top: `${territory.y * 30}px`,
-                        width: `${30}px`,
-                        height: `${30}px`,
-                        position: "absolute",
-                        border: "solid 1px black",
+        <Container>
+            <h1 style={{textAlign: "center"}}>Carte du monde</h1>
+            <div className="territories">
+                {simulation["territories"].map((territory, index) => (
+                    <div
+                        id={"territory-" + index.toString()}
+                        key={index}
+                        className="territory"
+                        style={{
+                            backgroundColor: "#" + territory.country?.color,
+                            left: `${territory.x * 30}px`,
+                            top: `${territory.y * 30}px`,
+                            width: `${30}px`,
+                            height: `${30}px`,
+                            position: "absolute",
+                            border: "solid 1px black",
 
-                    }}
-                    onClick={() => handleTerritoryClick(territory, index)}
-                >
-                </div>
-            ))}
+                        }}
+                        onClick={() => handleTerritoryClick(territory, index)}
+                    >
+                    </div>
+                ))}
 
-            {showModal && selectedTerritory != null && (
-                <TerritoryDetailComponent
-                    showModal={showModal}
-                    handleCloseModal={handleCloseModal}
-                    territory={selectedTerritory}
-                />
-            )}
-        </div>
+                {showModal && selectedTerritory != null && (
+                    <TerritoryDetailComponent
+                        showModal={showModal}
+                        handleCloseModal={handleCloseModal}
+                        territory={selectedTerritory}
+                    />
+                )}
+            </div>
+        </Container>
     );
 }
 
-export default TerritoryComponent;
+export default TerritoriesComponent;
