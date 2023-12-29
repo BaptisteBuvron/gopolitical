@@ -71,6 +71,7 @@ class Country {
     money: number;
     history: CountryEvent[];
     territories: Territory[];
+    moneyHistory: Map<string, number>;
 
     constructor(data: any) {
         this.agent = new Agent(data.agent);
@@ -78,6 +79,7 @@ class Country {
         this.money = data.money;
         this.history = data.history.map((eventData: any) => new CountryEvent(eventData, this));
         this.territories = data.territories.map((territoryData: any) => new Territory(territoryData, this));
+        this.moneyHistory = new Map<string, number>(Object.entries(data.moneyHistory));
     }
 }
 
@@ -86,7 +88,9 @@ class Territory {
     y: number;
     variations: Variation[];
     stock: Map<string, number>;
+    stockHistory: Map<number, Map<string, number>>;
     habitants: number;
+    habitantsHistory: Map<string, number>;
     country: Country | undefined;
 
     constructor(data: any, country?: Country) {
@@ -96,6 +100,12 @@ class Territory {
         this.stock = new Map<string, number>(Object.entries(data.stock));
         this.habitants = data.habitants;
         this.country = country;
+        this.stockHistory = new Map<number, Map<string, number>>();
+        for (const key in data.stockHistory) {
+            const innerMap = new Map<string, number>(Object.entries(data.stockHistory[key]));
+            this.stockHistory.set(Number(key), innerMap);
+        }
+        this.habitantsHistory = new Map<string, number>(Object.entries(data.habitantsHistory));
     }
 }
 
@@ -134,7 +144,6 @@ class Environment {
         this.market = new Market(data.market);
     }
 }
-
 
 
 class Simulation {

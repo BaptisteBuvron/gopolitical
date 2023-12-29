@@ -87,5 +87,27 @@ func (e *Environment) UpdateStocksFromConsumption() {
 			territory.Stock["water"] -= waterConsumption
 		}
 	}
+}
 
+func (e *Environment) UpdateStockHistory(currentDay int) {
+	for _, territory := range e.Territories {
+		//copy stock
+		copyStock := make(map[ResourceType]float64)
+		for k, v := range territory.Stock {
+			copyStock[k] = v
+		}
+		territory.StockHistory[currentDay] = copyStock
+	}
+}
+
+func (e *Environment) UpdateMoneyHistory(currentDay int) {
+	for _, country := range e.Countries {
+		country.MoneyHistory[currentDay] = country.Money
+	}
+}
+
+func (e *Environment) UpdateHabitantsHistory(day int) {
+	for _, territory := range e.Territories {
+		territory.HabitantsHistory[day] = territory.Habitants
+	}
 }

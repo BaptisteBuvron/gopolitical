@@ -24,19 +24,20 @@ type TransferResourceEvent struct {
 }
 
 type Country struct {
-	Agent       `json:"agent"`
-	Color       string          `json:"color"`
-	Territories []*Territory    `json:"territories"`
-	Money       float64         `json:"money"`
-	History     []Event         `json:"history"`
-	wg          *sync.WaitGroup `json:"-"`
-	In          Channel         `json:"-"`
-	Out         Channel         `json:"-"`
-	currentDay  int             `json:"-"`
+	Agent        `json:"agent"`
+	Color        string          `json:"color"`
+	Territories  []*Territory    `json:"territories"`
+	Money        float64         `json:"money"`
+	History      []Event         `json:"history"`
+	MoneyHistory map[int]float64 `json:"moneyHistory"`
+	wg           *sync.WaitGroup `json:"-"`
+	In           Channel         `json:"-"`
+	Out          Channel         `json:"-"`
+	currentDay   int             `json:"-"`
 }
 
 func NewCountry(id string, name string, color string, territories []*Territory, money float64, wg *sync.WaitGroup, in Channel, out Channel) *Country {
-	return &Country{Agent{id, name}, color, territories, money, make([]Event, 0), wg, in, out, 0}
+	return &Country{Agent{id, name}, color, territories, money, make([]Event, 0), make(map[int]float64), wg, in, out, 0}
 }
 
 func (c *Country) GetTotalStock() map[ResourceType]float64 {

@@ -73,6 +73,11 @@ func (s *Simulation) Start() {
 
 		//Wait the other day
 		time.Sleep(time.Duration(s.SecondByDay) * time.Second)
+		//Udd history
+		s.Environment.UpdateStockHistory(s.CurrentDay)
+		s.Environment.UpdateMoneyHistory(s.CurrentDay)
+		s.Environment.UpdateHabitantsHistory(s.CurrentDay)
+
 		//Send update to the websocket
 		s.WebSocket.SendUpdate()
 		//Unlock all agents
