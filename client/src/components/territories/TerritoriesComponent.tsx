@@ -4,15 +4,21 @@ import {Territory} from "../../Entity";
 import {Simulation} from "../../Entity";
 import {Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
+import SimulationErrorComponent from "../SimulationErrorComponent";
 
-interface TerritoryComponentProps {
-    simulation: Simulation;
+interface TerritoriesComponentProps {
+    simulation: Simulation | undefined;
 }
 
-function TerritoryComponent({ simulation }: TerritoryComponentProps) {
+function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
     const [showModal, setShowModal] = useState(false);
     const [selectedTerritory, setSelectedTerritory] = useState<Territory | null>(null);
 
+    if(simulation === undefined) {
+        return (
+            <SimulationErrorComponent />
+        )
+    }
     const handleTerritoryClick = (territory: Territory, index: number) => {
         //Si on reclique sur le même territoire = fermeture modal
         //Sinon, ouverture du modal
@@ -81,4 +87,4 @@ function TerritoryComponent({ simulation }: TerritoryComponentProps) {
     );
 }
 
-export default TerritoryComponent;
+export default TerritoriesComponent;

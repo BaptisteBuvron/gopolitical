@@ -1,20 +1,26 @@
 import React from "react";
+import {Simulation} from "../Entity";
+import SimulationErrorComponent from "./SimulationErrorComponent";
 
 interface CountryComponentProps {
-    countries: { name: string; color: string; x: number; y: number }[];
+    simulation: Simulation | undefined;
 }
 
-const CountryComponent: React.FC<CountryComponentProps> = ({ countries }) => {
+function CountryComponent({simulation}: CountryComponentProps) {
+    if(simulation === undefined) {
+        return (
+            <SimulationErrorComponent />
+        )
+    }
     return (
         <div className="Country-tab">
-            {countries.map((country, index) => (
-                <div key={index} className="Country"
+            {Array.from(simulation.countries.values()).map((country, index) => (
+                <div className="country"
                      style={{
-                         backgroundColor: country.color,
-                         left: `${country.x}px`,
-                         top: `${country.y}px`,
+                         backgroundColor: "#" + country.color,
+                         width: "100px",
                      }}>
-                    <p>{country.name}</p>
+                    <p>{country.agent.name}</p>
                 </div>
             ))}
         </div>
