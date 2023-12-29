@@ -1,6 +1,7 @@
-import {Territory, Variation} from "../../models/types";
+import {Territory, Variation} from "../../Entity";
+import {ResourceIconService} from "../../services/ResourceIconService";
+import {CountryFlagService} from "../../services/CountryFlagService";
 import React from "react";
-import {getCountryById, getCountryFlagById, getResourceIconPath} from "../../utils";
 import {Button, Modal} from "react-bootstrap";
 import {ClockHistory} from "react-bootstrap-icons";
 import Image from "react-bootstrap/Image";
@@ -11,7 +12,7 @@ import CountryActionsModal from "../countryActionsModal/CountryActionsModal";
 interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
     showModal: boolean,
-    territory: Territory | null,
+    territory: Territory,
 }
 
 function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
@@ -26,7 +27,21 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
             />
         );
     }
-    const country = getCountryById(territory.country);
+    const country = territory.country;
+
+    // Fonction pour obtenir le flag du country
+    const countryFlagService = new CountryFlagService();
+    const getCountryFlagById = (countryId: string | undefined): string => {
+        return countryFlagService.getCountryFlagById(countryId);
+    };
+
+    // Fonction pour obtenir l'icône de ressource par nom de ressource
+    const resourceIconService = new ResourceIconService();
+    const getResourceIconPath = (resource: string): string => {
+        return resourceIconService.getResourceIconPath(resource);
+    };
+
+
 
     // si on trouve un pays à partir de l'id du territoire, alors on affiche le détail du territoire
     // sinon, on affiche un modal avec un message d'erreur
@@ -42,13 +57,13 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                 <Modal.Header className="bg-dark text-light">
                     <div className="d-flex justify-content-between align-items-center">
                         <div className="col-10">
-                            <h4 className="card-title">{country.name + " [" + territory.x + "-" + territory.y+"]"} </h4>
+                            <h4 className="card-title">{country?.agent.name + " [" + territory.x + "-" + territory.y+"]"} </h4>
                             <Button variant="warning" className="mt-2" onClick={() => setModalShow(true)}>
                                 <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des actions
                             </Button>
                         </div>
                         <div className="col-2">
-                            <Image src={getCountryFlagById(country.id)} alt={country.name + " flag"} fluid />
+                            <Image src={getCountryFlagById(country?.agent.id)} alt={country?.agent.name + " flag"} fluid />
                         </div>
                     </div>
                 </Modal.Header>
@@ -56,22 +71,43 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                             <div className="card territory-card">
                                 <ul className="list-group list-group-flush">
                                     {
-                                        territory.variations.map((variation: Variation, index) => (
-                                            <li key={index} className="list-group-item">
-                                                <OverlayTrigger
-                                                    key="bottom"
-                                                    placement="bottom"
-                                                    overlay={
-                                                        <Tooltip>
-                                                            {variation.name.charAt(0).toUpperCase() + variation.name.slice(1)}
-                                                        </Tooltip>
-                                                    }
-                                                >
-                                                    <img src={getResourceIconPath(variation.name)} className="me-2" alt={variation.name + " icon"} />
-                                                </OverlayTrigger>
-                                                Value: {variation.value}
-                                            </li>
-                                        ))
+                                        <div className="card territory-card">
+                                            <ul className="list-group list-group-flush">
+                                                <li className="list-group-item">
+                                                    <strong>Position:</strong> {`(${territory.x}, ${territory.y})`}
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <strong>Country:</strong> {territory.country?.agent.name} ({territory.country?.agent.id})
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <strong>Habitants:</strong> {territory.habitants}
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <strong>Argent:</strong> {territory.country?.money}
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <strong>Variations:</strong>
+                                                    <ul className="mt-1">
+                                                        {territory.variations.map((variation: Variation, index) => (
+                                                            <li key={index} style={{listStyle: "none"}} className="mb-2">
+                                                                <OverlayTrigger
+                                                                    placement="left"
+                                                                    overlay={
+                                                                        <Tooltip>
+                                                                             {variation.resource.charAt(0).toUpperCase() + variation.resource.slice(1)}
+                                                                        </Tooltip>
+                                                                    }
+                                                                >
+                                                                    <img src={getResourceIconPath(variation.resource)} className="me-2" alt={variation.resource + " icon"} />
+                                                                </OverlayTrigger>
+                                                                Value: {variation.amount}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+
                                     }
                                 </ul>
                             </div>

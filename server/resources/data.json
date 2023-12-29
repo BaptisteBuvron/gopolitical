@@ -145,7 +145,7 @@
     {
       "x": 2,
       "y": 2,
-      "country": null,
+      "country": "us",
       "habitants": 10,
       "variations": [
         {
@@ -161,7 +161,7 @@
     {
       "x": 0,
       "y": 3,
-      "country": null,
+      "country": "us",
       "habitants": 10,
       "variations": [
         {

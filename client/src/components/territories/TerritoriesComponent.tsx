@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { data } from "../../data";
-import {getCountryColor} from "../../utils";
 import TerritoryDetailComponent from "../territoryDetail/TerritoryDetailComponent";
-import {Territory} from "../../models/types";
+import {Territory} from "../../Entity";
 import {Simulation} from "../../Entity";
 
 interface TerritoryComponentProps {
-    simulation: Simulation | undefined; // Define the simulation prop
+    simulation: Simulation;
 }
 
 function TerritoryComponent({ simulation }: TerritoryComponentProps) {
@@ -16,12 +14,14 @@ function TerritoryComponent({ simulation }: TerritoryComponentProps) {
     const handleTerritoryClick = (territory: Territory, index: number) => {
         //Si on reclique sur le même territoire = fermeture modal
         //Sinon, ouverture du modal
+        console.log(territory)
         if (selectedTerritory && selectedTerritory === territory) {
             setShowModal(false);
             setSelectedTerritory(null);
             document.getElementById("territory-" + index)?.classList.remove("selected-territory");
         } else {
             let territories: HTMLCollectionOf<Element> = document.getElementsByClassName("territory");
+
             // @ts-ignore
             for (let territory of territories) {
                 territory.classList.remove("selected-territory");
@@ -31,10 +31,6 @@ function TerritoryComponent({ simulation }: TerritoryComponentProps) {
             setShowModal(true);
         }
     };
-
-    if (simulation) {
-        console.log(simulation);
-    }
 
     //Cache le modal quand on appuye sur le bouton Fermer
     const handleCloseModal = () => {
@@ -49,13 +45,13 @@ function TerritoryComponent({ simulation }: TerritoryComponentProps) {
 
     return (
         <div className="Country-tab">
-            {data["territories"].map((territory, index) => (
+            {simulation["territories"].map((territory, index) => (
                 <div
                     id={"territory-" + index.toString()}
                     key={index}
                     className="territory"
                     style={{
-                        backgroundColor: getCountryColor(territory.country),
+                        backgroundColor: "#" + territory.country?.color,
                         left: `${territory.x * 30}px`,
                         top: `${territory.y * 30}px`,
                         width: `${30}px`,
@@ -69,7 +65,7 @@ function TerritoryComponent({ simulation }: TerritoryComponentProps) {
                 </div>
             ))}
 
-            {showModal && (
+            {showModal && selectedTerritory != null && (
                 <TerritoryDetailComponent
                     showModal={showModal}
                     handleCloseModal={handleCloseModal}

@@ -25,7 +25,7 @@ class Variation {
 
 
 class Agent {
-    id: number;
+    id: string;
     name: string;
 
     constructor(data: any) {
