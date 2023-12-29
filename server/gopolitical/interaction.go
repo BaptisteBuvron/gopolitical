@@ -1,7 +1,5 @@
 package gopolitical
 
-import "time"
-
 type Channel = chan Request
 
 type Request interface {
@@ -32,21 +30,27 @@ type MarketSellRequest struct {
 }
 
 type MarketBuyResponse struct {
-	MarketRequest
-	to             *Country
-	amountExecuted float64
-	cost           float64
+	Request
+	Event          `json:"event"`
+	Day            int          `json:"day"`
+	ResourceType   ResourceType `json:"resourceType"`
+	From           string       `json:"from"`
+	AmountExecuted float64      `json:"amountExecuted"`
+	Cost           float64      `json:"cost"`
 }
 
 type MarketSellResponse struct {
-	MarketRequest
-	to             *Country
-	amountExecuted float64
-	gain           float64
+	Request
+	Event          `json:"event"`
+	Day            int          `json:"day"`
+	ResourceType   ResourceType `json:"resourceType"`
+	To             string       `json:"to"`
+	AmountExecuted float64      `json:"amountExecuted"`
+	Gain           float64      `json:"gain"`
 }
 
 type MarketInteraction struct {
-	DateTransaction time.Time    `json:"dateTransaction"`
+	DateTransaction int          `json:"dateTransaction"`
 	ResourceType    ResourceType `json:"resourceType"`
 	Amount          float64      `json:"amount"`
 	Price           float64      `json:"price"`
