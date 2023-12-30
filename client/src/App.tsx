@@ -23,9 +23,10 @@ function App() {
 
             //parse data to Simulation
             //json beautifier print
-            console.log(data);
+            //console.log(data);
 
             let simulation = new Simulation(data);
+            console.log(simulation)
             setSimulation(simulation);
         }
 
