@@ -5,7 +5,7 @@ import {Simulation} from "./Entity";
 import {Navigate, Route, Routes} from "react-router-dom";
 import LayoutComponent from "./components/LayoutComponent";
 import CountryComponent from "./components/CountryComponent";
-import MarketComponent from "./components/MarketComponent";
+import MarketComponent from "./components/market/MarketComponent";
 
 function App() {
     const [simulation, setSimulation] = useState<Simulation>();
