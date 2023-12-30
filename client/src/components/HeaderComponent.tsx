@@ -2,8 +2,13 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import geopolitical from "../assets/geopolitics.png"
+import {Simulation} from "../Entity";
 
-function HeaderComponent() {
+interface HeaderComponentProps {
+    simulation: Simulation | undefined;
+}
+
+function HeaderComponent({simulation}: HeaderComponentProps) {
     return (
         <Navbar expand="lg" bg="dark" data-bs-theme="dark" sticky="top">
             <Container>
@@ -24,6 +29,15 @@ function HeaderComponent() {
                         <Nav.Link href="/countries">Countries</Nav.Link>
                         <Nav.Link href="/market">Market</Nav.Link>
                     </Nav>
+                    {
+                        simulation !== undefined && (
+                            <div>
+                                <Navbar.Text>
+                                    Jour : <b>{simulation.currentDay}</b>
+                                </Navbar.Text>
+                            </div>
+                        )
+                    }
                 </Navbar.Collapse>
             </Container>
         </Navbar>
