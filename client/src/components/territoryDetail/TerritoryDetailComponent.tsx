@@ -1,7 +1,7 @@
-import {Territory, Variation} from "../../Entity";
+import {Simulation, Territory, Variation} from "../../Entity";
 import {ResourceIconService} from "../../services/ResourceIconService";
 import {CountryFlagService} from "../../services/CountryFlagService";
-import React from "react";
+import React, {useEffect} from "react";
 import {Button, Modal} from "react-bootstrap";
 import {ClockHistory} from "react-bootstrap-icons";
 import Image from "react-bootstrap/Image";
@@ -13,17 +13,26 @@ interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
     showModal: boolean,
     territory: Territory,
+    simulation: Simulation,
 }
 
 function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
     const [modalShow, setModalShow] = React.useState(false);
-    let territory = props.territory;
+    const [territory, setTerritory] = React.useState(props.territory);
+    useEffect(() => {
+        let territory = props.simulation.territories.find(
+            (simTerritory) => props.territory.x === simTerritory.x && props.territory.y === simTerritory.y
+        )
+        if(territory) {
+            setTerritory(territory);
+        }
+    }, [props.simulation]);
+
     if(!territory) {
         return (
             <InvalidDataResponseComponent
                 handleCloseModal={props.handleCloseModal}
                 showModal={props.showModal}
-                territory={props.territory}
             />
         );
     }
@@ -53,6 +62,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                 animation={false}
                 backdrop={true}
                 centered
+                scrollable={true}
             >
                 <Modal.Header className="bg-dark text-light">
                     <div className="d-flex justify-content-between align-items-center">
@@ -77,13 +87,30 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                     <strong>Position:</strong> {`(${territory.x}, ${territory.y})`}
                                                 </li>
                                                 <li className="list-group-item">
-                                                    <strong>Country:</strong> {territory.country?.agent.name} ({territory.country?.agent.id})
-                                                </li>
-                                                <li className="list-group-item">
                                                     <strong>Habitants:</strong> {territory.habitants}
                                                 </li>
                                                 <li className="list-group-item">
                                                     <strong>Argent:</strong> {territory.country?.money}
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <strong>Stocks:</strong>
+                                                    <ul className="mt-1">
+                                                        {Array.from(territory.stock.entries()).map(([resource, quantity], index) => (
+                                                            <li key={index} style={{listStyle: "none"}} className="mb-2">
+                                                                <OverlayTrigger
+                                                                    placement="left"
+                                                                    overlay={
+                                                                        <Tooltip>
+                                                                            {resource.charAt(0).toUpperCase() + resource.slice(1)}
+                                                                        </Tooltip>
+                                                                    }
+                                                                >
+                                                                    <img src={getResourceIconPath(resource)} className="me-2" alt={resource + " icon"} />
+                                                                </OverlayTrigger>
+                                                                Value: {quantity}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
                                                 </li>
                                                 <li className="list-group-item">
                                                     <strong>Variations:</strong>
@@ -114,6 +141,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                             <CountryActionsModal
                                 show={modalShow}
                                 onHide ={() => setModalShow(false)}
+                                simulation={props.simulation}
                                 country={country}
                             />
                 </Modal.Body>
@@ -130,12 +158,16 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
         <InvalidDataResponseComponent
             handleCloseModal={props.handleCloseModal}
             showModal={props.showModal}
-            territory={props.territory}
         />
     );
 }
 
-function InvalidDataResponseComponent(props: TerritoryDetailComponentProps) {
+interface InvalidDataResponseComponentProps {
+    handleCloseModal(): void,
+    showModal: boolean,
+}
+
+function InvalidDataResponseComponent(props: InvalidDataResponseComponentProps) {
     return (
         <Modal
             show={props.showModal}

@@ -14,6 +14,7 @@ function App() {
         // Réessayer la connexion WebSocket lorsque le serveur n'est pas disponible
         const interval = setInterval(() => {
             if (socket.readyState === WebSocket.CLOSED) {
+                console.log("tentative de connexion au serveur ...")
                 socket = new WebSocket('ws://localhost:8080/ws');
             }
         }, 1000);

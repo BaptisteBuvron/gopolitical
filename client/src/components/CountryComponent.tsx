@@ -15,7 +15,7 @@ function CountryComponent({simulation}: CountryComponentProps) {
     return (
         <div className="Country-tab">
             {Array.from(simulation.countries.values()).map((country, index) => (
-                <div className="country"
+                <div key={index} className="country"
                      style={{
                          backgroundColor: "#" + country.color,
                          width: "100px",

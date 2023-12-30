@@ -79,6 +79,7 @@ function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
                         showModal={showModal}
                         handleCloseModal={handleCloseModal}
                         territory={selectedTerritory}
+                        simulation={simulation}
                     />
                 )}
             </div>
