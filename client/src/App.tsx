@@ -32,6 +32,7 @@ function App() {
 
         socket.onclose = function(event) {
             clearInterval(interval);
+            setSimulation(undefined);
         }
 
         // Fermer la connexion WebSocket lors du démontage du composant
