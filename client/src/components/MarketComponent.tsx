@@ -25,12 +25,12 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
     // Liste des prix du marché des différentes ressources
     const marketPricesElements = Array.from(marketPrices.entries()).map(([resource, price], index) => (
         <Card key={`price-${index}`} className="mb-3">
-            <Card.Body>
+            <Card.Body className="bg-dark text-light">
                 <Card.Title>Current Market Price</Card.Title>
                 <Card.Text>
-                    <strong>Resource:</strong> {resource}
+                    <strong className="text-warning">Resource:</strong> {resource}
                     <br />
-                    <strong>Price:</strong> {price}
+                    <strong className="text-warning">Price:</strong> {price}
                 </Card.Text>
             </Card.Body>
         </Card>
@@ -39,8 +39,8 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
     // Liste des transactions
     const sortedMarketHistoryElements = sortedMarketHistory.map((interaction, index) => (
         <Card key={index} className="mb-3">
-            <Card.Body>
-                <Card.Title>Day {interaction.dateTransaction}</Card.Title>
+            <Card.Body className="bg-dark text-light">
+                <Card.Title className="text-warning">Day {interaction.dateTransaction}</Card.Title>
                 <Card.Text>
                     <strong>Resource:</strong> {interaction.resourceType}
                     <br />
@@ -58,10 +58,12 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
 
     return (
         <Row>
-            <Col>
-                <h2>Market Prices</h2>
+            <Col md={6}>
+                <h2 className="text-center mb-3">Market Prices</h2>
                 {marketPricesElements}
-                <h2>Market Transactions</h2>
+            </Col>
+            <Col md={6}>
+                <h2 className="text-center mb-3">Market Transactions</h2>
                 {sortedMarketHistoryElements}
             </Col>
         </Row>
