@@ -40,7 +40,7 @@ function App() {
     }, []); // Effect sera exécuté une seule fois après le rendu initial
     return (
         <Routes>
-            <Route path="/" element={<LayoutComponent />}>
+            <Route path="/" element={<LayoutComponent simulation={simulation} />}>
                 <Route index element={<TerritoriesComponent simulation={simulation} />}/>
                 <Route path="/countries" element={<CountryComponent simulation={simulation}/>} />
                 {/*<Route path="/market" element={<MarketComponent simulation={simulation} />} />*/}
