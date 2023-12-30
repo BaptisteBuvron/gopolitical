@@ -162,6 +162,17 @@ func (c *Country) Deliberate() []Request {
 		}
 	}
 
+	// Check for war >:[
+	stock := c.GetTotalStock()
+	consumption := c.GetConsumption()
+	facteur := 1.0
+	for resource, quantity := range stock {
+		resourceConsumption := consumption[resource]
+		missing := quantity - resourceConsumption*facteur
+		if missing < 0 {
+			log.Printf("Missing: %f\n", quantity)
+		}
+	}
 	return requests
 }
 
