@@ -17,26 +17,21 @@ function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
     useEffect(() => {
         // La MAJ des nouvelles valeurs se fait sur un modal ouvert
         if (selectedTerritory) {
-            updateModal(selectedTerritory);
+            // On retrouve le territoires ouvert dans la simulation avec ses coordonnées
+            const matchingTerritory = simulation?.territories.find(
+                (simTerritory) =>
+                    simTerritory.x === selectedTerritory.x && simTerritory.y === selectedTerritory.y
+            );
+
+            if (matchingTerritory) {
+                // On modifie le modal avec les nouvelle valeurs
+                setShowModal(false);
+                setSelectedTerritory(null);
+                setSelectedTerritory(matchingTerritory);
+                setShowModal(true);
+            }
         }
-    }, [simulation?.territories]);
-
-    const updateModal = (territory: Territory) => {
-
-        // On retrouve le territoires ouvert dans la simulation avec ses coordonnées
-        const matchingTerritory = simulation?.territories.find(
-            (simTerritory) =>
-                simTerritory.x === territory.x && simTerritory.y === territory.y
-        );
-
-        if (matchingTerritory) {
-            // On modifie le modal avec les nouvelle valeurs
-            setShowModal(false);
-            setSelectedTerritory(null);
-            setSelectedTerritory(matchingTerritory);
-            setShowModal(true);
-        }
-    };
+    }, [simulation?.territories, selectedTerritory]);
 
 
     if(simulation === undefined) {
