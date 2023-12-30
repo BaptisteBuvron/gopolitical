@@ -53,14 +53,14 @@ class MarketBuyEvent implements EventType{
 
 // Implement the TransferResourceEvent class
 class TransferResourceEvent implements EventType{
-    from: Territory;
-    to: Territory;
+    from: string;
+    to: string;
     resource: string;
     amount: number;
 
     constructor(data: any, country?: Country) {
-        this.from = new Territory(data.from, country);
-        this.to = new Territory(data.to, country);
+        this.from = data.from;
+        this.to = data.to;
         this.resource = data.resource;
         this.amount = data.amount;
     }
@@ -106,7 +106,6 @@ class Country {
     color: string;
     money: number;
     history: CountryEvent[];
-    territories: Territory[];
     moneyHistory: Map<string, number>;
 
     constructor(data: any) {
@@ -114,7 +113,6 @@ class Country {
         this.color = data.color;
         this.money = data.money;
         this.history = data.history.map((eventData: any) => new CountryEvent(eventData, this));
-        this.territories = data.territories.map((territoryData: any) => new Territory(territoryData, this));
         this.moneyHistory = new Map<string, number>(Object.entries(data.moneyHistory));
     }
 }
@@ -122,6 +120,7 @@ class Country {
 class Territory {
     x: number;
     y: number;
+    name: string;
     variations: Variation[];
     stock: Map<string, number>;
     stockHistory: Map<number, Map<string, number>>;
@@ -129,13 +128,14 @@ class Territory {
     habitantsHistory: Map<string, number>;
     country: Country | undefined;
 
-    constructor(data: any, country?: Country) {
+    constructor(data: any) {
         this.x = data.x;
         this.y = data.y;
+        this.name = data.name;
         this.variations = data.variations.map((variationData: any) => new Variation(variationData));
         this.stock = new Map<string, number>(Object.entries(data.stock));
         this.habitants = data.habitants;
-        this.country = country;
+        this.country = new Country(data.country);
         this.stockHistory = new Map<number, Map<string, number>>();
         for (const key in data.stockHistory) {
             const innerMap = new Map<string, number>(Object.entries(data.stockHistory[key]));
@@ -150,16 +150,16 @@ class MarketInteraction {
     resourceType: string;
     amount: number;
     price: number;
-    buyer: Country ;
-    seller: Country;
+    buyer: string ;
+    seller: string;
 
     constructor(data: any) {
         this.dateTransaction = data.dateTransaction;
         this.resourceType = data.resourceType;
         this.amount = data.amount;
         this.price = data.price;
-        this.buyer = new Country(data.buyer);
-        this.seller = new Country(data.seller);
+        this.buyer = data.buyer.agent.name;
+        this.seller = data.seller.agent.name;
     }
 }
 
@@ -175,9 +175,11 @@ class Market {
 
 class Environment {
     market : Market;
+    consumptionByHabitant: Map<string, number>;
 
     constructor(data: any) {
         this.market = new Market(data.market);
+        this.consumptionByHabitant = new Map<string, number>(Object.entries(data.consumptionByHabitant))
     }
 }
 
@@ -199,15 +201,6 @@ class Simulation {
                 new Country(countryData),
             ])
         );
-        for (let territory of this.territories) {
-            for (let country of this.countries.values()) {
-                for (let countryTerritory of country.territories) {
-                    if (territory.x === countryTerritory.x && territory.y === countryTerritory.y) {
-                        territory.country = country;
-                    }
-                }
-            }
-        }
         this.currentDay = data.currentDay;
     }
 }

@@ -17,19 +17,15 @@ type Simulation struct {
 	WebSocket   *WebSocket `json:"-"`
 }
 
-const (
-	WATER_BY_HABITANT = 0.5
-	FOOD_BY_HABITANT  = 0.5
-)
-
 func NewSimulation(
 	secondByDay float64,
 	prices Prices,
 	countries map[string]*Country,
 	territories []*Territory,
 	wg *sync.WaitGroup,
+	consumptionsByHabitant map[ResourceType]float64,
 ) Simulation {
-	return Simulation{secondByDay, NewEnvironment(countries, territories, prices, wg), territories, countries, 0, wg, nil}
+	return Simulation{secondByDay, NewEnvironment(countries, territories, prices, wg, consumptionsByHabitant), territories, countries, 0, wg, nil}
 }
 
 func (s *Simulation) Start() {
