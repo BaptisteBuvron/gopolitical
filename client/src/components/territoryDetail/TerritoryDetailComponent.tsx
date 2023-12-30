@@ -60,16 +60,27 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                 show={props.showModal}
                 onHide={props.handleCloseModal}
                 animation={false}
-                backdrop={true}
                 centered
                 scrollable={true}
             >
                 <Modal.Header className="bg-dark text-light">
                     <div className="d-flex justify-content-between align-items-center">
                         <div className="col-10">
-                            <h4 className="card-title">{country?.agent.name + " [" + territory.x + "-" + territory.y+"]"} </h4>
+                            <h4 className="card-title">
+                                {country?.agent.name} | Territoire
+                                <OverlayTrigger
+                                    placement="right"
+                                    overlay={
+                                        <Tooltip>
+                                            Position du territoire
+                                        </Tooltip>
+                                    }
+                                >
+                                    <span>{" (" + territory.x + "," + territory.y + ")"}</span>
+                                </OverlayTrigger>
+                            </h4>
                             <Button variant="warning" className="mt-2" onClick={() => setModalShow(true)}>
-                                <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des actions
+                                <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des actions du pays
                             </Button>
                         </div>
                         <div className="col-2">
@@ -83,9 +94,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                     {
                                         <div className="card territory-card">
                                             <ul className="list-group list-group-flush">
-                                                <li className="list-group-item">
-                                                    <strong>Position:</strong> {`(${territory.x}, ${territory.y})`}
-                                                </li>
                                                 <li className="list-group-item">
                                                     <strong>Habitants:</strong> {territory.habitants}
                                                 </li>
@@ -146,7 +154,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                             />
                 </Modal.Body>
                 <Modal.Footer className="bg-dark text-light">
-                    <Button variant="secondary" onClick={props.handleCloseModal}>
+                    <Button variant="outline-warning" onClick={props.handleCloseModal}>
                         Fermer
                     </Button>
                 </Modal.Footer>
