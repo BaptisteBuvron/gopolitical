@@ -20,11 +20,6 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
 
     const countryFlagService = new CountryFlagService();
     const resourceIconService = new ResourceIconService();
-
-    const getCountryFlagById = (countryId: string | undefined): string => {
-        return countryFlagService.getCountryFlagById(countryId);
-    };
-
     const sortedMarketHistory = marketHistory
         .slice()
         .sort((a, b) => {
