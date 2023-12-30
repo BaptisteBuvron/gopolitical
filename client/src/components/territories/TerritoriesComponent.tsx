@@ -13,6 +13,32 @@ function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
     const [showModal, setShowModal] = useState(false);
     const [selectedTerritory, setSelectedTerritory] = useState<Territory | null>(null);
 
+    //On detecte des qu'il y a un changement sur la valeur simulation
+    useEffect(() => {
+        // La MAJ des nouvelles valeurs se fait sur un modal ouvert
+        if (selectedTerritory) {
+            updateModal(selectedTerritory);
+        }
+    }, [simulation?.territories]);
+
+    const updateModal = (territory: Territory) => {
+
+        // On retrouve le territoires ouvert dans la simulation avec ses coordonnées
+        const matchingTerritory = simulation?.territories.find(
+            (simTerritory) =>
+                simTerritory.x === territory.x && simTerritory.y === territory.y
+        );
+
+        if (matchingTerritory) {
+            // On modifie le modal avec les nouvelle valeurs
+            setShowModal(false);
+            setSelectedTerritory(null);
+            setSelectedTerritory(matchingTerritory);
+            setShowModal(true);
+        }
+    };
+
+
     if(simulation === undefined) {
         return (
             <SimulationErrorComponent />
@@ -48,31 +74,6 @@ function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
         }
         setShowModal(false);
         setSelectedTerritory(null);
-    };
-
-    //On detecte des qu'il y a un changement sur la valeur simulation
-    useEffect(() => {
-        // La MAJ des nouvelles valeurs se fait sur un modal ouvert
-        if (selectedTerritory) {
-            updateModal(selectedTerritory);
-        }
-    }, [simulation?.territories]);
-
-    const updateModal = (territory: Territory) => {
-
-        // On retrouve le territoires ouvert dans la simulation avec ses coordonnées
-        const matchingTerritory = simulation?.territories.find(
-            (simTerritory) =>
-                simTerritory.x === territory.x && simTerritory.y === territory.y
-        );
-
-        if (matchingTerritory) {
-            // On modifie le modal avec les nouvelle valeurs
-            setShowModal(false);
-            setSelectedTerritory(null);
-            setSelectedTerritory(matchingTerritory);
-            setShowModal(true);
-        }
     };
 
     return (
