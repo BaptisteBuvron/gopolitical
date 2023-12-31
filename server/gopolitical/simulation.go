@@ -67,8 +67,6 @@ func (s *Simulation) Start() {
 		log.Println("End of the day : ", s.CurrentDay)
 		fmt.Print("\n\n\n")
 
-		//Wait the other day
-		time.Sleep(time.Duration(s.SecondByDay) * time.Second)
 		//Udd history
 		s.Environment.UpdateStockHistory(s.CurrentDay)
 		s.Environment.UpdateMoneyHistory(s.CurrentDay)
@@ -78,6 +76,8 @@ func (s *Simulation) Start() {
 
 		//Send update to the websocket
 		s.WebSocket.SendUpdate()
+		//Wait the other day
+		time.Sleep(time.Duration(s.SecondByDay) * time.Second)
 		//Unlock all agents
 		for _, country := range s.Countries {
 			country.In <- true
