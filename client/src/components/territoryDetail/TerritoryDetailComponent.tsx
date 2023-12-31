@@ -98,9 +98,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                     <strong>Habitants:</strong> {territory.habitants}
                                                 </li>
                                                 <li className="list-group-item">
-                                                    <strong>Argent:</strong> {territory.country?.money}
-                                                </li>
-                                                <li className="list-group-item">
                                                     <strong>Stocks:</strong>
                                                     <ul className="mt-1">
                                                         {Array.from(territory.stock.entries()).map(([resource, quantity], index) => (

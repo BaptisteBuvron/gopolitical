@@ -4,7 +4,7 @@ import TerritoriesComponent from "./components/territories/TerritoriesComponent"
 import {Simulation} from "./Entity";
 import {Navigate, Route, Routes} from "react-router-dom";
 import LayoutComponent from "./components/LayoutComponent";
-import CountryComponent from "./components/CountryComponent";
+import CountriesComponent from "./components/CountriesComponent";
 import MarketComponent from "./components/market/MarketComponent";
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
 
         socket.onclose = function(event) {
             clearInterval(interval);
-            setSimulation(undefined);
+            //setSimulation(undefined);
         }
 
         // Fermer la connexion WebSocket lors du démontage du composant
@@ -43,7 +43,7 @@ function App() {
         <Routes>
             <Route path="/" element={<LayoutComponent simulation={simulation} />}>
                 <Route index element={<TerritoriesComponent simulation={simulation} />}/>
-                <Route path="/countries" element={<CountryComponent simulation={simulation}/>} />
+                <Route path="/countries" element={<CountriesComponent simulation={simulation}/>} />
                 <Route path="/market" element={<MarketComponent simulation={simulation} />} />
             </Route>
             <Route

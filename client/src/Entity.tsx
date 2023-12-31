@@ -115,6 +115,35 @@ class Country {
         this.history = data.history.map((eventData: any) => new CountryEvent(eventData, this));
         this.moneyHistory = new Map<string, number>(Object.entries(data.moneyHistory));
     }
+
+    getCountryPopulation(simulation: Simulation): number {
+        let territories = this.getTerritories(simulation);
+        return territories.reduce((accumulator, currentTerritory) => {
+            return accumulator + currentTerritory.habitants
+        },0);
+    }
+
+    getTotalStocks(simulation: Simulation): Map<string, number> {
+        let territories = this.getTerritories(simulation);
+        const result: Map<string, number> = new Map();
+
+        // Iterate over each territory
+        territories.forEach((territory) => {
+            // Iterate over each entry in the territory's stock map
+            territory.stock.forEach((value, key) => {
+                // Add the value to the result map or update if the key already exists
+                result.set(key, (result.get(key) || 0) + value);
+            });
+        });
+
+        return result;
+    }
+
+    getTerritories(simulation: Simulation): Territory[] {
+        return simulation.territories.filter(
+            (territory) => territory.country?.agent.id === this.agent.id
+        )
+    }
 }
 
 class Territory {
