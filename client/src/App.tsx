@@ -5,6 +5,7 @@ import {Simulation} from "./Entity";
 import {Navigate, Route, Routes} from "react-router-dom";
 import LayoutComponent from "./components/LayoutComponent";
 import CountryComponent from "./components/CountryComponent";
+import MarketComponent from "./components/market/MarketComponent";
 
 function App() {
     const [simulation, setSimulation] = useState<Simulation>();
@@ -42,7 +43,7 @@ function App() {
             <Route path="/" element={<LayoutComponent simulation={simulation} />}>
                 <Route index element={<TerritoriesComponent simulation={simulation} />}/>
                 <Route path="/countries" element={<CountryComponent simulation={simulation}/>} />
-                {/*<Route path="/market" element={<MarketComponent simulation={simulation} />} />*/}
+                <Route path="/market" element={<MarketComponent simulation={simulation} />} />
             </Route>
             <Route
                 path="*"
