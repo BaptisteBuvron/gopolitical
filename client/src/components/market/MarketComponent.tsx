@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Row, Col, Image, Table, Pagination } from "react-bootstrap";
 import { Simulation } from "../../Entity";
 import { ResourceIconService } from "../../services/ResourceIconService";
-import { CountryFlagService } from "../../services/CountryFlagService";
 import './MarketComponent.css';
 import {CountryService} from "../../services/CountryService";
 
@@ -21,7 +20,6 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
     const marketPrices = marketData.prices;
     const marketHistory = marketData.history;
 
-    const countryFlagService = new CountryFlagService();
     const countryService = new CountryService(simulation.countries);
     const resourceIconService = new ResourceIconService();
 

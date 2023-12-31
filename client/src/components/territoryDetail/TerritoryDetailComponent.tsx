@@ -8,7 +8,6 @@ import Image from "react-bootstrap/Image";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import CountryActionsModal from "../countryActionsModal/CountryActionsModal";
-import {CountryService} from "../../services/CountryService";
 
 interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
@@ -32,11 +31,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
     }
     const country = territory.country;
 
-    // Fonction pour obtenir le flag du country
-    const countryFlagService = new CountryFlagService();
-    const getCountryFlagById = (countryId: string | undefined): string => {
-        return countryFlagService.getCountryFlagById(countryId);
-    };
 
     // Fonction pour obtenir l'icône de ressource par nom de ressource
     const resourceIconService = new ResourceIconService();

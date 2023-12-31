@@ -4,7 +4,6 @@ import {Territory} from "../../Entity";
 import {Simulation} from "../../Entity";
 import Container from "react-bootstrap/Container";
 import SimulationErrorComponent from "../SimulationErrorComponent";
-import {CountryService} from "../../services/CountryService";
 
 interface TerritoriesComponentProps {
     simulation: Simulation | undefined
