@@ -1,0 +1,18 @@
+.flag-icon-market {
+    width: 50px;
+    height: auto;
+}
+
+.market-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resource-icon-with-margin {
+    margin-right: 8px;
+}
+.resource-icon-with-margin-flag {
+    margin-right: 8px;
+    margin-left: 20px;
+}

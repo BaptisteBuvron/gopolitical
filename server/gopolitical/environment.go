@@ -6,27 +6,29 @@ import (
 )
 
 type Environment struct {
-	Countries   map[string]*Country `json:"-"`
-	Territories []*Territory        `json:"-"`
-	Market      *Market             `json:"market"`
-	wg          *sync.WaitGroup
-	lock        sync.Mutex
-	Percept     map[string][]Request `json:"-"`
+	Countries             map[string]*Country `json:"-"`
+	Territories           []*Territory        `json:"-"`
+	Market                *Market             `json:"market"`
+	wg                    *sync.WaitGroup
+	lock                  sync.Mutex
+	Percept               map[string][]Request     `json:"-"`
+	ConsumptionByHabitant map[ResourceType]float64 `json:"consumptionByHabitant"`
 }
 
-func NewEnvironment(countries map[string]*Country, territories []*Territory, prices Prices, wg *sync.WaitGroup) Environment {
+func NewEnvironment(countries map[string]*Country, territories []*Territory, prices Prices, wg *sync.WaitGroup, consumptionsByHabitant map[ResourceType]float64) Environment {
 	//Map des perceptions que recoivent les pays à chaque tour
 	percept := make(map[string][]Request)
 	for _, country := range countries {
 		percept[country.Name] = []Request{}
 	}
 	return Environment{
-		Countries:   countries,
-		Territories: territories,
-		Market:      NewMarket(prices, percept),
-		wg:          wg,
-		lock:        sync.Mutex{},
-		Percept:     percept,
+		Countries:             countries,
+		Territories:           territories,
+		Market:                NewMarket(prices, percept),
+		wg:                    wg,
+		lock:                  sync.Mutex{},
+		Percept:               percept,
+		ConsumptionByHabitant: consumptionsByHabitant,
 	}
 }
 
@@ -46,6 +48,7 @@ func (e *Environment) handleRequests() {
 			switch req := req.(type) {
 			case MarketBuyRequest, MarketSellRequest:
 				e.Market.handleRequest(req)
+				Respond(country.In, req)
 				break
 			case PerceptRequest:
 				fromCountry := req.from
@@ -57,6 +60,7 @@ func (e *Environment) handleRequests() {
 			default:
 				log.Println("Une requete n'a pas pu etre traitee")
 			}
+			//respond to indicate the request was handled
 			e.lock.Unlock()
 		default:
 		}
@@ -80,11 +84,9 @@ func (e *Environment) UpdateStocksFromConsumption() {
 	//Mettre à jour les stocks des territoires à partir des consommations
 	for _, country := range e.Countries {
 		for _, territory := range country.Territories {
-			foodConsumption := float64(territory.Habitants) * FOOD_BY_HABITANT
-			territory.Stock["food"] -= foodConsumption
-
-			waterConsumption := float64(territory.Habitants) * WATER_BY_HABITANT
-			territory.Stock["water"] -= waterConsumption
+			for resource, consumption := range e.ConsumptionByHabitant {
+				territory.Stock[resource] -= float64(territory.Habitants) * consumption
+			}
 		}
 	}
 }
