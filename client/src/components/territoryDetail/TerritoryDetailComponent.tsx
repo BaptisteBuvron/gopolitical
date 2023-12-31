@@ -1,4 +1,4 @@
-import {Territory, Variation} from "../../Entity";
+import {Country, Territory, Variation} from "../../Entity";
 import {ResourceIconService} from "../../services/ResourceIconService";
 import {CountryFlagService} from "../../services/CountryFlagService";
 import React from "react";
@@ -8,11 +8,13 @@ import Image from "react-bootstrap/Image";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import CountryActionsModal from "../countryActionsModal/CountryActionsModal";
+import {CountryService} from "../../services/CountryService";
 
 interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
     showModal: boolean,
     territory: Territory,
+    country: Country
 }
 
 function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
@@ -24,6 +26,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                 handleCloseModal={props.handleCloseModal}
                 showModal={props.showModal}
                 territory={props.territory}
+                country={props.country}
             />
         );
     }
@@ -63,7 +66,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                             </Button>
                         </div>
                         <div className="col-2">
-                            <Image src={getCountryFlagById(country?.agent.id)} alt={country?.agent.name + " flag"} fluid />
+                            <Image src={country.flag} alt={country?.agent.name + " flag"} fluid />
                         </div>
                     </div>
                 </Modal.Header>
@@ -131,6 +134,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
             handleCloseModal={props.handleCloseModal}
             showModal={props.showModal}
             territory={props.territory}
+            country={props.country}
         />
     );
 }

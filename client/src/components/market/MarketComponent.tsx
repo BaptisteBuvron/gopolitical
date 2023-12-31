@@ -94,7 +94,7 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
                         <td className="text-center">{interaction.price * interaction.amount}$</td>
                         <td>
                             <Image
-                                src={countryFlagService.getCountryFlagById(countryService.getId(interaction.buyer))}
+                                src={countryService.getCountryByName(interaction.buyer)?.flag}
                                 alt={`${interaction.buyer} flag`}
                                 fluid
                                 className="flag-icon-market resource-icon-with-margin-flag"
@@ -103,7 +103,7 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
                         </td>
                         <td>
                             <Image
-                                src={countryFlagService.getCountryFlagById(countryService.getId(interaction.seller))}
+                                src={countryService.getCountryByName(interaction.seller)?.flag}
                                 alt={`${interaction.seller} flag`}
                                 fluid
                                 className="flag-icon-market resource-icon-with-margin-flag"
