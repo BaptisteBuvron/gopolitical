@@ -1,6 +1,5 @@
 import {Country, Territory, Variation} from "../../Entity";
 import {ResourceIconService} from "../../services/ResourceIconService";
-import {CountryFlagService} from "../../services/CountryFlagService";
 import React from "react";
 import {Button, Modal} from "react-bootstrap";
 import {ClockHistory} from "react-bootstrap-icons";
