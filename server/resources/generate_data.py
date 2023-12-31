@@ -79,7 +79,7 @@ def generate_data(num_countries, territories_per_country=10):
 
                 country_territory_coordinates.append((territory_x, territory_y))
 
-                territory_habitants = random.randint(5, 20)
+                territory_habitants = random.randint(5, 50)
                 territory_stocks = [
                     {"name": resource["name"], "value": random.randint(5, 50)}
                     for resource in data["resources"]

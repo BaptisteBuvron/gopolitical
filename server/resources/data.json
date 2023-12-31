@@ -34,1546 +34,92 @@
   ],
   "countries": [
     {
-      "name": "Senegal",
-      "id": "sn",
-      "color": "4D7",
-      "money": 370.56377496876877,
-      "flag": "https://www.flagcdn.com/256x192/sn.png"
+      "name": "Haiti",
+      "id": "ht",
+      "color": "9C7",
+      "money": 202.77792252440423,
+      "flag": "https://www.flagcdn.com/256x192/ht.png"
     },
     {
-      "name": "Australia",
-      "id": "au",
-      "color": "7CA",
-      "money": 287.0217029453865,
-      "flag": "https://www.flagcdn.com/256x192/au.png"
+      "name": "Tanzania",
+      "id": "tz",
+      "color": "FAE",
+      "money": 374.12839832470365,
+      "flag": "https://www.flagcdn.com/256x192/tz.png"
     },
     {
-      "name": "Hawaii",
-      "id": "us-hi",
-      "color": "7DF",
-      "money": 205.21091096632028,
-      "flag": "https://www.flagcdn.com/256x192/us-hi.png"
+      "name": "Czechia",
+      "id": "cz",
+      "color": "4D8",
+      "money": 332.01464231936814,
+      "flag": "https://www.flagcdn.com/256x192/cz.png"
     },
     {
-      "name": "Maine",
-      "id": "us-me",
-      "color": "4BA",
-      "money": 317.00055634116916,
-      "flag": "https://www.flagcdn.com/256x192/us-me.png"
+      "name": "Germany",
+      "id": "de",
+      "color": "9AA",
+      "money": 307.51015287736413,
+      "flag": "https://www.flagcdn.com/256x192/de.png"
     },
     {
-      "name": "S\u00c3\u00a3o Tom\u00c3\u00a9 and Pr\u00c3\u00adncipe",
-      "id": "st",
-      "color": "73B",
-      "money": 201.19821931411147,
-      "flag": "https://www.flagcdn.com/256x192/st.png"
+      "name": "Morocco",
+      "id": "ma",
+      "color": "B5F",
+      "money": 201.70492607529852,
+      "flag": "https://www.flagcdn.com/256x192/ma.png"
     },
     {
-      "name": "Belarus",
-      "id": "by",
-      "color": "A89",
-      "money": 369.51949354977955,
-      "flag": "https://www.flagcdn.com/256x192/by.png"
+      "name": "Bahamas",
+      "id": "bs",
+      "color": "4FE",
+      "money": 369.76982517128147,
+      "flag": "https://www.flagcdn.com/256x192/bs.png"
     },
     {
-      "name": "Taiwan",
-      "id": "tw",
-      "color": "DC5",
-      "money": 318.05475875496495,
-      "flag": "https://www.flagcdn.com/256x192/tw.png"
+      "name": "Guinea-Bissau",
+      "id": "gw",
+      "color": "F6D",
+      "money": 266.24665106237455,
+      "flag": "https://www.flagcdn.com/256x192/gw.png"
     },
     {
-      "name": "French Southern and Antarctic Lands",
-      "id": "tf",
-      "color": "77A",
-      "money": 205.66908009431734,
-      "flag": "https://www.flagcdn.com/256x192/tf.png"
+      "name": "Trinidad and Tobago",
+      "id": "tt",
+      "color": "FA9",
+      "money": 305.16542730393314,
+      "flag": "https://www.flagcdn.com/256x192/tt.png"
     },
     {
-      "name": "United Arab Emirates",
-      "id": "ae",
-      "color": "ADF",
-      "money": 239.39024441553426,
-      "flag": "https://www.flagcdn.com/256x192/ae.png"
-    },
-    {
-      "name": "Egypt",
-      "id": "eg",
-      "color": "6C8",
-      "money": 316.79624742095314,
-      "flag": "https://www.flagcdn.com/256x192/eg.png"
-    },
-    {
-      "name": "Nigeria",
-      "id": "ng",
-      "color": "4DE",
-      "money": 315.0457931631797,
-      "flag": "https://www.flagcdn.com/256x192/ng.png"
-    },
-    {
-      "name": "Nebraska",
-      "id": "us-ne",
-      "color": "9E3",
-      "money": 310.401314683064,
-      "flag": "https://www.flagcdn.com/256x192/us-ne.png"
-    },
-    {
-      "name": "Netherlands",
-      "id": "nl",
-      "color": "49A",
-      "money": 229.3997985542921,
-      "flag": "https://www.flagcdn.com/256x192/nl.png"
-    },
-    {
-      "name": "R\u00c3\u00a9union",
-      "id": "re",
+      "name": "Bermuda",
+      "id": "bm",
       "color": "47A",
-      "money": 269.2194842949229,
-      "flag": "https://www.flagcdn.com/256x192/re.png"
+      "money": 226.22441370336065,
+      "flag": "https://www.flagcdn.com/256x192/bm.png"
     },
     {
-      "name": "Slovenia",
-      "id": "si",
-      "color": "9D8",
-      "money": 394.7896512582331,
-      "flag": "https://www.flagcdn.com/256x192/si.png"
+      "name": "Mayotte",
+      "id": "yt",
+      "color": "E86",
+      "money": 338.1327000359589,
+      "flag": "https://www.flagcdn.com/256x192/yt.png"
     }
   ],
   "relations": [],
   "territories": [
     {
-      "x": 20,
-      "y": 20,
-      "country": "sn",
-      "name": "Territory1",
-      "habitants": 18,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 23
-        },
-        {
-          "name": "water",
-          "value": 40
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 20
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ]
-    },
-    {
-      "x": 19,
-      "y": 20,
-      "country": "sn",
-      "name": "Territory2",
-      "habitants": 15,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 20
-        },
-        {
-          "name": "water",
-          "value": 20
-        },
-        {
-          "name": "food",
-          "value": 27
-        },
-        {
-          "name": "armement",
-          "value": 44
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 14
-        },
-        {
-          "name": "food",
-          "value": 8
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ]
-    },
-    {
-      "x": 20,
-      "y": 19,
-      "country": "sn",
-      "name": "Territory3",
-      "habitants": 19,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 18
-        },
-        {
-          "name": "food",
-          "value": 36
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 19,
-      "y": 19,
-      "country": "sn",
-      "name": "Territory4",
-      "habitants": 6,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 29
-        },
-        {
-          "name": "water",
-          "value": 43
-        },
-        {
-          "name": "food",
-          "value": 27
-        },
-        {
-          "name": "armement",
-          "value": 22
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 6
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 18,
-      "y": 20,
-      "country": "sn",
-      "name": "Territory5",
-      "habitants": 16,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 50
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 50
-        },
-        {
-          "name": "armement",
-          "value": 23
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 14
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 18,
-      "y": 19,
-      "country": "sn",
-      "name": "Territory6",
-      "habitants": 7,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 23
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 48
-        },
-        {
-          "name": "armement",
-          "value": 40
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 8
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ]
-    },
-    {
-      "x": 20,
-      "y": 18,
-      "country": "sn",
-      "name": "Territory7",
-      "habitants": 15,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 10
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 17
-        },
-        {
-          "name": "armement",
-          "value": 46
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 6
-        },
-        {
-          "name": "food",
-          "value": 6
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ]
-    },
-    {
-      "x": 18,
-      "y": 18,
-      "country": "sn",
-      "name": "Territory8",
-      "habitants": 8,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 37
-        },
-        {
-          "name": "water",
-          "value": 50
-        },
-        {
-          "name": "food",
-          "value": 11
-        },
-        {
-          "name": "armement",
-          "value": 28
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ]
-    },
-    {
-      "x": 19,
-      "y": 18,
-      "country": "sn",
-      "name": "Territory9",
-      "habitants": 19,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 39
-        },
-        {
-          "name": "water",
-          "value": 25
-        },
-        {
-          "name": "food",
-          "value": 17
-        },
-        {
-          "name": "armement",
-          "value": 25
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 6
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ]
-    },
-    {
-      "x": 20,
-      "y": 17,
-      "country": "sn",
-      "name": "Territory10",
-      "habitants": 6,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 26
-        },
-        {
-          "name": "water",
-          "value": 25
-        },
-        {
-          "name": "food",
-          "value": 22
-        },
-        {
-          "name": "armement",
-          "value": 46
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 14
-        },
-        {
-          "name": "food",
-          "value": 6
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 11,
-      "y": 9,
-      "country": "au",
-      "name": "Territory1",
-      "habitants": 17,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 38
-        },
-        {
-          "name": "water",
-          "value": 47
-        },
-        {
-          "name": "food",
-          "value": 45
-        },
-        {
-          "name": "armement",
-          "value": 24
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 10,
-      "y": 9,
-      "country": "au",
-      "name": "Territory2",
-      "habitants": 5,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 42
-        },
-        {
-          "name": "water",
-          "value": 42
-        },
-        {
-          "name": "food",
-          "value": 35
-        },
-        {
-          "name": "armement",
-          "value": 40
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 10,
-      "y": 8,
-      "country": "au",
-      "name": "Territory3",
-      "habitants": 5,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 18
-        },
-        {
-          "name": "food",
-          "value": 48
-        },
-        {
-          "name": "armement",
-          "value": 19
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 5
-        },
-        {
-          "name": "water",
-          "value": 14
-        },
-        {
-          "name": "food",
-          "value": 14
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 9,
-      "y": 8,
-      "country": "au",
-      "name": "Territory4",
-      "habitants": 15,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 7
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 31
-        },
-        {
-          "name": "armement",
-          "value": 34
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 9,
-      "y": 9,
-      "country": "au",
-      "name": "Territory5",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 19
-        },
-        {
-          "name": "water",
-          "value": 45
-        },
-        {
-          "name": "food",
-          "value": 48
-        },
-        {
-          "name": "armement",
-          "value": 44
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 11,
-      "y": 10,
-      "country": "au",
-      "name": "Territory6",
-      "habitants": 11,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 25
-        },
-        {
-          "name": "water",
-          "value": 37
-        },
-        {
-          "name": "food",
-          "value": 16
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ]
-    },
-    {
-      "x": 8,
-      "y": 8,
-      "country": "au",
-      "name": "Territory7",
-      "habitants": 8,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 27
-        },
-        {
-          "name": "water",
-          "value": 6
-        },
-        {
-          "name": "food",
-          "value": 38
-        },
-        {
-          "name": "armement",
-          "value": 50
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 7
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 10
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ]
-    },
-    {
-      "x": 8,
-      "y": 7,
-      "country": "au",
-      "name": "Territory8",
-      "habitants": 16,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 30
-        },
-        {
-          "name": "water",
-          "value": 44
-        },
-        {
-          "name": "food",
-          "value": 32
-        },
-        {
-          "name": "armement",
-          "value": 38
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 11
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 8,
-      "y": 9,
-      "country": "au",
-      "name": "Territory9",
-      "habitants": 5,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 37
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 5
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ]
-    },
-    {
-      "x": 8,
-      "y": 10,
-      "country": "au",
-      "name": "Territory10",
-      "habitants": 14,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 20
-        },
-        {
-          "name": "water",
-          "value": 5
-        },
-        {
-          "name": "food",
-          "value": 33
-        },
-        {
-          "name": "armement",
-          "value": 17
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 10
-        },
-        {
-          "name": "water",
-          "value": 14
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ]
-    },
-    {
-      "x": 12,
-      "y": 7,
-      "country": "us-hi",
-      "name": "Territory1",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 50
-        },
-        {
-          "name": "armement",
-          "value": 38
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 6
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 13,
-      "y": 7,
-      "country": "us-hi",
-      "name": "Territory2",
-      "habitants": 14,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 35
-        },
-        {
-          "name": "water",
-          "value": 47
-        },
-        {
-          "name": "food",
-          "value": 44
-        },
-        {
-          "name": "armement",
-          "value": 26
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 10
-        },
-        {
-          "name": "water",
-          "value": 6
-        },
-        {
-          "name": "food",
-          "value": 11
-        },
-        {
-          "name": "armement",
-          "value": 15
-        }
-      ]
-    },
-    {
-      "x": 12,
-      "y": 6,
-      "country": "us-hi",
-      "name": "Territory3",
-      "habitants": 6,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 17
-        },
-        {
-          "name": "food",
-          "value": 45
-        },
-        {
-          "name": "armement",
-          "value": 36
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ]
-    },
-    {
-      "x": 13,
-      "y": 8,
-      "country": "us-hi",
-      "name": "Territory4",
-      "habitants": 5,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 31
-        },
-        {
-          "name": "water",
-          "value": 18
-        },
-        {
-          "name": "food",
-          "value": 50
-        },
-        {
-          "name": "armement",
-          "value": 36
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 12,
-      "y": 8,
-      "country": "us-hi",
-      "name": "Territory5",
-      "habitants": 5,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 42
-        },
-        {
-          "name": "water",
-          "value": 41
-        },
-        {
-          "name": "food",
-          "value": 42
-        },
-        {
-          "name": "armement",
-          "value": 42
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 10
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 13,
-      "y": 6,
-      "country": "us-hi",
-      "name": "Territory6",
-      "habitants": 11,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 25
-        },
-        {
-          "name": "water",
-          "value": 47
-        },
-        {
-          "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 10
-        },
-        {
-          "name": "water",
-          "value": 5
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 14,
-      "y": 6,
-      "country": "us-hi",
-      "name": "Territory7",
-      "habitants": 9,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 36
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 41
-        },
-        {
-          "name": "armement",
-          "value": 32
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ]
-    },
-    {
-      "x": 11,
-      "y": 7,
-      "country": "us-hi",
-      "name": "Territory8",
-      "habitants": 12,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 27
-        },
-        {
-          "name": "armement",
-          "value": 29
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 6
-        },
-        {
-          "name": "food",
-          "value": 8
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 11,
-      "y": 6,
-      "country": "us-hi",
-      "name": "Territory9",
-      "habitants": 8,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 30
-        },
-        {
-          "name": "food",
-          "value": 30
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 8
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 12,
+      "x": 2,
       "y": 5,
-      "country": "us-hi",
-      "name": "Territory10",
-      "habitants": 12,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 19
-        },
-        {
-          "name": "water",
-          "value": 46
-        },
-        {
-          "name": "food",
-          "value": 22
-        },
-        {
-          "name": "armement",
-          "value": 31
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 8
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ]
-    },
-    {
-      "x": 6,
-      "y": 9,
-      "country": "us-me",
+      "country": "ht",
       "name": "Territory1",
-      "habitants": 7,
+      "habitants": 35,
       "stocks": [
         {
           "name": "petrol",
-          "value": 49
+          "value": 33
         },
         {
           "name": "water",
-          "value": 45
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ]
-    },
-    {
-      "x": 6,
-      "y": 8,
-      "country": "us-me",
-      "name": "Territory2",
-      "habitants": 10,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 28
-        },
-        {
-          "name": "water",
-          "value": 36
-        },
-        {
-          "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 19
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
           "value": 6
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 6,
-      "y": 10,
-      "country": "us-me",
-      "name": "Territory3",
-      "habitants": 20,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 48
-        },
-        {
-          "name": "water",
-          "value": 12
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 32
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 10
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ]
-    },
-    {
-      "x": 5,
-      "y": 10,
-      "country": "us-me",
-      "name": "Territory4",
-      "habitants": 11,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 30
-        },
-        {
-          "name": "water",
-          "value": 37
         },
         {
           "name": "food",
@@ -1581,142 +127,13 @@
         },
         {
           "name": "armement",
-          "value": 38
+          "value": 44
         }
       ],
       "variations": [
         {
           "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
           "value": 14
-        },
-        {
-          "name": "food",
-          "value": 10
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 6,
-      "y": 7,
-      "country": "us-me",
-      "name": "Territory5",
-      "habitants": 18,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 30
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 19
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 7,
-      "y": 8,
-      "country": "us-me",
-      "name": "Territory6",
-      "habitants": 8,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 29
-        },
-        {
-          "name": "water",
-          "value": 14
-        },
-        {
-          "name": "food",
-          "value": 19
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ]
-    },
-    {
-      "x": 5,
-      "y": 9,
-      "country": "us-me",
-      "name": "Territory7",
-      "habitants": 15,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 23
-        },
-        {
-          "name": "water",
-          "value": 27
-        },
-        {
-          "name": "food",
-          "value": 49
-        },
-        {
-          "name": "armement",
-          "value": 37
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
         },
         {
           "name": "water",
@@ -1724,179 +141,93 @@
         },
         {
           "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 4,
-      "y": 9,
-      "country": "us-me",
-      "name": "Territory8",
-      "habitants": 12,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 50
-        },
-        {
-          "name": "water",
-          "value": 23
-        },
-        {
-          "name": "food",
-          "value": 43
-        },
-        {
-          "name": "armement",
-          "value": 28
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
-          "name": "armement",
-          "value": 8
-        }
-      ]
-    },
-    {
-      "x": 5,
-      "y": 7,
-      "country": "us-me",
-      "name": "Territory9",
-      "habitants": 7,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 29
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 34
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
           "value": 9
-        }
-      ]
-    },
-    {
-      "x": 5,
-      "y": 6,
-      "country": "us-me",
-      "name": "Territory10",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 22
-        },
-        {
-          "name": "food",
-          "value": 27
         },
         {
           "name": "armement",
-          "value": 46
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 8
+          "value": 13
         }
       ]
     },
     {
       "x": 2,
-      "y": 20,
-      "country": "st",
-      "name": "Territory1",
-      "habitants": 11,
+      "y": 6,
+      "country": "ht",
+      "name": "Territory2",
+      "habitants": 42,
       "stocks": [
         {
           "name": "petrol",
-          "value": 8
+          "value": 25
         },
         {
           "name": "water",
-          "value": 40
+          "value": 16
         },
         {
           "name": "food",
-          "value": 27
+          "value": 41
         },
         {
           "name": "armement",
-          "value": 7
+          "value": 23
         }
       ],
       "variations": [
         {
           "name": "petrol",
-          "value": 8
+          "value": 15
         },
         {
           "name": "water",
-          "value": 12
+          "value": 14
         },
         {
           "name": "food",
-          "value": 9
+          "value": 11
+        },
+        {
+          "name": "armement",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 5,
+      "country": "ht",
+      "name": "Territory3",
+      "habitants": 13,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 42
+        },
+        {
+          "name": "water",
+          "value": 23
+        },
+        {
+          "name": "food",
+          "value": 35
+        },
+        {
+          "name": "armement",
+          "value": 34
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 10
+        },
+        {
+          "name": "water",
+          "value": 10
+        },
+        {
+          "name": "food",
+          "value": 13
         },
         {
           "name": "armement",
@@ -1906,10 +237,10 @@
     },
     {
       "x": 3,
-      "y": 20,
-      "country": "st",
-      "name": "Territory2",
-      "habitants": 16,
+      "y": 6,
+      "country": "ht",
+      "name": "Territory4",
+      "habitants": 26,
       "stocks": [
         {
           "name": "petrol",
@@ -1917,54 +248,11 @@
         },
         {
           "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 31
-        },
-        {
-          "name": "armement",
-          "value": 42
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 10
-        },
-        {
-          "name": "water",
-          "value": 9
+          "value": 35
         },
         {
           "name": "food",
           "value": 8
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ]
-    },
-    {
-      "x": 2,
-      "y": 19,
-      "country": "st",
-      "name": "Territory3",
-      "habitants": 16,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 19
-        },
-        {
-          "name": "water",
-          "value": 50
-        },
-        {
-          "name": "food",
-          "value": 6
         },
         {
           "name": "armement",
@@ -1978,75 +266,32 @@
         },
         {
           "name": "water",
-          "value": 14
+          "value": 9
         },
         {
           "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ]
-    },
-    {
-      "x": 3,
-      "y": 19,
-      "country": "st",
-      "name": "Territory4",
-      "habitants": 17,
-      "stocks": [
-        {
-          "name": "petrol",
           "value": 15
         },
         {
-          "name": "water",
-          "value": 25
-        },
-        {
-          "name": "food",
-          "value": 27
-        },
-        {
           "name": "armement",
-          "value": 36
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 7
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 11
-        },
-        {
-          "name": "armement",
-          "value": 5
+          "value": 12
         }
       ]
     },
     {
-      "x": 3,
-      "y": 18,
-      "country": "st",
+      "x": 1,
+      "y": 6,
+      "country": "ht",
       "name": "Territory5",
-      "habitants": 19,
+      "habitants": 27,
       "stocks": [
         {
           "name": "petrol",
-          "value": 16
+          "value": 18
         },
         {
           "name": "water",
-          "value": 46
+          "value": 37
         },
         {
           "name": "food",
@@ -2054,60 +299,17 @@
         },
         {
           "name": "armement",
-          "value": 39
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 11
-        },
-        {
-          "name": "armement",
-          "value": 8
-        }
-      ]
-    },
-    {
-      "x": 4,
-      "y": 18,
-      "country": "st",
-      "name": "Territory6",
-      "habitants": 17,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 33
-        },
-        {
-          "name": "water",
           "value": 17
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 23
         }
       ],
       "variations": [
         {
           "name": "petrol",
-          "value": 9
+          "value": 13
         },
         {
           "name": "water",
-          "value": 13
+          "value": 5
         },
         {
           "name": "food",
@@ -2115,59 +317,16 @@
         },
         {
           "name": "armement",
-          "value": 10
+          "value": 7
         }
       ]
     },
     {
-      "x": 4,
-      "y": 20,
-      "country": "st",
-      "name": "Territory7",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 48
-        },
-        {
-          "name": "water",
-          "value": 16
-        },
-        {
-          "name": "food",
-          "value": 42
-        },
-        {
-          "name": "armement",
-          "value": 27
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 2,
-      "y": 18,
-      "country": "st",
-      "name": "Territory8",
-      "habitants": 12,
+      "x": 1,
+      "y": 7,
+      "country": "ht",
+      "name": "Territory6",
+      "habitants": 24,
       "stocks": [
         {
           "name": "petrol",
@@ -2175,15 +334,58 @@
         },
         {
           "name": "water",
-          "value": 8
+          "value": 23
         },
         {
           "name": "food",
-          "value": 11
+          "value": 27
         },
         {
           "name": "armement",
-          "value": 31
+          "value": 10
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 11
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "x": 1,
+      "y": 8,
+      "country": "ht",
+      "name": "Territory7",
+      "habitants": 19,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 30
+        },
+        {
+          "name": "water",
+          "value": 18
+        },
+        {
+          "name": "food",
+          "value": 38
+        },
+        {
+          "name": "armement",
+          "value": 24
         }
       ],
       "variations": [
@@ -2201,71 +403,28 @@
         },
         {
           "name": "armement",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "country": "ht",
+      "name": "Territory8",
+      "habitants": 24,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 20
+        },
+        {
+          "name": "water",
           "value": 15
-        }
-      ]
-    },
-    {
-      "x": 1,
-      "y": 18,
-      "country": "st",
-      "name": "Territory9",
-      "habitants": 5,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 45
-        },
-        {
-          "name": "water",
-          "value": 5
         },
         {
           "name": "food",
-          "value": 42
-        },
-        {
-          "name": "armement",
-          "value": 19
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 7
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 1,
-      "y": 17,
-      "country": "st",
-      "name": "Territory10",
-      "habitants": 16,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 49
-        },
-        {
-          "name": "water",
-          "value": 45
-        },
-        {
-          "name": "food",
-          "value": 8
+          "value": 17
         },
         {
           "name": "armement",
@@ -2275,7 +434,32 @@
       "variations": [
         {
           "name": "petrol",
-          "value": 5
+          "value": 10
+        },
+        {
+          "name": "water",
+          "value": 15
+        },
+        {
+          "name": "food",
+          "value": 14
+        },
+        {
+          "name": "armement",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "x": 2,
+      "y": 8,
+      "country": "ht",
+      "name": "Territory9",
+      "habitants": 38,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 41
         },
         {
           "name": "water",
@@ -2283,28 +467,562 @@
         },
         {
           "name": "food",
-          "value": 9
+          "value": 44
         },
         {
           "name": "armement",
+          "value": 27
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
           "value": 7
+        },
+        {
+          "name": "water",
+          "value": 11
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 14
+        }
+      ]
+    },
+    {
+      "x": 0,
+      "y": 8,
+      "country": "ht",
+      "name": "Territory10",
+      "habitants": 19,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 31
+        },
+        {
+          "name": "water",
+          "value": 11
+        },
+        {
+          "name": "food",
+          "value": 10
+        },
+        {
+          "name": "armement",
+          "value": 40
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 9
+        },
+        {
+          "name": "water",
+          "value": 10
+        },
+        {
+          "name": "food",
+          "value": 14
+        },
+        {
+          "name": "armement",
+          "value": 8
         }
       ]
     },
     {
       "x": 15,
-      "y": 5,
-      "country": "by",
+      "y": 0,
+      "country": "tz",
       "name": "Territory1",
-      "habitants": 7,
+      "habitants": 45,
       "stocks": [
         {
           "name": "petrol",
-          "value": 17
+          "value": 18
         },
         {
           "name": "water",
-          "value": 16
+          "value": 25
+        },
+        {
+          "name": "food",
+          "value": 45
+        },
+        {
+          "name": "armement",
+          "value": 33
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 15
+        },
+        {
+          "name": "water",
+          "value": 14
+        },
+        {
+          "name": "food",
+          "value": 7
+        },
+        {
+          "name": "armement",
+          "value": 14
+        }
+      ]
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "country": "tz",
+      "name": "Territory2",
+      "habitants": 34,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 9
+        },
+        {
+          "name": "water",
+          "value": 44
+        },
+        {
+          "name": "food",
+          "value": 50
+        },
+        {
+          "name": "armement",
+          "value": 23
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 15
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 8
+        },
+        {
+          "name": "armement",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "x": 15,
+      "y": 1,
+      "country": "tz",
+      "name": "Territory3",
+      "habitants": 16,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 46
+        },
+        {
+          "name": "water",
+          "value": 48
+        },
+        {
+          "name": "food",
+          "value": 15
+        },
+        {
+          "name": "armement",
+          "value": 37
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 9
+        },
+        {
+          "name": "water",
+          "value": 15
+        },
+        {
+          "name": "food",
+          "value": 5
+        },
+        {
+          "name": "armement",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "x": 15,
+      "y": 2,
+      "country": "tz",
+      "name": "Territory4",
+      "habitants": 20,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 36
+        },
+        {
+          "name": "water",
+          "value": 47
+        },
+        {
+          "name": "food",
+          "value": 33
+        },
+        {
+          "name": "armement",
+          "value": 12
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 5
+        },
+        {
+          "name": "water",
+          "value": 13
+        },
+        {
+          "name": "food",
+          "value": 5
+        },
+        {
+          "name": "armement",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "x": 14,
+      "y": 2,
+      "country": "tz",
+      "name": "Territory5",
+      "habitants": 36,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 26
+        },
+        {
+          "name": "water",
+          "value": 9
+        },
+        {
+          "name": "food",
+          "value": 46
+        },
+        {
+          "name": "armement",
+          "value": 12
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 13
+        },
+        {
+          "name": "water",
+          "value": 13
+        },
+        {
+          "name": "food",
+          "value": 9
+        },
+        {
+          "name": "armement",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "x": 16,
+      "y": 1,
+      "country": "tz",
+      "name": "Territory6",
+      "habitants": 18,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 47
+        },
+        {
+          "name": "water",
+          "value": 14
+        },
+        {
+          "name": "food",
+          "value": 8
+        },
+        {
+          "name": "armement",
+          "value": 13
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 5
+        },
+        {
+          "name": "water",
+          "value": 11
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "x": 16,
+      "y": 2,
+      "country": "tz",
+      "name": "Territory7",
+      "habitants": 25,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 20
+        },
+        {
+          "name": "water",
+          "value": 11
+        },
+        {
+          "name": "food",
+          "value": 5
+        },
+        {
+          "name": "armement",
+          "value": 44
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 15
+        },
+        {
+          "name": "food",
+          "value": 10
+        },
+        {
+          "name": "armement",
+          "value": 9
+        }
+      ]
+    },
+    {
+      "x": 14,
+      "y": 3,
+      "country": "tz",
+      "name": "Territory8",
+      "habitants": 10,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 13
+        },
+        {
+          "name": "water",
+          "value": 9
+        },
+        {
+          "name": "food",
+          "value": 22
+        },
+        {
+          "name": "armement",
+          "value": 33
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 14
+        },
+        {
+          "name": "water",
+          "value": 10
+        },
+        {
+          "name": "food",
+          "value": 5
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "country": "tz",
+      "name": "Territory9",
+      "habitants": 10,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 42
+        },
+        {
+          "name": "water",
+          "value": 39
+        },
+        {
+          "name": "food",
+          "value": 41
+        },
+        {
+          "name": "armement",
+          "value": 38
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 5
+        },
+        {
+          "name": "food",
+          "value": 11
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "x": 13,
+      "y": 3,
+      "country": "tz",
+      "name": "Territory10",
+      "habitants": 46,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 33
+        },
+        {
+          "name": "water",
+          "value": 42
+        },
+        {
+          "name": "food",
+          "value": 27
+        },
+        {
+          "name": "armement",
+          "value": 43
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 14
+        },
+        {
+          "name": "water",
+          "value": 5
+        },
+        {
+          "name": "food",
+          "value": 7
+        },
+        {
+          "name": "armement",
+          "value": 13
+        }
+      ]
+    },
+    {
+      "x": 19,
+      "y": 18,
+      "country": "cz",
+      "name": "Territory1",
+      "habitants": 44,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 22
+        },
+        {
+          "name": "water",
+          "value": 27
+        },
+        {
+          "name": "food",
+          "value": 19
+        },
+        {
+          "name": "armement",
+          "value": 50
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 9
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 14
+        },
+        {
+          "name": "armement",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "x": 19,
+      "y": 19,
+      "country": "cz",
+      "name": "Territory2",
+      "habitants": 36,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 27
+        },
+        {
+          "name": "water",
+          "value": 7
         },
         {
           "name": "food",
@@ -2312,7 +1030,695 @@
         },
         {
           "name": "armement",
+          "value": 40
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 10
+        },
+        {
+          "name": "water",
+          "value": 10
+        },
+        {
+          "name": "food",
+          "value": 15
+        },
+        {
+          "name": "armement",
+          "value": 13
+        }
+      ]
+    },
+    {
+      "x": 18,
+      "y": 18,
+      "country": "cz",
+      "name": "Territory3",
+      "habitants": 41,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 19
+        },
+        {
+          "name": "water",
+          "value": 25
+        },
+        {
+          "name": "food",
+          "value": 46
+        },
+        {
+          "name": "armement",
+          "value": 18
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 13
+        },
+        {
+          "name": "water",
+          "value": 12
+        },
+        {
+          "name": "food",
+          "value": 9
+        },
+        {
+          "name": "armement",
+          "value": 9
+        }
+      ]
+    },
+    {
+      "x": 18,
+      "y": 19,
+      "country": "cz",
+      "name": "Territory4",
+      "habitants": 25,
+      "stocks": [
+        {
+          "name": "petrol",
           "value": 16
+        },
+        {
+          "name": "water",
+          "value": 24
+        },
+        {
+          "name": "food",
+          "value": 26
+        },
+        {
+          "name": "armement",
+          "value": 13
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 5
+        },
+        {
+          "name": "water",
+          "value": 14
+        },
+        {
+          "name": "food",
+          "value": 11
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "x": 20,
+      "y": 19,
+      "country": "cz",
+      "name": "Territory5",
+      "habitants": 50,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 32
+        },
+        {
+          "name": "water",
+          "value": 13
+        },
+        {
+          "name": "food",
+          "value": 28
+        },
+        {
+          "name": "armement",
+          "value": 9
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 5
+        },
+        {
+          "name": "food",
+          "value": 11
+        },
+        {
+          "name": "armement",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "x": 19,
+      "y": 20,
+      "country": "cz",
+      "name": "Territory6",
+      "habitants": 23,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 20
+        },
+        {
+          "name": "water",
+          "value": 40
+        },
+        {
+          "name": "food",
+          "value": 28
+        },
+        {
+          "name": "armement",
+          "value": 19
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 11
+        },
+        {
+          "name": "water",
+          "value": 15
+        },
+        {
+          "name": "food",
+          "value": 8
+        },
+        {
+          "name": "armement",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "x": 19,
+      "y": 17,
+      "country": "cz",
+      "name": "Territory7",
+      "habitants": 41,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 23
+        },
+        {
+          "name": "water",
+          "value": 8
+        },
+        {
+          "name": "food",
+          "value": 15
+        },
+        {
+          "name": "armement",
+          "value": 24
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 12
+        },
+        {
+          "name": "food",
+          "value": 13
+        },
+        {
+          "name": "armement",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "x": 20,
+      "y": 20,
+      "country": "cz",
+      "name": "Territory8",
+      "habitants": 47,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 5
+        },
+        {
+          "name": "water",
+          "value": 44
+        },
+        {
+          "name": "food",
+          "value": 9
+        },
+        {
+          "name": "armement",
+          "value": 47
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 13
+        },
+        {
+          "name": "water",
+          "value": 5
+        },
+        {
+          "name": "food",
+          "value": 11
+        },
+        {
+          "name": "armement",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "x": 18,
+      "y": 17,
+      "country": "cz",
+      "name": "Territory9",
+      "habitants": 40,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 14
+        },
+        {
+          "name": "water",
+          "value": 13
+        },
+        {
+          "name": "food",
+          "value": 50
+        },
+        {
+          "name": "armement",
+          "value": 22
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 13
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 6
+        },
+        {
+          "name": "armement",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "x": 20,
+      "y": 18,
+      "country": "cz",
+      "name": "Territory10",
+      "habitants": 29,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 22
+        },
+        {
+          "name": "water",
+          "value": 38
+        },
+        {
+          "name": "food",
+          "value": 34
+        },
+        {
+          "name": "armement",
+          "value": 19
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 14
+        },
+        {
+          "name": "water",
+          "value": 13
+        },
+        {
+          "name": "food",
+          "value": 5
+        },
+        {
+          "name": "armement",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "x": 11,
+      "y": 14,
+      "country": "de",
+      "name": "Territory1",
+      "habitants": 6,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 27
+        },
+        {
+          "name": "water",
+          "value": 44
+        },
+        {
+          "name": "food",
+          "value": 24
+        },
+        {
+          "name": "armement",
+          "value": 7
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 9
+        },
+        {
+          "name": "water",
+          "value": 13
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "x": 10,
+      "y": 14,
+      "country": "de",
+      "name": "Territory2",
+      "habitants": 11,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 37
+        },
+        {
+          "name": "water",
+          "value": 16
+        },
+        {
+          "name": "food",
+          "value": 38
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 12
+        },
+        {
+          "name": "water",
+          "value": 10
+        },
+        {
+          "name": "food",
+          "value": 11
+        },
+        {
+          "name": "armement",
+          "value": 9
+        }
+      ]
+    },
+    {
+      "x": 10,
+      "y": 15,
+      "country": "de",
+      "name": "Territory3",
+      "habitants": 46,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 19
+        },
+        {
+          "name": "water",
+          "value": 10
+        },
+        {
+          "name": "food",
+          "value": 41
+        },
+        {
+          "name": "armement",
+          "value": 41
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 7
+        },
+        {
+          "name": "water",
+          "value": 5
+        },
+        {
+          "name": "food",
+          "value": 14
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "x": 9,
+      "y": 15,
+      "country": "de",
+      "name": "Territory4",
+      "habitants": 47,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 41
+        },
+        {
+          "name": "water",
+          "value": 5
+        },
+        {
+          "name": "food",
+          "value": 45
+        },
+        {
+          "name": "armement",
+          "value": 25
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 12
+        },
+        {
+          "name": "water",
+          "value": 12
+        },
+        {
+          "name": "food",
+          "value": 7
+        },
+        {
+          "name": "armement",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "x": 9,
+      "y": 14,
+      "country": "de",
+      "name": "Territory5",
+      "habitants": 10,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 15
+        },
+        {
+          "name": "water",
+          "value": 30
+        },
+        {
+          "name": "food",
+          "value": 37
+        },
+        {
+          "name": "armement",
+          "value": 19
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 7
+        },
+        {
+          "name": "water",
+          "value": 6
+        },
+        {
+          "name": "food",
+          "value": 7
+        },
+        {
+          "name": "armement",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "x": 8,
+      "y": 15,
+      "country": "de",
+      "name": "Territory6",
+      "habitants": 32,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 45
+        },
+        {
+          "name": "water",
+          "value": 18
+        },
+        {
+          "name": "food",
+          "value": 6
+        },
+        {
+          "name": "armement",
+          "value": 36
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 15
+        },
+        {
+          "name": "water",
+          "value": 13
+        },
+        {
+          "name": "food",
+          "value": 9
+        },
+        {
+          "name": "armement",
+          "value": 11
+        }
+      ]
+    },
+    {
+      "x": 8,
+      "y": 16,
+      "country": "de",
+      "name": "Territory7",
+      "habitants": 40,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 48
+        },
+        {
+          "name": "water",
+          "value": 36
+        },
+        {
+          "name": "food",
+          "value": 50
+        },
+        {
+          "name": "armement",
+          "value": 31
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 14
+        },
+        {
+          "name": "armement",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "x": 11,
+      "y": 15,
+      "country": "de",
+      "name": "Territory8",
+      "habitants": 11,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 16
+        },
+        {
+          "name": "water",
+          "value": 44
+        },
+        {
+          "name": "food",
+          "value": 7
+        },
+        {
+          "name": "armement",
+          "value": 47
         }
       ],
       "variations": [
@@ -2326,46 +1732,261 @@
         },
         {
           "name": "food",
-          "value": 6
+          "value": 10
         },
         {
           "name": "armement",
-          "value": 11
+          "value": 12
         }
       ]
     },
     {
-      "x": 14,
-      "y": 5,
-      "country": "by",
-      "name": "Territory2",
-      "habitants": 8,
+      "x": 9,
+      "y": 16,
+      "country": "de",
+      "name": "Territory9",
+      "habitants": 19,
       "stocks": [
         {
           "name": "petrol",
-          "value": 10
+          "value": 9
         },
         {
           "name": "water",
-          "value": 47
+          "value": 34
         },
         {
           "name": "food",
-          "value": 27
+          "value": 33
         },
         {
           "name": "armement",
-          "value": 47
+          "value": 8
         }
       ],
       "variations": [
         {
           "name": "petrol",
-          "value": 7
+          "value": 9
         },
         {
           "name": "water",
+          "value": 15
+        },
+        {
+          "name": "food",
+          "value": 13
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "x": 10,
+      "y": 16,
+      "country": "de",
+      "name": "Territory10",
+      "habitants": 33,
+      "stocks": [
+        {
+          "name": "petrol",
           "value": 12
+        },
+        {
+          "name": "water",
+          "value": 37
+        },
+        {
+          "name": "food",
+          "value": 11
+        },
+        {
+          "name": "armement",
+          "value": 12
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 15
+        },
+        {
+          "name": "food",
+          "value": 7
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "x": 14,
+      "y": 6,
+      "country": "ma",
+      "name": "Territory1",
+      "habitants": 5,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 32
+        },
+        {
+          "name": "water",
+          "value": 15
+        },
+        {
+          "name": "food",
+          "value": 17
+        },
+        {
+          "name": "armement",
+          "value": 11
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 5
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "x": 15,
+      "y": 6,
+      "country": "ma",
+      "name": "Territory2",
+      "habitants": 35,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 37
+        },
+        {
+          "name": "water",
+          "value": 18
+        },
+        {
+          "name": "food",
+          "value": 35
+        },
+        {
+          "name": "armement",
+          "value": 12
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 8
+        },
+        {
+          "name": "water",
+          "value": 15
+        },
+        {
+          "name": "food",
+          "value": 15
+        },
+        {
+          "name": "armement",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "x": 16,
+      "y": 6,
+      "country": "ma",
+      "name": "Territory3",
+      "habitants": 25,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 27
+        },
+        {
+          "name": "food",
+          "value": 13
+        },
+        {
+          "name": "armement",
+          "value": 19
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 10
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "x": 15,
+      "y": 7,
+      "country": "ma",
+      "name": "Territory4",
+      "habitants": 21,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 20
+        },
+        {
+          "name": "water",
+          "value": 46
+        },
+        {
+          "name": "food",
+          "value": 10
+        },
+        {
+          "name": "armement",
+          "value": 42
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 13
+        },
+        {
+          "name": "water",
+          "value": 8
         },
         {
           "name": "food",
@@ -2378,84 +1999,41 @@
       ]
     },
     {
-      "x": 16,
-      "y": 5,
-      "country": "by",
-      "name": "Territory3",
-      "habitants": 12,
+      "x": 14,
+      "y": 7,
+      "country": "ma",
+      "name": "Territory5",
+      "habitants": 30,
       "stocks": [
         {
           "name": "petrol",
-          "value": 36
+          "value": 33
         },
         {
           "name": "water",
-          "value": 14
+          "value": 16
         },
         {
           "name": "food",
-          "value": 5
+          "value": 29
         },
         {
           "name": "armement",
-          "value": 10
+          "value": 22
         }
       ],
       "variations": [
         {
           "name": "petrol",
-          "value": 12
+          "value": 15
         },
         {
           "name": "water",
-          "value": 10
+          "value": 12
         },
         {
           "name": "food",
           "value": 11
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 13,
-      "y": 5,
-      "country": "by",
-      "name": "Territory4",
-      "habitants": 15,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 33
-        },
-        {
-          "name": "water",
-          "value": 44
-        },
-        {
-          "name": "food",
-          "value": 41
-        },
-        {
-          "name": "armement",
-          "value": 33
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 5
-        },
-        {
-          "name": "food",
-          "value": 13
         },
         {
           "name": "armement",
@@ -2465,75 +2043,32 @@
     },
     {
       "x": 16,
-      "y": 4,
-      "country": "by",
-      "name": "Territory5",
-      "habitants": 10,
+      "y": 7,
+      "country": "ma",
+      "name": "Territory6",
+      "habitants": 32,
       "stocks": [
         {
           "name": "petrol",
-          "value": 21
+          "value": 44
         },
         {
           "name": "water",
-          "value": 10
+          "value": 48
         },
         {
           "name": "food",
-          "value": 30
+          "value": 20
         },
         {
           "name": "armement",
-          "value": 38
+          "value": 29
         }
       ],
       "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 14
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ]
-    },
-    {
-      "x": 14,
-      "y": 4,
-      "country": "by",
-      "name": "Territory6",
-      "habitants": 10,
-      "stocks": [
         {
           "name": "petrol",
           "value": 8
-        },
-        {
-          "name": "water",
-          "value": 34
-        },
-        {
-          "name": "food",
-          "value": 31
-        },
-        {
-          "name": "armement",
-          "value": 43
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
         },
         {
           "name": "water",
@@ -2550,15 +2085,162 @@
       ]
     },
     {
-      "x": 15,
-      "y": 4,
-      "country": "by",
+      "x": 17,
+      "y": 7,
+      "country": "ma",
       "name": "Territory7",
-      "habitants": 11,
+      "habitants": 48,
       "stocks": [
         {
           "name": "petrol",
+          "value": 47
+        },
+        {
+          "name": "water",
+          "value": 28
+        },
+        {
+          "name": "food",
+          "value": 42
+        },
+        {
+          "name": "armement",
+          "value": 29
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 12
+        },
+        {
+          "name": "water",
+          "value": 6
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "x": 18,
+      "y": 7,
+      "country": "ma",
+      "name": "Territory8",
+      "habitants": 6,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 32
+        },
+        {
+          "name": "water",
+          "value": 12
+        },
+        {
+          "name": "food",
+          "value": 27
+        },
+        {
+          "name": "armement",
           "value": 44
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 8
+        },
+        {
+          "name": "water",
+          "value": 10
+        },
+        {
+          "name": "food",
+          "value": 13
+        },
+        {
+          "name": "armement",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "x": 16,
+      "y": 8,
+      "country": "ma",
+      "name": "Territory9",
+      "habitants": 40,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 46
+        },
+        {
+          "name": "water",
+          "value": 5
+        },
+        {
+          "name": "food",
+          "value": 23
+        },
+        {
+          "name": "armement",
+          "value": 42
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 8
+        },
+        {
+          "name": "water",
+          "value": 10
+        },
+        {
+          "name": "food",
+          "value": 5
+        },
+        {
+          "name": "armement",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "x": 17,
+      "y": 6,
+      "country": "ma",
+      "name": "Territory10",
+      "habitants": 41,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 41
+        },
+        {
+          "name": "water",
+          "value": 9
+        },
+        {
+          "name": "food",
+          "value": 44
+        },
+        {
+          "name": "armement",
+          "value": 18
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 11
         },
         {
           "name": "water",
@@ -2566,11 +2248,79 @@
         },
         {
           "name": "food",
-          "value": 26
+          "value": 11
         },
         {
           "name": "armement",
-          "value": 17
+          "value": 7
+        }
+      ]
+    },
+    {
+      "x": 16,
+      "y": 5,
+      "country": "bs",
+      "name": "Territory1",
+      "habitants": 35,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 26
+        },
+        {
+          "name": "water",
+          "value": 31
+        },
+        {
+          "name": "food",
+          "value": 39
+        },
+        {
+          "name": "armement",
+          "value": 26
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 10
+        },
+        {
+          "name": "water",
+          "value": 13
+        },
+        {
+          "name": "food",
+          "value": 5
+        },
+        {
+          "name": "armement",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "x": 17,
+      "y": 5,
+      "country": "bs",
+      "name": "Territory2",
+      "habitants": 49,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 47
+        },
+        {
+          "name": "water",
+          "value": 31
+        },
+        {
+          "name": "food",
+          "value": 23
+        },
+        {
+          "name": "armement",
+          "value": 41
         }
       ],
       "variations": [
@@ -2584,28 +2334,28 @@
         },
         {
           "name": "food",
-          "value": 11
+          "value": 15
         },
         {
           "name": "armement",
-          "value": 6
+          "value": 7
         }
       ]
     },
     {
-      "x": 13,
-      "y": 4,
-      "country": "by",
-      "name": "Territory8",
-      "habitants": 10,
+      "x": 18,
+      "y": 5,
+      "country": "bs",
+      "name": "Territory3",
+      "habitants": 47,
       "stocks": [
         {
           "name": "petrol",
-          "value": 17
+          "value": 29
         },
         {
           "name": "water",
-          "value": 42
+          "value": 24
         },
         {
           "name": "food",
@@ -2613,7 +2363,7 @@
         },
         {
           "name": "armement",
-          "value": 5
+          "value": 37
         }
       ],
       "variations": [
@@ -2623,24 +2373,24 @@
         },
         {
           "name": "water",
-          "value": 9
+          "value": 7
         },
         {
           "name": "food",
-          "value": 14
+          "value": 7
         },
         {
           "name": "armement",
-          "value": 9
+          "value": 6
         }
       ]
     },
     {
-      "x": 12,
+      "x": 17,
       "y": 4,
-      "country": "by",
-      "name": "Territory9",
-      "habitants": 5,
+      "country": "bs",
+      "name": "Territory4",
+      "habitants": 15,
       "stocks": [
         {
           "name": "petrol",
@@ -2648,15 +2398,58 @@
         },
         {
           "name": "water",
-          "value": 35
+          "value": 42
         },
         {
           "name": "food",
-          "value": 43
+          "value": 23
         },
         {
           "name": "armement",
-          "value": 34
+          "value": 23
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 9
+        },
+        {
+          "name": "water",
+          "value": 15
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "x": 17,
+      "y": 3,
+      "country": "bs",
+      "name": "Territory5",
+      "habitants": 22,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 25
+        },
+        {
+          "name": "water",
+          "value": 23
+        },
+        {
+          "name": "food",
+          "value": 45
+        },
+        {
+          "name": "armement",
+          "value": 19
         }
       ],
       "variations": [
@@ -2666,40 +2459,40 @@
         },
         {
           "name": "water",
-          "value": 5
+          "value": 11
         },
         {
           "name": "food",
-          "value": 5
+          "value": 10
         },
         {
           "name": "armement",
-          "value": 11
+          "value": 15
         }
       ]
     },
     {
       "x": 15,
-      "y": 3,
-      "country": "by",
-      "name": "Territory10",
-      "habitants": 9,
+      "y": 5,
+      "country": "bs",
+      "name": "Territory6",
+      "habitants": 45,
       "stocks": [
         {
           "name": "petrol",
-          "value": 35
+          "value": 11
         },
         {
           "name": "water",
-          "value": 16
+          "value": 45
         },
         {
           "name": "food",
-          "value": 7
+          "value": 12
         },
         {
           "name": "armement",
-          "value": 21
+          "value": 14
         }
       ],
       "variations": [
@@ -2709,11 +2502,11 @@
         },
         {
           "name": "water",
-          "value": 7
+          "value": 8
         },
         {
           "name": "food",
-          "value": 9
+          "value": 11
         },
         {
           "name": "armement",
@@ -2722,23 +2515,840 @@
       ]
     },
     {
-      "x": 11,
-      "y": 11,
-      "country": "tw",
-      "name": "Territory1",
-      "habitants": 5,
+      "x": 14,
+      "y": 5,
+      "country": "bs",
+      "name": "Territory7",
+      "habitants": 17,
       "stocks": [
         {
           "name": "petrol",
-          "value": 33
+          "value": 14
         },
         {
           "name": "water",
-          "value": 31
+          "value": 11
+        },
+        {
+          "name": "food",
+          "value": 5
+        },
+        {
+          "name": "armement",
+          "value": 25
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 13
+        },
+        {
+          "name": "water",
+          "value": 11
+        },
+        {
+          "name": "food",
+          "value": 9
+        },
+        {
+          "name": "armement",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "x": 18,
+      "y": 4,
+      "country": "bs",
+      "name": "Territory8",
+      "habitants": 36,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 24
+        },
+        {
+          "name": "water",
+          "value": 36
+        },
+        {
+          "name": "food",
+          "value": 15
+        },
+        {
+          "name": "armement",
+          "value": 47
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 14
+        },
+        {
+          "name": "water",
+          "value": 9
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "x": 18,
+      "y": 6,
+      "country": "bs",
+      "name": "Territory9",
+      "habitants": 6,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 28
+        },
+        {
+          "name": "water",
+          "value": 8
+        },
+        {
+          "name": "food",
+          "value": 40
+        },
+        {
+          "name": "armement",
+          "value": 18
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 14
+        },
+        {
+          "name": "water",
+          "value": 5
+        },
+        {
+          "name": "food",
+          "value": 9
+        },
+        {
+          "name": "armement",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "x": 16,
+      "y": 4,
+      "country": "bs",
+      "name": "Territory10",
+      "habitants": 15,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 10
+        },
+        {
+          "name": "water",
+          "value": 35
+        },
+        {
+          "name": "food",
+          "value": 17
+        },
+        {
+          "name": "armement",
+          "value": 35
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 14
+        },
+        {
+          "name": "water",
+          "value": 11
+        },
+        {
+          "name": "food",
+          "value": 9
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "country": "gw",
+      "name": "Territory1",
+      "habitants": 26,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 43
+        },
+        {
+          "name": "water",
+          "value": 28
+        },
+        {
+          "name": "food",
+          "value": 46
+        },
+        {
+          "name": "armement",
+          "value": 21
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 13
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 13
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "country": "gw",
+      "name": "Territory2",
+      "habitants": 33,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 24
+        },
+        {
+          "name": "water",
+          "value": 16
+        },
+        {
+          "name": "food",
+          "value": 6
+        },
+        {
+          "name": "armement",
+          "value": 25
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 13
+        },
+        {
+          "name": "food",
+          "value": 6
+        },
+        {
+          "name": "armement",
+          "value": 14
+        }
+      ]
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "country": "gw",
+      "name": "Territory3",
+      "habitants": 12,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 19
+        },
+        {
+          "name": "water",
+          "value": 5
+        },
+        {
+          "name": "food",
+          "value": 13
+        },
+        {
+          "name": "armement",
+          "value": 36
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 12
+        },
+        {
+          "name": "water",
+          "value": 11
         },
         {
           "name": "food",
           "value": 10
+        },
+        {
+          "name": "armement",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "country": "gw",
+      "name": "Territory4",
+      "habitants": 21,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 28
+        },
+        {
+          "name": "water",
+          "value": 47
+        },
+        {
+          "name": "food",
+          "value": 31
+        },
+        {
+          "name": "armement",
+          "value": 25
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 5
+        },
+        {
+          "name": "water",
+          "value": 14
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "country": "gw",
+      "name": "Territory5",
+      "habitants": 10,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 27
+        },
+        {
+          "name": "water",
+          "value": 42
+        },
+        {
+          "name": "food",
+          "value": 45
+        },
+        {
+          "name": "armement",
+          "value": 40
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 10
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 7
+        },
+        {
+          "name": "armement",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "country": "gw",
+      "name": "Territory6",
+      "habitants": 48,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 19
+        },
+        {
+          "name": "water",
+          "value": 34
+        },
+        {
+          "name": "food",
+          "value": 32
+        },
+        {
+          "name": "armement",
+          "value": 16
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 15
+        },
+        {
+          "name": "water",
+          "value": 15
+        },
+        {
+          "name": "food",
+          "value": 6
+        },
+        {
+          "name": "armement",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "country": "gw",
+      "name": "Territory7",
+      "habitants": 48,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 39
+        },
+        {
+          "name": "water",
+          "value": 38
+        },
+        {
+          "name": "food",
+          "value": 8
+        },
+        {
+          "name": "armement",
+          "value": 24
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 7
+        },
+        {
+          "name": "water",
+          "value": 11
+        },
+        {
+          "name": "food",
+          "value": 5
+        },
+        {
+          "name": "armement",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "x": 8,
+      "y": 1,
+      "country": "gw",
+      "name": "Territory8",
+      "habitants": 46,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 32
+        },
+        {
+          "name": "water",
+          "value": 39
+        },
+        {
+          "name": "food",
+          "value": 47
+        },
+        {
+          "name": "armement",
+          "value": 34
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 10
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 5
+        },
+        {
+          "name": "armement",
+          "value": 14
+        }
+      ]
+    },
+    {
+      "x": 7,
+      "y": 2,
+      "country": "gw",
+      "name": "Territory9",
+      "habitants": 35,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 43
+        },
+        {
+          "name": "water",
+          "value": 33
+        },
+        {
+          "name": "food",
+          "value": 46
+        },
+        {
+          "name": "armement",
+          "value": 7
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 8
+        },
+        {
+          "name": "water",
+          "value": 6
+        },
+        {
+          "name": "food",
+          "value": 8
+        },
+        {
+          "name": "armement",
+          "value": 9
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "country": "gw",
+      "name": "Territory10",
+      "habitants": 16,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 18
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 21
+        },
+        {
+          "name": "armement",
+          "value": 20
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 14
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 11
+        },
+        {
+          "name": "armement",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "x": 19,
+      "y": 8,
+      "country": "tt",
+      "name": "Territory1",
+      "habitants": 21,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 46
+        },
+        {
+          "name": "water",
+          "value": 27
+        },
+        {
+          "name": "food",
+          "value": 23
+        },
+        {
+          "name": "armement",
+          "value": 46
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 9
+        },
+        {
+          "name": "water",
+          "value": 11
+        },
+        {
+          "name": "food",
+          "value": 14
+        },
+        {
+          "name": "armement",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "x": 20,
+      "y": 8,
+      "country": "tt",
+      "name": "Territory2",
+      "habitants": 17,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 16
+        },
+        {
+          "name": "water",
+          "value": 9
+        },
+        {
+          "name": "food",
+          "value": 11
+        },
+        {
+          "name": "armement",
+          "value": 13
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 8
+        },
+        {
+          "name": "water",
+          "value": 11
+        },
+        {
+          "name": "food",
+          "value": 5
+        },
+        {
+          "name": "armement",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "x": 19,
+      "y": 9,
+      "country": "tt",
+      "name": "Territory3",
+      "habitants": 40,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 15
+        },
+        {
+          "name": "water",
+          "value": 40
+        },
+        {
+          "name": "food",
+          "value": 8
+        },
+        {
+          "name": "armement",
+          "value": 17
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 12
+        },
+        {
+          "name": "food",
+          "value": 7
+        },
+        {
+          "name": "armement",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "x": 20,
+      "y": 9,
+      "country": "tt",
+      "name": "Territory4",
+      "habitants": 9,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 10
+        },
+        {
+          "name": "water",
+          "value": 36
+        },
+        {
+          "name": "food",
+          "value": 25
+        },
+        {
+          "name": "armement",
+          "value": 36
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 10
+        },
+        {
+          "name": "water",
+          "value": 12
+        },
+        {
+          "name": "food",
+          "value": 11
+        },
+        {
+          "name": "armement",
+          "value": 11
+        }
+      ]
+    },
+    {
+      "x": 18,
+      "y": 8,
+      "country": "tt",
+      "name": "Territory5",
+      "habitants": 46,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 8
+        },
+        {
+          "name": "water",
+          "value": 41
+        },
+        {
+          "name": "food",
+          "value": 38
+        },
+        {
+          "name": "armement",
+          "value": 17
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 11
+        },
+        {
+          "name": "water",
+          "value": 12
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "x": 17,
+      "y": 8,
+      "country": "tt",
+      "name": "Territory6",
+      "habitants": 24,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 50
+        },
+        {
+          "name": "water",
+          "value": 16
+        },
+        {
+          "name": "food",
+          "value": 35
         },
         {
           "name": "armement",
@@ -2748,32 +3358,7 @@
       "variations": [
         {
           "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 12,
-      "y": 11,
-      "country": "tw",
-      "name": "Territory2",
-      "habitants": 7,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 18
+          "value": 10
         },
         {
           "name": "water",
@@ -2781,855 +3366,20 @@
         },
         {
           "name": "food",
-          "value": 11
-        },
-        {
-          "name": "armement",
-          "value": 49
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
           "value": 15
         },
         {
           "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 12,
-      "y": 12,
-      "country": "tw",
-      "name": "Territory3",
-      "habitants": 16,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 29
-        },
-        {
-          "name": "water",
-          "value": 5
-        },
-        {
-          "name": "food",
-          "value": 22
-        },
-        {
-          "name": "armement",
-          "value": 27
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 7
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 6
-        },
-        {
-          "name": "armement",
           "value": 7
         }
       ]
     },
     {
-      "x": 12,
-      "y": 13,
-      "country": "tw",
-      "name": "Territory4",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 23
-        },
-        {
-          "name": "water",
-          "value": 36
-        },
-        {
-          "name": "food",
-          "value": 43
-        },
-        {
-          "name": "armement",
-          "value": 30
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 7
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 11,
-      "y": 13,
-      "country": "tw",
-      "name": "Territory5",
-      "habitants": 9,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 31
-        },
-        {
-          "name": "water",
-          "value": 36
-        },
-        {
-          "name": "food",
-          "value": 35
-        },
-        {
-          "name": "armement",
-          "value": 43
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ]
-    },
-    {
-      "x": 10,
-      "y": 13,
-      "country": "tw",
-      "name": "Territory6",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 45
-        },
-        {
-          "name": "water",
-          "value": 14
-        },
-        {
-          "name": "food",
-          "value": 27
-        },
-        {
-          "name": "armement",
-          "value": 42
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 13,
-      "y": 11,
-      "country": "tw",
+      "x": 18,
+      "y": 9,
+      "country": "tt",
       "name": "Territory7",
-      "habitants": 5,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 23
-        },
-        {
-          "name": "water",
-          "value": 30
-        },
-        {
-          "name": "food",
-          "value": 36
-        },
-        {
-          "name": "armement",
-          "value": 23
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 15
-        }
-      ]
-    },
-    {
-      "x": 11,
-      "y": 12,
-      "country": "tw",
-      "name": "Territory8",
-      "habitants": 9,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 16
-        },
-        {
-          "name": "food",
-          "value": 20
-        },
-        {
-          "name": "armement",
-          "value": 47
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 5
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 10,
-      "y": 12,
-      "country": "tw",
-      "name": "Territory9",
-      "habitants": 10,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 8
-        },
-        {
-          "name": "armement",
-          "value": 47
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 7
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 13,
-      "y": 10,
-      "country": "tw",
-      "name": "Territory10",
-      "habitants": 10,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 47
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 19
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 3,
-      "y": 1,
-      "country": "tf",
-      "name": "Territory1",
-      "habitants": 18,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 46
-        },
-        {
-          "name": "water",
-          "value": 28
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 12
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 2,
-      "y": 1,
-      "country": "tf",
-      "name": "Territory2",
-      "habitants": 11,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 29
-        },
-        {
-          "name": "water",
-          "value": 50
-        },
-        {
-          "name": "food",
-          "value": 50
-        },
-        {
-          "name": "armement",
-          "value": 36
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ]
-    },
-    {
-      "x": 2,
-      "y": 2,
-      "country": "tf",
-      "name": "Territory3",
-      "habitants": 9,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 49
-        },
-        {
-          "name": "water",
-          "value": 43
-        },
-        {
-          "name": "food",
-          "value": 35
-        },
-        {
-          "name": "armement",
-          "value": 36
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
-          "name": "armement",
-          "value": 15
-        }
-      ]
-    },
-    {
-      "x": 2,
-      "y": 3,
-      "country": "tf",
-      "name": "Territory4",
-      "habitants": 11,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 41
-        },
-        {
-          "name": "water",
-          "value": 28
-        },
-        {
-          "name": "food",
-          "value": 46
-        },
-        {
-          "name": "armement",
-          "value": 31
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 12
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 1,
-      "y": 1,
-      "country": "tf",
-      "name": "Territory5",
-      "habitants": 16,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 47
-        },
-        {
-          "name": "water",
-          "value": 6
-        },
-        {
-          "name": "food",
-          "value": 49
-        },
-        {
-          "name": "armement",
-          "value": 17
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 15
-        }
-      ]
-    },
-    {
-      "x": 3,
-      "y": 0,
-      "country": "tf",
-      "name": "Territory6",
-      "habitants": 6,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 20
-        },
-        {
-          "name": "water",
-          "value": 24
-        },
-        {
-          "name": "food",
-          "value": 45
-        },
-        {
-          "name": "armement",
-          "value": 45
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 2,
-      "y": 0,
-      "country": "tf",
-      "name": "Territory7",
-      "habitants": 6,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 17
-        },
-        {
-          "name": "water",
-          "value": 23
-        },
-        {
-          "name": "food",
-          "value": 21
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ]
-    },
-    {
-      "x": 4,
-      "y": 1,
-      "country": "tf",
-      "name": "Territory8",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 19
-        },
-        {
-          "name": "water",
-          "value": 49
-        },
-        {
-          "name": "food",
-          "value": 42
-        },
-        {
-          "name": "armement",
-          "value": 24
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 12
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 4,
-      "y": 0,
-      "country": "tf",
-      "name": "Territory9",
-      "habitants": 16,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 34
-        },
-        {
-          "name": "food",
-          "value": 28
-        },
-        {
-          "name": "armement",
-          "value": 21
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ]
-    },
-    {
-      "x": 3,
-      "y": 2,
-      "country": "tf",
-      "name": "Territory10",
-      "habitants": 15,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 40
-        },
-        {
-          "name": "food",
-          "value": 40
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 10
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 10
-        },
-        {
-          "name": "armement",
-          "value": 15
-        }
-      ]
-    },
-    {
-      "x": 20,
-      "y": 7,
-      "country": "ae",
-      "name": "Territory1",
-      "habitants": 16,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 23
-        },
-        {
-          "name": "water",
-          "value": 37
-        },
-        {
-          "name": "food",
-          "value": 27
-        },
-        {
-          "name": "armement",
-          "value": 23
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 10
-        },
-        {
-          "name": "water",
-          "value": 12
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 20,
-      "y": 8,
-      "country": "ae",
-      "name": "Territory2",
-      "habitants": 18,
+      "habitants": 40,
       "stocks": [
         {
           "name": "petrol",
@@ -3637,11 +3387,183 @@
         },
         {
           "name": "water",
-          "value": 6
+          "value": 19
         },
         {
           "name": "food",
+          "value": 30
+        },
+        {
+          "name": "armement",
+          "value": 6
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 11
+        },
+        {
+          "name": "water",
+          "value": 12
+        },
+        {
+          "name": "food",
+          "value": 14
+        },
+        {
+          "name": "armement",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "x": 20,
+      "y": 10,
+      "country": "tt",
+      "name": "Territory8",
+      "habitants": 33,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 19
+        },
+        {
+          "name": "water",
+          "value": 43
+        },
+        {
+          "name": "food",
+          "value": 17
+        },
+        {
+          "name": "armement",
+          "value": 29
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 14
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 7
+        },
+        {
+          "name": "armement",
           "value": 5
+        }
+      ]
+    },
+    {
+      "x": 17,
+      "y": 9,
+      "country": "tt",
+      "name": "Territory9",
+      "habitants": 22,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 22
+        },
+        {
+          "name": "water",
+          "value": 42
+        },
+        {
+          "name": "food",
+          "value": 22
+        },
+        {
+          "name": "armement",
+          "value": 5
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 5
+        },
+        {
+          "name": "water",
+          "value": 5
+        },
+        {
+          "name": "food",
+          "value": 11
+        },
+        {
+          "name": "armement",
+          "value": 11
+        }
+      ]
+    },
+    {
+      "x": 20,
+      "y": 11,
+      "country": "tt",
+      "name": "Territory10",
+      "habitants": 41,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 48
+        },
+        {
+          "name": "water",
+          "value": 36
+        },
+        {
+          "name": "food",
+          "value": 22
+        },
+        {
+          "name": "armement",
+          "value": 47
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 13
+        },
+        {
+          "name": "water",
+          "value": 15
+        },
+        {
+          "name": "food",
+          "value": 8
+        },
+        {
+          "name": "armement",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 17,
+      "country": "bm",
+      "name": "Territory1",
+      "habitants": 16,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 49
+        },
+        {
+          "name": "water",
+          "value": 25
+        },
+        {
+          "name": "food",
+          "value": 15
         },
         {
           "name": "armement",
@@ -3651,44 +3573,216 @@
       "variations": [
         {
           "name": "petrol",
-          "value": 7
+          "value": 13
         },
         {
           "name": "water",
-          "value": 5
+          "value": 11
         },
         {
           "name": "food",
-          "value": 5
+          "value": 6
         },
         {
           "name": "armement",
-          "value": 14
+          "value": 8
         }
       ]
     },
     {
-      "x": 19,
-      "y": 8,
-      "country": "ae",
+      "x": 4,
+      "y": 17,
+      "country": "bm",
+      "name": "Territory2",
+      "habitants": 23,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 25
+        },
+        {
+          "name": "water",
+          "value": 9
+        },
+        {
+          "name": "food",
+          "value": 19
+        },
+        {
+          "name": "armement",
+          "value": 35
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 7
+        },
+        {
+          "name": "water",
+          "value": 11
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 11
+        }
+      ]
+    },
+    {
+      "x": 4,
+      "y": 16,
+      "country": "bm",
       "name": "Territory3",
+      "habitants": 17,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 50
+        },
+        {
+          "name": "water",
+          "value": 14
+        },
+        {
+          "name": "food",
+          "value": 29
+        },
+        {
+          "name": "armement",
+          "value": 24
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 12
+        },
+        {
+          "name": "water",
+          "value": 10
+        },
+        {
+          "name": "food",
+          "value": 14
+        },
+        {
+          "name": "armement",
+          "value": 11
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 16,
+      "country": "bm",
+      "name": "Territory4",
+      "habitants": 39,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 34
+        },
+        {
+          "name": "food",
+          "value": 28
+        },
+        {
+          "name": "armement",
+          "value": 42
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 7
+        },
+        {
+          "name": "water",
+          "value": 8
+        },
+        {
+          "name": "food",
+          "value": 15
+        },
+        {
+          "name": "armement",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 18,
+      "country": "bm",
+      "name": "Territory5",
       "habitants": 15,
       "stocks": [
         {
           "name": "petrol",
-          "value": 43
+          "value": 8
         },
         {
           "name": "water",
-          "value": 20
+          "value": 11
         },
         {
           "name": "food",
-          "value": 31
+          "value": 29
         },
         {
           "name": "armement",
-          "value": 20
+          "value": 22
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 12
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "x": 2,
+      "y": 18,
+      "country": "bm",
+      "name": "Territory6",
+      "habitants": 31,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 5
+        },
+        {
+          "name": "water",
+          "value": 15
+        },
+        {
+          "name": "food",
+          "value": 42
+        },
+        {
+          "name": "armement",
+          "value": 33
         }
       ],
       "variations": [
@@ -3698,7 +3792,7 @@
         },
         {
           "name": "water",
-          "value": 12
+          "value": 7
         },
         {
           "name": "food",
@@ -3706,20 +3800,20 @@
         },
         {
           "name": "armement",
-          "value": 14
+          "value": 5
         }
       ]
     },
     {
-      "x": 19,
-      "y": 7,
-      "country": "ae",
-      "name": "Territory4",
-      "habitants": 17,
+      "x": 5,
+      "y": 17,
+      "country": "bm",
+      "name": "Territory7",
+      "habitants": 31,
       "stocks": [
         {
           "name": "petrol",
-          "value": 34
+          "value": 45
         },
         {
           "name": "water",
@@ -3727,179 +3821,179 @@
         },
         {
           "name": "food",
-          "value": 20
+          "value": 18
         },
         {
           "name": "armement",
-          "value": 31
+          "value": 13
         }
       ],
       "variations": [
         {
           "name": "petrol",
+          "value": 13
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "x": 2,
+      "y": 17,
+      "country": "bm",
+      "name": "Territory8",
+      "habitants": 20,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 23
+        },
+        {
+          "name": "water",
           "value": 6
         },
         {
-          "name": "water",
-          "value": 7
-        },
-        {
           "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 8
-        }
-      ]
-    },
-    {
-      "x": 20,
-      "y": 9,
-      "country": "ae",
-      "name": "Territory5",
-      "habitants": 16,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 50
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 36
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 7
-        },
-        {
-          "name": "water",
-          "value": 14
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
-          "name": "armement",
-          "value": 15
-        }
-      ]
-    },
-    {
-      "x": 18,
-      "y": 8,
-      "country": "ae",
-      "name": "Territory6",
-      "habitants": 18,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 34
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 45
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ]
-    },
-    {
-      "x": 18,
-      "y": 9,
-      "country": "ae",
-      "name": "Territory7",
-      "habitants": 14,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 40
-        },
-        {
-          "name": "water",
-          "value": 36
-        },
-        {
-          "name": "food",
-          "value": 50
-        },
-        {
-          "name": "armement",
           "value": 21
+        },
+        {
+          "name": "armement",
+          "value": 50
         }
       ],
       "variations": [
         {
           "name": "petrol",
-          "value": 5
+          "value": 13
         },
         {
           "name": "water",
-          "value": 8
+          "value": 13
         },
         {
           "name": "food",
-          "value": 7
+          "value": 12
         },
         {
           "name": "armement",
-          "value": 10
+          "value": 11
         }
       ]
     },
     {
-      "x": 18,
-      "y": 10,
-      "country": "ae",
-      "name": "Territory8",
-      "habitants": 16,
+      "x": 2,
+      "y": 19,
+      "country": "bm",
+      "name": "Territory9",
+      "habitants": 15,
       "stocks": [
         {
           "name": "petrol",
-          "value": 50
+          "value": 30
         },
         {
           "name": "water",
-          "value": 31
+          "value": 29
         },
         {
           "name": "food",
-          "value": 37
+          "value": 26
+        },
+        {
+          "name": "armement",
+          "value": 8
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 11
+        },
+        {
+          "name": "water",
+          "value": 9
+        },
+        {
+          "name": "food",
+          "value": 10
+        },
+        {
+          "name": "armement",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "x": 3,
+      "y": 19,
+      "country": "bm",
+      "name": "Territory10",
+      "habitants": 15,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 49
+        },
+        {
+          "name": "water",
+          "value": 21
+        },
+        {
+          "name": "food",
+          "value": 18
+        },
+        {
+          "name": "armement",
+          "value": 9
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 15
+        },
+        {
+          "name": "water",
+          "value": 9
+        },
+        {
+          "name": "food",
+          "value": 8
+        },
+        {
+          "name": "armement",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "x": 19,
+      "y": 5,
+      "country": "yt",
+      "name": "Territory1",
+      "habitants": 12,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 43
+        },
+        {
+          "name": "water",
+          "value": 44
+        },
+        {
+          "name": "food",
+          "value": 45
         },
         {
           "name": "armement",
@@ -3909,7 +4003,50 @@
       "variations": [
         {
           "name": "petrol",
-          "value": 5
+          "value": 10
+        },
+        {
+          "name": "water",
+          "value": 6
+        },
+        {
+          "name": "food",
+          "value": 13
+        },
+        {
+          "name": "armement",
+          "value": 11
+        }
+      ]
+    },
+    {
+      "x": 19,
+      "y": 4,
+      "country": "yt",
+      "name": "Territory2",
+      "habitants": 50,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 26
+        },
+        {
+          "name": "water",
+          "value": 14
+        },
+        {
+          "name": "food",
+          "value": 44
+        },
+        {
+          "name": "armement",
+          "value": 43
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 12
         },
         {
           "name": "water",
@@ -3917,1232 +4054,329 @@
         },
         {
           "name": "food",
+          "value": 7
+        },
+        {
+          "name": "armement",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "x": 20,
+      "y": 4,
+      "country": "yt",
+      "name": "Territory3",
+      "habitants": 18,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 8
+        },
+        {
+          "name": "water",
+          "value": 37
+        },
+        {
+          "name": "food",
+          "value": 8
+        },
+        {
+          "name": "armement",
+          "value": 37
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 5
+        },
+        {
+          "name": "water",
+          "value": 6
+        },
+        {
+          "name": "food",
+          "value": 15
+        },
+        {
+          "name": "armement",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "x": 20,
+      "y": 5,
+      "country": "yt",
+      "name": "Territory4",
+      "habitants": 23,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 34
+        },
+        {
+          "name": "water",
+          "value": 43
+        },
+        {
+          "name": "food",
+          "value": 37
+        },
+        {
+          "name": "armement",
+          "value": 21
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 10
+        },
+        {
+          "name": "water",
+          "value": 11
+        },
+        {
+          "name": "food",
+          "value": 14
+        },
+        {
+          "name": "armement",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "x": 20,
+      "y": 6,
+      "country": "yt",
+      "name": "Territory5",
+      "habitants": 20,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 23
+        },
+        {
+          "name": "water",
+          "value": 18
+        },
+        {
+          "name": "food",
+          "value": 9
+        },
+        {
+          "name": "armement",
+          "value": 33
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 12
+        },
+        {
+          "name": "food",
+          "value": 7
+        },
+        {
+          "name": "armement",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "x": 20,
+      "y": 3,
+      "country": "yt",
+      "name": "Territory6",
+      "habitants": 40,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 41
+        },
+        {
+          "name": "water",
+          "value": 20
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 43
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 15
+        },
+        {
+          "name": "water",
+          "value": 7
+        },
+        {
+          "name": "food",
           "value": 10
         },
         {
           "name": "armement",
-          "value": 14
+          "value": 8
+        }
+      ]
+    },
+    {
+      "x": 19,
+      "y": 3,
+      "country": "yt",
+      "name": "Territory7",
+      "habitants": 47,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 50
+        },
+        {
+          "name": "water",
+          "value": 43
+        },
+        {
+          "name": "food",
+          "value": 45
+        },
+        {
+          "name": "armement",
+          "value": 41
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 6
+        },
+        {
+          "name": "water",
+          "value": 13
+        },
+        {
+          "name": "food",
+          "value": 12
+        },
+        {
+          "name": "armement",
+          "value": 5
         }
       ]
     },
     {
       "x": 19,
       "y": 6,
-      "country": "ae",
-      "name": "Territory9",
-      "habitants": 15,
+      "country": "yt",
+      "name": "Territory8",
+      "habitants": 22,
       "stocks": [
         {
           "name": "petrol",
-          "value": 46
+          "value": 42
         },
         {
           "name": "water",
-          "value": 43
+          "value": 35
         },
         {
           "name": "food",
-          "value": 29
+          "value": 15
         },
         {
           "name": "armement",
-          "value": 5
+          "value": 6
         }
       ],
       "variations": [
         {
           "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
           "value": 12
         },
         {
-          "name": "armement",
+          "name": "water",
+          "value": 13
+        },
+        {
+          "name": "food",
           "value": 7
+        },
+        {
+          "name": "armement",
+          "value": 11
         }
       ]
     },
     {
-      "x": 18,
+      "x": 19,
       "y": 7,
-      "country": "ae",
-      "name": "Territory10",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 25
-        },
-        {
-          "name": "food",
-          "value": 43
-        },
-        {
-          "name": "armement",
-          "value": 40
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 10
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ]
-    },
-    {
-      "x": 0,
-      "y": 17,
-      "country": "eg",
-      "name": "Territory1",
-      "habitants": 20,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 6
-        },
-        {
-          "name": "food",
-          "value": 49
-        },
-        {
-          "name": "armement",
-          "value": 40
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 8
-        }
-      ]
-    },
-    {
-      "x": 0,
-      "y": 18,
-      "country": "eg",
-      "name": "Territory2",
-      "habitants": 16,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 21
-        },
-        {
-          "name": "water",
-          "value": 37
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 49
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 12
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ]
-    },
-    {
-      "x": 0,
-      "y": 19,
-      "country": "eg",
-      "name": "Territory3",
-      "habitants": 9,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 42
-        },
-        {
-          "name": "water",
-          "value": 45
-        },
-        {
-          "name": "food",
-          "value": 40
-        },
-        {
-          "name": "armement",
-          "value": 32
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 0,
-      "y": 16,
-      "country": "eg",
-      "name": "Territory4",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 36
-        },
-        {
-          "name": "water",
-          "value": 35
-        },
-        {
-          "name": "food",
-          "value": 50
-        },
-        {
-          "name": "armement",
-          "value": 47
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 7
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 0,
-      "y": 20,
-      "country": "eg",
-      "name": "Territory5",
-      "habitants": 9,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 38
-        },
-        {
-          "name": "water",
-          "value": 23
-        },
-        {
-          "name": "food",
-          "value": 14
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ]
-    },
-    {
-      "x": 1,
-      "y": 16,
-      "country": "eg",
-      "name": "Territory6",
-      "habitants": 20,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 23
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 37
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 1,
-      "y": 20,
-      "country": "eg",
-      "name": "Territory7",
-      "habitants": 17,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 27
-        },
-        {
-          "name": "water",
-          "value": 34
-        },
-        {
-          "name": "food",
-          "value": 22
-        },
-        {
-          "name": "armement",
-          "value": 40
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ]
-    },
-    {
-      "x": 0,
-      "y": 15,
-      "country": "eg",
-      "name": "Territory8",
-      "habitants": 8,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 32
-        },
-        {
-          "name": "water",
-          "value": 50
-        },
-        {
-          "name": "food",
-          "value": 21
-        },
-        {
-          "name": "armement",
-          "value": 46
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 10
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 2,
-      "y": 16,
-      "country": "eg",
+      "country": "yt",
       "name": "Territory9",
-      "habitants": 7,
+      "habitants": 48,
       "stocks": [
         {
           "name": "petrol",
-          "value": 35
-        },
-        {
-          "name": "water",
-          "value": 6
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 37
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 14
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ]
-    },
-    {
-      "x": 2,
-      "y": 15,
-      "country": "eg",
-      "name": "Territory10",
-      "habitants": 10,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 27
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 16
-        },
-        {
-          "name": "armement",
-          "value": 37
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 9,
-      "y": 14,
-      "country": "ng",
-      "name": "Territory1",
-      "habitants": 15,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 27
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 50
-        },
-        {
-          "name": "armement",
-          "value": 22
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 5
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 10,
-      "y": 14,
-      "country": "ng",
-      "name": "Territory2",
-      "habitants": 10,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 39
-        },
-        {
-          "name": "water",
-          "value": 22
-        },
-        {
-          "name": "food",
-          "value": 17
-        },
-        {
-          "name": "armement",
-          "value": 35
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 12
-        },
-        {
-          "name": "food",
-          "value": 8
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 9,
-      "y": 15,
-      "country": "ng",
-      "name": "Territory3",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 27
-        },
-        {
-          "name": "armement",
-          "value": 47
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 7
-        },
-        {
-          "name": "water",
-          "value": 14
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 8,
-      "y": 14,
-      "country": "ng",
-      "name": "Territory4",
-      "habitants": 9,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 40
-        },
-        {
-          "name": "water",
-          "value": 48
-        },
-        {
-          "name": "food",
-          "value": 50
-        },
-        {
-          "name": "armement",
-          "value": 45
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 10,
-      "y": 15,
-      "country": "ng",
-      "name": "Territory5",
-      "habitants": 18,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 47
-        },
-        {
-          "name": "water",
           "value": 30
         },
         {
-          "name": "food",
-          "value": 37
-        },
-        {
-          "name": "armement",
-          "value": 21
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
           "name": "water",
-          "value": 7
+          "value": 38
         },
         {
           "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ]
-    },
-    {
-      "x": 10,
-      "y": 16,
-      "country": "ng",
-      "name": "Territory6",
-      "habitants": 12,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 25
-        },
-        {
-          "name": "water",
-          "value": 27
-        },
-        {
-          "name": "food",
-          "value": 18
-        },
-        {
-          "name": "armement",
-          "value": 41
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 11
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 10,
-      "y": 17,
-      "country": "ng",
-      "name": "Territory7",
-      "habitants": 5,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 35
-        },
-        {
-          "name": "food",
-          "value": 36
-        },
-        {
-          "name": "armement",
-          "value": 24
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ]
-    },
-    {
-      "x": 11,
-      "y": 16,
-      "country": "ng",
-      "name": "Territory8",
-      "habitants": 12,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 28
-        },
-        {
-          "name": "armement",
-          "value": 42
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 14
-        },
-        {
-          "name": "food",
-          "value": 10
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 10,
-      "y": 18,
-      "country": "ng",
-      "name": "Territory9",
-      "habitants": 7,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 42
-        },
-        {
-          "name": "armement",
-          "value": 16
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 5
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 10
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ]
-    },
-    {
-      "x": 11,
-      "y": 14,
-      "country": "ng",
-      "name": "Territory10",
-      "habitants": 15,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 40
-        },
-        {
-          "name": "water",
-          "value": 43
-        },
-        {
-          "name": "food",
-          "value": 22
-        },
-        {
-          "name": "armement",
-          "value": 43
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 15
-        }
-      ]
-    },
-    {
-      "x": 1,
-      "y": 0,
-      "country": "us-ne",
-      "name": "Territory1",
-      "habitants": 17,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 41
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 14
-        },
-        {
-          "name": "armement",
-          "value": 14
-        }
-      ]
-    },
-    {
-      "x": 0,
-      "y": 0,
-      "country": "us-ne",
-      "name": "Territory2",
-      "habitants": 17,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 33
-        },
-        {
-          "name": "water",
-          "value": 29
-        },
-        {
-          "name": "food",
-          "value": 6
-        },
-        {
-          "name": "armement",
-          "value": 24
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 0,
-      "y": 1,
-      "country": "us-ne",
-      "name": "Territory3",
-      "habitants": 8,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 39
-        },
-        {
-          "name": "water",
-          "value": 42
-        },
-        {
-          "name": "food",
-          "value": 35
-        },
-        {
-          "name": "armement",
           "value": 47
+        },
+        {
+          "name": "armement",
+          "value": 22
         }
       ],
       "variations": [
         {
           "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 11
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 0,
-      "y": 2,
-      "country": "us-ne",
-      "name": "Territory4",
-      "habitants": 12,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 33
-        },
-        {
-          "name": "water",
           "value": 15
         },
         {
-          "name": "food",
-          "value": 49
-        },
-        {
-          "name": "armement",
-          "value": 46
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
           "name": "water",
-          "value": 5
+          "value": 14
         },
         {
           "name": "food",
-          "value": 12
+          "value": 13
         },
         {
           "name": "armement",
-          "value": 12
+          "value": 13
         }
       ]
     },
     {
-      "x": 0,
+      "x": 18,
       "y": 3,
-      "country": "us-ne",
-      "name": "Territory5",
-      "habitants": 19,
+      "country": "yt",
+      "name": "Territory10",
+      "habitants": 48,
       "stocks": [
         {
           "name": "petrol",
-          "value": 36
+          "value": 37
         },
         {
           "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 42
-        },
-        {
-          "name": "armement",
-          "value": 38
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 8
-        }
-      ]
-    },
-    {
-      "x": 0,
-      "y": 4,
-      "country": "us-ne",
-      "name": "Territory6",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 46
-        },
-        {
-          "name": "water",
-          "value": 35
-        },
-        {
-          "name": "food",
-          "value": 6
-        },
-        {
-          "name": "armement",
-          "value": 25
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ]
-    },
-    {
-      "x": 0,
-      "y": 5,
-      "country": "us-ne",
-      "name": "Territory7",
-      "habitants": 15,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 45
+          "value": 27
         },
         {
           "name": "food",
@@ -5150,1174 +4384,13 @@
         },
         {
           "name": "armement",
-          "value": 50
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 14
-        },
-        {
-          "name": "food",
-          "value": 14
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 1,
-      "y": 5,
-      "country": "us-ne",
-      "name": "Territory8",
-      "habitants": 20,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 31
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 10
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ]
-    },
-    {
-      "x": 1,
-      "y": 2,
-      "country": "us-ne",
-      "name": "Territory9",
-      "habitants": 12,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 28
-        },
-        {
-          "name": "water",
-          "value": 33
-        },
-        {
-          "name": "food",
-          "value": 22
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 1,
-      "y": 3,
-      "country": "us-ne",
-      "name": "Territory10",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 40
-        },
-        {
-          "name": "food",
-          "value": 18
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 15
-        }
-      ]
-    },
-    {
-      "x": 19,
-      "y": 0,
-      "country": "nl",
-      "name": "Territory1",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 20
-        },
-        {
-          "name": "water",
-          "value": 42
-        },
-        {
-          "name": "food",
-          "value": 47
-        },
-        {
-          "name": "armement",
-          "value": 16
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 19,
-      "y": 1,
-      "country": "nl",
-      "name": "Territory2",
-      "habitants": 8,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 48
-        },
-        {
-          "name": "water",
-          "value": 37
-        },
-        {
-          "name": "food",
-          "value": 8
-        },
-        {
-          "name": "armement",
-          "value": 39
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 5
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ]
-    },
-    {
-      "x": 18,
-      "y": 0,
-      "country": "nl",
-      "name": "Territory3",
-      "habitants": 17,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 17
-        },
-        {
-          "name": "water",
-          "value": 6
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 17
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 10
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 19,
-      "y": 2,
-      "country": "nl",
-      "name": "Territory4",
-      "habitants": 12,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 16
-        },
-        {
-          "name": "food",
-          "value": 28
-        },
-        {
-          "name": "armement",
-          "value": 18
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 12
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 18,
-      "y": 1,
-      "country": "nl",
-      "name": "Territory5",
-      "habitants": 7,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 34
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 34
-        },
-        {
-          "name": "armement",
-          "value": 44
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 12
-        },
-        {
-          "name": "food",
-          "value": 6
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 18,
-      "y": 2,
-      "country": "nl",
-      "name": "Territory6",
-      "habitants": 20,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 17
-        },
-        {
-          "name": "water",
-          "value": 35
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 45
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 8
-        }
-      ]
-    },
-    {
-      "x": 20,
-      "y": 0,
-      "country": "nl",
-      "name": "Territory7",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 44
-        },
-        {
-          "name": "food",
-          "value": 42
-        },
-        {
-          "name": "armement",
-          "value": 45
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 17,
-      "y": 2,
-      "country": "nl",
-      "name": "Territory8",
-      "habitants": 8,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 38
-        },
-        {
-          "name": "water",
-          "value": 35
-        },
-        {
-          "name": "food",
-          "value": 10
-        },
-        {
-          "name": "armement",
-          "value": 22
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 10
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 20,
-      "y": 1,
-      "country": "nl",
-      "name": "Territory9",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 45
-        },
-        {
-          "name": "water",
-          "value": 42
-        },
-        {
-          "name": "food",
-          "value": 25
-        },
-        {
-          "name": "armement",
-          "value": 37
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 5
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ]
-    },
-    {
-      "x": 17,
-      "y": 0,
-      "country": "nl",
-      "name": "Territory10",
-      "habitants": 18,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 50
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 16
-        },
-        {
-          "name": "armement",
-          "value": 25
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 14
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ]
-    },
-    {
-      "x": 3,
-      "y": 14,
-      "country": "re",
-      "name": "Territory1",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 30
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
-          "name": "armement",
-          "value": 42
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ]
-    },
-    {
-      "x": 2,
-      "y": 14,
-      "country": "re",
-      "name": "Territory2",
-      "habitants": 11,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 26
-        },
-        {
-          "name": "water",
-          "value": 10
-        },
-        {
-          "name": "food",
-          "value": 16
-        },
-        {
-          "name": "armement",
-          "value": 24
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 10
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 1,
-      "y": 14,
-      "country": "re",
-      "name": "Territory3",
-      "habitants": 14,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 48
-        },
-        {
-          "name": "water",
-          "value": 30
-        },
-        {
-          "name": "food",
-          "value": 16
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 5
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 15
-        }
-      ]
-    },
-    {
-      "x": 3,
-      "y": 13,
-      "country": "re",
-      "name": "Territory4",
-      "habitants": 17,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 40
-        },
-        {
-          "name": "water",
-          "value": 5
-        },
-        {
-          "name": "food",
-          "value": 33
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 8
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 3,
-      "y": 12,
-      "country": "re",
-      "name": "Territory5",
-      "habitants": 20,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 16
-        },
-        {
-          "name": "water",
-          "value": 30
-        },
-        {
-          "name": "food",
-          "value": 29
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 5
-        },
-        {
-          "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 4,
-      "y": 14,
-      "country": "re",
-      "name": "Territory6",
-      "habitants": 20,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 37
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 29
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 6
-        },
-        {
-          "name": "food",
-          "value": 8
-        },
-        {
-          "name": "armement",
-          "value": 5
-        }
-      ]
-    },
-    {
-      "x": 5,
-      "y": 14,
-      "country": "re",
-      "name": "Territory7",
-      "habitants": 5,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 47
-        },
-        {
-          "name": "water",
-          "value": 37
-        },
-        {
-          "name": "food",
           "value": 21
-        },
-        {
-          "name": "armement",
-          "value": 33
         }
       ],
       "variations": [
         {
           "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ]
-    },
-    {
-      "x": 3,
-      "y": 15,
-      "country": "re",
-      "name": "Territory8",
-      "habitants": 20,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 43
-        },
-        {
-          "name": "water",
-          "value": 17
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 29
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 8
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
           "value": 11
-        }
-      ]
-    },
-    {
-      "x": 2,
-      "y": 12,
-      "country": "re",
-      "name": "Territory9",
-      "habitants": 9,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 44
-        },
-        {
-          "name": "water",
-          "value": 48
-        },
-        {
-          "name": "food",
-          "value": 42
-        },
-        {
-          "name": "armement",
-          "value": 36
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 14
-        },
-        {
-          "name": "food",
-          "value": 14
-        },
-        {
-          "name": "armement",
-          "value": 9
-        }
-      ]
-    },
-    {
-      "x": 2,
-      "y": 11,
-      "country": "re",
-      "name": "Territory10",
-      "habitants": 20,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 32
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 18
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 14
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 6,
-      "y": 15,
-      "country": "si",
-      "name": "Territory1",
-      "habitants": 19,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 27
-        },
-        {
-          "name": "water",
-          "value": 47
-        },
-        {
-          "name": "food",
-          "value": 34
-        },
-        {
-          "name": "armement",
-          "value": 48
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 14
-        },
-        {
-          "name": "water",
-          "value": 12
-        },
-        {
-          "name": "food",
-          "value": 14
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ]
-    },
-    {
-      "x": 7,
-      "y": 15,
-      "country": "si",
-      "name": "Territory2",
-      "habitants": 8,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 35
-        },
-        {
-          "name": "water",
-          "value": 48
-        },
-        {
-          "name": "food",
-          "value": 18
-        },
-        {
-          "name": "armement",
-          "value": 39
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 7,
-      "y": 16,
-      "country": "si",
-      "name": "Territory3",
-      "habitants": 20,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 6
-        },
-        {
-          "name": "water",
-          "value": 21
-        },
-        {
-          "name": "food",
-          "value": 11
-        },
-        {
-          "name": "armement",
-          "value": 25
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 10
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 14
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ]
-    },
-    {
-      "x": 5,
-      "y": 15,
-      "country": "si",
-      "name": "Territory4",
-      "habitants": 18,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 21
-        },
-        {
-          "name": "water",
-          "value": 11
-        },
-        {
-          "name": "food",
-          "value": 7
-        },
-        {
-          "name": "armement",
-          "value": 25
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
         },
         {
           "name": "water",
@@ -6325,269 +4398,11 @@
         },
         {
           "name": "food",
-          "value": 12
-        },
-        {
-          "name": "armement",
-          "value": 13
-        }
-      ]
-    },
-    {
-      "x": 5,
-      "y": 16,
-      "country": "si",
-      "name": "Territory5",
-      "habitants": 15,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 35
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 49
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 9
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
-          "name": "armement",
-          "value": 8
-        }
-      ]
-    },
-    {
-      "x": 6,
-      "y": 16,
-      "country": "si",
-      "name": "Territory6",
-      "habitants": 8,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 31
-        },
-        {
-          "name": "water",
-          "value": 28
-        },
-        {
-          "name": "food",
-          "value": 31
-        },
-        {
-          "name": "armement",
-          "value": 37
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 11
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 13
-        },
-        {
-          "name": "armement",
-          "value": 7
-        }
-      ]
-    },
-    {
-      "x": 8,
-      "y": 16,
-      "country": "si",
-      "name": "Territory7",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 22
-        },
-        {
-          "name": "food",
-          "value": 47
-        },
-        {
-          "name": "armement",
-          "value": 15
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 12
-        },
-        {
-          "name": "water",
-          "value": 15
-        },
-        {
-          "name": "food",
-          "value": 9
-        },
-        {
-          "name": "armement",
-          "value": 8
-        }
-      ]
-    },
-    {
-      "x": 5,
-      "y": 17,
-      "country": "si",
-      "name": "Territory8",
-      "habitants": 13,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 5
-        },
-        {
-          "name": "water",
-          "value": 22
-        },
-        {
-          "name": "food",
-          "value": 8
-        },
-        {
-          "name": "armement",
-          "value": 12
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 13
-        },
-        {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 10
-        },
-        {
-          "name": "armement",
-          "value": 11
-        }
-      ]
-    },
-    {
-      "x": 4,
-      "y": 15,
-      "country": "si",
-      "name": "Territory9",
-      "habitants": 20,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 31
-        },
-        {
-          "name": "water",
-          "value": 9
-        },
-        {
-          "name": "food",
-          "value": 37
-        },
-        {
-          "name": "armement",
-          "value": 34
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
           "value": 14
         },
         {
-          "name": "water",
-          "value": 7
-        },
-        {
-          "name": "food",
-          "value": 5
-        },
-        {
           "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 4,
-      "y": 16,
-      "country": "si",
-      "name": "Territory10",
-      "habitants": 7,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 23
-        },
-        {
-          "name": "water",
-          "value": 45
-        },
-        {
-          "name": "food",
-          "value": 19
-        },
-        {
-          "name": "armement",
-          "value": 20
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 8
-        },
-        {
-          "name": "water",
-          "value": 13
-        },
-        {
-          "name": "food",
-          "value": 11
-        },
-        {
-          "name": "armement",
-          "value": 9
+          "value": 12
         }
       ]
     }
