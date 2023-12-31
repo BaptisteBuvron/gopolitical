@@ -4,6 +4,7 @@ import { Simulation } from "../../Entity";
 import { ResourceIconService } from "../../services/ResourceIconService";
 import { CountryFlagService } from "../../services/CountryFlagService";
 import './MarketComponent.css';
+import {CountryService} from "../../services/CountryService";
 
 interface MarketComponentProps {
     simulation: Simulation | undefined;
@@ -19,6 +20,7 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
     const marketHistory = marketData.history;
 
     const countryFlagService = new CountryFlagService();
+    const countryService = new CountryService(simulation.countries);
     const resourceIconService = new ResourceIconService();
     const sortedMarketHistory = marketHistory
         .slice()
@@ -84,21 +86,21 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
                         <td className="text-center">{interaction.price * interaction.amount}$</td>
                         <td>
                             <Image
-                                src={countryFlagService.getCountryFlagById(interaction.buyer.agent.id)}
-                                alt={`${interaction.buyer.agent.name} flag`}
+                                src={countryFlagService.getCountryFlagById(countryService.getId(interaction.buyer))}
+                                alt={`${interaction.buyer} flag`}
                                 fluid
                                 className="flag-icon-market resource-icon-with-margin-flag"
                             />
-                            {interaction.buyer.agent.name}
+                            {interaction.buyer}
                         </td>
                         <td>
                             <Image
-                                src={countryFlagService.getCountryFlagById(interaction.seller.agent.id)}
-                                alt={`${interaction.seller.agent.name} flag`}
+                                src={countryFlagService.getCountryFlagById(countryService.getId(interaction.seller))}
+                                alt={`${interaction.seller} flag`}
                                 fluid
                                 className="flag-icon-market resource-icon-with-margin-flag"
                             />
-                            {interaction.seller.agent.name}
+                            {interaction.seller}
                         </td>
                     </tr>
                 ))}
