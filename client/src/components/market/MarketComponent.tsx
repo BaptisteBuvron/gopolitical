@@ -3,7 +3,7 @@ import { Row, Col, Image, Table, Pagination } from "react-bootstrap";
 import { Simulation } from "../../Entity";
 import { ResourceIconService } from "../../services/ResourceIconService";
 import './MarketComponent.css';
-import {CountryService} from "../../services/CountryService";
+import { CountryService } from "../../services/CountryService";
 
 interface MarketComponentProps {
     simulation: Simulation | undefined;
@@ -33,9 +33,20 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
             return dateB - dateA;
         });
 
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = sortedMarketHistory.slice(indexOfFirstItem, indexOfLastItem);
+    const pagesCount = Math.ceil(sortedMarketHistory.length / itemsPerPage);
+    const visiblePages = Array.from({ length: Math.min(3, pagesCount) }, (_, index) => index + 1);
+
+    const nextPage = () => {
+        if (currentPage < pagesCount) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
@@ -76,50 +87,71 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
                 </tr>
                 </thead>
                 <tbody>
-                {currentItems.map((interaction, index) => (
-                    <tr key={index}>
-                        <td className="text-center">{interaction.dateTransaction}</td>
-                        <td className="text-center">
-                            <img
-                                src={resourceIconService.getResourceIconPath(interaction.resourceType)}
-                                alt={`${interaction.resourceType} icon`}
-                                className="resource-icon-with-margin"
-                            />
-                            {interaction.resourceType}
-                        </td>
-                        <td className="text-center">{interaction.amount}</td>
-                        <td className="text-center">{interaction.price}$/Unit</td>
-                        <td className="text-center">{interaction.price * interaction.amount}$</td>
-                        <td>
-                            <Image
-                                src={countryService.getCountryByName(interaction.buyer)?.flag}
-                                alt={`${interaction.buyer} flag`}
-                                fluid
-                                className="flag-icon-market resource-icon-with-margin-flag"
-                            />
-                            {interaction.buyer}
-                        </td>
-                        <td>
-                            <Image
-                                src={countryService.getCountryByName(interaction.seller)?.flag}
-                                alt={`${interaction.seller} flag`}
-                                fluid
-                                className="flag-icon-market resource-icon-with-margin-flag"
-                            />
-                            {interaction.seller}
-                        </td>
-                    </tr>
-                ))}
+                {sortedMarketHistory
+                    .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                    .map((interaction, index) => (
+                        <tr key={index}>
+                            <td className="text-center">{interaction.dateTransaction}</td>
+                            <td className="text-center">
+                                <img
+                                    src={resourceIconService.getResourceIconPath(interaction.resourceType)}
+                                    alt={`${interaction.resourceType} icon`}
+                                    className="resource-icon-with-margin"
+                                />
+                                {interaction.resourceType}
+                            </td>
+                            <td className="text-center">{interaction.amount}</td>
+                            <td className="text-center">{interaction.price}$/Unit</td>
+                            <td className="text-center">{interaction.price * interaction.amount}$</td>
+                            <td>
+                                <Image
+                                    src={countryService.getCountryByName(interaction.buyer)?.flag}
+                                    alt={`${interaction.buyer} flag`}
+                                    fluid
+                                    className="flag-icon-market resource-icon-with-margin-flag"
+                                />
+                                {interaction.buyer}
+                            </td>
+                            <td>
+                                <Image
+                                    src={countryService.getCountryByName(interaction.seller)?.flag}
+                                    alt={`${interaction.seller} flag`}
+                                    fluid
+                                    className="flag-icon-market resource-icon-with-margin-flag"
+                                />
+                                {interaction.seller}
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </Table>
 
             <div className="d-flex justify-content-center">
                 <Pagination>
-                    {Array.from({ length: Math.ceil(sortedMarketHistory.length / itemsPerPage) }).map((_, index) => (
-                        <Pagination.Item key={index} active={index + 1 === currentPage} onClick={() => paginate(index + 1)}>
-                            {index + 1}
+                    <Pagination.Prev onClick={prevPage} />
+                    {visiblePages.map((pageNumber) => (
+                        <Pagination.Item
+                            key={pageNumber}
+                            active={pageNumber === currentPage}
+                            onClick={() => paginate(pageNumber)}
+                        >
+                            {pageNumber}
                         </Pagination.Item>
                     ))}
+                    {currentPage < pagesCount - 2 && (
+                        <Pagination.Ellipsis disabled />
+                    )}
+                    {currentPage < pagesCount - 1 && (
+                        <Pagination.Item onClick={() => paginate(currentPage + 1)}>
+                            {currentPage + 1}
+                        </Pagination.Item>
+                    )}
+                    {currentPage < pagesCount && (
+                        <Pagination.Item onClick={() => paginate(currentPage + 2)}>
+                            {currentPage + 2}
+                        </Pagination.Item>
+                    )}
+                    <Pagination.Next onClick={nextPage} />
                 </Pagination>
             </div>
         </Col>
