@@ -46,7 +46,7 @@ function CountryActionsModal({ onHide, country, show }: CountryModalProps) {
                             {action.eventType && (
                                 <>
                                     {action.eventType.constructor === TransferResourceEvent && (
-                                        <TransferResourceEventComponent event={action.eventType as TransferResourceEvent} />
+                                        <TransferResourceEventComponent event={action.eventType as TransferResourceEvent}  day={action.day}/>
                                     )}
                                 </>
                             )}

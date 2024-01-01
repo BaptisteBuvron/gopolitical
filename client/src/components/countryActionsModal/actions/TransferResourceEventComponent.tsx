@@ -4,9 +4,10 @@ import { ResourceIconService } from "../../../services/ResourceIconService";
 
 interface TransferResourceEventComponentProps {
     event: TransferResourceEvent;
+    day : number;
 }
 
-function TransferResourceEventComponent({ event }: TransferResourceEventComponentProps) {
+function TransferResourceEventComponent({ event , day}: TransferResourceEventComponentProps) {
     const { from, to, resource, amount } = event;
 
     const resourceIconService = new ResourceIconService();
@@ -15,6 +16,7 @@ function TransferResourceEventComponent({ event }: TransferResourceEventComponen
 
     return (
         <>
+            <td>Day {day}</td>
             <td>Transfert</td>
             <td>From {from}</td>
             <td>To {to}</td>
