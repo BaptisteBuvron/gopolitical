@@ -9,6 +9,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import {ResourceIconService} from "../services/ResourceIconService";
 import {ClockHistory} from "react-bootstrap-icons";
 import CountryActionsModal from "./countryActionsModal/CountryActionsModal";
+import CountryHabitantsEvolutionComponent from "./CountryHabitantsEvolutionComponent";
 
 interface CountriesComponentProps {
     simulation: Simulation | undefined;
@@ -16,6 +17,7 @@ interface CountriesComponentProps {
 
 function CountriesComponent({simulation}: CountriesComponentProps) {
     const [showModalStockEvolutionCountry, setShowModalStockEvolutionCountry] = useState(false);
+    const [showModalHabitantsEvolutionCountry, setShowModalHabitantsEvolutionCountry] = useState(false);
     const [showCountryActionsModal, setShowCountryActionsModal] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
@@ -43,8 +45,18 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
         setShowModalStockEvolutionCountry(true);
     }
 
+    function showHabitantsEvolution(country: Country) {
+        setSelectedCountry(country);
+        setShowModalHabitantsEvolutionCountry(true);
+    }
+
     function hideStockEvolution() {
         setShowModalStockEvolutionCountry(false);
+        setSelectedCountry(null);
+    }
+
+    function hideHabitantsEvolution() {
+        setShowModalHabitantsEvolutionCountry(false);
         setSelectedCountry(null);
     }
 
@@ -75,14 +87,15 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                                         <ul className="list-group list-group-flush">
                                             <li className="list-group-item">
                                                 <strong>Habitants:</strong> {country.getCountryPopulation(simulation)}
+                                                <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => showHabitantsEvolution(country)}>
+                                                    <ClockHistory className="mb-1 me-1"></ClockHistory>Historique du nombre d'habitants
+                                                </Button>
                                             </li>
                                             <li className="list-group-item">
                                                 <strong>Argent:</strong> {country?.money}
                                                 <ul className="mt-1">
                                                     <li style={{listStyle: "none"}}>
-                                                        <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => showStockEvolution(country)}>
-                                                            <ClockHistory className="mb-1 me-1"></ClockHistory>Historique de l'argent
-                                                        </Button>
+
                                                     </li>
                                                 </ul>
                                             </li>
@@ -121,6 +134,12 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                             <CountryStockEvolutionComponent
                                 show={showModalStockEvolutionCountry}
                                 onHide ={() => hideStockEvolution()}
+                                simulation={simulation}
+                                propsCountry={selectedCountry}
+                            />
+                            <CountryHabitantsEvolutionComponent
+                                show={showModalHabitantsEvolutionCountry}
+                                onHide ={() => hideHabitantsEvolution()}
                                 simulation={simulation}
                                 propsCountry={selectedCountry}
                             />

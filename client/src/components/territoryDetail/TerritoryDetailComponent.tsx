@@ -9,6 +9,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import CountryActionsModal from "../countryActionsModal/CountryActionsModal";
 import './TerritoryDetailComponent.css';
 import TerritoryStockEvolutionComponent from "../TerritoryStockEvolutionComponent";
+import TerritoryHabitantsEvolutionComponent from "../TerritoryHabitantsEvolutionComponent";
 
 interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
@@ -22,6 +23,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
     const [showModalCountryActions, setShowModalCountryActions] = useState(false);
     const [territory, setTerritory] = useState(props.territory);
     const [showStockEvolutionModal, setShowStockEvolutionModal] = useState(false);
+    const [showHabitantsEvolutionModal, setShowHabitantsEvolutionModal] = useState(false);
     const [country, setCountry] = useState<Country | undefined>(territory.country)
 
     useEffect(() => {
@@ -93,6 +95,9 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                             <ul className="list-group list-group-flush">
                                                 <li className="list-group-item">
                                                     <strong>Habitants:</strong> {territory.habitants}
+                                                    <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => setShowHabitantsEvolutionModal(true)}>
+                                                        <ClockHistory className="mb-1 me-1"></ClockHistory>Historique du nombre d'habitants
+                                                    </Button>
                                                 </li>
                                                 <li className="list-group-item">
                                                     <strong>Stocks:</strong>
@@ -188,6 +193,13 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                 show={showStockEvolutionModal}
                                 propsTerritory={territory}
                             />
+                            <TerritoryHabitantsEvolutionComponent
+                                simulation={props.simulation}
+                                onHide={() => setShowHabitantsEvolutionModal(false)}
+                                show={showHabitantsEvolutionModal}
+                                propsTerritory={territory}
+                            />
+
                 </Modal.Body>
                 <Modal.Footer className="bg-dark text-light">
                     <Button variant="outline-warning" onClick={props.handleCloseModal}>

@@ -120,7 +120,7 @@ func (c *Country) Deliberate() []Request {
 	//Le pays regarde s'il lui manque des ressources, si oui, il les achète
 	for _, territory := range c.Territories {
 		for resource, consumption := range c.consumptionByHabitant {
-			totalConsumption := float64(territory.Habitants) * consumption
+			totalConsumption := (float64(territory.Habitants) * consumption) * 2
 			//Calculer si les territoires ont assez de ressources pour nourrir leurs habitants
 			needed := territory.Stock[resource] - totalConsumption
 			if needed < 0 {

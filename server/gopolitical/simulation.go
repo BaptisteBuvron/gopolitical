@@ -77,10 +77,12 @@ func (s *Simulation) Start() {
 		s.Environment.Market.Percept = make(map[string][]Request)
 
 		//Send update to the websocket
-		go s.WebSocket.SendUpdate()
+		s.WebSocket.SendUpdate()
+		fmt.Println("Update sent to the websocket")
 		//Wait the other day
 		time.Sleep(time.Duration(s.SecondByDay) * time.Second)
 		//Unlock all agents
+		fmt.Println("Unlocking country : ")
 		for _, country := range s.Countries {
 			country.In <- true
 		}
