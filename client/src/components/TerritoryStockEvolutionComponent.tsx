@@ -1,8 +1,7 @@
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import React, {useEffect, useState} from "react";
-import {CountryFlagService} from "../services/CountryFlagService";
-import {Country, Simulation, Territory} from "../Entity";
+import {Simulation, Territory} from "../Entity";
 import StockHistoryChart from "./stockHistoryChartComponent/stockHistoryChartComponent";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -15,21 +14,15 @@ interface TerritoryStockEvolutionProps {
 }
 
 function TerritoryStockEvolutionComponent({ onHide, propsTerritory, simulation, show }: TerritoryStockEvolutionProps) {
-    const [showHistoryModal, setShowHistoryModal] = useState(false);
+    //const [showHistoryModal, setShowHistoryModal] = useState(false);
     const [territory, setTerritory] = useState<Territory>(propsTerritory)
 
     useEffect(() => {
         let simTerritory = simulation.territories.find(simTerritory => territory.name === simTerritory.name);
-        if (simTerritory != undefined) {
+        if (simTerritory !== undefined) {
             setTerritory(simTerritory);
         }
     }, [simulation, territory])
-
-    // Fonction pour obtenir le flag du country
-    const countryFlagService = new CountryFlagService();
-    const getCountryFlagById = (countryId: string | undefined): string => {
-        return countryFlagService.getCountryFlagById(countryId);
-    };
 
     const stockHistory = territory.stockHistory;
     const country = territory.country;
@@ -60,7 +53,7 @@ function TerritoryStockEvolutionComponent({ onHide, propsTerritory, simulation, 
                         <h4 className={"text-warning"}>Evolution des stocks</h4>
                     </div>
                     <div className="col-2">
-                        <Image src={getCountryFlagById(country?.agent.id)} alt={country?.agent.name + " flag"} fluid />
+                        <Image src={country?.flag} alt={country?.agent.name + " flag"} fluid />
                     </div>
                 </div>
             </Modal.Header>

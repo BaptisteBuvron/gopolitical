@@ -1,7 +1,6 @@
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import React, {useEffect, useState} from "react";
-import {CountryFlagService} from "../services/CountryFlagService";
 import {Country, Simulation} from "../Entity";
 import StockHistoryChart from "./stockHistoryChartComponent/stockHistoryChartComponent";
 
@@ -13,25 +12,17 @@ interface CountryStockEvolutionProps {
 }
 
 function CountryStockEvolutionComponent({ onHide, propsCountry, simulation, show }: CountryStockEvolutionProps) {
-    const [showHistoryModal, setShowHistoryModal] = useState(false);
+    //const [showHistoryModal, setShowHistoryModal] = useState(false);
     const [country, setCountry] = useState<Country | null>(propsCountry)
-    const [countryPopulation, setCountryPopulation] = useState(country?.getCountryPopulation(simulation));
 
     useEffect(() => {
         if (propsCountry != null) {
             let simCountry = simulation.countries.get(propsCountry.agent.id);
-            if (simCountry != undefined) {
+            if (simCountry !== undefined) {
                 setCountry(simCountry);
-                setCountryPopulation(country?.getCountryPopulation(simulation))
             }
         }
-    }, [simulation])
-
-    // Fonction pour obtenir le flag du country
-    const countryFlagService = new CountryFlagService();
-    const getCountryFlagById = (countryId: string | undefined): string => {
-        return countryFlagService.getCountryFlagById(countryId);
-    };
+    }, [simulation, propsCountry])
 
     const stockHistory = country?.getAllTerritoriesStockHistory(simulation);
     return (
@@ -49,7 +40,7 @@ function CountryStockEvolutionComponent({ onHide, propsCountry, simulation, show
                     <h4 className={"text-warning"}>Evolution des stocks</h4>
                 </div>
                 <div className="col-2">
-                    <Image src={getCountryFlagById(country?.agent.id)} alt={country?.agent.name + " flag"} fluid />
+                    <Image src={country?.flag} alt={country?.agent.name + " flag"} fluid />
                 </div>
             </div>
         </Modal.Header>

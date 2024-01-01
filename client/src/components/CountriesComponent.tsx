@@ -127,7 +127,6 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                             <CountryActionsModal
                                 show={showCountryActionsModal}
                                 onHide ={() => hideCountryActions()}
-                                simulation={simulation}
                                 country={selectedCountry}
                             />
                         </div>

@@ -1,6 +1,5 @@
 import {Country, Simulation, Territory, Variation} from "../../Entity";
 import {ResourceIconService} from "../../services/ResourceIconService";
-import {CountryFlagService} from "../../services/CountryFlagService";
 import React, {useEffect, useState} from "react";
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import {ClockHistory} from "react-bootstrap-icons";
@@ -39,8 +38,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
             <InvalidDataResponseComponent
                 handleCloseModal={props.handleCloseModal}
                 showModal={props.showModal}
-                territory={props.territory}
-                country={props.country}
             />
         );
     }
@@ -160,7 +157,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                             <CountryActionsModal
                                 show={showModalCountryActions}
                                 onHide ={() => setShowModalCountryActions(false)}
-                                simulation={props.simulation}
                                 country={country}
                             />
                             <TerritoryStockEvolutionComponent
@@ -183,8 +179,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
         <InvalidDataResponseComponent
             handleCloseModal={props.handleCloseModal}
             showModal={props.showModal}
-            territory={props.territory}
-            country={props.country}
         />
     );
 }
