@@ -4,7 +4,7 @@ import { Country, TransferResourceEvent } from "../../Entity";
 import Image from "react-bootstrap/Image";
 import TransferResourceEventComponent from "./actions/TransferResourceEventComponent";
 
-const ACTIONS_PER_PAGE = 15;
+const ACTIONS_PER_PAGE = 11;
 
 export interface CountryModalProps {
     onHide: () => void;
