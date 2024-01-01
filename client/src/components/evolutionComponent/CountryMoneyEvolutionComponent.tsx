@@ -12,7 +12,6 @@ interface CountryStockEvolutionProps {
 }
 
 function CountryMoneyEvolutionComponent({ onHide, propsCountry, simulation, show }: CountryStockEvolutionProps) {
-    //const [showHistoryModal, setShowHistoryModal] = useState(false);
     const [country, setCountry] = useState<Country | null>(propsCountry)
 
     useEffect(() => {
@@ -42,7 +41,7 @@ function CountryMoneyEvolutionComponent({ onHide, propsCountry, simulation, show
                     <div className="col-2">
                         <Image src={country?.flag} alt={country?.agent.name + " flag"} fluid />
                     </div>
-                </div>AAA
+                </div>
             </Modal.Header>
             <Modal.Body className="bg-dark text-light">
                 <Row className="justify-content-center">
