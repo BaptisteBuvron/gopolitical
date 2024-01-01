@@ -101,7 +101,9 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                 </li>
                                                 <li className="list-group-item">
                                                     <strong>Stocks:</strong>
-                                                    <Row className="justify-content-around">
+                                                    <Row className="justify-content-center">
+                                                        <Col className="col-10">
+                                                            <Row className="justify-content-between">
                                                         {Array.from(territory.stock.entries()).map(([resource, quantity], index) => (
                                                             <Col key={index} className="col-5 mb-2">
                                                                 <OverlayTrigger
@@ -118,33 +120,38 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                             </Col>
                                                         ))}
                                                     </Row>
+                                                        </Col>
+                                                    </Row>
                                                     <Row className="justify-content-center">
                                                         <Col className="col-auto">
                                                             <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => setShowStockEvolutionModal(true)}>
                                                                 <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des stocks
                                                             </Button>
                                                         </Col>
-
                                                     </Row>
                                                 </li>
                                                 <li className="list-group-item">
                                                     <strong>Variations:</strong>
-                                                    <Row className="justify-content-around">
-                                                        {territory.variations.map((variation: Variation, index) => (
-                                                            <Col key={index} className="col-5">
-                                                                <OverlayTrigger
-                                                                    placement="left"
-                                                                    overlay={
-                                                                        <Tooltip>
-                                                                             {variation.resource.charAt(0).toUpperCase() + variation.resource.slice(1)}
-                                                                        </Tooltip>
-                                                                    }
-                                                                >
-                                                                    <img src={getResourceIconPath(variation.resource)} className="me-2" alt={variation.resource + " icon"} />
-                                                                </OverlayTrigger>
-                                                                Value: {variation.amount}
-                                                            </Col>
-                                                        ))}
+                                                    <Row className="justify-content-center">
+                                                        <Col className="col-10">
+                                                            <Row className="justify-content-between">
+                                                                {territory.variations.map((variation: Variation, index) => (
+                                                                    <Col key={index} className="col-5">
+                                                                        <OverlayTrigger
+                                                                            placement="left"
+                                                                            overlay={
+                                                                                <Tooltip>
+                                                                                    {variation.resource.charAt(0).toUpperCase() + variation.resource.slice(1)}
+                                                                                </Tooltip>
+                                                                            }
+                                                                        >
+                                                                            <img src={getResourceIconPath(variation.resource)} className="me-2" alt={variation.resource + " icon"} />
+                                                                        </OverlayTrigger>
+                                                                        Value: {variation.amount}
+                                                                    </Col>
+                                                                ))}
+                                                            </Row>
+                                                        </Col>
                                                     </Row>
                                                 </li>
                                             </ul>
