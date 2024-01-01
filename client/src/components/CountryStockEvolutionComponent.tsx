@@ -1,22 +1,18 @@
-import CountryActionsModal, {CountryModalProps} from "./countryActionsModal/CountryActionsModal";
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import React, {useEffect, useState} from "react";
 import {CountryFlagService} from "../services/CountryFlagService";
-import {ClockHistory} from "react-bootstrap-icons";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-import {Country, Simulation, Variation} from "../Entity";
+import {Country, Simulation} from "../Entity";
 import StockHistoryChart from "./stockHistoryChartComponent/stockHistoryChartComponent";
 
-interface CountryDetailProps {
+interface CountryStockEvolutionProps {
     onHide: () => void;
     propsCountry: Country | null;
     simulation: Simulation;
     show: boolean;
 }
 
-function CountryStockEvolutionComponent({ onHide, propsCountry, simulation, show }: CountryDetailProps) {
+function CountryStockEvolutionComponent({ onHide, propsCountry, simulation, show }: CountryStockEvolutionProps) {
     const [showHistoryModal, setShowHistoryModal] = useState(false);
     const [country, setCountry] = useState<Country | null>(propsCountry)
     const [countryPopulation, setCountryPopulation] = useState(country?.getCountryPopulation(simulation));
@@ -65,7 +61,7 @@ function CountryStockEvolutionComponent({ onHide, propsCountry, simulation, show
             </Row>
         </Modal.Body>
         <Modal.Footer className="bg-dark text-light">
-                <Button variant="outline-warning" className="col-auto" onClick={onHide} >Fermer</Button>
+                <Button variant="outline-warning" className="col-auto" onClick={onHide}>Retour</Button>
         </Modal.Footer>
     </Modal>
 );

@@ -1,13 +1,14 @@
 import {Simulation, Territory, Variation} from "../../Entity";
 import {ResourceIconService} from "../../services/ResourceIconService";
 import {CountryFlagService} from "../../services/CountryFlagService";
-import React, {useEffect} from "react";
-import {Button, Modal} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Button, Col, Modal, Row} from "react-bootstrap";
 import {ClockHistory} from "react-bootstrap-icons";
 import Image from "react-bootstrap/Image";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import CountryActionsModal from "../countryActionsModal/CountryActionsModal";
+import TerritoryStockEvolutionComponent from "../TerritoryStockEvolutionComponent";
 
 interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
@@ -17,8 +18,10 @@ interface TerritoryDetailComponentProps {
 }
 
 function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
-    const [modalShow, setModalShow] = React.useState(false);
-    const [territory, setTerritory] = React.useState(props.territory);
+    const [modalShow, setModalShow] = useState(false);
+    const [territory, setTerritory] = useState(props.territory);
+    const [showStockEvolutionModal, setShowStockEvolutionModal] = useState(false);
+
     useEffect(() => {
         let territory = props.simulation.territories.find(
             (simTerritory) => props.territory.x === simTerritory.x && props.territory.y === simTerritory.y
@@ -49,8 +52,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
     const getResourceIconPath = (resource: string): string => {
         return resourceIconService.getResourceIconPath(resource);
     };
-
-
 
     // si on trouve un pays à partir de l'id du territoire, alors on affiche le détail du territoire
     // sinon, on affiche un modal avec un message d'erreur
@@ -99,9 +100,9 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                 </li>
                                                 <li className="list-group-item">
                                                     <strong>Stocks:</strong>
-                                                    <ul className="mt-1">
+                                                    <Row className="justify-content-around">
                                                         {Array.from(territory.stock.entries()).map(([resource, quantity], index) => (
-                                                            <li key={index} style={{listStyle: "none"}} className="mb-2">
+                                                            <Col key={index} className="col-5 mb-2">
                                                                 <OverlayTrigger
                                                                     placement="left"
                                                                     overlay={
@@ -113,15 +114,23 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                                     <img src={getResourceIconPath(resource)} className="me-2" alt={resource + " icon"} />
                                                                 </OverlayTrigger>
                                                                 Value: {quantity}
-                                                            </li>
+                                                            </Col>
                                                         ))}
-                                                    </ul>
+                                                    </Row>
+                                                    <Row className="justify-content-center">
+                                                        <Col className="col-auto">
+                                                            <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => setShowStockEvolutionModal(true)}>
+                                                                <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des stocks
+                                                            </Button>
+                                                        </Col>
+
+                                                    </Row>
                                                 </li>
                                                 <li className="list-group-item">
                                                     <strong>Variations:</strong>
-                                                    <ul className="mt-1">
+                                                    <Row className="justify-content-around">
                                                         {territory.variations.map((variation: Variation, index) => (
-                                                            <li key={index} style={{listStyle: "none"}} className="mb-2">
+                                                            <Col key={index} className="col-5">
                                                                 <OverlayTrigger
                                                                     placement="left"
                                                                     overlay={
@@ -133,13 +142,12 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                                     <img src={getResourceIconPath(variation.resource)} className="me-2" alt={variation.resource + " icon"} />
                                                                 </OverlayTrigger>
                                                                 Value: {variation.amount}
-                                                            </li>
+                                                            </Col>
                                                         ))}
-                                                    </ul>
+                                                    </Row>
                                                 </li>
                                             </ul>
                                         </div>
-
                                     }
                                 </ul>
                             </div>
@@ -148,6 +156,12 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                 onHide ={() => setModalShow(false)}
                                 simulation={props.simulation}
                                 country={country}
+                            />
+                            <TerritoryStockEvolutionComponent
+                                simulation={props.simulation}
+                                onHide={() => setShowStockEvolutionModal(false)}
+                                show={showStockEvolutionModal}
+                                propsTerritory={territory}
                             />
                 </Modal.Body>
                 <Modal.Footer className="bg-dark text-light">
