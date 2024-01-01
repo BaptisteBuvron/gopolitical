@@ -15,7 +15,6 @@ interface TerritoryDetailComponentProps {
     showModal: boolean,
     territory: Territory,
     country: Country,
-    consumption: Map<string, number>;
     simulation: Simulation,
 }
 
@@ -155,7 +154,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                     <Row className="justify-content-center">
                                                         <Col className="col-10">
                                                             <Row className="justify-content-between">
-                                                                {props.consumption && Array.from(props.consumption.entries()).map(([resource, amount], index) => (
+                                                                {props.simulation.environment.consumptionByHabitant && Array.from(props.simulation.environment.consumptionByHabitant.entries()).map(([resource, amount], index) => (
                                                                     <Col key={index} className="col-5 mb-2">
                                                                         <OverlayTrigger
                                                                             placement="left"

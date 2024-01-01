@@ -104,7 +104,6 @@ function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
                         territory={selectedTerritory}
                         simulation={simulation}
                         country={selectedTerritory.country}
-                        consumption={simulation.environment.consumptionByHabitant}
                     />
                 )}
             </div>
