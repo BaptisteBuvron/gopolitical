@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Image, Table, Pagination } from "react-bootstrap";
+import {Row, Col, Image, Table, Pagination, ButtonGroup, Dropdown} from "react-bootstrap";
 import { Simulation } from "../../Entity";
 import { ResourceIconService } from "../../services/ResourceIconService";
 import './MarketComponent.css';
@@ -11,6 +11,9 @@ interface MarketComponentProps {
 
 const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [selectedResource, setSelectedResource] = useState<string | null>(null);
+    const [selectedBuyer, setSelectedBuyer] = useState<string | null>(null);
+    const [selectedSeller, setSelectedSeller] = useState<string | null>(null);
 
     if (!simulation || !simulation.environment || !simulation.environment.market) {
         return <div>Loading...</div>;
@@ -25,7 +28,17 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
 
     const itemsPerPage = 12;
 
-    const sortedMarketHistory = marketHistory
+
+
+
+    const filteredMarketHistory = marketHistory
+        .filter(interaction => (
+            (!selectedResource || interaction.resourceType === selectedResource) &&
+            (!selectedBuyer || interaction.buyer === selectedBuyer) &&
+            (!selectedSeller || interaction.seller === selectedSeller)
+        ));
+
+    const sortedMarketHistory = filteredMarketHistory
         .slice()
         .sort((a, b) => {
             const dateA = new Date(a.dateTransaction).getTime();
@@ -49,6 +62,9 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
     };
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+    const handleResourceSelect = (resource: string | null) => setSelectedResource(resource);
+    const handleBuyerSelect = (buyer: string | null) => setSelectedBuyer(buyer);
+    const handleSellerSelect = (seller: string | null) => setSelectedSeller(seller);
 
     const marketPricesElements = (
         <Table striped bordered hover>
@@ -160,6 +176,46 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
     return (
         <Row className="market-display">
             {marketPricesElements}
+            <Row className="justify-content-center">
+            <Col md={3} className="market-column market-filters">
+                <h2 className="text-center mb-3">Filters</h2>
+                <Dropdown as={ButtonGroup} className="mb-3">
+                    <Dropdown.Toggle id="resource-filter-dropdown" title={selectedResource || 'Resource'}>{selectedResource || 'Resource'}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => handleResourceSelect(null)}>All</Dropdown.Item>
+                        {Array.from(marketPrices.keys()).map((resource, index) => (
+                            <Dropdown.Item key={`resource-${index}`} onClick={() => handleResourceSelect(resource)}>
+                                {resource}
+                            </Dropdown.Item>
+                        ))}
+                    </Dropdown.Menu>
+                </Dropdown>
+                <Dropdown as={ButtonGroup} className="mb-3">
+                    <Dropdown.Toggle id="buyer-filter-dropdown" title={selectedBuyer || 'Buyer'}>{selectedBuyer || 'Buyer'}</Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => handleBuyerSelect(null)}>All</Dropdown.Item>
+                        {Array.from(new Set(marketHistory.map(interaction => interaction.buyer))).map((buyer, index) => (
+                            <Dropdown.Item key={`buyer-${index}`} onClick={() => handleBuyerSelect(buyer)}>
+                                {buyer}
+                            </Dropdown.Item>
+                        ))}
+                        {/* Add options for buyers based on your data */}
+                    </Dropdown.Menu>
+                </Dropdown>
+                <Dropdown as={ButtonGroup} className="mb-3">
+                    <Dropdown.Toggle id="seller-filter-dropdown" title={selectedSeller || 'Seller'}>{selectedSeller || 'Seller'}</Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => handleSellerSelect(null)}>All</Dropdown.Item>
+                        {Array.from(new Set(marketHistory.map(interaction => interaction.seller))).map((seller, index) => (
+                            <Dropdown.Item key={`seller-${index}`} onClick={() => handleSellerSelect(seller)}>
+                                {seller}
+                            </Dropdown.Item>
+                        ))}
+                    </Dropdown.Menu>
+                </Dropdown>
+            </Col>
+            </Row>
             {marketTransactions}
         </Row>
     );

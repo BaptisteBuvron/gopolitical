@@ -119,7 +119,6 @@ func (c *Country) Deliberate() []Request {
 
 	//Le pays regarde s'il lui manque des ressources, si oui, il les achète
 	for _, territory := range c.Territories {
-
 		for resource, consumption := range c.consumptionByHabitant {
 			totalConsumption := float64(territory.Habitants) * consumption
 			//Calculer si les territoires ont assez de ressources pour nourrir leurs habitants
@@ -134,7 +133,17 @@ func (c *Country) Deliberate() []Request {
 				}
 			}
 		}
-
+		getTotalArmement := c.GetTotalStock()["armement"]
+		armementRequired := float64(len(c.Territories) * 100)
+		if getTotalArmement < armementRequired {
+			buyRequest := MarketBuyRequest{from: c, territoire: territory, resources: "armement", amount: armementRequired - getTotalArmement}
+			log.Println("Ordre d'achat de ", armementRequired-getTotalArmement, " armement de ", c.Name, " pour le territoire ", territory.X, " ", territory.Y)
+			requests = append(requests, buyRequest)
+		} else if getTotalArmement > armementRequired {
+			sellRequest := MarketSellRequest{from: c, territoire: territory, resources: "armement", amount: getTotalArmement - armementRequired}
+			log.Println("Ordre de vente de ", getTotalArmement-armementRequired, " armement de ", c.Name, " pour le territoire ", territory.X, " ", territory.Y)
+			requests = append(requests, sellRequest)
+		}
 	}
 
 	//Le pays regarde si des territoires ont plus de ressources que ce qu'il leur faut, si oui, il les vend

@@ -49,8 +49,6 @@ class MarketBuyEvent implements EventType{
     }
 }
 
-
-
 // Implement the TransferResourceEvent class
 class TransferResourceEvent implements EventType{
     from: string;
@@ -118,6 +116,7 @@ class Country {
         this.flag = data.flag;
     }
 
+
     getCountryPopulation(simulation: Simulation): number {
         let territories = this.getTerritories(simulation);
         return territories.reduce((accumulator, currentTerritory) => {
@@ -172,6 +171,7 @@ class Country {
 
         return allTerritoriesStockHistory;
     }
+
 }
 
 class Territory {

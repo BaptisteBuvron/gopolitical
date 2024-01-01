@@ -13,7 +13,7 @@ def generate_data(num_countries, territories_per_country=10):
             {"name": "petrol", "price": 10},
             {"name": "water", "price": 1.5},
             {"name": "food", "price": 2},
-            {"name": "armement", "price": 10}
+            {"name": "armement", "price": 5}
         ],
         "consumptionsByHabitant": [
             {"name": "petrol", "value": 0.2},
