@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { Button, Modal, Table } from "react-bootstrap";
-import { Country, MarketBuyEvent, MarketSellEvent, TransferResourceEvent } from "../../Entity";
-import { CountryFlagService } from "../../services/CountryFlagService";
+import { Button, Modal, Table, Pagination } from "react-bootstrap";
+import { Country, TransferResourceEvent } from "../../Entity";
 import Image from "react-bootstrap/Image";
-import MarketBuyEventComponent from "./actions/MarketBuyEventComponent";
 import TransferResourceEventComponent from "./actions/TransferResourceEventComponent";
-import MarketSellEventComponent from "./actions/MarketSellEventComponent";
 
-const ACTIONS_PER_PAGE = 10;
+const ACTIONS_PER_PAGE = 15;
 
 export interface CountryModalProps {
     onHide: () => void;
@@ -17,12 +14,6 @@ export interface CountryModalProps {
 
 function CountryActionsModal({ onHide, country, show }: CountryModalProps) {
     const [currentPage, setCurrentPage] = useState(1);
-
-    // Fonction pour obtenir le flag du country
-    const countryFlagService = new CountryFlagService();
-    const getCountryFlagById = (countryId: string | undefined): string => {
-        return countryFlagService.getCountryFlagById(countryId);
-    };
 
     const sortedActions = country?.history ? [...country.history].reverse() : [];
 
@@ -42,7 +33,7 @@ function CountryActionsModal({ onHide, country, show }: CountryModalProps) {
                         <h4 className={"text-warning"}>Historique des actions</h4>
                     </div>
                     <div className="col-2">
-                        <Image src={getCountryFlagById(country?.agent.id)} alt={country?.agent.name + " flag"} fluid />
+                        <Image src={country?.flag} alt={country?.agent.name + " flag"} fluid />
                     </div>
                 </div>
             </Modal.Header>
@@ -54,12 +45,6 @@ function CountryActionsModal({ onHide, country, show }: CountryModalProps) {
                         <tr key={index}>
                             {action.eventType && (
                                 <>
-                                    {action.eventType.constructor === MarketSellEvent && (
-                                        <MarketSellEventComponent event={action.eventType as MarketSellEvent} />
-                                    )}
-                                    {action.eventType.constructor === MarketBuyEvent && (
-                                        <MarketBuyEventComponent event={action.eventType as MarketBuyEvent} />
-                                    )}
                                     {action.eventType.constructor === TransferResourceEvent && (
                                         <TransferResourceEventComponent event={action.eventType as TransferResourceEvent} />
                                     )}
@@ -70,24 +55,29 @@ function CountryActionsModal({ onHide, country, show }: CountryModalProps) {
                     </tbody>
                 </Table>
                 {totalPageCount > 1 && (
-                    <div className="d-flex justify-content-center mt-3">
-                        <Button
-                            variant="light"
-                            disabled={currentPage === 1}
-                            onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
-                        >
-                            Précédent
-                        </Button>
-                        <span className="mx-2">
-              Page {currentPage} sur {totalPageCount}
-            </span>
-                        <Button
-                            variant="light"
-                            disabled={currentPage === totalPageCount}
-                            onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
-                        >
-                            Suivant
-                        </Button>
+                    <div className="d-flex justify-content-center align-items-center">
+                        <Pagination>
+                            <Pagination.Prev
+                                disabled={currentPage === 1}
+                                onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
+                            />
+                            {Array.from({ length: Math.min(totalPageCount, 5) }, (_, index) => {
+                                const startPage = Math.max(1, currentPage - 2);
+                                return (
+                                    <Pagination.Item
+                                        key={startPage + index}
+                                        active={startPage + index === currentPage}
+                                        onClick={() => setCurrentPage(startPage + index)}
+                                    >
+                                        {startPage + index}
+                                    </Pagination.Item>
+                                );
+                            })}
+                            <Pagination.Next
+                                disabled={currentPage === totalPageCount}
+                                onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
+                            />
+                        </Pagination>
                     </div>
                 )}
             </Modal.Body>
