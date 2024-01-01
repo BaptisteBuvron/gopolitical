@@ -1,17 +1,17 @@
 import React from "react";
 import {Button, Modal} from "react-bootstrap";
-import {Country } from "../../Entity";
+import {Country} from "../../Entity";
 import {CountryFlagService} from "../../services/CountryFlagService";
 import Image from "react-bootstrap/Image";
 import "../../App.css";
 
-interface CountryActionsModalProps {
+export interface CountryModalProps {
     onHide: () => void;
     country: Country | null;
     show: boolean;
 }
 
-function CountryActionsModal({ onHide, country, show }: CountryActionsModalProps) {
+function CountryActionsModal({ onHide, country, show }: CountryModalProps) {
 
     // Fonction pour obtenir le flag du country
     const countryFlagService = new CountryFlagService();
@@ -23,14 +23,14 @@ function CountryActionsModal({ onHide, country, show }: CountryActionsModalProps
         <Modal
             show={show}
             size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
             centered
             scrollable={true}
+            animation={false}
         >
             <Modal.Header className="bg-dark text-light">
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex justify-content-between align-items-center col-12">
                     <div className="col-10">
-                        <h3 className="card-title mb-3">{country?.agent.name}</h3>
+                        <h3 className="card-title mb-1">{country?.agent.name}</h3>
                         <h4 className={"text-warning"}>Historique des actions</h4>
                     </div>
                     <div className="col-2">
@@ -73,7 +73,7 @@ function CountryActionsModal({ onHide, country, show }: CountryActionsModalProps
 
             </Modal.Body>
             <Modal.Footer className="bg-dark text-light">
-                <Button variant="warning" onClick={onHide} size="lg">Fermer</Button>
+                <Button variant="warning" onClick={onHide} >Retour</Button>
             </Modal.Footer>
         </Modal>
     );

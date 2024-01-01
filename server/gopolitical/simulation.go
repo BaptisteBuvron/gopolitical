@@ -75,7 +75,7 @@ func (s *Simulation) Start() {
 		s.Environment.Market.Percept = make(map[string][]Request)
 
 		//Send update to the websocket
-		s.WebSocket.SendUpdate()
+		go s.WebSocket.SendUpdate()
 		//Wait the other day
 		time.Sleep(time.Duration(s.SecondByDay) * time.Second)
 		//Unlock all agents
