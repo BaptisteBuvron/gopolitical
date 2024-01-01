@@ -22,11 +22,11 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
     useEffect(() => {
         if (selectedCountry && simulation) {
             let simCountry = simulation.countries.get(selectedCountry.agent.id);
-            if (simCountry != undefined) {
+            if (simCountry !== undefined) {
                 setSelectedCountry(simCountry);
             }
         }
-    }, [simulation])
+    }, [simulation, selectedCountry])
 
     function showCountryActions(country: Country) {
         setSelectedCountry(country);
