@@ -7,14 +7,15 @@ import Image from "react-bootstrap/Image";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import CountryActionsModal from "../countryActionsModal/CountryActionsModal";
+import './TerritoryDetailComponent.css';
 import TerritoryStockEvolutionComponent from "../TerritoryStockEvolutionComponent";
 
 interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
     showModal: boolean,
     territory: Territory,
+    country: Country,
     simulation: Simulation,
-    country: Country
 }
 
 function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
@@ -88,7 +89,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                 <Modal.Body className="bg-dark text-light">
                             <div className="card territory-card">
                                 <ul className="list-group list-group-flush">
-                                    {
                                         <div className="card territory-card">
                                             <ul className="list-group list-group-flush">
                                                 <li className="list-group-item">
@@ -131,7 +131,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                         <Col className="col-10">
                                                             <Row className="justify-content-between">
                                                                 {territory.variations.map((variation: Variation, index) => (
-                                                                    <Col key={index} className="col-5">
+                                                                    <Col key={index} className="col-5 mb-2">
                                                                         <OverlayTrigger
                                                                             placement="left"
                                                                             overlay={
@@ -149,9 +149,32 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                         </Col>
                                                     </Row>
                                                 </li>
-                                            </ul>
-                                        </div>
-                                    }
+                                                <li className="list-group-item">
+                                                    <strong>Consumption:</strong>
+                                                    <Row className="justify-content-center">
+                                                        <Col className="col-10">
+                                                            <Row className="justify-content-between">
+                                                                {props.simulation.environment.consumptionByHabitant && Array.from(props.simulation.environment.consumptionByHabitant.entries()).map(([resource, amount], index) => (
+                                                                    <Col key={index} className="col-5 mb-2">
+                                                                        <OverlayTrigger
+                                                                            placement="left"
+                                                                            overlay={
+                                                                                <Tooltip>
+                                                                                    {resource.charAt(0).toUpperCase() + resource.slice(1)}
+                                                                                </Tooltip>
+                                                                            }
+                                                                        >
+                                                                            <img src={getResourceIconPath(resource)} className="me-2" alt={resource + " icon"} />
+                                                                        </OverlayTrigger>
+                                                                        Value: {(amount * territory.habitants).toFixed(1)}
+                                                                    </Col>
+                                                                ))}
+                                                            </Row>
+                                                        </Col>
+                                                    </Row>
+                                                </li>
+                                        </ul>
+                                    </div>
                                 </ul>
                             </div>
                             <CountryActionsModal

@@ -19,3 +19,32 @@
   background-color: #D9D9D9 !important;
   color: #000000 !important;
 }
+
+.title {
+  font-weight: bold;
+}
+
+.sub-title {
+  font-weight: bold;
+}
+
+.variations {
+  margin-bottom: 15px;
+  padding-right: 25px;
+}
+
+.separator {
+  border-left: 1px solid #ccc;
+  padding-left: 15px;
+  margin-left: 15px;
+}
+
+.consumption {
+  margin-bottom: 15px;
+}
+
+.variation-item,
+.consumption-item {
+  list-style: none;
+  margin-bottom: 5px;
+}
