@@ -1,20 +1,22 @@
 import React, {useEffect, useState} from "react";
-import {Country, Simulation, Variation} from "../Entity";
+import {Country, Simulation} from "../Entity";
 import SimulationErrorComponent from "./SimulationErrorComponent";
 import {Button, Card, Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import CountryDetailComponent from "./CountryDetailComponent";
+import CountryStockEvolutionComponent from "./CountryStockEvolutionComponent";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import {ResourceIconService} from "../services/ResourceIconService";
 import {ClockHistory} from "react-bootstrap-icons";
+import CountryActionsModal from "./countryActionsModal/CountryActionsModal";
 
 interface CountriesComponentProps {
     simulation: Simulation | undefined;
 }
 
 function CountriesComponent({simulation}: CountriesComponentProps) {
-    const [modalDetailCountryShow, setModalDetailCountryShow] = React.useState(false);
+    const [showModalStockEvolutionCountry, setShowModalStockEvolutionCountry] = useState(false);
+    const [showCountryActionsModal, setShowCountryActionsModal] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
     useEffect(() => {
@@ -26,9 +28,24 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
         }
     }, [simulation])
 
-    function showDetailCountryModal(country: Country) {
+    function showCountryActions(country: Country) {
         setSelectedCountry(country);
-        setModalDetailCountryShow(true);
+        setShowCountryActionsModal(true);
+    }
+
+    function hideCountryActions() {
+        setSelectedCountry(null);
+        setShowCountryActionsModal(false);
+    }
+
+    function showStockEvolution(country: Country) {
+        setSelectedCountry(country);
+        setShowModalStockEvolutionCountry(true);
+    }
+
+    function hideStockEvolution() {
+        setShowModalStockEvolutionCountry(false);
+        setSelectedCountry(null);
     }
 
     if(simulation === undefined) {
@@ -63,7 +80,7 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                                                 <strong>Argent:</strong> {country?.money}
                                                 <ul className="mt-1">
                                                     <li style={{listStyle: "none"}}>
-                                                        <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => setModalDetailCountryShow(true)}>
+                                                        <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => showStockEvolution(country)}>
                                                             <ClockHistory className="mb-1 me-1"></ClockHistory>Historique de l'argent
                                                         </Button>
                                                     </li>
@@ -88,7 +105,7 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                                                         </li>
                                                     ))}
                                                     <li style={{listStyle: "none"}}>
-                                                        <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => setModalDetailCountryShow(true)}>
+                                                        <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => showStockEvolution(country)}>
                                                             <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des stocks
                                                         </Button>
                                                     </li>
@@ -96,16 +113,22 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                                             </li>
                                         </ul>
                                     </div>
-                                    <Button variant="warning" onClick={() => showDetailCountryModal(country)}>
+                                    <Button variant="warning" onClick={() => showCountryActions(country)}>
                                         <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des actions
                                     </Button>
                                 </Card.Body>
                             </Card>
-                            <CountryDetailComponent
-                                show={modalDetailCountryShow}
-                                onHide ={() => setModalDetailCountryShow(false)}
+                            <CountryStockEvolutionComponent
+                                show={showModalStockEvolutionCountry}
+                                onHide ={() => hideStockEvolution()}
                                 simulation={simulation}
                                 propsCountry={selectedCountry}
+                            />
+                            <CountryActionsModal
+                                show={showCountryActionsModal}
+                                onHide ={() => hideCountryActions()}
+                                simulation={simulation}
+                                country={selectedCountry}
                             />
                         </div>
                     ))}
