@@ -40,7 +40,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
             <InvalidDataResponseComponent
                 handleCloseModal={props.handleCloseModal}
                 showModal={props.showModal}
-                consumption={props.consumption}
             />
         );
     }
@@ -91,7 +90,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                 <Modal.Body className="bg-dark text-light">
                             <div className="card territory-card">
                                 <ul className="list-group list-group-flush">
-                                    {
                                         <div className="card territory-card">
                                             <ul className="list-group list-group-flush">
                                                 <li className="list-group-item">
@@ -134,7 +132,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                         <Col className="col-10">
                                                             <Row className="justify-content-between">
                                                                 {territory.variations.map((variation: Variation, index) => (
-                                                                    <Col key={index} className="col-5">
+                                                                    <Col key={index} className="col-5 mb-2">
                                                                         <OverlayTrigger
                                                                             placement="left"
                                                                             overlay={
@@ -152,33 +150,32 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                         </Col>
                                                     </Row>
                                                 </li>
-                                            ))}
+                                                <li className="list-group-item">
+                                                    <strong>Consumption:</strong>
+                                                    <Row className="justify-content-center">
+                                                        <Col className="col-10">
+                                                            <Row className="justify-content-between">
+                                                                {props.consumption && Array.from(props.consumption.entries()).map(([resource, amount], index) => (
+                                                                    <Col key={index} className="col-5 mb-2">
+                                                                        <OverlayTrigger
+                                                                            placement="left"
+                                                                            overlay={
+                                                                                <Tooltip>
+                                                                                    {resource.charAt(0).toUpperCase() + resource.slice(1)}
+                                                                                </Tooltip>
+                                                                            }
+                                                                        >
+                                                                            <img src={getResourceIconPath(resource)} className="me-2" alt={resource + " icon"} />
+                                                                        </OverlayTrigger>
+                                                                        Value: {(amount * territory.habitants).toFixed(1)}
+                                                                    </Col>
+                                                                ))}
+                                                            </Row>
+                                                        </Col>
+                                                    </Row>
+                                                </li>
                                         </ul>
                                     </div>
-
-                                    <div className="separator">
-                                        <div className="consumption">
-                                            <strong className="sub-title">Consumption:</strong>
-                                            <ul className="mt-1">
-                                                {props.consumption && Array.from(props.consumption.entries()).map(([resource, amount], index) => (
-                                                    <li key={index} className="consumption-item mb-2">
-                                                        <OverlayTrigger
-                                                            placement="left"
-                                                            overlay={
-                                                                <Tooltip>
-                                                                    {resource.charAt(0).toUpperCase() + resource.slice(1)}
-                                                                </Tooltip>
-                                                            }
-                                                        >
-                                                            <img src={getResourceIconPath(resource)} className="me-2" alt={resource + " icon"} />
-                                                        </OverlayTrigger>
-                                                        Value: {(amount * territory.habitants).toFixed(1)}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-
-                                    }
                                 </ul>
                             </div>
                             <CountryActionsModal
@@ -206,8 +203,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
         <InvalidDataResponseComponent
             handleCloseModal={props.handleCloseModal}
             showModal={props.showModal}
-
-            consumption={props.consumption}
         />
     );
 }
