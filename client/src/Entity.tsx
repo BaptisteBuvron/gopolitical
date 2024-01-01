@@ -116,14 +116,6 @@ class Country {
         this.flag = data.flag;
     }
 
-    getTotalHabitants(territories: Territory[]) {
-        let totalHabitants = 0;
-        for (const territory of territories) {
-            if (territory.country.agent.id === this.agent.id) {
-                totalHabitants += territory.habitants;
-            }
-        }
-    }
 }
 
 class Territory {
