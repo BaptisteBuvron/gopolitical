@@ -42,20 +42,36 @@ type SellResourceEvent struct {
 }
 
 type Country struct {
-	Agent        `json:"agent"`
-	Color        string          `json:"color"`
-	Territories  []*Territory    `json:"territories"`
-	Money        float64         `json:"money"`
-	History      []Event         `json:"history"`
-	MoneyHistory map[int]float64 `json:"moneyHistory"`
-	wg           *sync.WaitGroup `json:"-"`
-	In           Channel         `json:"-"`
-	Out          Channel         `json:"-"`
-	currentDay   int             `json:"-"`
+	Agent          `json:"agent"`
+	Color          string          `json:"color"`
+	Territories    []*Territory    `json:"territories"`
+	Money          float64         `json:"money"`
+	History        []Event         `json:"history"`
+	Enemy          string          `json:"enemy"`
+	MoneyHistory   map[int]float64 `json:"moneyHistory"`
+	PerceivedWorld *World          `json:"-"`
+	In             Channel         `json:"-"`
+	Out            Channel         `json:"-"`
+	CurrentDay     int             `json:"-"`
+	WgStart        *sync.WaitGroup `json:"-"`
+	WgMiddle       *sync.WaitGroup `json:"-"`
+	WgEnd          *sync.WaitGroup `json:"-"`
 }
 
-func NewCountry(id string, name string, color string, territories []*Territory, money float64, wg *sync.WaitGroup, in Channel, out Channel) *Country {
-	return &Country{Agent{id, name}, color, territories, money, make([]Event, 0), make(map[int]float64), wg, in, out, 0}
+func NewCountry(id string, name string, color string, territories []*Territory, money float64, in Channel, out Channel) *Country {
+	return &Country{
+		Agent:          Agent{id, name},
+		Color:          color,
+		Territories:    territories,
+		Money:          money,
+		History:        make([]Event, 0),
+		Enemy:          "",
+		MoneyHistory:   make(map[int]float64),
+		PerceivedWorld: nil,
+		In:             in,
+		Out:            out,
+		CurrentDay:     0,
+	}
 }
 
 func (c *Country) GetTotalStock() map[ResourceType]float64 {
@@ -79,15 +95,21 @@ func (c *Country) GetTotalHabitants() int {
 func (c *Country) Start() {
 	log.Printf("Country %s started\n", c.Name)
 	for {
-		c.wg.Add(1)
+		c.WgMiddle.Done()
+		log.Printf("Wait next day %s\n", c.Name)
+		c.WgStart.Wait()
+		log.Printf("Start %s\n", c.Name)
+
 		c.Percept()
 		requests := c.Deliberate()
 		c.Act(requests)
-		c.wg.Done()
 		//Wait for the end of the day
-		<-c.In
 		//TODO: get the day from the environment (Percept)
-		c.currentDay++
+		c.CurrentDay++
+
+		log.Printf("End %s\n", c.Name)
+		c.WgMiddle.Done()
+		c.WgEnd.Wait()
 	}
 }
 
@@ -99,22 +121,25 @@ func (c *Country) Percept() {
 	//Downcast to a PerceptResponse
 	if perceptResponse, ok := perceptResponse.(PerceptResponse); ok {
 		for _, event := range perceptResponse.events {
-			switch event := event.(type) {
+			switch event.(type) {
 			case MarketBuyResponse, MarketSellResponse:
 				c.History = append(c.History, event)
 				break
 			}
-
 		}
+		c.Enemy, _ = perceptResponse.RelationManager.WorstRelation(c.ID)
+		c.PerceivedWorld = perceptResponse.World
 		//TODO : Faire un traitement des events
+	} else {
+		panic("Invalid state, got unexpected response for percept request")
 	}
 
-	log.Printf("Country %s percepted\n", c.Name)
+	log.Printf("Country %s perceived\n", c.Name)
 }
 
 func (c *Country) Deliberate() []Request {
 	log.Printf("Country %s deliberate\n", c.Name)
-	log.Println("Stock total de ", c.Name, " : ", c.GetTotalStock())
+	log.Println("Stock total de", c.Name, ":", c.GetTotalStock())
 	time.Sleep(1 * time.Second)
 	requests := []Request{}
 
@@ -139,16 +164,15 @@ func (c *Country) Deliberate() []Request {
 		//TODO Rendre générique pour toutes les ressources
 		if territory.Stock["food"] < foodConsomption {
 			buyRequest := MarketBuyRequest{from: c, territoire: territory, resources: "food", amount: foodConsomption}
-			log.Println("Ordre d'achat de ", foodConsomption, " food de ", c.Name, " pour le territoire ", territory.X, " ", territory.Y)
+			log.Println("Ordre d'achat de", foodConsomption, "food de", c.Name, " our le territoire", territory.X, " ", territory.Y)
 			requests = append(requests, buyRequest)
 		}
 
 		if territory.Stock["water"] < waterConsumption {
 			buyRequest := MarketBuyRequest{from: c, territoire: territory, resources: "water", amount: waterConsumption}
-			log.Println("Ordre d'achat de ", waterConsumption, " water de ", c.Name, " pour le territoire ", territory.X, " ", territory.Y)
+			log.Println("Ordre d'achat de", waterConsumption, "water de", c.Name, "pour le territoire", territory.X, " ", territory.Y)
 			requests = append(requests, buyRequest)
 		}
-
 	}
 
 	//Le pays regarde si des territoires ont plus de ressources que ce qu'il leur faut, si oui, il les vend
@@ -157,7 +181,7 @@ func (c *Country) Deliberate() []Request {
 		//Faire un ordre de vente pour chaque ressource en surplus
 		for resource, quantity := range surplus {
 			sellRequest := MarketSellRequest{from: c, territoire: territory, resources: resource, amount: quantity}
-			log.Println("Ordre de vente de", quantity, " ", resource, " de ", c.Name, " pour le territoire ", territory.X, " ", territory.Y)
+			log.Println("Ordre de vente de", quantity, resource, "de", c.Name, "pour le territoire", territory.X, " ", territory.Y)
 			requests = append(requests, sellRequest)
 		}
 	}
@@ -170,10 +194,37 @@ func (c *Country) Deliberate() []Request {
 		resourceConsumption := consumption[resource]
 		missing := quantity - resourceConsumption*facteur
 		if missing < 0 {
-			log.Printf("Missing: %f\n", quantity)
+			// TODO less naive attack, il ne peut pas acceder à son enemy
+			mostInterestingTerritoryValue := 0.0
+			var mostInterestingTerritoryTerritory *Territory
+			for _, territory := range c.PerceivedWorld.FindNeighborTerritoriesOfCountryWith(c, c.Enemy) {
+				totalVariation := 0.0
+				for _, variation := range territory.Variations {
+					totalVariation += variation.Amount
+				}
+				if mostInterestingTerritoryValue < totalVariation {
+					mostInterestingTerritoryTerritory = territory
+				}
+			}
+			if mostInterestingTerritoryTerritory != nil {
+				attackReq := AttackRequest{to: mostInterestingTerritoryTerritory, armement: 1}
+				requests = append(requests, attackReq)
+				log.Printf("Demande d'attaquer %s\n", c.Enemy)
+			} else {
+				log.Printf("Souhaite attaqué mais n'a pas trouvé de cible %s\n", c.Enemy)
+			}
+			break
 		}
 	}
+
 	return requests
+}
+
+func (c *Country) MostInterestingEnemyTerritory(requests []Request) {
+	log.Printf("Country %s act\n", c.Name)
+	for _, request := range requests {
+		c.Out <- request
+	}
 }
 
 func (c *Country) Act(requests []Request) {
@@ -207,14 +258,13 @@ func (c *Country) tryTransferResources(to *Territory, resource ResourceType, nee
 				}
 			}
 		}
-
 	}
 	return need
 }
 
 func (c *Country) transferResources(from *Territory, to *Territory, resource ResourceType, quantity float64) {
-	log.Println("Transfert de ", quantity, " ", resource, " de ", from.Country.Name, " vers ", to.Country.Name)
-	event := TransferResourceEvent{CountryEvent{"transferResource", c.currentDay}, from, to, resource, quantity}
+	log.Println("Transfert de", quantity, resource, "de", from.Country.Name, "vers", to.Country.Name)
+	event := TransferResourceEvent{CountryEvent{"transferResource", c.CurrentDay}, from, to, resource, quantity}
 	c.History = append(c.History, event)
 	from.Stock[resource] -= quantity
 	to.Stock[resource] += quantity
