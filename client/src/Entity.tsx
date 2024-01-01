@@ -49,8 +49,6 @@ class MarketBuyEvent implements EventType{
     }
 }
 
-
-
 // Implement the TransferResourceEvent class
 class TransferResourceEvent implements EventType{
     from: string;
@@ -116,6 +114,15 @@ class Country {
         this.history = data.history.map((eventData: any) => new CountryEvent(eventData, this));
         this.moneyHistory = new Map<string, number>(Object.entries(data.moneyHistory));
         this.flag = data.flag;
+    }
+
+    getTotalHabitants(territories: Territory[]) {
+        let totalHabitants = 0;
+        for (const territory of territories) {
+            if (territory.country.agent.id === this.agent.id) {
+                totalHabitants += territory.habitants;
+            }
+        }
     }
 }
 
