@@ -134,6 +134,9 @@ func (e *Environment) KillHungryHabitants() {
 		}
 		//On tue la moitié des habitants qui ont faim
 		killedHabitants := int(math.Ceil(float64(maxHabitantsHungry) / 2))
+		if territory.Habitants-killedHabitants <= 0 {
+			killedHabitants = territory.Habitants - 1
+		}
 		territory.Habitants -= killedHabitants
 		totalKilledHabitants[territory.Country.Name] += killedHabitants
 	}

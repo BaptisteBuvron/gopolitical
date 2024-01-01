@@ -176,11 +176,12 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
     return (
         <Row className="market-display">
             {marketPricesElements}
-            <Row>
+            <Row className="justify-content-center">
             <Col md={3} className="market-column market-filters">
                 <h2 className="text-center mb-3">Filters</h2>
                 <Dropdown as={ButtonGroup} className="mb-3">
-                    <Dropdown.Toggle id="resource-filter-dropdown">Resource</Dropdown.Toggle>
+                    <Dropdown.Toggle id="resource-filter-dropdown" title={selectedResource || 'Resource'}>{selectedResource || 'Resource'}
+                    </Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item onClick={() => handleResourceSelect(null)}>All</Dropdown.Item>
                         {Array.from(marketPrices.keys()).map((resource, index) => (
@@ -191,17 +192,26 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
                     </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown as={ButtonGroup} className="mb-3">
-                    <Dropdown.Toggle id="buyer-filter-dropdown">Buyer</Dropdown.Toggle>
+                    <Dropdown.Toggle id="buyer-filter-dropdown" title={selectedBuyer || 'Buyer'}>{selectedBuyer || 'Buyer'}</Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item onClick={() => handleBuyerSelect(null)}>All</Dropdown.Item>
+                        {Array.from(new Set(marketHistory.map(interaction => interaction.buyer))).map((buyer, index) => (
+                            <Dropdown.Item key={`buyer-${index}`} onClick={() => handleBuyerSelect(buyer)}>
+                                {buyer}
+                            </Dropdown.Item>
+                        ))}
                         {/* Add options for buyers based on your data */}
                     </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown as={ButtonGroup} className="mb-3">
-                    <Dropdown.Toggle id="seller-filter-dropdown">Seller</Dropdown.Toggle>
+                    <Dropdown.Toggle id="seller-filter-dropdown" title={selectedSeller || 'Seller'}>{selectedSeller || 'Seller'}</Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item onClick={() => handleSellerSelect(null)}>All</Dropdown.Item>
-                        {/* Add options for sellers based on your data */}
+                        {Array.from(new Set(marketHistory.map(interaction => interaction.seller))).map((seller, index) => (
+                            <Dropdown.Item key={`seller-${index}`} onClick={() => handleSellerSelect(seller)}>
+                                {seller}
+                            </Dropdown.Item>
+                        ))}
                     </Dropdown.Menu>
                 </Dropdown>
             </Col>
