@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import SimulationErrorComponent from "../SimulationErrorComponent";
 
 interface TerritoriesComponentProps {
-    simulation: Simulation | undefined;
+    simulation: Simulation | undefined
 }
 
 function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
@@ -39,6 +39,8 @@ function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
             <SimulationErrorComponent />
         )
     }
+
+
     const handleTerritoryClick = (territory: Territory, index: number) => {
         //Si on reclique sur le même territoire = fermeture modal
         //Sinon, ouverture du modal
@@ -101,6 +103,7 @@ function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
                         handleCloseModal={handleCloseModal}
                         territory={selectedTerritory}
                         simulation={simulation}
+                        country={selectedTerritory.country}
                     />
                 )}
             </div>

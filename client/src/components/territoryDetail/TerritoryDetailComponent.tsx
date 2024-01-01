@@ -15,6 +15,7 @@ interface TerritoryDetailComponentProps {
     showModal: boolean,
     territory: Territory,
     simulation: Simulation,
+    country: Country
 }
 
 function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
@@ -38,15 +39,12 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
             <InvalidDataResponseComponent
                 handleCloseModal={props.handleCloseModal}
                 showModal={props.showModal}
+                territory={props.territory}
+                country={props.country}
             />
         );
     }
 
-    // Fonction pour obtenir le flag du country
-    const countryFlagService = new CountryFlagService();
-    const getCountryFlagById = (countryId: string | undefined): string => {
-        return countryFlagService.getCountryFlagById(countryId);
-    };
 
     // Fonction pour obtenir l'icône de ressource par nom de ressource
     const resourceIconService = new ResourceIconService();
@@ -86,7 +84,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                             </Button>
                         </div>
                         <div className="col-2">
-                            <Image src={getCountryFlagById(country?.agent.id)} alt={country?.agent.name + " flag"} fluid />
+                            <Image src={country.flag} alt={country?.agent.name + " flag"} fluid />
                         </div>
                     </div>
                 </Modal.Header>
@@ -185,6 +183,8 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
         <InvalidDataResponseComponent
             handleCloseModal={props.handleCloseModal}
             showModal={props.showModal}
+            territory={props.territory}
+            country={props.country}
         />
     );
 }

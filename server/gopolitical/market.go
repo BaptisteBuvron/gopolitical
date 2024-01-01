@@ -82,7 +82,7 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 		executed = math.Floor(buy.from.Money / m.Prices[buy.resources])
 		//get the integer part down
 		if executed <= 0 {
-			log.Println("Transaction annulée : ", buy.from.Name, " n'a pas assez d'argent pour acheter ", executed, " ", buy.resources, " à ", sell.from.Name)
+			//log.Println("Transaction annulée : ", buy.from.Name, " n'a pas assez d'argent pour acheter ", executed, " ", buy.resources, " à ", sell.from.Name)
 			return
 		}
 	}

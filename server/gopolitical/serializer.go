@@ -16,6 +16,7 @@ type PartialCountry struct {
 	ID    string  `json:"id"`
 	Color string  `json:"color"`
 	Money float64 `json:"money"`
+	Flag  string  `json:"flag"`
 }
 
 type PartialRelation struct {
@@ -71,7 +72,7 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 		out := make(Channel)
 		//create slice of territories
 		territories := make([]*Territory, 0)
-		countries[country.ID] = NewCountry(country.ID, country.Name, country.Color, territories, country.Money, wg, in, out, consumptionsByHabitant)
+		countries[country.ID] = NewCountry(country.ID, country.Name, country.Color, country.Flag, territories, country.Money, wg, in, out, consumptionsByHabitant)
 	}
 
 	territories := make([]*Territory, len(s.Territories))

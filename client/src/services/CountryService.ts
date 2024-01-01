@@ -18,4 +18,21 @@ export class CountryService {
 
         return foundId;
     }
+
+    getCountryById(countryId: string | undefined): Country | undefined {
+        return this.countries.get(countryId || "");
+    }
+
+    getCountryByName(name: string) {
+        let foundCountry: Country | undefined;
+
+        this.countries.forEach((country) => {
+            if (country.agent.name === name) {
+                foundCountry = country;
+            }
+        });
+
+        return foundCountry;
+
+    }
 }
