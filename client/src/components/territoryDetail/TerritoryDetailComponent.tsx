@@ -28,7 +28,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
             (simTerritory) => props.territory.x === simTerritory.x && props.territory.y === simTerritory.y
         )
         if(territory) {
-            console.log("actualisation du territoire : " + territory.x + territory.y)
             setTerritory(territory);
             setCountry(territory.country);
         }

@@ -19,7 +19,7 @@ function TerritoryStockEvolutionComponent({ onHide, propsTerritory, simulation, 
     const [territory, setTerritory] = useState<Territory>(propsTerritory)
 
     useEffect(() => {
-        let simTerritory = simulation.territories.find(simTerritory => territory.name === territory.name);
+        let simTerritory = simulation.territories.find(simTerritory => territory.name === simTerritory.name);
         if (simTerritory != undefined) {
             setTerritory(simTerritory);
         }
