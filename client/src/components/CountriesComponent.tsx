@@ -3,12 +3,13 @@ import {Country, Simulation} from "../Entity";
 import SimulationErrorComponent from "./SimulationErrorComponent";
 import {Button, Card, Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import CountryStockEvolutionComponent from "./CountryStockEvolutionComponent";
+import CountryStockEvolutionComponent from "./evolutionComponent/CountryStockEvolutionComponent";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import {ResourceIconService} from "../services/ResourceIconService";
 import {ClockHistory} from "react-bootstrap-icons";
 import CountryActionsModal from "./countryActionsModal/CountryActionsModal";
+import CountryMoneyEvolutionComponent from "./evolutionComponent/CountryMoneyEvolutionComponent";
 
 interface CountriesComponentProps {
     simulation: Simulation | undefined;
@@ -16,6 +17,7 @@ interface CountriesComponentProps {
 
 function CountriesComponent({simulation}: CountriesComponentProps) {
     const [showModalStockEvolutionCountry, setShowModalStockEvolutionCountry] = useState(false);
+    const [showModalMoneyEvolutionCountry, setShowModalMoneyEvolutionCountry] = useState(false);
     const [showCountryActionsModal, setShowCountryActionsModal] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
@@ -45,6 +47,16 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
 
     function hideStockEvolution() {
         setShowModalStockEvolutionCountry(false);
+        setSelectedCountry(null);
+    }
+
+    function showMoneyEvolution(country: Country) {
+        setSelectedCountry(country);
+        setShowModalMoneyEvolutionCountry(true);
+    }
+
+    function hideMoneyEvolution() {
+        setShowModalMoneyEvolutionCountry(false);
         setSelectedCountry(null);
     }
 
@@ -80,7 +92,7 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                                                 <strong>Argent:</strong> {country?.money}
                                                 <ul className="mt-1">
                                                     <li style={{listStyle: "none"}}>
-                                                        <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => showStockEvolution(country)}>
+                                                        <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => showMoneyEvolution(country)}>
                                                             <ClockHistory className="mb-1 me-1"></ClockHistory>Historique de l'argent
                                                         </Button>
                                                     </li>
@@ -121,6 +133,12 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                             <CountryStockEvolutionComponent
                                 show={showModalStockEvolutionCountry}
                                 onHide ={() => hideStockEvolution()}
+                                simulation={simulation}
+                                propsCountry={selectedCountry}
+                            />
+                            <CountryMoneyEvolutionComponent
+                                show={showModalMoneyEvolutionCountry}
+                                onHide ={() => hideMoneyEvolution()}
                                 simulation={simulation}
                                 propsCountry={selectedCountry}
                             />

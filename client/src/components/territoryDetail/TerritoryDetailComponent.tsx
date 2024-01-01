@@ -8,7 +8,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import CountryActionsModal from "../countryActionsModal/CountryActionsModal";
 import './TerritoryDetailComponent.css';
-import TerritoryStockEvolutionComponent from "../TerritoryStockEvolutionComponent";
+import TerritoryStockEvolutionComponent from "../evolutionComponent/TerritoryStockEvolutionComponent";
 
 interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
