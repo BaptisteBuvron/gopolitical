@@ -1,4 +1,4 @@
-import {Simulation, Territory, Variation} from "../../Entity";
+import {Country, Simulation, Territory, Variation} from "../../Entity";
 import {ResourceIconService} from "../../services/ResourceIconService";
 import {CountryFlagService} from "../../services/CountryFlagService";
 import React, {useEffect, useState} from "react";
@@ -18,18 +18,21 @@ interface TerritoryDetailComponentProps {
 }
 
 function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
-    const [modalShow, setModalShow] = useState(false);
+    const [showModalCountryActions, setShowModalCountryActions] = useState(false);
     const [territory, setTerritory] = useState(props.territory);
     const [showStockEvolutionModal, setShowStockEvolutionModal] = useState(false);
+    const [country, setCountry] = useState<Country | undefined>(territory.country)
 
     useEffect(() => {
         let territory = props.simulation.territories.find(
             (simTerritory) => props.territory.x === simTerritory.x && props.territory.y === simTerritory.y
         )
         if(territory) {
+            console.log("actualisation du territoire : " + territory.x + territory.y)
             setTerritory(territory);
+            setCountry(territory.country);
         }
-    }, [props.simulation]);
+    }, [props.simulation, props.territory]);
 
     if(!territory) {
         return (
@@ -39,7 +42,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
             />
         );
     }
-    const country = territory.country;
 
     // Fonction pour obtenir le flag du country
     const countryFlagService = new CountryFlagService();
@@ -80,7 +82,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                     <span>{" (" + territory.x + "," + territory.y + ")"}</span>
                                 </OverlayTrigger>
                             </h4>
-                            <Button variant="warning" className="mt-2" onClick={() => setModalShow(true)}>
+                            <Button variant="warning" className="mt-2" onClick={() => setShowModalCountryActions(true)}>
                                 <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des actions du pays
                             </Button>
                         </div>
@@ -152,8 +154,8 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                 </ul>
                             </div>
                             <CountryActionsModal
-                                show={modalShow}
-                                onHide ={() => setModalShow(false)}
+                                show={showModalCountryActions}
+                                onHide ={() => setShowModalCountryActions(false)}
                                 simulation={props.simulation}
                                 country={country}
                             />

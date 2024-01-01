@@ -23,7 +23,7 @@ function TerritoryStockEvolutionComponent({ onHide, propsTerritory, simulation, 
         if (simTerritory != undefined) {
             setTerritory(simTerritory);
         }
-    }, [simulation])
+    }, [simulation, territory])
 
     // Fonction pour obtenir le flag du country
     const countryFlagService = new CountryFlagService();
