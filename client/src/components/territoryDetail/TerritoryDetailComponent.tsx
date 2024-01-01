@@ -1,13 +1,14 @@
-import {Country, Territory, Variation} from "../../Entity";
+import {Country, Simulation, Territory, Variation} from "../../Entity";
 import {ResourceIconService} from "../../services/ResourceIconService";
-import React from "react";
-import {Button, Modal} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Button, Col, Modal, Row} from "react-bootstrap";
 import {ClockHistory} from "react-bootstrap-icons";
 import Image from "react-bootstrap/Image";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import CountryActionsModal from "../countryActionsModal/CountryActionsModal";
 import './TerritoryDetailComponent.css';
+import TerritoryStockEvolutionComponent from "../TerritoryStockEvolutionComponent";
 
 interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
@@ -15,23 +16,34 @@ interface TerritoryDetailComponentProps {
     territory: Territory,
     country: Country,
     consumption: Map<string, number>;
+    simulation: Simulation,
 }
 
 function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
-    const [modalShow, setModalShow] = React.useState(false);
-    let territory = props.territory;
+    const [showModalCountryActions, setShowModalCountryActions] = useState(false);
+    const [territory, setTerritory] = useState(props.territory);
+    const [showStockEvolutionModal, setShowStockEvolutionModal] = useState(false);
+    const [country, setCountry] = useState<Country | undefined>(territory.country)
+
+    useEffect(() => {
+        let territory = props.simulation.territories.find(
+            (simTerritory) => props.territory.x === simTerritory.x && props.territory.y === simTerritory.y
+        )
+        if(territory) {
+            setTerritory(territory);
+            setCountry(territory.country);
+        }
+    }, [props.simulation, props.territory]);
+
     if(!territory) {
         return (
             <InvalidDataResponseComponent
                 handleCloseModal={props.handleCloseModal}
                 showModal={props.showModal}
-                territory={props.territory}
-                country={props.country}
                 consumption={props.consumption}
             />
         );
     }
-    const country = territory.country;
 
 
     // Fonction pour obtenir l'icône de ressource par nom de ressource
@@ -39,8 +51,6 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
     const getResourceIconPath = (resource: string): string => {
         return resourceIconService.getResourceIconPath(resource);
     };
-
-
 
     // si on trouve un pays à partir de l'id du territoire, alors on affiche le détail du territoire
     // sinon, on affiche un modal avec un message d'erreur
@@ -50,15 +60,27 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                 show={props.showModal}
                 onHide={props.handleCloseModal}
                 animation={false}
-                backdrop={true}
                 centered
+                scrollable={true}
             >
                 <Modal.Header className="bg-dark text-light">
                     <div className="d-flex justify-content-between align-items-center">
                         <div className="col-10">
-                            <h4 className="card-title">{country?.agent.name + " [" + territory.x + "-" + territory.y+"]"} </h4>
-                            <Button variant="warning" className="mt-2" onClick={() => setModalShow(true)}>
-                                <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des actions
+                            <h4 className="card-title">
+                                {country?.agent.name} | Territoire
+                                <OverlayTrigger
+                                    placement="right"
+                                    overlay={
+                                        <Tooltip>
+                                            Position du territoire
+                                        </Tooltip>
+                                    }
+                                >
+                                    <span>{" (" + territory.x + "," + territory.y + ")"}</span>
+                                </OverlayTrigger>
+                            </h4>
+                            <Button variant="warning" className="mt-2" onClick={() => setShowModalCountryActions(true)}>
+                                <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des actions du pays
                             </Button>
                         </div>
                         <div className="col-2">
@@ -67,38 +89,68 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                     </div>
                 </Modal.Header>
                 <Modal.Body className="bg-dark text-light">
-                    <div className="card territory-card">
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item">
-                                <strong className="title">Position:</strong> {`(${territory.x}, ${territory.y})`}
-                            </li>
-                            <li className="list-group-item">
-                                <strong className="title">Country:</strong> {territory.country?.agent.name} ({territory.country?.agent.id})
-                            </li>
-                            <li className="list-group-item">
-                                <strong className="title">Habitants:</strong> {territory.habitants}
-                            </li>
-                            <li className="list-group-item">
-                                <strong className="title">Argent:</strong> {territory.country?.money}
-                            </li>
-                            <li className="list-group-item">
-                                <div className="d-flex">
-                                    <div className="variations">
-                                        <strong className="sub-title">Variations:</strong>
-                                        <ul className="mt-1 me-2">
-                                            {territory.variations.map((variation: Variation, index) => (
-                                                <li key={index} className="variation-item mb-2">
-                                                    <OverlayTrigger
-                                                        placement="left"
-                                                        overlay={
-                                                            <Tooltip>
-                                                                {variation.resource.charAt(0).toUpperCase() + variation.resource.slice(1)}
-                                                            </Tooltip>
-                                                        }
-                                                    >
-                                                        <img src={getResourceIconPath(variation.resource)} className="me-2" alt={variation.resource + " icon"} />
-                                                    </OverlayTrigger>
-                                                    Value: {variation.amount.toFixed(1)}
+                            <div className="card territory-card">
+                                <ul className="list-group list-group-flush">
+                                    {
+                                        <div className="card territory-card">
+                                            <ul className="list-group list-group-flush">
+                                                <li className="list-group-item">
+                                                    <strong>Habitants:</strong> {territory.habitants}
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <strong>Stocks:</strong>
+                                                    <Row className="justify-content-center">
+                                                        <Col className="col-10">
+                                                            <Row className="justify-content-between">
+                                                        {Array.from(territory.stock.entries()).map(([resource, quantity], index) => (
+                                                            <Col key={index} className="col-5 mb-2">
+                                                                <OverlayTrigger
+                                                                    placement="left"
+                                                                    overlay={
+                                                                        <Tooltip>
+                                                                            {resource.charAt(0).toUpperCase() + resource.slice(1)}
+                                                                        </Tooltip>
+                                                                    }
+                                                                >
+                                                                    <img src={getResourceIconPath(resource)} className="me-2" alt={resource + " icon"} />
+                                                                </OverlayTrigger>
+                                                                Value: {quantity}
+                                                            </Col>
+                                                        ))}
+                                                    </Row>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row className="justify-content-center">
+                                                        <Col className="col-auto">
+                                                            <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => setShowStockEvolutionModal(true)}>
+                                                                <ClockHistory className="mb-1 me-1"></ClockHistory>Historique des stocks
+                                                            </Button>
+                                                        </Col>
+                                                    </Row>
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <strong>Variations:</strong>
+                                                    <Row className="justify-content-center">
+                                                        <Col className="col-10">
+                                                            <Row className="justify-content-between">
+                                                                {territory.variations.map((variation: Variation, index) => (
+                                                                    <Col key={index} className="col-5">
+                                                                        <OverlayTrigger
+                                                                            placement="left"
+                                                                            overlay={
+                                                                                <Tooltip>
+                                                                                    {variation.resource.charAt(0).toUpperCase() + variation.resource.slice(1)}
+                                                                                </Tooltip>
+                                                                            }
+                                                                        >
+                                                                            <img src={getResourceIconPath(variation.resource)} className="me-2" alt={variation.resource + " icon"} />
+                                                                        </OverlayTrigger>
+                                                                        Value: {variation.amount}
+                                                                    </Col>
+                                                                ))}
+                                                            </Row>
+                                                        </Col>
+                                                    </Row>
                                                 </li>
                                             ))}
                                         </ul>
@@ -125,20 +177,24 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                 ))}
                                             </ul>
                                         </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
 
-                    <CountryActionsModal
-                                show={modalShow}
-                                onHide ={() => setModalShow(false)}
+                                    }
+                                </ul>
+                            </div>
+                            <CountryActionsModal
+                                show={showModalCountryActions}
+                                onHide ={() => setShowModalCountryActions(false)}
                                 country={country}
+                            />
+                            <TerritoryStockEvolutionComponent
+                                simulation={props.simulation}
+                                onHide={() => setShowStockEvolutionModal(false)}
+                                show={showStockEvolutionModal}
+                                propsTerritory={territory}
                             />
                 </Modal.Body>
                 <Modal.Footer className="bg-dark text-light">
-                    <Button variant="secondary" onClick={props.handleCloseModal}>
+                    <Button variant="outline-warning" onClick={props.handleCloseModal}>
                         Fermer
                     </Button>
                 </Modal.Footer>
@@ -150,14 +206,18 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
         <InvalidDataResponseComponent
             handleCloseModal={props.handleCloseModal}
             showModal={props.showModal}
-            territory={props.territory}
-            country={props.country}
+
             consumption={props.consumption}
         />
     );
 }
 
-function InvalidDataResponseComponent(props: TerritoryDetailComponentProps) {
+interface InvalidDataResponseComponentProps {
+    handleCloseModal(): void,
+    showModal: boolean,
+}
+
+function InvalidDataResponseComponent(props: InvalidDataResponseComponentProps) {
     return (
         <Modal
             show={props.showModal}

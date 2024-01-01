@@ -63,6 +63,8 @@ func (s *Simulation) Start() {
 
 		//Mettre à jour les stocks des territoires à partir des consommations des habitants
 		s.Environment.UpdateStocksFromConsumption()
+		s.Environment.KillHungryHabitants()
+		s.Environment.BirthHabitants()
 
 		log.Println("End of the day : ", s.CurrentDay)
 		fmt.Print("\n\n\n")
@@ -75,7 +77,7 @@ func (s *Simulation) Start() {
 		s.Environment.Market.Percept = make(map[string][]Request)
 
 		//Send update to the websocket
-		s.WebSocket.SendUpdate()
+		go s.WebSocket.SendUpdate()
 		//Wait the other day
 		time.Sleep(time.Duration(s.SecondByDay) * time.Second)
 		//Unlock all agents

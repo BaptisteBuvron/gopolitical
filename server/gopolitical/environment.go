@@ -2,6 +2,7 @@ package gopolitical
 
 import (
 	"log"
+	"math"
 	"sync"
 )
 
@@ -111,5 +112,48 @@ func (e *Environment) UpdateMoneyHistory(currentDay int) {
 func (e *Environment) UpdateHabitantsHistory(day int) {
 	for _, territory := range e.Territories {
 		territory.HabitantsHistory[day] = territory.Habitants
+	}
+}
+
+func (e *Environment) KillHungryHabitants() {
+	totalKilledHabitants := make(map[string]int)
+	for _, territory := range e.Territories {
+		habitantsHungryByResource := make(map[ResourceType]int)
+		for resource, consumption := range e.ConsumptionByHabitant {
+			if territory.Stock[resource] < 0 {
+				habitantsHungry := math.Ceil(math.Abs(territory.Stock[resource]) / consumption)
+				habitantsHungryByResource[resource] = int(habitantsHungry)
+			}
+		}
+		//get max habitants hungry
+		maxHabitantsHungry := 0
+		for _, habitantsHungry := range habitantsHungryByResource {
+			if habitantsHungry > maxHabitantsHungry {
+				maxHabitantsHungry = habitantsHungry
+			}
+		}
+		//On tue la moitié des habitants qui ont faim
+		killedHabitants := int(math.Ceil(float64(maxHabitantsHungry) / 2))
+		if territory.Habitants-killedHabitants <= 0 {
+			killedHabitants = territory.Habitants - 1
+		}
+		territory.Habitants -= killedHabitants
+		totalKilledHabitants[territory.Country.Name] += killedHabitants
+	}
+	for countryName, killedHabitants := range totalKilledHabitants {
+		log.Println("Famine : ", killedHabitants, " habitants sont mort de faim ", countryName)
+	}
+
+}
+
+func (e *Environment) BirthHabitants() {
+	totalBirthHabitants := make(map[string]int)
+	for _, territory := range e.Territories {
+		birth := int(math.Ceil(float64(territory.Habitants) * 0.02))
+		territory.Habitants += birth
+		totalBirthHabitants[territory.Country.Name] += birth
+	}
+	for countryName, birthHabitants := range totalBirthHabitants {
+		log.Println("Naissance : ", birthHabitants, " habitants de ", countryName)
 	}
 }
