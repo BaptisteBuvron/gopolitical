@@ -103,6 +103,7 @@ function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
                         handleCloseModal={handleCloseModal}
                         territory={selectedTerritory}
                         country={selectedTerritory.country}
+                        consumption={simulation.environment.consumptionByHabitant}
                     />
                 )}
             </div>

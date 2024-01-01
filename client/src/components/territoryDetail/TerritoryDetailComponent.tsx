@@ -7,12 +7,14 @@ import Image from "react-bootstrap/Image";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import CountryActionsModal from "../countryActionsModal/CountryActionsModal";
+import './TerritoryDetailComponent.css';
 
 interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
     showModal: boolean,
     territory: Territory,
-    country: Country
+    country: Country,
+    consumption: Map<string, number>;
 }
 
 function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
@@ -25,6 +27,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                 showModal={props.showModal}
                 territory={props.territory}
                 country={props.country}
+                consumption={props.consumption}
             />
         );
     }
@@ -64,50 +67,71 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                     </div>
                 </Modal.Header>
                 <Modal.Body className="bg-dark text-light">
-                            <div className="card territory-card">
-                                <ul className="list-group list-group-flush">
-                                    {
-                                        <div className="card territory-card">
-                                            <ul className="list-group list-group-flush">
-                                                <li className="list-group-item">
-                                                    <strong>Position:</strong> {`(${territory.x}, ${territory.y})`}
+                    <div className="card territory-card">
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">
+                                <strong className="title">Position:</strong> {`(${territory.x}, ${territory.y})`}
+                            </li>
+                            <li className="list-group-item">
+                                <strong className="title">Country:</strong> {territory.country?.agent.name} ({territory.country?.agent.id})
+                            </li>
+                            <li className="list-group-item">
+                                <strong className="title">Habitants:</strong> {territory.habitants}
+                            </li>
+                            <li className="list-group-item">
+                                <strong className="title">Argent:</strong> {territory.country?.money}
+                            </li>
+                            <li className="list-group-item">
+                                <div className="d-flex">
+                                    <div className="variations">
+                                        <strong className="sub-title">Variations:</strong>
+                                        <ul className="mt-1 me-2">
+                                            {territory.variations.map((variation: Variation, index) => (
+                                                <li key={index} className="variation-item mb-2">
+                                                    <OverlayTrigger
+                                                        placement="left"
+                                                        overlay={
+                                                            <Tooltip>
+                                                                {variation.resource.charAt(0).toUpperCase() + variation.resource.slice(1)}
+                                                            </Tooltip>
+                                                        }
+                                                    >
+                                                        <img src={getResourceIconPath(variation.resource)} className="me-2" alt={variation.resource + " icon"} />
+                                                    </OverlayTrigger>
+                                                    Value: {variation.amount.toFixed(1)}
                                                 </li>
-                                                <li className="list-group-item">
-                                                    <strong>Country:</strong> {territory.country?.agent.name} ({territory.country?.agent.id})
-                                                </li>
-                                                <li className="list-group-item">
-                                                    <strong>Habitants:</strong> {territory.habitants}
-                                                </li>
-                                                <li className="list-group-item">
-                                                    <strong>Argent:</strong> {territory.country?.money}
-                                                </li>
-                                                <li className="list-group-item">
-                                                    <strong>Variations:</strong>
-                                                    <ul className="mt-1">
-                                                        {territory.variations.map((variation: Variation, index) => (
-                                                            <li key={index} style={{listStyle: "none"}} className="mb-2">
-                                                                <OverlayTrigger
-                                                                    placement="left"
-                                                                    overlay={
-                                                                        <Tooltip>
-                                                                             {variation.resource.charAt(0).toUpperCase() + variation.resource.slice(1)}
-                                                                        </Tooltip>
-                                                                    }
-                                                                >
-                                                                    <img src={getResourceIconPath(variation.resource)} className="me-2" alt={variation.resource + " icon"} />
-                                                                </OverlayTrigger>
-                                                                Value: {variation.amount}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    <div className="separator">
+                                        <div className="consumption">
+                                            <strong className="sub-title">Consumption:</strong>
+                                            <ul className="mt-1">
+                                                {props.consumption && Array.from(props.consumption.entries()).map(([resource, amount], index) => (
+                                                    <li key={index} className="consumption-item mb-2">
+                                                        <OverlayTrigger
+                                                            placement="left"
+                                                            overlay={
+                                                                <Tooltip>
+                                                                    {resource.charAt(0).toUpperCase() + resource.slice(1)}
+                                                                </Tooltip>
+                                                            }
+                                                        >
+                                                            <img src={getResourceIconPath(resource)} className="me-2" alt={resource + " icon"} />
+                                                        </OverlayTrigger>
+                                                        Value: {amount * territory.habitants}
+                                                    </li>
+                                                ))}
                                             </ul>
                                         </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-                                    }
-                                </ul>
-                            </div>
-                            <CountryActionsModal
+                    <CountryActionsModal
                                 show={modalShow}
                                 onHide ={() => setModalShow(false)}
                                 country={country}
@@ -128,6 +152,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
             showModal={props.showModal}
             territory={props.territory}
             country={props.country}
+            consumption={props.consumption}
         />
     );
 }

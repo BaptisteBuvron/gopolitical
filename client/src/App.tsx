@@ -27,7 +27,7 @@ function App() {
             //console.log(data);
 
             let simulation = new Simulation(data);
-            //console.log(simulation)
+            console.log(simulation)
             setSimulation(simulation);
         }
 
