@@ -13,13 +13,14 @@ import (
 type WebSocket struct {
 	Simulation *Simulation
 	Clients    map[*websocket.Conn]struct{}
-	mu         sync.Mutex
+	mu         *sync.Mutex
 }
 
 func NewWebSocket(simulation *Simulation) *WebSocket {
 	return &WebSocket{
 		Simulation: simulation,
 		Clients:    make(map[*websocket.Conn]struct{}),
+		mu:         &sync.Mutex{},
 	}
 }
 
