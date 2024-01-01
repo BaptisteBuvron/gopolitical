@@ -262,4 +262,4 @@ class Simulation {
     }
 }
 
-export { Simulation, Territory, Country, Resource, Variation, Agent, MarketInteraction, Market, Environment };
+export { Simulation, Territory, Country, Resource, Variation, Agent, MarketInteraction, Market, Environment, TransferResourceEvent, MarketBuyEvent, MarketSellEvent };
