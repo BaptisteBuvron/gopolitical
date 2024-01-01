@@ -116,6 +116,62 @@ class Country {
         this.flag = data.flag;
     }
 
+
+    getCountryPopulation(simulation: Simulation): number {
+        let territories = this.getTerritories(simulation);
+        return territories.reduce((accumulator, currentTerritory) => {
+            return accumulator + currentTerritory.habitants
+        },0);
+    }
+
+    getTotalStocks(simulation: Simulation): Map<string, number> {
+        let territories = this.getTerritories(simulation);
+        const result: Map<string, number> = new Map();
+
+        // Iterate over each territory
+        territories.forEach((territory) => {
+            //console.log(territory.stock);
+            // Iterate over each entry in the territory's stock map
+            territory.stock.forEach((value, key) => {
+                // Add the value to the result map or update if the key already exists
+                result.set(key, (result.get(key) || 0) + value);
+            });
+        });
+
+        return result;
+    }
+
+    getTerritories(simulation: Simulation): Territory[] {
+        return simulation.territories.filter(
+            (territory) => territory.country?.agent.id === this.agent.id
+        )
+    }
+
+    // Méthode pour récupérer le stockHistory de tous les territoires
+    getAllTerritoriesStockHistory(simulation: Simulation): Map<number, Map<string, number>> {
+        const allTerritoriesStockHistory = new Map<number, Map<string, number>>();
+
+        // Parcourir tous les territoires du pays
+        this.getTerritories(simulation).forEach((territory) => {
+            // Ajouter le stockHistory du territoire à la carte globale
+            territory.stockHistory.forEach((history, timestamp) => {
+                if (!allTerritoriesStockHistory.has(timestamp)) {
+                    allTerritoriesStockHistory.set(timestamp, new Map<string, number>());
+                }
+
+                const existingHistory = allTerritoriesStockHistory.get(timestamp);
+                if (existingHistory) {
+                    // Mettre à jour le stockHistory global en ajoutant les valeurs du territoire
+                    history.forEach((value, key) => {
+                        existingHistory.set(key, (existingHistory.get(key) || 0) + value);
+                    });
+                }
+            });
+        });
+
+        return allTerritoriesStockHistory;
+    }
+
 }
 
 class Territory {
