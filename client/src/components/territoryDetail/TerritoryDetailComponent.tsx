@@ -1,6 +1,5 @@
-import {Territory, Variation} from "../../Entity";
+import {Country, Territory, Variation} from "../../Entity";
 import {ResourceIconService} from "../../services/ResourceIconService";
-import {CountryFlagService} from "../../services/CountryFlagService";
 import React from "react";
 import {Button, Modal} from "react-bootstrap";
 import {ClockHistory} from "react-bootstrap-icons";
@@ -13,6 +12,7 @@ interface TerritoryDetailComponentProps {
     handleCloseModal(): void,
     showModal: boolean,
     territory: Territory,
+    country: Country
 }
 
 function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
@@ -24,16 +24,12 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                 handleCloseModal={props.handleCloseModal}
                 showModal={props.showModal}
                 territory={props.territory}
+                country={props.country}
             />
         );
     }
     const country = territory.country;
 
-    // Fonction pour obtenir le flag du country
-    const countryFlagService = new CountryFlagService();
-    const getCountryFlagById = (countryId: string | undefined): string => {
-        return countryFlagService.getCountryFlagById(countryId);
-    };
 
     // Fonction pour obtenir l'icône de ressource par nom de ressource
     const resourceIconService = new ResourceIconService();
@@ -63,7 +59,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                             </Button>
                         </div>
                         <div className="col-2">
-                            <Image src={getCountryFlagById(country?.agent.id)} alt={country?.agent.name + " flag"} fluid />
+                            <Image src={country.flag} alt={country?.agent.name + " flag"} fluid />
                         </div>
                     </div>
                 </Modal.Header>
@@ -131,6 +127,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
             handleCloseModal={props.handleCloseModal}
             showModal={props.showModal}
             territory={props.territory}
+            country={props.country}
         />
     );
 }

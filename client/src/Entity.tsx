@@ -107,6 +107,7 @@ class Country {
     money: number;
     history: CountryEvent[];
     moneyHistory: Map<string, number>;
+    flag: string;
 
     constructor(data: any) {
         this.agent = new Agent(data.agent);
@@ -114,6 +115,7 @@ class Country {
         this.money = data.money;
         this.history = data.history.map((eventData: any) => new CountryEvent(eventData, this));
         this.moneyHistory = new Map<string, number>(Object.entries(data.moneyHistory));
+        this.flag = data.flag;
     }
 }
 
@@ -126,7 +128,7 @@ class Territory {
     stockHistory: Map<number, Map<string, number>>;
     habitants: number;
     habitantsHistory: Map<string, number>;
-    country: Country | undefined;
+    country: Country;
 
     constructor(data: any) {
         this.x = data.x;

@@ -45,6 +45,7 @@ type SellResourceEvent struct {
 type Country struct {
 	Agent                 `json:"agent"`
 	Color                 string                   `json:"color"`
+	Flag                  string                   `json:"flag"`
 	Territories           []*Territory             `json:"-"`
 	Money                 float64                  `json:"money"`
 	History               []Event                  `json:"history"`
@@ -56,8 +57,8 @@ type Country struct {
 	consumptionByHabitant map[ResourceType]float64 `json:"-"`
 }
 
-func NewCountry(id string, name string, color string, territories []*Territory, money float64, wg *sync.WaitGroup, in Channel, out Channel, consumptionByHabitant map[ResourceType]float64) *Country {
-	return &Country{Agent{id, name}, color, territories, money, make([]Event, 0), make(map[int]float64), wg, in, out, 0, consumptionByHabitant}
+func NewCountry(id string, name string, color string, flag string, territories []*Territory, money float64, wg *sync.WaitGroup, in Channel, out Channel, consumptionByHabitant map[ResourceType]float64) *Country {
+	return &Country{Agent{id, name}, color, flag, territories, money, make([]Event, 0), make(map[int]float64), wg, in, out, 0, consumptionByHabitant}
 }
 
 func (c *Country) GetTotalStock() map[ResourceType]float64 {
