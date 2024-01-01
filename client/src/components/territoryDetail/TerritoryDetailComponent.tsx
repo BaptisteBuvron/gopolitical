@@ -120,7 +120,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                         >
                                                             <img src={getResourceIconPath(resource)} className="me-2" alt={resource + " icon"} />
                                                         </OverlayTrigger>
-                                                        Value: {amount * territory.habitants}
+                                                        Value: {(amount * territory.habitants).toFixed(1)}
                                                     </li>
                                                 ))}
                                             </ul>
