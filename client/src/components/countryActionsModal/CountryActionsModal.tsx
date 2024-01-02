@@ -15,7 +15,11 @@ export interface CountryModalProps {
 function CountryActionsModal({ onHide, country, show }: CountryModalProps) {
     const [currentPage, setCurrentPage] = useState(1);
 
-    const sortedActions = country?.history ? [...country.history].reverse() : [];
+    const sortedActions = country?.history
+        ? [...country.history]
+            .reverse()
+            .filter((action) => action.eventType && action.eventType.constructor === TransferResourceEvent)
+        : [];
 
     const totalPageCount = Math.ceil(sortedActions.length / ACTIONS_PER_PAGE);
 
