@@ -42,7 +42,6 @@ function CountryActionsModal({ onHide, country, show }: CountryModalProps) {
                 </div>
             </Modal.Header>
             <Modal.Body className="bg-dark text-light">
-                <h4>Historique des actions</h4>
                 <Table striped bordered hover variant="dark">
                     <tbody>
                     {paginatedActions.map((action, index) => (
