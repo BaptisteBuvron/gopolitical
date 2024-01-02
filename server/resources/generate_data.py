@@ -16,7 +16,7 @@ def generate_data(num_countries, territories_per_country=10):
             {"name": "armement", "price": 5}
         ],
         "consumptionsByHabitant": [
-            {"name": "petrol", "value": 0.2},
+            {"name": "petrol", "value": 0.3},
             {"name": "water", "value": 0.5},
             {"name": "food", "value": 0.5}
         ],
@@ -81,11 +81,11 @@ def generate_data(num_countries, territories_per_country=10):
 
                 territory_habitants = random.randint(5, 50)
                 territory_stocks = [
-                    {"name": resource["name"], "value": random.randint(5, 50)}
+                    {"name": resource["name"], "value": random.randint(150, 300)}
                     for resource in data["resources"]
                 ]
                 territory_variations = [
-                    {"name": resource["name"], "value": random.randint(5, 15)}
+                    {"name": resource["name"], "value": random.randint(5, 10) if resource["name"] == "armement" else random.randint(5, 15)}
                     for resource in data["resources"]
                 ]
 

@@ -110,7 +110,7 @@ class Country {
     constructor(data: any) {
         this.agent = new Agent(data.agent);
         this.color = data.color;
-        this.money = data.money;
+        this.money = Math.ceil(data.money)
         this.history = data.history.map((eventData: any) => new CountryEvent(eventData, this));
         this.moneyHistory = new Map<string, number>(Object.entries(data.moneyHistory));
         this.flag = data.flag;
@@ -170,6 +170,20 @@ class Country {
         });
 
         return allTerritoriesStockHistory;
+    }
+
+    getAllTerritoriesHabitantsHistory(simulation: Simulation): Map<string, number> {
+        const allTerritoriesHabitantsHistory = new Map<string, number>();
+
+        // Parcourir tous les territoires du pays
+        this.getTerritories(simulation).forEach((territory) => {
+            // Ajouter le stockHistory du territoire à la carte globale
+            territory.habitantsHistory.forEach((value, key) => {
+                allTerritoriesHabitantsHistory.set(key, (allTerritoriesHabitantsHistory.get(key) || 0) + value);
+            });
+        });
+
+        return allTerritoriesHabitantsHistory;
     }
 
 }
@@ -262,4 +276,4 @@ class Simulation {
     }
 }
 
-export { Simulation, Territory, Country, Resource, Variation, Agent, MarketInteraction, Market, Environment };
+export { Simulation, Territory, Country, Resource, Variation, Agent, MarketInteraction, Market, Environment, TransferResourceEvent, MarketBuyEvent, MarketSellEvent };
