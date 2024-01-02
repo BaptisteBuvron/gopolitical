@@ -10,13 +10,13 @@ def generate_data(num_countries, territories_per_country=10):
     data = {
         "secondByDay": 2.0,
         "resources": [
-            {"name": "petrol", "price": 10},
+            {"name": "petrol", "price": 5},
             {"name": "water", "price": 1.5},
             {"name": "food", "price": 2},
             {"name": "armement", "price": 5}
         ],
         "consumptionsByHabitant": [
-            {"name": "petrol", "value": 0.3},
+            {"name": "petrol", "value": 0.5},
             {"name": "water", "value": 0.5},
             {"name": "food", "value": 0.5}
         ],
@@ -43,7 +43,7 @@ def generate_data(num_countries, territories_per_country=10):
             selected_country_names.add(country_name)
 
             country_color = generate_flashy_color()[1:]
-            country_money = random.uniform(200, 400)
+            country_money = random.uniform(500, 1000)
             data["countries"].append({
                 "name": country_name,
                 "id": country_id,
@@ -81,11 +81,11 @@ def generate_data(num_countries, territories_per_country=10):
 
                 territory_habitants = random.randint(5, 50)
                 territory_stocks = [
-                    {"name": resource["name"], "value": random.randint(150, 300)}
+                    {"name": resource["name"], "value": random.randint(territory_habitants*2, territory_habitants*4)}
                     for resource in data["resources"]
                 ]
                 territory_variations = [
-                    {"name": resource["name"], "value": random.randint(5, 10) if resource["name"] == "armement" else random.randint(5, 15)}
+                    {"name": resource["name"], "value": random.randint(5, 10) if resource["name"] == "armement" else random.randint(15, 25)}
                     for resource in data["resources"]
                 ]
 
