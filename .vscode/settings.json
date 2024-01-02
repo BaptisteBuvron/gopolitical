@@ -14,5 +14,13 @@
       "pipx",
       "Soudarsane"
     ],
-    "go.testFlags": ["-v"]
+    "go.testFlags": ["-v"],
+    "cSpell.ignorePaths": [
+      "package-lock.json",
+      "client/node_modules",
+      "vscode-extension",
+      ".git/objects",
+      ".vscode",
+      ".vscode-insiders"
+    ]
 }

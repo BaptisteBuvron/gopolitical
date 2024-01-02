@@ -39,29 +39,6 @@ func (rm *RelationManager) GetRelation(country string, other string) float64 {
 	return 0.0
 }
 
-// O(Countries)
-func (rm *RelationManager) WorstRelation(country string) (string, float64) {
-	var worstCountry string
-	var worstRelation float64
-	if relations, ok := rm.relations[country]; ok {
-		for other, relation := range relations {
-			if relation < worstRelation {
-				worstRelation = relation
-				worstCountry = other
-			}
-		}
-	}
-	if relations, ok := rm.relationsInverse[country]; ok {
-		for other, relation := range relations {
-			if relation < worstRelation {
-				worstRelation = relation
-				worstCountry = other
-			}
-		}
-	}
-	return worstCountry, worstRelation
-}
-
 // O(1)
 func (rm *RelationManager) UpdateRelation(country string, other string, value float64) {
 	if country < other {

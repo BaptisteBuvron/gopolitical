@@ -7,3 +7,7 @@ type Resource struct {
 	Name     ResourceType `json:"name"`
 	Quantity int          `json:"quantity"`
 }
+
+const (
+	ARMAMENT ResourceType = "armement"
+)

@@ -107,7 +107,7 @@ func NewWorld(territories []*Territory, width int, height int) *World {
 				panic("Void detected")
 			}
 			if w.GetTerritoryAt(x, y) != nil && w.GetMaritimeAreaAt(x, y) != nil {
-				panic("quantum superposition detected")
+				panic("Quantum superposition detected")
 			}
 		}
 	}

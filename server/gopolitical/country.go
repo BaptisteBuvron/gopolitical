@@ -1,8 +1,10 @@
 package gopolitical
 
 import (
+	"fmt"
 	"log"
 	"math"
+	"math/rand"
 	"sync"
 	"time"
 )
@@ -42,36 +44,42 @@ type SellResourceEvent struct {
 }
 
 type Country struct {
-	Agent          `json:"agent"`
-	Color          string          `json:"color"`
-	Territories    []*Territory    `json:"territories"`
-	Money          float64         `json:"money"`
-	History        []Event         `json:"history"`
-	Enemy          string          `json:"enemy"`
-	MoneyHistory   map[int]float64 `json:"moneyHistory"`
-	PerceivedWorld *World          `json:"-"`
-	In             Channel         `json:"-"`
-	Out            Channel         `json:"-"`
-	CurrentDay     int             `json:"-"`
-	WgStart        *sync.WaitGroup `json:"-"`
-	WgMiddle       *sync.WaitGroup `json:"-"`
-	WgEnd          *sync.WaitGroup `json:"-"`
+	Agent           `json:"agent"`
+	Color           string           `json:"color"`
+	Territories     []*Territory     `json:"territories"`
+	Money           float64          `json:"money"`
+	History         []Event          `json:"history"`
+	MoneyHistory    map[int]float64  `json:"moneyHistory"`
+	RelationManager *RelationManager `json:"-"`
+	PerceivedWorld  *World           `json:"-"`
+	PerceivedPrices Prices           `json:"-"`
+	In              Channel          `json:"-"`
+	Out             Channel          `json:"-"`
+	CurrentDay      int              `json:"-"`
+	WgStart         *sync.WaitGroup  `json:"-"`
+	WgMiddle        *sync.WaitGroup  `json:"-"`
+	WgEnd           *sync.WaitGroup  `json:"-"`
+	RandomGenerator *rand.Rand       `json:"-"`
 }
 
 func NewCountry(id string, name string, color string, territories []*Territory, money float64, in Channel, out Channel) *Country {
-	return &Country{
-		Agent:          Agent{id, name},
-		Color:          color,
-		Territories:    territories,
-		Money:          money,
-		History:        make([]Event, 0),
-		Enemy:          "",
-		MoneyHistory:   make(map[int]float64),
-		PerceivedWorld: nil,
-		In:             in,
-		Out:            out,
-		CurrentDay:     0,
+	country := &Country{
+		Agent:           Agent{id, name},
+		Color:           color,
+		Territories:     territories,
+		Money:           money,
+		History:         make([]Event, 0),
+		RelationManager: nil,
+		MoneyHistory:    make(map[int]float64),
+		PerceivedWorld:  nil,
+		PerceivedPrices: nil,
+		In:              in,
+		Out:             out,
+		CurrentDay:      0,
 	}
+	randomSource := rand.NewSource(time.Now().UnixNano())
+	country.RandomGenerator = rand.New(randomSource)
+	return country
 }
 
 func (c *Country) GetTotalStock() map[ResourceType]float64 {
@@ -82,6 +90,14 @@ func (c *Country) GetTotalStock() map[ResourceType]float64 {
 		}
 	}
 	return stockCountry
+}
+
+func (c *Country) GetTotalStockOf(ressource ResourceType) float64 {
+	stock := 0.0
+	for _, territory := range c.Territories {
+		stock += territory.Stock[ressource]
+	}
+	return stock
 }
 
 func (c *Country) GetTotalHabitants() int {
@@ -95,8 +111,6 @@ func (c *Country) GetTotalHabitants() int {
 func (c *Country) Start() {
 	log.Printf("Country %s started\n", c.Name)
 	for {
-		c.WgMiddle.Done()
-		log.Printf("Wait next day %s\n", c.Name)
 		c.WgStart.Wait()
 		log.Printf("Start %s\n", c.Name)
 
@@ -110,6 +124,8 @@ func (c *Country) Start() {
 		log.Printf("End %s\n", c.Name)
 		c.WgMiddle.Done()
 		c.WgEnd.Wait()
+		c.WgMiddle.Done()
+		log.Printf("Wait next day %s\n", c.Name)
 	}
 }
 
@@ -127,8 +143,9 @@ func (c *Country) Percept() {
 				break
 			}
 		}
-		c.Enemy, _ = perceptResponse.RelationManager.WorstRelation(c.ID)
+		c.RelationManager = perceptResponse.RelationManager
 		c.PerceivedWorld = perceptResponse.World
+		c.PerceivedPrices = perceptResponse.Prices
 		//TODO : Faire un traitement des events
 	} else {
 		panic("Invalid state, got unexpected response for percept request")
@@ -194,24 +211,11 @@ func (c *Country) Deliberate() []Request {
 		resourceConsumption := consumption[resource]
 		missing := quantity - resourceConsumption*facteur
 		if missing < 0 {
-			// TODO less naive attack, il ne peut pas acceder à son enemy
-			mostInterestingTerritoryValue := 0.0
-			var mostInterestingTerritoryTerritory *Territory
-			for _, territory := range c.PerceivedWorld.FindNeighborTerritoriesOfCountryWith(c, c.Enemy) {
-				totalVariation := 0.0
-				for _, variation := range territory.Variations {
-					totalVariation += variation.Amount
-				}
-				if mostInterestingTerritoryValue < totalVariation {
-					mostInterestingTerritoryTerritory = territory
-				}
-			}
-			if mostInterestingTerritoryTerritory != nil {
-				attackReq := AttackRequest{to: mostInterestingTerritoryTerritory, armement: 1}
+			territory := c.MostInterestingTerritoryToAttack()
+			if territory != nil {
+				attackReq := AttackRequest{from: c, to: territory, armement: c.RandomGenerator.Float64() * stock[ARMAMENT]}
 				requests = append(requests, attackReq)
-				log.Printf("Demande d'attaquer %s\n", c.Enemy)
-			} else {
-				log.Printf("Souhaite attaqué mais n'a pas trouvé de cible %s\n", c.Enemy)
+				log.Printf("%v pense à attaquer %v %v %v\n", c.ID, territory.X, territory.Y, territory.Country.ID)
 			}
 			break
 		}
@@ -220,11 +224,21 @@ func (c *Country) Deliberate() []Request {
 	return requests
 }
 
-func (c *Country) MostInterestingEnemyTerritory(requests []Request) {
-	log.Printf("Country %s act\n", c.Name)
-	for _, request := range requests {
-		c.Out <- request
+func (c *Country) MostInterestingTerritoryToAttack() *Territory {
+	// Trouve un territoire voisin avec le moins de défense et le plus de ressources
+	var bestAttackTerritory *Territory
+	bestAttackScore := 0.0
+	for _, territory := range c.PerceivedWorld.FindNeighborTerritoriesOfCountry(c) {
+		relation := c.RelationManager.GetRelation(c.ID, territory.Country.ID)
+		value := territory.MarketValue(c.PerceivedPrices)
+		stock := territory.Country.GetTotalStock()
+		attackScore := (1 / relation) * value * (1 / stock[ARMAMENT])
+		if attackScore > bestAttackScore {
+			bestAttackTerritory = territory
+			bestAttackScore = attackScore
+		}
 	}
+	return bestAttackTerritory
 }
 
 func (c *Country) Act(requests []Request) {
@@ -242,6 +256,41 @@ func (c *Country) GetConsumption() map[ResourceType]float64 {
 	consumption["water"] = float64(totalHabitants) * WATER_BY_HABITANT
 
 	return consumption
+}
+
+// O(3 * Territories)
+func (c *Country) Consume(resource ResourceType, quantity float64) error {
+	if len(c.Territories) == 0 {
+		// On ignore la demande
+		return fmt.Errorf("Aucuns territoire valide")
+	}
+	// On cherche le stock minimum (qui peut être négatif)
+	minStock := c.Territories[0].Stock[resource]
+	for _, territory := range c.Territories[1:] {
+		stock := territory.Stock[resource]
+		if minStock > stock {
+			minStock = stock
+		}
+	}
+	// On calcule la somme des différences avec le plus petit
+	totalStockDifference := 0.0
+	for _, territory := range c.Territories {
+		stock := territory.Stock[resource]
+		totalStockDifference += stock - minStock
+	}
+
+	// On consomme les ressources en fonction du ratio stock / totalStockDifference
+	for _, territory := range c.Territories {
+		stock := territory.Stock[resource]
+		var percent float64
+		if totalStockDifference == 0.0 {
+			percent = 1.0 / float64(len(c.Territories))
+		} else {
+			percent = (stock - minStock) / totalStockDifference
+		}
+		territory.Stock[resource] -= quantity * percent
+	}
+	return nil
 }
 
 func (c *Country) tryTransferResources(to *Territory, resource ResourceType, need float64) float64 {
