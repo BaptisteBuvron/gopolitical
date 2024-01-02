@@ -200,7 +200,6 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
                                 {buyer}
                             </Dropdown.Item>
                         ))}
-                        {/* Add options for buyers based on your data */}
                     </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown as={ButtonGroup} className="mb-3">
