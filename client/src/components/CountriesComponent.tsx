@@ -3,13 +3,13 @@ import {Country, Simulation} from "../Entity";
 import SimulationErrorComponent from "./SimulationErrorComponent";
 import {Button, Card, Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import CountryStockEvolutionComponent from "./evolutionComponent/CountryStockEvolutionComponent";
+import CountryStockEvolutionComponent from "./CountryStockEvolutionComponent";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import {ResourceIconService} from "../services/ResourceIconService";
 import {ClockHistory} from "react-bootstrap-icons";
 import CountryActionsModal from "./countryActionsModal/CountryActionsModal";
-import CountryMoneyEvolutionComponent from "./evolutionComponent/CountryMoneyEvolutionComponent";
+import CountryMoneyEvolutionComponent from "./CountryMoneyEvolutionComponent";
 
 interface CountriesComponentProps {
     simulation: Simulation | undefined;

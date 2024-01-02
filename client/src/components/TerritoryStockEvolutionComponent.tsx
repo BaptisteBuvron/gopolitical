@@ -1,8 +1,8 @@
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import React, {useEffect, useState} from "react";
-import {Simulation, Territory} from "../../Entity";
-import StockHistoryChart from "../HistoryChartComponent/stockHistoryChartComponent";
+import {Simulation, Territory} from "../Entity";
+import StockHistoryChart from "./stockHistoryChartComponent/stockHistoryChartComponent";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 

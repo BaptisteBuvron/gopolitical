@@ -1,8 +1,8 @@
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import React, {useEffect, useState} from "react";
-import {Country, Simulation} from "../../Entity";
-import MoneyHistoryChart from "../HistoryChartComponent/moneyHistoryChartComponent";
+import {Country, Simulation} from "../Entity";
+import MoneyHistoryChart from "./stockHistoryChartComponent/moneyHistoryChartComponent";
 
 interface CountryStockEvolutionProps {
     onHide: () => void;
