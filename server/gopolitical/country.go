@@ -132,8 +132,13 @@ func (c *Country) Deliberate() []Request {
 		getTotalArmement := c.GetTotalStock()["armement"]
 		armementRequired := float64(len(c.Territories) * 100)
 		if getTotalArmement < armementRequired {
-			buyRequest := MarketBuyRequest{from: c, territoire: territory, resources: "armement", amount: armementRequired - getTotalArmement}
-			log.Println("Ordre d'achat de ", armementRequired-getTotalArmement, " armement de ", c.Name, " pour le territoire ", territory.X, " ", territory.Y)
+			if armementRequired-getTotalArmement < 10 {
+				armementRequired = 10
+			} else {
+				armementRequired = armementRequired - getTotalArmement
+			}
+			buyRequest := MarketBuyRequest{from: c, territoire: territory, resources: "armement", amount: armementRequired}
+			log.Println("Ordre d'achat de ", armementRequired, " armement de ", c.Name, " pour le territoire ", territory.X, " ", territory.Y)
 			requests = append(requests, buyRequest)
 		} else if getTotalArmement > armementRequired {
 			sellRequest := MarketSellRequest{from: c, territoire: territory, resources: "armement", amount: getTotalArmement - armementRequired}
@@ -144,7 +149,7 @@ func (c *Country) Deliberate() []Request {
 
 	//Le pays regarde si des territoires ont plus de ressources que ce qu'il leur faut, si oui, il les vend
 	for _, territory := range c.Territories {
-		surplus := territory.GetSurplus(3)
+		surplus := territory.GetSurplus(5)
 		//Faire un ordre de vente pour chaque ressource en surplus
 		for resource, quantity := range surplus {
 			sellRequest := MarketSellRequest{from: c, territoire: territory, resources: resource, amount: quantity}
@@ -169,7 +174,7 @@ func (c *Country) tryTransferResources(to *Territory, resource ResourceType, nee
 	for _, territory := range c.Territories {
 		if territory != to {
 			//Pour les échanges entre territoires, on ne prend que les surplus de 1 jour
-			surplus := territory.GetSurplus(1)
+			surplus := territory.GetSurplus(2)
 			if surplus[resource] > 0 {
 				if surplus[resource] > need {
 					c.transferResources(territory, to, resource, need)

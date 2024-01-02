@@ -133,12 +133,16 @@ func (e *Environment) KillHungryHabitants() {
 			}
 		}
 		//On tue la moitié des habitants qui ont faim
-		killedHabitants := int(math.Ceil(float64(maxHabitantsHungry) / 2))
+		killedHabitants := int(math.Ceil(float64(maxHabitantsHungry) / 5))
 		if territory.Habitants-killedHabitants <= 0 {
 			killedHabitants = territory.Habitants - 1
 		}
 		territory.Habitants -= killedHabitants
 		totalKilledHabitants[territory.Country.Name] += killedHabitants
+		if killedHabitants == 0 {
+			birth := int(math.Ceil(float64(territory.Habitants) * 0.01))
+			territory.Habitants += birth
+		}
 	}
 	for countryName, killedHabitants := range totalKilledHabitants {
 		log.Println("Famine : ", killedHabitants, " habitants sont mort de faim ", countryName)
@@ -149,11 +153,22 @@ func (e *Environment) KillHungryHabitants() {
 func (e *Environment) BirthHabitants() {
 	totalBirthHabitants := make(map[string]int)
 	for _, territory := range e.Territories {
-		birth := int(math.Ceil(float64(territory.Habitants) * 0.02))
+		birth := int(math.Ceil(float64(territory.Habitants) * 0.01))
 		territory.Habitants += birth
 		totalBirthHabitants[territory.Country.Name] += birth
 	}
 	for countryName, birthHabitants := range totalBirthHabitants {
 		log.Println("Naissance : ", birthHabitants, " habitants de ", countryName)
 	}
+}
+
+func (e *Environment) BirthHabitantsCountry(country *Country) {
+	totalBirthHabitants := 0
+	for _, territory := range country.Territories {
+		birth := int(math.Ceil(float64(territory.Habitants) * 0.01))
+		territory.Habitants += birth
+		totalBirthHabitants += birth
+	}
+	log.Println("Naissance : ", totalBirthHabitants, " habitants de ", country.Name)
+
 }
