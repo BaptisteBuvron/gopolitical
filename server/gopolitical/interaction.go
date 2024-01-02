@@ -82,5 +82,4 @@ type AttackRequest struct {
 
 type AttackResponse struct {
 	Request
-	to *Country
 }

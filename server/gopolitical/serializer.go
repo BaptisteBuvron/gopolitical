@@ -15,6 +15,7 @@ type PartialCountry struct {
 	ID    string  `json:"id"`
 	Color string  `json:"color"`
 	Money float64 `json:"money"`
+	Flag  string  `json:"flag"`
 }
 
 type PartialRelation struct {
@@ -25,8 +26,15 @@ type PartialTerritory struct {
 	Y          int                `json:"y"`
 	Country    string             `json:"country"`
 	Habitants  int                `json:"habitants"`
+	Name       string             `json:"name"`
 	Stock      []PartialVariation `json:"stock"`
 	Variations []PartialVariation `json:"variations"`
+	Stocks     []PartialStock     `json:"stocks"`
+}
+
+type PartialStock struct {
+	Resource ResourceType `json:"name"`
+	Amount   float64      `json:"value"`
 }
 
 type PartialVariation struct {
@@ -34,17 +42,27 @@ type PartialVariation struct {
 	Value float64      `json:"value"`
 }
 
+type PartialConsumptionByHabitant struct {
+	Resource ResourceType `json:"name"`
+	Amount   float64      `json:"value"`
+}
+
 type PartialSimulation struct {
-	WorldWidth  int                `json:"worldWidth"`
-	WorldHeight int                `json:"worldHeight"`
-	SecondByDay float64            `json:"secondByDay"`
-	Resources   []PartialResource  `json:"resources"`
-	Countries   []PartialCountry   `json:"countries"`
-	Territories []PartialTerritory `json:"territories"`
+	WorldWidth             int                            `json:"worldWidth"`
+	WorldHeight            int                            `json:"worldHeight"`
+	SecondByDay            float64                        `json:"secondByDay"`
+	ConsumptionsByHabitant []PartialConsumptionByHabitant `json:"consumptionsByHabitant"`
+	Resources              []PartialResource              `json:"resources"`
+	Countries              []PartialCountry               `json:"countries"`
+	Territories            []PartialTerritory             `json:"territories"`
 }
 
 func (s *PartialSimulation) ToSimulation() Simulation {
 	prices := make(map[ResourceType]float64, len(s.Resources))
+	consumptionsByHabitant := make(map[ResourceType]float64, len(s.ConsumptionsByHabitant))
+	for _, consumption := range s.ConsumptionsByHabitant {
+		consumptionsByHabitant[consumption.Resource] = consumption.Amount
+	}
 	for _, resource := range s.Resources {
 		prices[resource.Name] = resource.Price
 	}
@@ -55,7 +73,17 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 		out := make(Channel)
 		//create slice of territories
 		territories := make([]*Territory, 0)
-		countries[country.ID] = NewCountry(country.ID, country.Name, country.Color, territories, country.Money, in, out)
+		countries[country.ID] = NewCountry(
+			country.ID,
+			country.Name,
+			country.Color,
+			country.Flag,
+			territories,
+			country.Money,
+			in,
+			out,
+			consumptionsByHabitant,
+		)
 	}
 
 	territories := make([]*Territory, len(s.Territories))
@@ -68,20 +96,19 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 
 		// Fill stock
 		stock := make(map[ResourceType]float64)
-		for _, resource := range s.Resources {
-			stock[resource.Name] = 0
+		for _, stockT := range territory.Stocks {
+			stock[stockT.Resource] = stockT.Amount
 		}
 		for _, resource := range territory.Stock {
 			stock[resource.Name] = resource.Value
 		}
-
 		// Add new territory
-		territories[i] = NewTerritory(territory.X, territory.Y, variations, stock, country, territory.Habitants)
+		territories[i] = NewTerritory(territory.X, territory.Y, territory.Name, variations, stock, country, territory.Habitants)
 		if country != nil {
 			country.Territories = append(country.Territories, territories[i])
 		}
 	}
-	return NewSimulation(s.WorldWidth, s.WorldHeight, s.SecondByDay, prices, countries, territories)
+	return NewSimulation(s.WorldWidth, s.WorldHeight, s.SecondByDay, prices, countries, territories, consumptionsByHabitant)
 }
 
 func LoadSimulation(path string) (Simulation, error) {

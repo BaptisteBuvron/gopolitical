@@ -1,0 +1,13 @@
+@startuml
+title Market - HandleRequests()
+
+participant Market
+
+loop For each buy in buys
+    loop For each sell in sells
+        alt buy.resources == sell.resources
+            Market -> Market: handleTransaction(buy, sell, history)
+        end
+    end
+end
+@enduml

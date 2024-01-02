@@ -13,13 +13,14 @@ import (
 type WebSocket struct {
 	Simulation *Simulation
 	Clients    map[*websocket.Conn]struct{}
-	mu         sync.Mutex
+	mu         *sync.Mutex
 }
 
 func NewWebSocket(simulation *Simulation) *WebSocket {
 	return &WebSocket{
 		Simulation: simulation,
 		Clients:    make(map[*websocket.Conn]struct{}),
+		mu:         &sync.Mutex{},
 	}
 }
 
@@ -49,11 +50,12 @@ func (ws *WebSocket) handleWebSocket(writer http.ResponseWriter, request *http.R
 	// Ajouter la nouvelle connexion à la liste des clients
 	ws.mu.Lock()
 	ws.Clients[conn] = struct{}{}
-	ws.mu.Unlock()
 
 	// Envoyer la simulation actuelle à la nouvelle connexion
 	simulationJSON, _ := json.Marshal(ws.Simulation)
 	conn.WriteMessage(websocket.TextMessage, simulationJSON)
+
+	ws.mu.Unlock()
 
 	// Attendre des mises à jour depuis la connexion
 	for {
@@ -72,6 +74,8 @@ func (ws *WebSocket) handleWebSocket(writer http.ResponseWriter, request *http.R
 
 func (ws *WebSocket) SendUpdate() {
 	// Convertir la simulation en JSON
+	ws.mu.Lock()
+	defer ws.mu.Unlock()
 	simulationJSON, err := json.Marshal(ws.Simulation)
 	if err != nil {
 		log.Println("Erreur lors de la sérialisation JSON de la simulation:", err)
@@ -79,8 +83,6 @@ func (ws *WebSocket) SendUpdate() {
 	}
 
 	// Parcourir toutes les connexions actives et envoyer la mise à jour
-	ws.mu.Lock()
-	defer ws.mu.Unlock()
 	for conn := range ws.Clients {
 		err := conn.WriteMessage(websocket.TextMessage, simulationJSON)
 		if err != nil {

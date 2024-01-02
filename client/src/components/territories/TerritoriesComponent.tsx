@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import TerritoryDetailComponent from "../territoryDetail/TerritoryDetailComponent";
 import {Territory} from "../../Entity";
 import {Simulation} from "../../Entity";
@@ -6,22 +6,45 @@ import Container from "react-bootstrap/Container";
 import SimulationErrorComponent from "../SimulationErrorComponent";
 
 interface TerritoriesComponentProps {
-    simulation: Simulation | undefined;
+    simulation: Simulation | undefined
 }
 
 function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
     const [showModal, setShowModal] = useState(false);
     const [selectedTerritory, setSelectedTerritory] = useState<Territory | null>(null);
 
+    //On detecte des qu'il y a un changement sur la valeur simulation
+    useEffect(() => {
+        // La MAJ des nouvelles valeurs se fait sur un modal ouvert
+        if (selectedTerritory) {
+            // On retrouve le territoires ouvert dans la simulation avec ses coordonnées
+            const matchingTerritory = simulation?.territories.find(
+                (simTerritory) =>
+                    simTerritory.x === selectedTerritory.x && simTerritory.y === selectedTerritory.y
+            );
+
+            if (matchingTerritory) {
+                // On modifie le modal avec les nouvelle valeurs
+                setShowModal(false);
+                setSelectedTerritory(null);
+                setSelectedTerritory(matchingTerritory);
+                setShowModal(true);
+            }
+        }
+    }, [simulation?.territories, selectedTerritory]);
+
+
     if(simulation === undefined) {
         return (
             <SimulationErrorComponent />
         )
     }
+
+
     const handleTerritoryClick = (territory: Territory, index: number) => {
         //Si on reclique sur le même territoire = fermeture modal
         //Sinon, ouverture du modal
-        console.log(territory)
+        //console.log(territory)
         if (selectedTerritory && selectedTerritory === territory) {
             setShowModal(false);
             setSelectedTerritory(null);
@@ -79,6 +102,8 @@ function TerritoriesComponent({ simulation }: TerritoriesComponentProps) {
                         showModal={showModal}
                         handleCloseModal={handleCloseModal}
                         territory={selectedTerritory}
+                        simulation={simulation}
+                        country={selectedTerritory.country}
                     />
                 )}
             </div>

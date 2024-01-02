@@ -2,34 +2,34 @@ package gopolitical
 
 import (
 	"log"
+	"math"
 	"math/rand"
-	"sync"
 	"time"
 )
 
 type Environment struct {
-	Countries       map[string]*Country  `json:"-"`
-	World           *World               `json:""`
-	RelationManager *RelationManager     `json:"-"`
-	Market          *Market              `json:"market"`
-	RandomGenerator *rand.Rand           `json:"-"`
-	lock            sync.Mutex           `json:"-"`
-	Percept         map[string][]Request `json:"-"`
+	Countries             map[string]*Country      `json:"countries"`
+	World                 *World                   `json:"world"`
+	RelationManager       *RelationManager         `json:"-"`
+	Market                *Market                  `json:"market"`
+	RandomGenerator       *rand.Rand               `json:"-"`
+	Percept               map[string][]Request     `json:"-"`
+	ConsumptionByHabitant map[ResourceType]float64 `json:"consumptionByHabitant"`
 }
 
-func NewEnvironment(worldWidth int, worldHeight int, countries map[string]*Country, territories []*Territory, prices Prices) *Environment {
-	// Map des perceptions que reçoivent les pays à chaque tour
+func NewEnvironment(worldWidth int, worldHeight int, countries map[string]*Country, territories []*Territory, prices Prices, consumptionsByHabitant map[ResourceType]float64) *Environment {
+	//Map des perceptions que reçoivent les pays à chaque tour
 	percept := make(map[string][]Request)
 	for _, country := range countries {
 		percept[country.Name] = []Request{}
 	}
 	env := &Environment{
-		Countries:       countries,
-		World:           NewWorld(territories, worldWidth, worldHeight),
-		RelationManager: NewRelationManager(),
-		Market:          NewMarket(prices, percept),
-		lock:            sync.Mutex{},
-		Percept:         percept,
+		Countries:             countries,
+		World:                 NewWorld(territories, worldWidth, worldHeight),
+		RelationManager:       NewRelationManager(),
+		Market:                NewMarket(prices, percept),
+		Percept:               percept,
+		ConsumptionByHabitant: consumptionsByHabitant,
 	}
 	env.Market.Env = env
 
@@ -39,21 +39,22 @@ func NewEnvironment(worldWidth int, worldHeight int, countries map[string]*Count
 }
 
 func (e *Environment) Start() {
-	log.Println("Start of the environment")
+	log.Printf("[Environment] Start")
 	for {
 		e.handleRequests()
 	}
 }
 
 func (e *Environment) handleRequests() {
+	// No need to lock
 	for _, country := range e.Countries {
 		select {
 		case req := <-country.Out:
 			//Try downcasting
-			e.lock.Lock()
 			switch req := req.(type) {
 			case MarketBuyRequest, MarketSellRequest:
 				e.Market.handleRequest(req)
+				Respond(country.In, req)
 				break
 			case PerceptRequest:
 				fromCountry := req.from
@@ -66,46 +67,48 @@ func (e *Environment) handleRequests() {
 				break
 			case AttackRequest:
 				// TODO: verifier que les pays sont bien voisins au moments de l'attaques
+				// TODO: Pas grave si il se trompe, il y aura du tire allié
 				// On récupère les stocks d'armes des deux pays
 				defensiveArmament := req.to.Country.GetTotalStockOf(ARMAMENT)
 				offensiveArmament := req.from.GetTotalStockOf(ARMAMENT)
 				// On verify que le pays à bien de quoi attaquer
 				if offensiveArmament < req.armement {
-					log.Printf("Attaque avortée de %v sur %v\n", req.from.ID, req.to.Country.ID)
+					log.Printf("[Environment] Attaque avortée de %s sur %s (%s)\n", req.from.Name, req.to.Name, req.to.Country.Name)
 					continue
 				}
 				// Il n'utilisera que ce qu'il souhaite
 				offensiveArmament = req.armement
 				// Si l'attaqué a assez de ressource pour se défendre
 				if req.armement < defensiveArmament {
-					defensiveArmament = req.armement // Il n'en utilise qu'une partiel
+					defensiveArmament = req.armement // Il n'en utilise qu'une partie
 				}
 
 				// Il font une bataille donc il consomme de l'armement
 				req.from.Consume(ARMAMENT, offensiveArmament)
 				req.to.Country.Consume(ARMAMENT, defensiveArmament)
 
-				// Le taux de réussite correspond à offensif / défensif
-				chanceOfFailure := offensiveArmament / defensiveArmament
-				log.Printf("%v Attaque %v avec %.2f de réussite\n", req.from.ID, req.to.Country.ID, chanceOfFailure*100)
+				// Le taux de réussite correspond à offensif / défensif avec un bonus de 10%
+				chanceOfCapture := 1 - (offensiveArmament/defensiveArmament)*0.9
+				log.Printf("[Environment] %v attaque %v (%v) avec %.0f%% de réussite\n", req.from.Name, req.to.Name, req.to.Country.Name, chanceOfCapture*100)
 
 				// On récupère l'état de la relation actuelle
 				relation := e.RelationManager.GetRelation(req.from.ID, req.to.Country.ID)
 				attackedCountry := req.to.Country
-				if chanceOfFailure < e.RandomGenerator.Float64() { // L'attaque a réussi
+				if chanceOfCapture > e.RandomGenerator.Float64() { // L'attaque a réussi
 					relation = relation / 3
 					req.to.TransfertProperty(req.from)
-					log.Printf("Attaque réussit\n")
+					log.Printf("[Environment] Capturé !")
 				} else { // L'attaque a échoué
 					relation = relation * 2 / 3
-					log.Printf("Attaque échoué\n")
+					log.Printf("[Environment] Échec !")
 				}
 				e.RelationManager.UpdateRelation(req.from.ID, attackedCountry.ID, relation)
+				Respond(req.from.In, AttackResponse{})
 				break
 			default:
-				log.Println("Une requete n'a pas pu etre traitee")
+				log.Println("[Environment] Une requete n'a pas pu etre traitee")
 			}
-			e.lock.Unlock()
+			//respond to indicate the request was handled
 		default:
 		}
 	}
@@ -128,11 +131,9 @@ func (e *Environment) UpdateStocksFromConsumption() {
 	// Mettre à jour les stocks des territoires à partir des consommations
 	for _, country := range e.Countries {
 		for _, territory := range country.Territories {
-			foodConsumption := float64(territory.Habitants) * FOOD_BY_HABITANT
-			territory.Stock["food"] -= foodConsumption
-
-			waterConsumption := float64(territory.Habitants) * WATER_BY_HABITANT
-			territory.Stock["water"] -= waterConsumption
+			for resource, consumption := range e.ConsumptionByHabitant {
+				territory.Stock[resource] -= float64(territory.Habitants) * consumption
+			}
 		}
 	}
 }
@@ -157,5 +158,48 @@ func (e *Environment) UpdateMoneyHistory(currentDay int) {
 func (e *Environment) UpdateHabitantsHistory(day int) {
 	for _, territory := range e.World.Territories() {
 		territory.HabitantsHistory[day] = territory.Habitants
+	}
+}
+
+func (e *Environment) KillHungryHabitants() {
+	totalKilledHabitants := make(map[string]int)
+	for _, territory := range e.World.Territories() {
+		habitantsHungryByResource := make(map[ResourceType]int)
+		for resource, consumption := range e.ConsumptionByHabitant {
+			if territory.Stock[resource] < 0 {
+				habitantsHungry := math.Ceil(math.Abs(territory.Stock[resource]) / consumption)
+				habitantsHungryByResource[resource] = int(habitantsHungry)
+			}
+		}
+		//get max habitants hungry
+		maxHabitantsHungry := 0
+		for _, habitantsHungry := range habitantsHungryByResource {
+			if habitantsHungry > maxHabitantsHungry {
+				maxHabitantsHungry = habitantsHungry
+			}
+		}
+		//On tue un dixième des habitants qui ont faim
+		killedHabitants := int(math.Ceil(float64(maxHabitantsHungry) / 10))
+		if territory.Habitants-killedHabitants <= 0 {
+			killedHabitants = territory.Habitants - 1
+		}
+		territory.Habitants -= killedHabitants
+		totalKilledHabitants[territory.Country.Name] += killedHabitants
+	}
+	for countryName, killedHabitants := range totalKilledHabitants {
+		log.Printf("[Environment] [%s] [Famine] %d habitants sont mort de faim", countryName, killedHabitants)
+	}
+
+}
+
+func (e *Environment) BirthHabitants() {
+	totalBirthHabitants := make(map[string]int)
+	for _, territory := range e.World.Territories() {
+		birth := int(math.Ceil(float64(territory.Habitants) * 0.02))
+		territory.Habitants += birth
+		totalBirthHabitants[territory.Country.Name] += birth
+	}
+	for countryName, birthHabitants := range totalBirthHabitants {
+		log.Printf("[Environment] [%s] [Naissance] %d habitants sont nées", countryName, birthHabitants)
 	}
 }

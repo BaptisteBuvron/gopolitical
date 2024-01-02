@@ -1,0 +1,9 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Country << (S,Aquamarine) >> {
+        ...
+        + In Channel
+        + Out Channel
+    }
+@enduml

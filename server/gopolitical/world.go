@@ -1,6 +1,9 @@
 package gopolitical
 
-import "log"
+import (
+	"encoding/json"
+	"log"
+)
 
 type Pos struct {
 	X int
@@ -123,6 +126,23 @@ func (w *World) Delta(pos Pos, x int, y int) Pos {
 
 func (w *World) Territories() map[Pos]*Territory {
 	return w.territories
+}
+
+type PartialWorld struct {
+	Width       int          `json:"width"`
+	Height      int          `json:"height"`
+	Territories []*Territory `json:"territories"`
+}
+
+func (w *World) MarshalJSON() ([]byte, error) {
+	// Insert the string directly into the Data member
+	territories := make([]*Territory, 0)
+	for _, territory := range w.Territories() {
+		territories = append(territories, territory)
+	}
+	a := PartialWorld{w.width, w.height, territories}
+	data, err := json.Marshal(a)
+	return data, err
 }
 
 func (w *World) Near(pos Pos) []Pos {
