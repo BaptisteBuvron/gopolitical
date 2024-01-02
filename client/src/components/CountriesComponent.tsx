@@ -153,7 +153,10 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                             <CountryMoneyEvolutionComponent
                                 show={showModalMoneyEvolutionCountry}
                                 onHide ={() => hideMoneyEvolution()}
+                                propsCountry={selectedCountry}
+                                simulation={simulation}
                             />
+
                             <CountryHabitantsEvolutionComponent
                                 show={showModalHabitantsEvolutionCountry}
                                 onHide ={() => hideHabitantsEvolution()}
