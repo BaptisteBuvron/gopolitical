@@ -1,0 +1,51 @@
+@startuml
+title Country - Deliberate()
+
+participant Country
+participant Territory
+participant MarketBuyRequest
+participant MarketSellRequest
+
+Country -> Country: requests := []MarketRequest
+
+activate Territory
+loop For each territory in Territories
+loop For each resource, consumption in consumptionByHabitant
+    Territory -> Country: territory.Stock[resource] - (float64(territory.Habitants) * consumption)
+    alt needed < 0
+        Country -> Country: tryTransferResources(territory, resource, needed)
+        Territory -> Country: c.tryTransferResources(territory, resource, needed)
+        Country -> MarketBuyRequest: Create buy request
+        Country --> Country: Append buyRequest to requests
+    end
+end
+end loop
+deactivate Territory
+
+
+
+Country -> Country: getTotalArmement
+Country -> Country: armementRequired := len(c.Territories) * 100
+alt getTotalArmement < armementRequired
+    Country -> MarketBuyRequest: Create buy request for armement
+    Country --> Country: Append buyRequest to requests
+else getTotalArmement > armementRequired
+    Country -> MarketSellRequest: Create sell request for armement
+    Country --> Country: Append sellRequest to requests
+end
+
+
+loop For each territory in Territories
+    Territory -> Territory: surplus := territory.GetSurplus(3)
+    activate Territory
+
+    loop For each resource, quantity in surplus
+        Country -> MarketSellRequest: Create sell request for surplus
+        Country --> Country: Append sellRequest to requests
+    end
+
+    deactivate Territory
+end
+
+Country --> Country: return requests
+@enduml

@@ -5,7 +5,6 @@ import (
 	"log"
 	"math"
 	"sync"
-	"time"
 )
 
 type Event interface {
@@ -100,27 +99,24 @@ func (c *Country) Percept() {
 	fmt.Println("Country ", c.Name, " waiting for percept")
 	perceptResponse := <-c.In
 	fmt.Println("Country ", c.Name, " percepted")
-
 	//Downcast to a PerceptResponse
 	if perceptResponse, ok := perceptResponse.(PerceptResponse); ok {
 		//Process the events
 		history := processMarketEvents(perceptResponse.events)
 		c.History = append(c.History, history...)
 	}
-
 	log.Printf("Country %s percepted\n", c.Name)
 }
 
 func (c *Country) Deliberate() []Request {
 	log.Printf("Country %s deliberate\n", c.Name)
 	log.Println("Stock total de ", c.Name, " : ", c.GetTotalStock())
-	time.Sleep(1 * time.Second)
 	requests := []Request{}
 
 	//Le pays regarde s'il lui manque des ressources, si oui, il les achète
 	for _, territory := range c.Territories {
 		for resource, consumption := range c.consumptionByHabitant {
-			totalConsumption := float64(territory.Habitants) * consumption
+			totalConsumption := (float64(territory.Habitants) * consumption) * 2
 			//Calculer si les territoires ont assez de ressources pour nourrir leurs habitants
 			needed := territory.Stock[resource] - totalConsumption
 			if needed < 0 {

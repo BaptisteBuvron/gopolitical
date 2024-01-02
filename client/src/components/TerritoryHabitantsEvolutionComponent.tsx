@@ -1,19 +1,17 @@
 import {Button, Col, Modal, Row} from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import React, {useEffect, useState} from "react";
-import {Simulation, Territory} from "../Entity";
-import StockHistoryChart from "./stockHistoryChartComponent/stockHistoryChartComponent";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import { Simulation, Territory} from "../Entity";
+import HabitantsHistoryChartComponent from "./stockHistoryChartComponent/habitantsHistoryChartComponent";
 
-interface TerritoryStockEvolutionProps {
+interface TerritoryHabitantsEvolutionProps {
     onHide: () => void;
     propsTerritory: Territory;
     simulation: Simulation;
     show: boolean;
 }
 
-function TerritoryStockEvolutionComponent({ onHide, propsTerritory, simulation, show }: TerritoryStockEvolutionProps) {
+function TerritoryHabitantsEvolutionComponent({onHide, propsTerritory, simulation, show}: TerritoryHabitantsEvolutionProps) {
     //const [showHistoryModal, setShowHistoryModal] = useState(false);
     const [territory, setTerritory] = useState<Territory>(propsTerritory)
 
@@ -21,8 +19,10 @@ function TerritoryStockEvolutionComponent({ onHide, propsTerritory, simulation, 
         setTerritory(propsTerritory)
     }, [simulation, propsTerritory])
 
-    const stockHistory = territory.stockHistory;
+    const habitantsHistory = territory?.habitantsHistory;
     const country = territory.country;
+
+
     return (
         <Modal
             show={show}
@@ -34,30 +34,18 @@ function TerritoryStockEvolutionComponent({ onHide, propsTerritory, simulation, 
             <Modal.Header className="bg-dark text-light">
                 <div className="d-flex justify-content-between align-items-center col-12">
                     <div className="col-10">
-                        <h3 className="card-title">
-                            {country?.agent.name} | Territoire
-                            <OverlayTrigger
-                                placement="right"
-                                overlay={
-                                    <Tooltip>
-                                        Position du territoire
-                                    </Tooltip>
-                                }
-                            >
-                                <span>{" (" + territory.x + "," + territory.y + ")"}</span>
-                            </OverlayTrigger>
-                        </h3>
+                        <h3 className="card-title mb-1">{country?.agent.name}</h3>
                         <h4 className={"text-warning"}>Evolution des stocks</h4>
                     </div>
                     <div className="col-2">
-                        <Image src={country?.flag} alt={country?.agent.name + " flag"} fluid />
+                        <Image src={country?.flag} alt={country?.agent.name + " flag"} fluid/>
                     </div>
                 </div>
             </Modal.Header>
             <Modal.Body className="bg-dark text-light">
                 <Row className="justify-content-center">
                     <Col className="col-10">
-                        {stockHistory && <StockHistoryChart stockHistory={stockHistory}/>}
+                        {habitantsHistory && <HabitantsHistoryChartComponent habitantsHistory={habitantsHistory}/>}
                     </Col>
                 </Row>
             </Modal.Body>
@@ -68,4 +56,4 @@ function TerritoryStockEvolutionComponent({ onHide, propsTerritory, simulation, 
     );
 }
 
-export default TerritoryStockEvolutionComponent;
+export default TerritoryHabitantsEvolutionComponent;

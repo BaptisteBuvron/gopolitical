@@ -1,0 +1,14 @@
+@startuml
+title Country - Act()
+
+participant Country
+participant Environment
+
+loop For each request in requests
+    Country -> Country: c.Out <- request
+    activate Environment
+    Country -> Country: <-c.In: Response
+    deactivate Environment
+end
+
+@enduml

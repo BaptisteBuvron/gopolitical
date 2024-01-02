@@ -22,22 +22,18 @@ function App() {
         socket.onmessage = function(event) {
             const data = JSON.parse(event.data);
 
-            //parse data to Simulation
-            //json beautifier print
             //console.log(data);
 
             let simulation = new Simulation(data);
-            console.log(simulation)
+            //console.log(simulation)
             setSimulation(simulation);
         }
 
         socket.onclose = function(event) {
-            clearInterval(interval);
             //setSimulation(undefined);
+            clearInterval(interval);
         }
-
-        // Fermer la connexion WebSocket lors du démontage du composant
-        return () => socket.close();
+;
     }, []); // Effect sera exécuté une seule fois après le rendu initial
     return (
         <Routes>

@@ -1,0 +1,30 @@
+@startuml
+title Environment - handleRequests()
+
+participant Environment
+participant country
+participant Market
+
+Environment -> country: Iterate over Countries
+activate country
+
+loop For each country
+    Environment -> Environment: <-country.Out
+
+    alt Try downcasting MarketBuyRequest / MarketSellRequest
+        activate Market
+        Environment --> Market: Environment.Market.handleRequest(req)
+        deactivate Market
+
+        Environment --> country: country.In <- req
+
+    else
+        Environment --> Environment: log.Println("Une requete n'a pas pu etre traitee")
+    end
+
+    deactivate country
+
+end
+
+@enduml
+
