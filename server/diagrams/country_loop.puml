@@ -1,0 +1,35 @@
+@startuml
+title Country - Start()
+
+participant Country
+participant Percept
+participant Deliberate
+participant Act
+
+
+loop Forever
+    Country -> Country: c.wg.Add(1)
+    Country -> Percept: c.Percept()
+    activate Percept
+    Percept --> Country: Percept results
+    deactivate Percept
+    Country -> Deliberate: c.Deliberate()
+    activate Deliberate
+    Deliberate --> Country: List of requests
+    deactivate Deliberate
+    Country -> Act: c.Act(requests)
+    activate Act
+    Act --> Country: Act results
+    deactivate Act
+    Country -> Country: c.wg.Done()
+
+    Country -> Country: <-c.In
+    note right
+        Wait the signal to start the next day
+    end note
+
+    Country -> Country: c.currentDay++
+
+end
+
+@enduml
