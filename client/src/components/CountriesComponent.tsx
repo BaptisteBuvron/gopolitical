@@ -9,6 +9,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import {ResourceIconService} from "../services/ResourceIconService";
 import {ClockHistory} from "react-bootstrap-icons";
 import CountryActionsModal from "./countryActionsModal/CountryActionsModal";
+import CountryMoneyEvolutionComponent from "./CountryMoneyEvolutionComponent";
 import CountryHabitantsEvolutionComponent from "./CountryHabitantsEvolutionComponent";
 
 interface CountriesComponentProps {
@@ -17,6 +18,7 @@ interface CountriesComponentProps {
 
 function CountriesComponent({simulation}: CountriesComponentProps) {
     const [showModalStockEvolutionCountry, setShowModalStockEvolutionCountry] = useState(false);
+    const [showModalMoneyEvolutionCountry, setShowModalMoneyEvolutionCountry] = useState(false);
     const [showModalHabitantsEvolutionCountry, setShowModalHabitantsEvolutionCountry] = useState(false);
     const [showCountryActionsModal, setShowCountryActionsModal] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
@@ -55,6 +57,15 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
         setSelectedCountry(null);
     }
 
+    function showMoneyEvolution(country: Country) {
+        setSelectedCountry(country);
+        setShowModalMoneyEvolutionCountry(true);
+    }
+
+    function hideMoneyEvolution() {
+        setShowModalMoneyEvolutionCountry(false);
+    }
+        
     function hideHabitantsEvolution() {
         setShowModalHabitantsEvolutionCountry(false);
         setSelectedCountry(null);
@@ -95,7 +106,9 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                                                 <strong>Argent:</strong> {country?.money}
                                                 <ul className="mt-1">
                                                     <li style={{listStyle: "none"}}>
-
+                                                        <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => showMoneyEvolution(country)}>
+                                                            <ClockHistory className="mb-1 me-1"></ClockHistory>Historique de l'argent
+                                                        </Button>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -137,6 +150,13 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                                 simulation={simulation}
                                 propsCountry={selectedCountry}
                             />
+                            <CountryMoneyEvolutionComponent
+                                show={showModalMoneyEvolutionCountry}
+                                onHide ={() => hideMoneyEvolution()}
+                                propsCountry={selectedCountry}
+                                simulation={simulation}
+                            />
+
                             <CountryHabitantsEvolutionComponent
                                 show={showModalHabitantsEvolutionCountry}
                                 onHide ={() => hideHabitantsEvolution()}

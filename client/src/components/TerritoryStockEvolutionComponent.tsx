@@ -67,4 +67,5 @@ function TerritoryStockEvolutionComponent({ onHide, propsTerritory, simulation, 
         </Modal>
     );
 }
+
 export default TerritoryStockEvolutionComponent;

@@ -2,7 +2,6 @@ package gopolitical
 
 import (
 	"encoding/json"
-	"log"
 )
 
 type Pos struct {
@@ -27,7 +26,7 @@ func NewMaritimeArea() *MaritimeArea {
 }
 
 func NewWorld(territories []*Territory, width int, height int) *World {
-	log.Printf("Start generating world")
+	Debug("World", "Pré-calcul des voisins")
 	// Creation de la structure
 	w := World{}
 
@@ -116,7 +115,7 @@ func NewWorld(territories []*Territory, width int, height int) *World {
 	}
 
 	// Return created world
-	log.Printf("World generated")
+	Debug("World", "Pré-calcul terminé")
 	return &w
 }
 

@@ -1,7 +1,5 @@
 package gopolitical
 
-import "log"
-
 type Territory struct {
 	X                int                              `json:"x"`
 	Y                int                              `json:"y"`
@@ -44,7 +42,7 @@ func (t *Territory) GetSurplus(daysToSecure float64) map[ResourceType]float64 {
 }
 
 func (t *Territory) TransfertProperty(country *Country) {
-	log.Printf("[%s] Transfert de propriete de %s vers %s", t.Name, t.Country.Name, country.Name)
+	Debug(t.Name, "Transfert de propriété de %s vers %s", t.Country.Name, country.Name)
 	losingCountry := t.Country
 	// Délier le territoire a son pays d'origine
 	for i, territory := range losingCountry.Territories {

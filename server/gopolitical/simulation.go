@@ -1,7 +1,7 @@
 package gopolitical
 
 import (
-	"log"
+	"fmt"
 	"sync"
 	"time"
 )
@@ -42,12 +42,12 @@ func (s *Simulation) Start() {
 	go s.WebSocket.Start() // TODO: attendre le lancement pour commencer
 	time.Sleep(1)
 
-	log.Printf("[Simulation] Statistiques")
-	log.Printf("[Simulation] Pays                     : %d", len(s.Environment.Countries))
-	log.Printf("[Simulation] Territoires              : %d", len(s.Environment.Market.Env.World.Territories()))
+	Debug("Simulation", "Statistiques")
+	Debug("Simulation", "Pays                     : %d", len(s.Environment.Countries))
+	Debug("Simulation", "Territoires              : %d", len(s.Environment.Market.Env.World.Territories()))
 
 	for _, country := range s.Environment.Countries {
-		log.Printf("[Simulation] %-24s : %d", country.Name, len(country.Territories))
+		Debug("Simulation", "%-24s : %d", country.Name, len(country.Territories))
 	}
 
 	go s.Environment.Start()
@@ -62,9 +62,10 @@ func (s *Simulation) Start() {
 	}
 
 	for {
+		startTimeDay := time.Now()
 		// Increment current day
 		s.incrementDay()
-		log.Printf("[Simulation] Commencement du jour %d", s.CurrentDay)
+		Info("Simulation", "Commencement du jour %d", s.CurrentDay)
 
 		// Start all agents
 		// TODO: Comment géré l'ajout d'un nouveau pays
@@ -76,7 +77,7 @@ func (s *Simulation) Start() {
 		s.WgMiddle.Wait()                            // On s'assure qu'ils soit tous réarmé
 		s.WgMiddle.Add(len(s.Environment.Countries)) // On remonte le conteur de WgMiddle
 		s.WgEnd.Add(1)                               // On reverrouille la fin
-		log.Println("[Simulation] Fin des actions des pays")
+		Debug("Simulation", "Fin des actions des pays")
 
 		// On fait correspondre les ordres d'achats et de ventes
 		s.Environment.Market.HandleRequests()
@@ -86,8 +87,7 @@ func (s *Simulation) Start() {
 
 		// Mettre à jour les stocks des territoires à partir des consommations des habitants
 		s.Environment.UpdateStocksFromConsumption()
-		s.Environment.KillHungryHabitants()
-		s.Environment.BirthHabitants()
+		s.Environment.ApplyRulesOfLife()
 
 		//Add history
 		s.Environment.UpdateStockHistory(s.CurrentDay)
@@ -99,19 +99,25 @@ func (s *Simulation) Start() {
 		//Send update to the websocket
 		s.WebSocket.SendUpdate()
 
-		log.Printf("[Simulation] Fin du jour %d", s.CurrentDay)
+		Debug("Simulation", "Fin du jour %d", s.CurrentDay)
 
 		// Espace dans les logs
-		log.Printf("")
-		log.Printf("")
-		log.Printf("")
+		Debug("Simulation", "")
+		Debug("Simulation", "")
+		Debug("Simulation", "")
 
 		//Wait the other day
-		time.Sleep(time.Duration(s.SecondByDay) * time.Second)
-		// Reader
-		//var keepGoing string
-		//log.Printf("[Simulation] [WAIT] Continuer ? %d", s.CurrentDay)
-		//fmt.Scanln(&keepGoing)
+		endTimeDay := time.Now()
+		expectedEndTimeDay := startTimeDay.Add(time.Duration(s.SecondByDay) * time.Second)
+		if expectedEndTimeDay.After(endTimeDay) {
+			time.Sleep(expectedEndTimeDay.Sub(endTimeDay))
+		}
+		// Attente optionnelle
+		if DebugEnabled() {
+			var keepGoing string
+			Debug("Simulation", "Continuer ?")
+			fmt.Scanln(&keepGoing)
+		}
 	}
 }
 

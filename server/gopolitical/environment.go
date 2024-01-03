@@ -1,7 +1,6 @@
 package gopolitical
 
 import (
-	"log"
 	"math"
 	"math/rand"
 	"time"
@@ -39,7 +38,7 @@ func NewEnvironment(worldWidth int, worldHeight int, countries map[string]*Count
 }
 
 func (e *Environment) Start() {
-	log.Printf("[Environment] Start")
+	Debug("Environment", "Start")
 	for {
 		e.handleRequests()
 	}
@@ -73,7 +72,7 @@ func (e *Environment) handleRequests() {
 				offensiveArmament := req.from.GetTotalStockOf(ARMAMENT)
 				// On verify que le pays à bien de quoi attaquer
 				if offensiveArmament < req.armement {
-					log.Printf("[Environment] Attaque avortée de %s sur %s (%s)\n", req.from.Name, req.to.Name, req.to.Country.Name)
+					Debug(req.from.Name, "[Environment] Attaque avortée de %s sur %s (%s)\n", req.to.Name, req.to.Country.Name)
 					continue
 				}
 				// Il n'utilisera que ce qu'il souhaite
@@ -89,7 +88,7 @@ func (e *Environment) handleRequests() {
 
 				// Le taux de réussite correspond à offensif / défensif avec un bonus de 10%
 				chanceOfCapture := 1 - (offensiveArmament/defensiveArmament)*0.9
-				log.Printf("[Environment] %v attaque %v (%v) avec %.0f%% de réussite\n", req.from.Name, req.to.Name, req.to.Country.Name, chanceOfCapture*100)
+				Debug(req.from.Name, "%v attaque %v (%v) avec %.0f%% de réussite", req.to.Name, req.to.Country.Name, chanceOfCapture*100)
 
 				// On récupère l'état de la relation actuelle
 				relation := e.RelationManager.GetRelation(req.from.ID, req.to.Country.ID)
@@ -97,16 +96,16 @@ func (e *Environment) handleRequests() {
 				if chanceOfCapture > e.RandomGenerator.Float64() { // L'attaque a réussi
 					relation = relation / 3
 					req.to.TransfertProperty(req.from)
-					log.Printf("[Environment] Capturé !")
+					Debug("Environment", "Capturé !")
 				} else { // L'attaque a échoué
 					relation = relation * 2 / 3
-					log.Printf("[Environment] Échec !")
+					Debug("Environment", "Échec !")
 				}
 				e.RelationManager.UpdateRelation(req.from.ID, attackedCountry.ID, relation)
 				Respond(req.from.In, AttackResponse{})
 				break
 			default:
-				log.Println("[Environment] Une requete n'a pas pu etre traitee")
+				Debug("Environment", "Une requête n'a pas pu être traitée")
 			}
 			//respond to indicate the request was handled
 		default:
@@ -161,7 +160,7 @@ func (e *Environment) UpdateHabitantsHistory(day int) {
 	}
 }
 
-func (e *Environment) KillHungryHabitants() {
+func (e *Environment) ApplyRulesOfLife() {
 	totalKilledHabitants := make(map[string]int)
 	for _, territory := range e.World.Territories() {
 		habitantsHungryByResource := make(map[ResourceType]int)
@@ -179,27 +178,18 @@ func (e *Environment) KillHungryHabitants() {
 			}
 		}
 		//On tue un dixième des habitants qui ont faim
-		killedHabitants := int(math.Ceil(float64(maxHabitantsHungry) / 10))
+		killedHabitants := int(math.Ceil(float64(maxHabitantsHungry) / STARVATION_RATIO))
 		if territory.Habitants-killedHabitants <= 0 {
 			killedHabitants = territory.Habitants - 1
 		}
 		territory.Habitants -= killedHabitants
 		totalKilledHabitants[territory.Country.Name] += killedHabitants
+		if killedHabitants == 0 {
+			birth := int(math.Ceil(float64(territory.Habitants) * BIRTH_RATIO))
+			territory.Habitants += birth
+		}
 	}
 	for countryName, killedHabitants := range totalKilledHabitants {
-		log.Printf("[Environment] [%s] [Famine] %d habitants sont mort de faim", countryName, killedHabitants)
-	}
-
-}
-
-func (e *Environment) BirthHabitants() {
-	totalBirthHabitants := make(map[string]int)
-	for _, territory := range e.World.Territories() {
-		birth := int(math.Ceil(float64(territory.Habitants) * 0.02))
-		territory.Habitants += birth
-		totalBirthHabitants[territory.Country.Name] += birth
-	}
-	for countryName, birthHabitants := range totalBirthHabitants {
-		log.Printf("[Environment] [%s] [Naissance] %d habitants sont nées", countryName, birthHabitants)
+		Debug("Environment", "[%s] %d habitants sont mort de faim", countryName, killedHabitants)
 	}
 }

@@ -1,7 +1,6 @@
 package gopolitical
 
 import (
-	"log"
 	"math"
 )
 
@@ -84,8 +83,8 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 		executed = buy.amount
 	}
 	// On vérifie que le territoire n'a pas changé
-	if buy.from != buy.territoire.Country || sell.from != buy.territoire.Country {
-		log.Printf("[Market] [%s->%s] Transaction annulée de %f %s", buy.from.Name, sell.from.Name, executed, buy.resources)
+	if buy.from != buy.territoire.Country || sell.from != sell.territoire.Country {
+		Debug("Market", "[%s->%s] Transaction invalide de %f %s", buy.from.Name, sell.from.Name, executed, buy.resources)
 		return 0.0
 
 	}
@@ -96,7 +95,7 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 		executed = math.Floor(buy.from.Money / m.Prices[buy.resources])
 		//get the integer part down
 		if executed <= 0 {
-			log.Printf("[Market] [%s->%s] Transaction annulée de %f %s", buy.from.Name, sell.from.Name, executed, buy.resources)
+			Debug("Market", "[%s->%s] Transaction annulée de %f %s", buy.from.Name, sell.from.Name, executed, buy.resources)
 			return 0.0
 		}
 	}
@@ -140,7 +139,7 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 
 	buy.territoire.Stock[buy.resources] += executed
 	sell.territoire.Stock[sell.resources] -= executed
-	log.Printf("[Market] [%s->%s] Transaction effectuée de %f %s pour %f", buy.from.Name, sell.from.Name, executed, buy.resources, cost)
+	Debug("Market", "[%s->%s] Transaction effectuée de %f %s pour %f", buy.from.Name, sell.from.Name, executed, buy.resources, cost)
 	m.History = append(m.History, &MarketInteraction{m.currentDay, buy.resources, executed, m.Prices[buy.resources], buy.from, sell.from})
 
 	//Add to history
