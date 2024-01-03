@@ -67,5 +67,19 @@ type PerceptRequest struct {
 
 type PerceptResponse struct {
 	Request
-	events []Request
+	events          []Request
+	RelationManager *RelationManager
+	World           *World
+	Prices          Prices
+}
+
+type AttackRequest struct {
+	Request
+	from     *Country
+	to       *Territory
+	armement float64
+}
+
+type AttackResponse struct {
+	Request
 }

@@ -263,11 +263,12 @@ class Simulation {
     currentDay: number;
 
     constructor(data: any) {
+        console.log(data)
         this.secondByDay = data.secondByDay;
         this.environment = new Environment(data.environment);
-        this.territories = data.territories.map((territoryData: any) => new Territory(territoryData));
+        this.territories = data.environment.world.territories.map((territoryData: any) => new Territory(territoryData));
         this.countries = new Map<string, Country>(
-            Object.entries(data.countries).map(([countryKey, countryData]: [string, any]) => [
+            Object.entries(data.environment.countries).map(([countryKey, countryData]: [string, any]) => [
                 countryKey,
                 new Country(countryData),
             ])

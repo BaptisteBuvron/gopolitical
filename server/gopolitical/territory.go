@@ -20,16 +20,12 @@ func (t Territory) Start() {
 
 }
 
-func (t Territory) Percept() {
-
-}
-
-func (t Territory) Deliberate() {
-
-}
-
-func (t Territory) Act() {
-
+func (t Territory) MarketValue(prices Prices) float64 {
+	totalVariation := 0.0
+	for _, variation := range t.Variations {
+		totalVariation += variation.Amount * prices[variation.Ressource]
+	}
+	return totalVariation
 }
 
 func (t *Territory) GetSurplus(daysToSecure float64) map[ResourceType]float64 {
@@ -43,4 +39,30 @@ func (t *Territory) GetSurplus(daysToSecure float64) map[ResourceType]float64 {
 		}
 	}
 	return surplus
+}
+
+func (t *Territory) TransfertProperty(country *Country) {
+	Debug(t.Name, "Transfert de propriété de %s vers %s", t.Country.Name, country.Name)
+	losingCountry := t.Country
+	// Délier le territoire a son pays d'origine
+	for i, territory := range losingCountry.Territories {
+		if territory.Equal(t) {
+			losingCountry.Territories = append(losingCountry.Territories[:i], losingCountry.Territories[i+1:]...)
+		}
+	}
+	t.Country = country
+	// Relier le territoire au nouveaux pays
+	country.Territories = append(country.Territories, t)
+
+	// On enlève les dettes du territoires et les faisons consommer au pays
+	for ressource, quantity := range t.Stock {
+		if quantity < 0 {
+			losingCountry.Consume(ressource, -quantity)
+		}
+	}
+	// TODO: migrate population
+	t.Habitants = 0
+}
+func (t *Territory) Equal(territory *Territory) bool {
+	return t.X == territory.X && t.Y == territory.Y
 }

@@ -42,7 +42,7 @@ var upgrader = websocket.Upgrader{
 func (ws *WebSocket) handleWebSocket(writer http.ResponseWriter, request *http.Request) {
 	conn, err := upgrader.Upgrade(writer, request, nil)
 	if err != nil {
-		log.Println(err)
+		Info("Websocket", "La connection n'a pas pu être établie : %v", err)
 		return
 	}
 	defer conn.Close()
@@ -56,12 +56,13 @@ func (ws *WebSocket) handleWebSocket(writer http.ResponseWriter, request *http.R
 	conn.WriteMessage(websocket.TextMessage, simulationJSON)
 
 	ws.mu.Unlock()
+	Debug("Websocket", "Connection au client")
 
 	// Attendre des mises à jour depuis la connexion
 	for {
 		_, _, err := conn.ReadMessage()
 		if err != nil {
-			log.Println(err)
+			Info("Websocket", "La connexion a été interrompu : %v", err)
 			break
 		}
 	}
@@ -78,7 +79,7 @@ func (ws *WebSocket) SendUpdate() {
 	defer ws.mu.Unlock()
 	simulationJSON, err := json.Marshal(ws.Simulation)
 	if err != nil {
-		log.Println("Erreur lors de la sérialisation JSON de la simulation:", err)
+		Info("Websocket", "Erreur lors de la sérialisation JSON de la simulation: %v", err)
 		return
 	}
 
@@ -86,7 +87,7 @@ func (ws *WebSocket) SendUpdate() {
 	for conn := range ws.Clients {
 		err := conn.WriteMessage(websocket.TextMessage, simulationJSON)
 		if err != nil {
-			log.Println("Erreur lors de l'envoi de la mise à jour via WebSocket:", err)
+			Info("Websocket", "Erreur lors de l'envoi de la mise à jour via WebSocket: %v", err)
 		}
 	}
 }

@@ -1,4 +1,6 @@
 {
+  "worldWidth": 100,
+  "worldHeight": 100,
   "secondByDay": 2.0,
   "resources": [
     {

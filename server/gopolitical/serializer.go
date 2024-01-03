@@ -3,7 +3,6 @@ package gopolitical
 import (
 	"encoding/json"
 	"os"
-	"sync"
 )
 
 type PartialResource struct {
@@ -28,6 +27,7 @@ type PartialTerritory struct {
 	Country    string             `json:"country"`
 	Habitants  int                `json:"habitants"`
 	Name       string             `json:"name"`
+	Stock      []PartialVariation `json:"stock"`
 	Variations []PartialVariation `json:"variations"`
 	Stocks     []PartialStock     `json:"stocks"`
 }
@@ -48,6 +48,8 @@ type PartialConsumptionByHabitant struct {
 }
 
 type PartialSimulation struct {
+	WorldWidth             int                            `json:"worldWidth"`
+	WorldHeight            int                            `json:"worldHeight"`
 	SecondByDay            float64                        `json:"secondByDay"`
 	ConsumptionsByHabitant []PartialConsumptionByHabitant `json:"consumptionsByHabitant"`
 	Resources              []PartialResource              `json:"resources"`
@@ -61,7 +63,6 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 	for _, consumption := range s.ConsumptionsByHabitant {
 		consumptionsByHabitant[consumption.Resource] = consumption.Amount
 	}
-	wg := new(sync.WaitGroup)
 	for _, resource := range s.Resources {
 		prices[resource.Name] = resource.Price
 	}
@@ -72,7 +73,17 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 		out := make(Channel)
 		//create slice of territories
 		territories := make([]*Territory, 0)
-		countries[country.ID] = NewCountry(country.ID, country.Name, country.Color, country.Flag, territories, country.Money, wg, in, out, consumptionsByHabitant)
+		countries[country.ID] = NewCountry(
+			country.ID,
+			country.Name,
+			country.Color,
+			country.Flag,
+			territories,
+			country.Money,
+			in,
+			out,
+			consumptionsByHabitant,
+		)
 	}
 
 	territories := make([]*Territory, len(s.Territories))
@@ -82,16 +93,22 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 			variations = append(variations, Variation{variation.Name, variation.Value})
 		}
 		country := countries[territory.Country]
+
+		// Fill stock
 		stock := make(map[ResourceType]float64)
 		for _, stockT := range territory.Stocks {
 			stock[stockT.Resource] = stockT.Amount
 		}
+		for _, resource := range territory.Stock {
+			stock[resource.Name] = resource.Value
+		}
+		// Add new territory
 		territories[i] = NewTerritory(territory.X, territory.Y, territory.Name, variations, stock, country, territory.Habitants)
 		if country != nil {
 			country.Territories = append(country.Territories, territories[i])
 		}
 	}
-	return NewSimulation(s.SecondByDay, prices, countries, territories, wg, consumptionsByHabitant)
+	return NewSimulation(s.WorldWidth, s.WorldHeight, s.SecondByDay, prices, countries, territories, consumptionsByHabitant)
 }
 
 func LoadSimulation(path string) (Simulation, error) {

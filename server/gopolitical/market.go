@@ -1,13 +1,13 @@
 package gopolitical
 
 import (
-	"log"
 	"math"
 )
 
 type Prices map[ResourceType]float64
 
 type Market struct {
+	Env        *Environment `json:"-"`
 	sells      map[int]*MarketSellRequest
 	buys       map[int]*MarketBuyRequest
 	Prices     Prices `json:"prices"`
@@ -19,7 +19,7 @@ type Market struct {
 }
 
 func NewMarket(prices Prices, percept map[string][]Request) *Market {
-	return &Market{make(map[int]*MarketSellRequest), make(map[int]*MarketBuyRequest), prices, 0, 0, percept, []*MarketInteraction{}, 0}
+	return &Market{nil, make(map[int]*MarketSellRequest), make(map[int]*MarketBuyRequest), prices, 0, 0, percept, []*MarketInteraction{}, 0}
 }
 
 func (m *Market) handleRequest(req MarketRequest) {
@@ -44,12 +44,20 @@ func (m *Market) handleSellRequest(req *MarketSellRequest) {
 	m.IdSell++
 }
 
+func UpdateRelation(cost float64) {
+
+}
+
 func (m *Market) HandleRequests() {
 	fusionHistory := make(map[string]map[string]map[ResourceType]*MarketInteraction)
 	for _, buy := range m.buys {
 		for _, sell := range m.sells {
 			if buy.resources == sell.resources && buy.from != sell.from {
-				m.handleTransaction(buy, sell, fusionHistory)
+				cost := m.handleTransaction(buy, sell, fusionHistory)
+				if cost != 0.0 { // Optimization: Don't update if zero
+					relation := m.Env.RelationManager.GetRelation(buy.from.ID, sell.from.ID)
+					m.Env.RelationManager.UpdateRelation(buy.from.ID, sell.from.ID, relation+cost)
+				}
 			}
 		}
 	}
@@ -62,18 +70,23 @@ func (m *Market) HandleRequests() {
 			}
 		}
 	}
-
 	//on vide les listes d'achats et de ventes pour le prochain tour => le pays recalculera au prochain tour ses ordres d'achats et de ventes en fonction de ses besoins
 	m.buys = make(map[int]*MarketBuyRequest)
 	m.sells = make(map[int]*MarketSellRequest)
 }
 
-func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellRequest, fusionHistory map[string]map[string]map[ResourceType]*MarketInteraction) {
+func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellRequest, fusionHistory map[string]map[string]map[ResourceType]*MarketInteraction) float64 {
 	executed := 0.0
 	if buy.amount >= sell.amount {
 		executed = sell.amount
 	} else {
 		executed = buy.amount
+	}
+	// On vérifie que le territoire n'a pas changé
+	if buy.from != buy.territoire.Country || sell.from != sell.territoire.Country {
+		Debug("Market", "[%s->%s] Transaction invalide de %f %s", buy.from.Name, sell.from.Name, executed, buy.resources)
+		return 0.0
+
 	}
 
 	//vérifier que le pays acheteur a assez d'argent
@@ -82,8 +95,8 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 		executed = math.Floor(buy.from.Money / m.Prices[buy.resources])
 		//get the integer part down
 		if executed <= 0 {
-			//log.Println("Transaction annulée : ", buy.from.Name, " n'a pas assez d'argent pour acheter ", executed, " ", buy.resources, " à ", sell.from.Name)
-			return
+			Debug("Market", "[%s->%s] Transaction annulée de %f %s", buy.from.Name, sell.from.Name, executed, buy.resources)
+			return 0.0
 		}
 	}
 
@@ -126,7 +139,8 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 
 	buy.territoire.Stock[buy.resources] += executed
 	sell.territoire.Stock[sell.resources] -= executed
-	log.Println("Transaction effectuée : ", buy.from.Name, " achete ", executed, " ", buy.resources, " à ", sell.from.Name, " pour ", executed*m.Prices[buy.resources])
+	Debug("Market", "[%s->%s] Transaction effectuée de %f %s pour %f", buy.from.Name, sell.from.Name, executed, buy.resources, cost)
+	m.History = append(m.History, &MarketInteraction{m.currentDay, buy.resources, executed, m.Prices[buy.resources], buy.from, sell.from})
 
 	//Add to history
 	if fusionHistory[buy.from.Name] == nil {
@@ -140,5 +154,5 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 	}
 	fusionHistory[buy.from.Name][sell.from.Name][buy.resources].Amount += executed
 
-	//m.History = append(m.History, &MarketInteraction{m.currentDay, buy.resources, executed, m.Prices[buy.resources], buy.from, sell.from})
+	return cost
 }
