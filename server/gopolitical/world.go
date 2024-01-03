@@ -95,7 +95,7 @@ func NewWorld(territories []*Territory, width int, height int) *World {
 		// Find all neighbor in area
 		for pos := range area.cover {
 			for _, near := range w.Near(pos) {
-				neighbor := area.neighbors[pos]
+				neighbor := w.territories[near]
 				if neighbor != nil {
 					area.neighbors[near] = neighbor
 				}
@@ -174,9 +174,11 @@ func (w *World) FindNeighborTerritoriesOfCountry(country *Country) map[Pos]*Terr
 			neighborTerritory := w.territories[near]
 			if neighborTerritory == nil { // Si il n'y a pas de territoire, c'est une ouverture sur la mer
 				// On marque tous les voisins à cette zones
-				area := w.maritimeAreas[near] // peut être nil ?????
+				area := w.maritimeAreas[near]
 				for posNeighbor, neighbor := range area.neighbors {
-					territories[posNeighbor] = neighbor
+					if neighbor.Country.ID != country.ID {
+						territories[posNeighbor] = neighbor
+					}
 				}
 				// Si il un territoire et qu'il n'appartient pas au pays en lui même
 			} else if neighborTerritory.Country.ID != country.ID {

@@ -137,11 +137,11 @@ func (c *Country) Percept() {
 	c.Out <- perceptRequest
 	Debug(c.Name, "Percept")
 	perceptResponse := <-c.In
-	//Downcast to a PerceptResponse
+	// Downcast to a PerceptResponse
 	if perceptResponse, ok := perceptResponse.(PerceptResponse); ok {
 		//Process the events
-		history := processMarketEvents(perceptResponse.events)
-		c.History = append(c.History, history...)
+		//D: history := processMarketEvents(perceptResponse.events)
+		//D: c.History = append(c.History, history...)
 		c.RelationManager = perceptResponse.RelationManager
 		c.PerceivedWorld = perceptResponse.World
 		c.PerceivedPrices = perceptResponse.Prices
@@ -219,12 +219,12 @@ func (c *Country) Deliberate() []Request {
 func (c *Country) MostInterestingTerritoryToAttack() *Territory {
 	// Trouve un territoire voisin avec le moins de défense et le plus de ressources
 	var bestAttackTerritory *Territory
-	bestAttackScore := 0.0
+	bestAttackScore := math.Inf(-1)
 	for _, territory := range c.PerceivedWorld.FindNeighborTerritoriesOfCountry(c) {
 		relation := c.RelationManager.GetRelation(c.ID, territory.Country.ID)
 		value := territory.MarketValue(c.PerceivedPrices)
-		stock := territory.Country.GetTotalStock()
-		attackScore := (1 / relation) * value * (1 / stock[ARMAMENT])
+		// TODO : stock := territory.Country.GetTotalStock()
+		attackScore := (1 / relation) * value // * (1 / stock[ARMAMENT])
 		if attackScore > bestAttackScore {
 			bestAttackTerritory = territory
 			bestAttackScore = attackScore

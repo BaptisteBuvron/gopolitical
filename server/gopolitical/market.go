@@ -62,7 +62,7 @@ func (m *Market) HandleRequests() {
 		}
 	}
 
-	//add fusion history to market history
+	// REMOVE ME add fusion history to market history
 	for _, country := range fusionHistory {
 		for _, country2 := range country {
 			for _, marketInteraction := range country2 {
@@ -140,7 +140,7 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 	buy.territoire.Stock[buy.resources] += executed
 	sell.territoire.Stock[sell.resources] -= executed
 	Debug("Market", "[%s->%s] Transaction effectuée de %f %s pour %f", buy.from.Name, sell.from.Name, executed, buy.resources, cost)
-	m.History = append(m.History, &MarketInteraction{m.currentDay, buy.resources, executed, m.Prices[buy.resources], buy.from, sell.from})
+	//D: m.History = append(m.History, &MarketInteraction{m.currentDay, buy.resources, executed, m.Prices[buy.resources], buy.from, sell.from})
 
 	//Add to history
 	if fusionHistory[buy.from.Name] == nil {

@@ -1,0 +1,48 @@
+@startuml Syncronization
+!define SIMULATION gopolitical.Simulation
+!define ENVIRONMENT gopolitical.Environment
+!define COUNTRY gopolitical.Country
+!define WEBSOCKET gopolitical.WebSocket
+
+
+SIMULATION -> WEBSOCKET : NewWebSocket(s)
+create WEBSOCKET
+SIMULATION -> WEBSOCKET : Start()
+activate WEBSOCKET
+create ENVIRONMENT
+SIMULATION -> ENVIRONMENT : NewEnvironment()
+activate ENVIRONMENT
+SIMULATION -> ENVIRONMENT : Start()
+activate ENVIRONMENT
+
+loop For each country
+    SIMULATION -> COUNTRY : Start()
+    activate COUNTRY
+end loop
+
+loop Forever
+    SIMULATION -> SIMULATION : incrementDay()
+    SIMULATION -> COUNTRY: wg.Wait()
+    note right
+    Wait for all countries to finish their day
+    end note
+    SIMULATION -> ENVIRONMENT : Market.HandleRequests()
+    SIMULATION -> ENVIRONMENT : UpdateStocksFromVariation()
+    SIMULATION -> ENVIRONMENT : UpdateStocksFromConsumption()
+    SIMULATION -> ENVIRONMENT : KillHungryHabitants()
+    SIMULATION -> ENVIRONMENT : BirthHabitants()
+    SIMULATION -> ENVIRONMENT : UpdateStockHistory()
+    SIMULATION -> ENVIRONMENT : UpdateMoneyHistory()
+    SIMULATION -> ENVIRONMENT : UpdateHabitantsHistory()
+    SIMULATION -> ENVIRONMENT : Percept = Market.Percept
+    SIMULATION -> ENVIRONMENT : Market.Percept = make(map[string][]Request)
+    SIMULATION -> WEBSOCKET : SendUpdate()
+    loop For each country
+        SIMULATION -> COUNTRY : c.in <- True
+        note right
+        Unblock country
+        end note
+    end loop
+end loop
+
+@enduml

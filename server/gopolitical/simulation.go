@@ -1,7 +1,6 @@
 package gopolitical
 
 import (
-	"fmt"
 	"sync"
 	"time"
 )
@@ -112,12 +111,14 @@ func (s *Simulation) Start() {
 		if expectedEndTimeDay.After(endTimeDay) {
 			time.Sleep(expectedEndTimeDay.Sub(endTimeDay))
 		}
-		// Attente optionnelle
-		if DebugEnabled() {
-			var keepGoing string
-			Debug("Simulation", "Continuer ?")
-			fmt.Scanln(&keepGoing)
-		}
+		/*
+			// Attente optionnelle
+			if DebugEnabled() {
+				var keepGoing string
+				Debug("Simulation", "Continuer ?")
+				fmt.Scanln(&keepGoing)
+			}
+		*/
 	}
 }
 

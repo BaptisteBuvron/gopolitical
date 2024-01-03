@@ -70,14 +70,18 @@ func (e *Environment) handleRequests() {
 				// On récupère les stocks d'armes des deux pays
 				defensiveArmament := req.to.Country.GetTotalStockOf(ARMAMENT)
 				offensiveArmament := req.from.GetTotalStockOf(ARMAMENT)
-				// On verify que le pays à bien de quoi attaquer
-				if offensiveArmament < req.armement {
-					Debug(req.from.Name, "[Environment] Attaque avortée de %s sur %s (%s)\n", req.to.Name, req.to.Country.Name)
+				// On vérifie que le pays à bien de quoi attaquer
+				if offensiveArmament < req.armement && req.armement > 0 && offensiveArmament > 0 {
+					Debug(req.from.Name, "[Environment] Attaque avortée sur %s (%s)\n", req.to.Name, req.to.Country.Name)
+					Respond(req.from.In, AttackResponse{})
 					continue
 				}
 				// Il n'utilisera que ce qu'il souhaite
 				offensiveArmament = req.armement
 				// Si l'attaqué a assez de ressource pour se défendre
+				if defensiveArmament < 0 {
+					defensiveArmament = 0
+				}
 				if req.armement < defensiveArmament {
 					defensiveArmament = req.armement // Il n'en utilise qu'une partie
 				}
@@ -87,8 +91,8 @@ func (e *Environment) handleRequests() {
 				req.to.Country.Consume(ARMAMENT, defensiveArmament)
 
 				// Le taux de réussite correspond à offensif / défensif avec un bonus de 10%
-				chanceOfCapture := 1 - (offensiveArmament/defensiveArmament)*0.9
-				Debug(req.from.Name, "%v attaque %v (%v) avec %.0f%% de réussite", req.to.Name, req.to.Country.Name, chanceOfCapture*100)
+				chanceOfCapture := 1 - (offensiveArmament/defensiveArmament)*0.8
+				Debug(req.from.Name, "Attaque %v (%v) avec %.0f%% de réussite", req.to.Name, req.to.Country.Name, chanceOfCapture*100)
 
 				// On récupère l'état de la relation actuelle
 				relation := e.RelationManager.GetRelation(req.from.ID, req.to.Country.ID)
@@ -165,8 +169,9 @@ func (e *Environment) ApplyRulesOfLife() {
 	for _, territory := range e.World.Territories() {
 		habitantsHungryByResource := make(map[ResourceType]int)
 		for resource, consumption := range e.ConsumptionByHabitant {
-			if territory.Stock[resource] < 0 {
-				habitantsHungry := math.Ceil(math.Abs(territory.Stock[resource]) / consumption)
+			quantity := territory.Stock[resource]
+			if quantity < 0 {
+				habitantsHungry := math.Ceil(math.Abs(quantity) / consumption)
 				habitantsHungryByResource[resource] = int(habitantsHungry)
 			}
 		}
@@ -178,7 +183,7 @@ func (e *Environment) ApplyRulesOfLife() {
 			}
 		}
 		//On tue un dixième des habitants qui ont faim
-		killedHabitants := int(math.Ceil(float64(maxHabitantsHungry) / STARVATION_RATIO))
+		killedHabitants := int(math.Ceil(float64(maxHabitantsHungry) * STARVATION_RATIO))
 		if territory.Habitants-killedHabitants <= 0 {
 			killedHabitants = territory.Habitants - 1
 		}
