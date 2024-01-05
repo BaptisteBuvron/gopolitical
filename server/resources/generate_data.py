@@ -1,5 +1,6 @@
 import json
 import random
+import faker
 from colorama import Fore, Style  # Ajout de colorama
 
 def generate_flashy_color():
@@ -8,6 +9,8 @@ def generate_flashy_color():
 
 def generate_data(num_countries, territories_per_country=10):
     data = {
+        "worldWidth": 40,
+        "worldHeight": 25,
         "secondByDay": 2.0,
         "resources": [
             {"name": "petrol", "price": 5},
@@ -24,6 +27,7 @@ def generate_data(num_countries, territories_per_country=10):
         "relations": [],
         "territories": []
     }
+    fake = faker.Faker()
 
     with open("flags_code.json", "r") as f:
         flags_code = json.load(f)
@@ -56,7 +60,7 @@ def generate_data(num_countries, territories_per_country=10):
             country_territory_coordinates = []
 
             for j in range(territories_per_country):
-                territory_name = f"Territory{j + 1}"
+                territory_name = fake.unique.city()
 
                 # Generate unique coordinates (adjacent if possible)
                 while True:
@@ -69,11 +73,11 @@ def generate_data(num_countries, territories_per_country=10):
                         dx, dy = {"North": (0, 1), "South": (0, -1), "East": (1, 0), "West": (-1, 0)}[direction]
                         territory_x, territory_y = existing_territory_coords[0] + dx, existing_territory_coords[1] + dy
                     else:
-                        territory_x = random.randint(0, 20)
-                        territory_y = random.randint(0, 20)
+                        territory_x = random.randint(0, data["worldWidth"])
+                        territory_y = random.randint(0, data["worldHeight"])
 
                     # Vérification d'unicité des coordonnées et validité des coordonnées
-                    if (territory_x, territory_y) not in unique_coordinates and 0 <= territory_x <= 20 and 0 <= territory_y <= 20:
+                    if (territory_x, territory_y) not in unique_coordinates and 0 <= territory_x < data["worldWidth"] and 0 <= territory_y < data["worldHeight"]:
                         unique_coordinates.add((territory_x, territory_y))
                         break
 
