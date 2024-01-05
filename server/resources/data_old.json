@@ -1,7 +1,7 @@
 {
   "worldWidth": 100,
   "worldHeight": 100,
-  "secondByDay": 2.0,
+  "secondByDay": 1.0,
   "resources": [
     {
       "name": "petrol",

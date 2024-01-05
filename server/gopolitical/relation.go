@@ -26,6 +26,9 @@ func NewRelationManager() *RelationManager {
 	}
 }
 
+// structure spécial permettant obtenir un couple en O(1), de l'update en O(1) et de récupérer toutes les relations d'un pays en O(Country)
+// contre O(Country*2) si on aurait utilisé une map simple
+
 // O(1)
 func (rm *RelationManager) GetRelation(country string, other string) float64 {
 	if country < other {

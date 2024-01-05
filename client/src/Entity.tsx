@@ -100,7 +100,8 @@ class Agent {
 }
 
 class Country {
-    agent: Agent;
+    id: string
+    name: string
     color: string;
     money: number;
     history: CountryEvent[];
@@ -108,7 +109,8 @@ class Country {
     flag: string;
 
     constructor(data: any) {
-        this.agent = new Agent(data.agent);
+        this.id = data.id;
+        this.name = data.name;
         this.color = data.color;
         this.money = Math.ceil(data.money)
         this.history = data.history.map((eventData: any) => new CountryEvent(eventData, this));
@@ -143,7 +145,7 @@ class Country {
 
     getTerritories(simulation: Simulation): Territory[] {
         return simulation.territories.filter(
-            (territory) => territory.country?.agent.id === this.agent.id
+            (territory) => territory.country?.id === this.id
         )
     }
 
@@ -229,8 +231,8 @@ class MarketInteraction {
         this.resourceType = data.resourceType;
         this.amount = data.amount;
         this.price = data.price;
-        this.buyer = data.buyer.agent.name;
-        this.seller = data.seller.agent.name;
+        this.buyer = data.buyer.name;
+        this.seller = data.seller.name;
     }
 }
 
@@ -246,10 +248,12 @@ class Market {
 
 class Environment {
     market : Market;
+    currentDay : number
     consumptionByHabitant: Map<string, number>;
 
     constructor(data: any) {
         this.market = new Market(data.market);
+        this.currentDay = data.currentDay
         this.consumptionByHabitant = new Map<string, number>(Object.entries(data.consumptionByHabitant))
     }
 }
@@ -263,7 +267,6 @@ class Simulation {
     currentDay: number;
 
     constructor(data: any) {
-        console.log(data)
         this.secondByDay = data.secondByDay;
         this.environment = new Environment(data.environment);
         this.territories = data.environment.world.territories.map((territoryData: any) => new Territory(territoryData));

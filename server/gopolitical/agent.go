@@ -1,13 +1,14 @@
 package gopolitical
 
-type Agent struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+type Action interface {
+	Execute(env *Environment)
 }
 
-type AgentI interface {
+type Agent interface {
 	Start()
-	Percept()
+	Percept(*Environment)
 	Deliberate()
-	Act()
+	Act() []Action
+	GetID() string
+	CleanUp(*Environment)
 }

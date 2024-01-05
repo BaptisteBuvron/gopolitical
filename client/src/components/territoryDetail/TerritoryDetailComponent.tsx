@@ -67,7 +67,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                     <div className="d-flex justify-content-between align-items-center">
                         <div className="col-10">
                             <h4 className="card-title">
-                                {country?.agent.name} | Territoire
+                                {country?.name} | Territoire
                                 <OverlayTrigger
                                     placement="right"
                                     overlay={
@@ -84,7 +84,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                             </Button>
                         </div>
                         <div className="col-2">
-                            <Image src={country.flag} alt={country?.agent.name + " flag"} fluid />
+                            <Image src={country.flag} alt={country?.name + " flag"} fluid />
                         </div>
                     </div>
                 </Modal.Header>

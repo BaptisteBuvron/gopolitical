@@ -16,11 +16,11 @@ func NewTerritory(x int, y int, name string, variations []Variation, stock map[R
 	return &Territory{x, y, name, variations, stock, make(map[int]map[ResourceType]float64), country, habitant, make(map[int]int)}
 }
 
-func (t Territory) Start() {
-
+func (t *Territory) GetPosition() Pos {
+	return Pos{t.X, t.Y}
 }
 
-func (t Territory) MarketValue(prices Prices) float64 {
+func (t *Territory) MarketValue(prices Prices) float64 {
 	totalVariation := 0.0
 	for _, variation := range t.Variations {
 		totalVariation += variation.Amount * prices[variation.Ressource]
@@ -28,11 +28,11 @@ func (t Territory) MarketValue(prices Prices) float64 {
 	return totalVariation
 }
 
-func (t *Territory) GetSurplus(daysToSecure float64) map[ResourceType]float64 {
+func (t *Territory) GetSurplus(daysToSecure float64, consumptionByHabitant map[ResourceType]float64) map[ResourceType]float64 {
 	surplus := make(map[ResourceType]float64)
 	//On garde 3 jours de surplus
 
-	for resource, consumption := range t.Country.consumptionByHabitant {
+	for resource, consumption := range consumptionByHabitant {
 		surplusAmount := t.Stock[resource] - (float64(t.Habitants)*consumption)*daysToSecure
 		if surplusAmount > 0 {
 			surplus[resource] = surplusAmount

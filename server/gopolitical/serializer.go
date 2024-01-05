@@ -69,8 +69,8 @@ func (s *PartialSimulation) ToSimulation() Simulation {
 
 	countries := make(map[string]*Country, len(s.Countries))
 	for _, country := range s.Countries {
-		in := make(Channel)
-		out := make(Channel)
+		in := make(chan *CompletePerception)
+		out := make(chan []Action)
 		//create slice of territories
 		territories := make([]*Territory, 0)
 		countries[country.ID] = NewCountry(

@@ -25,7 +25,7 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
 
     useEffect(() => {
         if (selectedCountry && simulation) {
-            let simCountry = simulation.countries.get(selectedCountry.agent.id);
+            let simCountry = simulation.countries.get(selectedCountry.id);
             if (simCountry !== undefined) {
                 setSelectedCountry(simCountry);
             }
@@ -93,7 +93,7 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                                     backgroundColor: "#" + country.color,
                                 }}></Card.Header>
                                 <Card.Body>
-                                    <Card.Title className="mb-2">{country.agent.name}</Card.Title>
+                                    <Card.Title className="mb-2">{country.name}</Card.Title>
                                     <div className="card text-start text-bg-dark mb-2">
                                         <ul className="list-group list-group-flush">
                                             <li className="list-group-item">
