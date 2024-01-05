@@ -199,17 +199,18 @@ func (w *World) IsTerritoryAttackableBy(territory *Territory, country *Country) 
 	return false
 }
 
-func (w *World) HasDirectContact(territory *Territory, country *Country) bool {
+func (w *World) CountDirectContact(territory *Territory, country *Country) int {
 	if territory.Country.ID == country.ID {
-		return false // Same country, we can't attack
+		return 0 // Same country, we can't attack
 	}
+	contact := 0
 	for _, pos := range w.Near(territory.GetPosition()) {
 		neighbor := w.territories[pos]
 		if neighbor != nil && neighbor.Country.ID == country.ID {
-			return true
+			contact += 1
 		}
 	}
-	return false
+	return contact
 }
 
 func (w *World) FindNeighborTerritoriesOfCountryWith(country *Country, other string) map[Pos]*Territory {
