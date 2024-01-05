@@ -102,9 +102,9 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
                                 />
                                 {interaction.resourceType}
                             </td>
-                            <td className="text-center">{interaction.amount}</td>
+                            <td className="text-center">{Math.ceil(interaction.amount)}</td>
                             <td className="text-center">{interaction.price}$/Unit</td>
-                            <td className="text-center">{interaction.price * interaction.amount}$</td>
+                            <td className="text-center">{interaction.price * Math.ceil(interaction.amount)}$</td>
                             <td>
                                 <Image
                                     src={countryService.getCountryByName(interaction.buyer)?.flag}
