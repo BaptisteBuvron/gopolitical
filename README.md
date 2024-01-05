@@ -2,6 +2,8 @@
 
 [![CI: Test](https://github.com/BaptisteBuvron/gopolitical/actions/workflows/test.yml/badge.svg)](https://github.com/BaptisteBuvron/gopolitical/actions/workflows/test.yml)
 
+Gopolitical is a multi-agent project developped to simulate trade and diplomatic relationships between countries.
+
 - [Subject](https://docs.google.com/document/d/1H8QpU5dTMkJEEb2nTqgMNJ84rH7QNalC8CqPTC4qPV8)
 - [Repository](https://github.com/BaptisteBuvron/gopolitical)
 
@@ -14,15 +16,15 @@ Install [Go](https://golang.org/doc/install).
 #### With git clone
 
 ```bash
-go install github.com/BaptisteBuvron/gopolitical/server@v1.0.0
+git clone https://github.com/BaptisteBuvron/gopolitical
+sudo go install .
+# Start-Process powershell -Verb runAs -ArgumentList "cd $(Get-Location); go install"
 ```
 
 #### Without git clone
 
 ```bash
-git clone https://github.com/BaptisteBuvron/gopolitical
-sudo go install .
-# Start-Process powershell -Verb runAs -ArgumentList "cd $(Get-Location); go install"
+go install github.com/BaptisteBuvron/gopolitical/server@v1.1.1
 ```
 
 #### Customization of the Simulation Instance
