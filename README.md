@@ -25,6 +25,11 @@ sudo go install .
 # Start-Process powershell -Verb runAs -ArgumentList "cd $(Get-Location); go install"
 ```
 
+#### Customization of the Simulation Instance
+
+It is possible to change the data.json file that will be interpreted by the simulation by default at launch. This file instructs the simulation about various countries, territories, stock variations, consumptions, etc.
+
+It is possible to generate a data.json file using the Python script located in /server/resources/generate_data.py.
 Run the server:
 
 ```bash

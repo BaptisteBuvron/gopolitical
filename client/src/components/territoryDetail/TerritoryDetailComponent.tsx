@@ -95,9 +95,13 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                             <ul className="list-group list-group-flush">
                                                 <li className="list-group-item">
                                                     <strong>Habitants:</strong> {territory.habitants}
-                                                    <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => setShowHabitantsEvolutionModal(true)}>
-                                                        <ClockHistory className="mb-1 me-1"></ClockHistory>Historique du nombre d'habitants
-                                                    </Button>
+                                                    <Row className="justify-content-center">
+                                                        <Col className="col-auto">
+                                                            <Button size="sm" variant="outline-dark" className="col-auto" onClick={() => setShowHabitantsEvolutionModal(true)}>
+                                                                <ClockHistory className="mb-1 me-1"></ClockHistory>Historique du nombre d'habitants
+                                                            </Button>
+                                                        </Col>
+                                                    </Row>
                                                 </li>
                                                 <li className="list-group-item">
                                                     <strong>Stocks:</strong>
@@ -147,7 +151,7 @@ function TerritoryDetailComponent(props: TerritoryDetailComponentProps) {
                                                                         >
                                                                             <img src={getResourceIconPath(variation.resource)} className="me-2" alt={variation.resource + " icon"} />
                                                                         </OverlayTrigger>
-                                                                        Value: {variation.amount}
+                                                                        Value: {Math.ceil(variation.amount)}
                                                                     </Col>
                                                                 ))}
                                                             </Row>
