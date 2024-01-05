@@ -33,7 +33,8 @@ It is possible to generate a data.json file using the Python script located in /
 Run the server:
 
 ```bash
-server
+cd server
+go run .
 ```
 
 Run tests:

@@ -8,6 +8,8 @@ def generate_flashy_color():
 
 def generate_data(num_countries, territories_per_country=10):
     data = {
+        "worldWidth": 100,
+        "worldHeight": 100,
         "secondByDay": 2.0,
         "resources": [
             {"name": "petrol", "price": 5},
