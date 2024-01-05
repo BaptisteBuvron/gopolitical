@@ -191,12 +191,21 @@ func (w *World) FindNeighborTerritoriesOfCountry(country *Country) map[Pos]*Terr
 }
 
 func (w *World) IsTerritoryAttackableBy(territory *Territory, country *Country) bool {
+	for _, t := range w.FindNeighborTerritoriesOfCountry(country) {
+		if t.X == territory.X && t.Y == territory.Y {
+			return true
+		}
+	}
+	return false
+}
+
+func (w *World) HasDirectContact(territory *Territory, country *Country) bool {
 	if territory.Country.ID == country.ID {
 		return false // Same country, we can't attack
 	}
 	for _, pos := range w.Near(territory.GetPosition()) {
 		neighbor := w.territories[pos]
-		if neighbor != nil && neighbor.Country.ID != country.ID {
+		if neighbor != nil && neighbor.Country.ID == country.ID {
 			return true
 		}
 	}

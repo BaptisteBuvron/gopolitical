@@ -180,8 +180,12 @@ func (c *Country) MostInterestingTerritoryToAttack() *Territory {
 	for _, territory := range c.Perception.env.World.FindNeighborTerritoriesOfCountry(c) {
 		relation := c.Perception.env.RelationManager.GetRelation(c.ID, territory.Country.ID)
 		value := territory.MarketValue(c.Perception.env.Market.Prices)
-		// TODO : stock := territory.Country.GetTotalStock()
-		attackScore := (1 / relation) * value // * (1 / stock[ARMAMENT])
+		armament := 1.0 // territory.Country.GetTotalStockOf(ARMAMENT)
+		bonusContact := 1.0
+		if c.Perception.env.World.HasDirectContact(territory, c) {
+			bonusContact = 10.0
+		}
+		attackScore := (1 / relation) * value * (1 / armament) * bonusContact
 		if attackScore > bestAttackScore {
 			bestAttackTerritory = territory
 			bestAttackScore = attackScore
