@@ -1,5 +1,6 @@
 import json
 import random
+import faker
 from colorama import Fore, Style  # Ajout de colorama
 
 def generate_flashy_color():
@@ -26,6 +27,7 @@ def generate_data(num_countries, territories_per_country=10):
         "relations": [],
         "territories": []
     }
+    fake = faker.Faker()
 
     with open("flags_code.json", "r") as f:
         flags_code = json.load(f)
@@ -58,7 +60,7 @@ def generate_data(num_countries, territories_per_country=10):
             country_territory_coordinates = []
 
             for j in range(territories_per_country):
-                territory_name = f"Territory{j + 1}"
+                territory_name = fake.unique.city()
 
                 # Generate unique coordinates (adjacent if possible)
                 while True:
