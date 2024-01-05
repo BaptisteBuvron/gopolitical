@@ -17,7 +17,7 @@ function CountryHabitantsEvolutionComponent({ onHide, propsCountry, simulation, 
 
     useEffect(() => {
         if (propsCountry != null) {
-            let simCountry = simulation.countries.get(propsCountry.agent.id);
+            let simCountry = simulation.countries.get(propsCountry.id);
             if (simCountry !== undefined) {
                 setCountry(simCountry);
             }
@@ -37,11 +37,11 @@ function CountryHabitantsEvolutionComponent({ onHide, propsCountry, simulation, 
         <Modal.Header className="bg-dark text-light">
             <div className="d-flex justify-content-between align-items-center col-12">
                 <div className="col-10">
-                    <h3 className="card-title mb-1">{country?.agent.name}</h3>
+                    <h3 className="card-title mb-1">{country?.name}</h3>
                     <h4 className={"text-warning"}>Evolution des habitants</h4>
                 </div>
                 <div className="col-2">
-                    <Image src={country?.flag} alt={country?.agent.name + " flag"} fluid />
+                    <Image src={country?.flag} alt={country?.name + " flag"} fluid />
                 </div>
             </div>
         </Modal.Header>

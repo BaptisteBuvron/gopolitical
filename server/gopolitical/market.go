@@ -6,54 +6,73 @@ import (
 
 type Prices map[ResourceType]float64
 
+type MarketBuyAction struct {
+	Action
+	BuyID      int
+	from       *Country
+	territoire *Territory
+	resources  ResourceType
+	amount     float64
+}
+
+func (a *MarketBuyAction) Execute(env *Environment) {
+	env.Market.RegisterBuy(a)
+}
+
+type MarketSellAction struct {
+	Action
+	SellID     int
+	from       *Country
+	territoire *Territory
+	resources  ResourceType
+	amount     float64
+}
+
+func (a *MarketSellAction) Execute(env *Environment) {
+	env.Market.RegisterSell(a)
+}
+
 type Market struct {
 	Env        *Environment `json:"-"`
-	sells      map[int]*MarketSellRequest
-	buys       map[int]*MarketBuyRequest
+	sells      map[int]*MarketSellAction
+	buys       map[int]*MarketBuyAction
 	Prices     Prices `json:"prices"`
 	IdSell     int
 	IdBuy      int
-	Percept    map[string][]Request `json:"-"`
-	History    []*MarketInteraction `json:"history"`
+	History    []*MarketInteractionEvent `json:"history"`
 	currentDay int
 }
 
-func NewMarket(prices Prices, percept map[string][]Request) *Market {
-	return &Market{nil, make(map[int]*MarketSellRequest), make(map[int]*MarketBuyRequest), prices, 0, 0, percept, []*MarketInteraction{}, 0}
-}
-
-func (m *Market) handleRequest(req MarketRequest) {
-	switch req := req.(type) {
-	case MarketBuyRequest:
-		m.handleBuyRequest(&req)
-	case MarketSellRequest:
-		m.handleSellRequest(&req)
-	default:
-	}
-}
-
-func (m *Market) handleBuyRequest(req *MarketBuyRequest) {
-	m.buys[m.IdBuy] = req
-	req.BuyID = m.IdBuy
-	m.IdBuy++
-}
-
-func (m *Market) handleSellRequest(req *MarketSellRequest) {
-	m.sells[m.IdSell] = req
-	req.SellID = m.IdSell
+func (m *Market) RegisterBuy(buy *MarketBuyAction) {
+	m.buys[m.IdBuy] = buy
+	buy.BuyID = m.IdSell
 	m.IdSell++
 }
 
-func UpdateRelation(cost float64) {
-
+func (m *Market) RegisterSell(sell *MarketSellAction) {
+	m.sells[m.IdSell] = sell
+	sell.SellID = m.IdSell
+	m.IdSell++
+}
+func NewMarket(prices Prices) *Market {
+	return &Market{
+		nil,
+		make(map[int]*MarketSellAction),
+		make(map[int]*MarketBuyAction),
+		prices,
+		0,
+		0,
+		[]*MarketInteractionEvent{},
+		0,
+	}
 }
 
 func (m *Market) HandleRequests() {
-	fusionHistory := make(map[string]map[string]map[ResourceType]*MarketInteraction)
+	fusionHistory := make(map[string]map[string]map[ResourceType]*MarketInteractionEvent)
 	for _, buy := range m.buys {
 		for _, sell := range m.sells {
 			if buy.resources == sell.resources && buy.from != sell.from {
-				cost := m.handleTransaction(buy, sell, fusionHistory)
+				cost := m.HandleTransaction(buy, sell, fusionHistory)
 				if cost != 0.0 { // Optimization: Don't update if zero
 					relation := m.Env.RelationManager.GetRelation(buy.from.ID, sell.from.ID)
 					m.Env.RelationManager.UpdateRelation(buy.from.ID, sell.from.ID, relation+cost)
@@ -63,7 +82,7 @@ func (m *Market) HandleRequests() {
 	}
 
 	//remove history higher than 4 days
-	newHistory := make([]*MarketInteraction, 0)
+	newHistory := make([]*MarketInteractionEvent, 0)
 	for _, country := range m.History {
 		if country.DateTransaction >= m.currentDay-4 {
 			newHistory = append(newHistory, country)
@@ -80,11 +99,15 @@ func (m *Market) HandleRequests() {
 		}
 	}
 	//on vide les listes d'achats et de ventes pour le prochain tour => le pays recalculera au prochain tour ses ordres d'achats et de ventes en fonction de ses besoins
-	m.buys = make(map[int]*MarketBuyRequest)
-	m.sells = make(map[int]*MarketSellRequest)
+	m.buys = make(map[int]*MarketBuyAction)
+	m.sells = make(map[int]*MarketSellAction)
 }
 
-func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellRequest, fusionHistory map[string]map[string]map[ResourceType]*MarketInteraction) float64 {
+func (m *Market) HandleTransaction(
+	buy *MarketBuyAction,
+	sell *MarketSellAction,
+	fusionHistory map[string]map[string]map[ResourceType]*MarketInteractionEvent,
+) float64 {
 	executed := 0.0
 	if buy.amount >= sell.amount {
 		executed = sell.amount
@@ -135,12 +158,6 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 
 	}
 
-	//on envoie la reponse au pays acheteur
-	m.Percept[buy.from.Name] = append(m.Percept[buy.from.Name], MarketBuyResponse{new(Request), "buyEvent", m.currentDay, buy.resources, sell.from.Name, executed, executed * m.Prices[buy.resources]})
-	//on envoie la reponse au pays vendeur
-
-	m.Percept[sell.from.Name] = append(m.Percept[sell.from.Name], MarketSellResponse{new(Request), "sellEvent", m.currentDay, sell.resources, buy.from.Name, executed, executed * m.Prices[sell.resources]})
-
 	//on met à jour les stocks des pays et leur argent
 	cost := executed * m.Prices[buy.resources]
 	buy.from.Money -= cost
@@ -151,17 +168,20 @@ func (m *Market) handleTransaction(buy *MarketBuyRequest, sell *MarketSellReques
 	Debug("Market", "[%s->%s] Transaction effectuée de %f %s pour %f", buy.from.Name, sell.from.Name, executed, buy.resources, cost)
 	//D: m.History = append(m.History, &MarketInteraction{m.currentDay, buy.resources, executed, m.Prices[buy.resources], buy.from, sell.from})
 
+	buyer := buy.from.Name
+	seller := sell.from.Name
 	//Add to history
-	if fusionHistory[buy.from.Name] == nil {
-		fusionHistory[buy.from.Name] = make(map[string]map[ResourceType]*MarketInteraction)
+	if fusionHistory[buyer] == nil {
+		fusionHistory[buyer] = make(map[string]map[ResourceType]*MarketInteractionEvent)
 	}
-	if fusionHistory[buy.from.Name][sell.from.Name] == nil {
-		fusionHistory[buy.from.Name][sell.from.Name] = make(map[ResourceType]*MarketInteraction)
+	if fusionHistory[buyer][seller] == nil {
+		fusionHistory[buyer][seller] = make(map[ResourceType]*MarketInteractionEvent)
 	}
-	if fusionHistory[buy.from.Name][sell.from.Name][buy.resources] == nil {
-		fusionHistory[buy.from.Name][sell.from.Name][buy.resources] = &MarketInteraction{m.currentDay, buy.resources, 0, m.Prices[buy.resources], buy.from, sell.from}
+	if fusionHistory[buyer][seller][buy.resources] == nil {
+		record := &MarketInteractionEvent{m.currentDay, buy.resources, 0, m.Prices[buy.resources], buy.from, sell.from}
+		fusionHistory[buyer][seller][buy.resources] = record
 	}
-	fusionHistory[buy.from.Name][sell.from.Name][buy.resources].Amount += executed
+	fusionHistory[buyer][seller][buy.resources].Amount += executed
 
 	return cost
 }

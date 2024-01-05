@@ -190,6 +190,19 @@ func (w *World) FindNeighborTerritoriesOfCountry(country *Country) map[Pos]*Terr
 	return territories
 }
 
+func (w *World) IsTerritoryAttackableBy(territory *Territory, country *Country) bool {
+	if territory.Country.ID == country.ID {
+		return false // Same country, we can't attack
+	}
+	for _, pos := range w.Near(territory.GetPosition()) {
+		neighbor := w.territories[pos]
+		if neighbor != nil && neighbor.Country.ID != country.ID {
+			return true
+		}
+	}
+	return false
+}
+
 func (w *World) FindNeighborTerritoriesOfCountryWith(country *Country, other string) map[Pos]*Territory {
 	territories := make(map[Pos]*Territory)
 	for pos, territory := range w.FindNeighborTerritoriesOfCountry(country) {

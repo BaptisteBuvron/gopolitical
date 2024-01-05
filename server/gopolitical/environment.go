@@ -2,8 +2,6 @@ package gopolitical
 
 import (
 	"math"
-	"math/rand"
-	"time"
 )
 
 type Environment struct {
@@ -11,114 +9,60 @@ type Environment struct {
 	World                 *World                   `json:"world"`
 	RelationManager       *RelationManager         `json:"-"`
 	Market                *Market                  `json:"market"`
-	RandomGenerator       *rand.Rand               `json:"-"`
-	Percept               map[string][]Request     `json:"-"`
+	Agents                map[string]Agent         `json:"-"`
 	ConsumptionByHabitant map[ResourceType]float64 `json:"consumptionByHabitant"`
+	CurrentDay            int                      `json:"currentDay"`
 }
 
 func NewEnvironment(worldWidth int, worldHeight int, countries map[string]*Country, territories []*Territory, prices Prices, consumptionsByHabitant map[ResourceType]float64) *Environment {
 	//Map des perceptions que reçoivent les pays à chaque tour
-	percept := make(map[string][]Request)
-	for _, country := range countries {
-		percept[country.Name] = []Request{}
-	}
 	env := &Environment{
 		Countries:             countries,
 		World:                 NewWorld(territories, worldWidth, worldHeight),
 		RelationManager:       NewRelationManager(),
-		Market:                NewMarket(prices, percept),
-		Percept:               percept,
+		Market:                NewMarket(prices),
 		ConsumptionByHabitant: consumptionsByHabitant,
+		CurrentDay:            1,
 	}
 	env.Market.Env = env
 
-	randomSource := rand.NewSource(time.Now().UnixNano())
-	env.RandomGenerator = rand.New(randomSource)
+	// We have only countries as agents
+	env.Agents = make(map[string]Agent, len(env.Countries))
+	for _, country := range env.Countries {
+		env.Agents[country.ID] = country
+	}
 	return env
 }
 
-func (e *Environment) Start() {
-	Debug("Environment", "Start")
-	for {
-		e.handleRequests()
+func (e *Environment) HandleActions(actions []Action) {
+	// Permet de ne pas priorisé un agents
+	random.Shuffle(len(actions), func(i, j int) {
+		actions[i], actions[j] = actions[j], actions[i]
+	})
+	// Les requêtes s’exécute dans le contexte de l'environnement
+	for _, action := range actions {
+		action.Execute(e)
 	}
 }
 
-func (e *Environment) handleRequests() {
-	// No need to lock
-	for _, country := range e.Countries {
-		select {
-		case req := <-country.Out:
-			//Try downcasting
-			switch req := req.(type) {
-			case MarketBuyRequest, MarketSellRequest:
-				e.Market.handleRequest(req)
-				Respond(country.In, req)
-				break
-			case PerceptRequest:
-				fromCountry := req.from
-				responsePercept := PerceptResponse{events: e.Percept[fromCountry.Name]}
-				e.Percept[fromCountry.Name] = []Request{}
-				responsePercept.RelationManager = e.RelationManager
-				responsePercept.World = e.World
-				responsePercept.Prices = e.Market.Prices
-				Respond(fromCountry.In, responsePercept)
-				break
-			case AttackRequest:
-				// TODO: verifier que les pays sont bien voisins au moments de l'attaques
-				// TODO: Pas grave si il se trompe, il y aura du tire allié
-				// On récupère les stocks d'armes des deux pays
-				defensiveArmament := req.to.Country.GetTotalStockOf(ARMAMENT)
-				offensiveArmament := req.from.GetTotalStockOf(ARMAMENT)
-				// On vérifie que le pays à bien de quoi attaquer
-				if offensiveArmament < req.armement && req.armement > 0 && offensiveArmament > 0 {
-					Debug(req.from.Name, "[Environment] Attaque avortée sur %s (%s)\n", req.to.Name, req.to.Country.Name)
-					Respond(req.from.In, AttackResponse{})
-					continue
-				}
-				// Il n'utilisera que ce qu'il souhaite
-				offensiveArmament = req.armement
-				// Si l'attaqué a assez de ressource pour se défendre
-				if defensiveArmament < 0 {
-					defensiveArmament = 0
-				}
-				if req.armement < defensiveArmament {
-					defensiveArmament = req.armement // Il n'en utilise qu'une partie
-				}
+func (e *Environment) Update() {
+	// On fait correspondre les ordres d'achats et de ventes
+	e.Market.HandleRequests()
 
-				// Il font une bataille donc il consomme de l'armement
-				req.from.Consume(ARMAMENT, offensiveArmament)
-				req.to.Country.Consume(ARMAMENT, defensiveArmament)
+	// Mettre à jour les stocks des territoires à partir des variations
+	e.UpdateStocksFromVariation()
 
-				// Le taux de réussite correspond à offensif / défensif avec un bonus de 10%
-				chanceOfCapture := 1 - (offensiveArmament/defensiveArmament)*0.8
-				Debug(req.from.Name, "Attaque %v (%v) avec %.0f%% de réussite", req.to.Name, req.to.Country.Name, chanceOfCapture*100)
+	// Mettre à jour les stocks des territoires à partir des consommations des habitants
+	e.UpdateStocksFromConsumption()
+	e.ApplyRulesOfLife()
 
-				// On récupère l'état de la relation actuelle
-				relation := e.RelationManager.GetRelation(req.from.ID, req.to.Country.ID)
-				attackedCountry := req.to.Country
-				if chanceOfCapture > e.RandomGenerator.Float64() { // L'attaque a réussi
-					relation = relation / 3
-					req.to.TransfertProperty(req.from)
-					Debug("Environment", "Capturé !")
-				} else { // L'attaque a échoué
-					relation = relation * 2 / 3
-					Debug("Environment", "Échec !")
-				}
-				e.RelationManager.UpdateRelation(req.from.ID, attackedCountry.ID, relation)
-				Respond(req.from.In, AttackResponse{})
-				break
-			default:
-				Debug("Environment", "Une requête n'a pas pu être traitée")
-			}
-			//respond to indicate the request was handled
-		default:
-		}
-	}
-}
+	//Add history
+	e.UpdateStockHistory()
+	e.UpdateMoneyHistory()
+	e.UpdateHabitantsHistory()
 
-func Respond(toChannel Channel, res Request) {
-	toChannel <- res
+	e.CurrentDay += 1
+
 }
 
 func (e *Environment) UpdateStocksFromVariation() {
@@ -141,26 +85,26 @@ func (e *Environment) UpdateStocksFromConsumption() {
 	}
 }
 
-func (e *Environment) UpdateStockHistory(currentDay int) {
+func (e *Environment) UpdateStockHistory() {
 	for _, territory := range e.World.Territories() {
 		// copy stock
 		copyStock := make(map[ResourceType]float64)
 		for k, v := range territory.Stock {
 			copyStock[k] = v
 		}
-		territory.StockHistory[currentDay] = copyStock
+		territory.StockHistory[e.CurrentDay] = copyStock
 	}
 }
 
-func (e *Environment) UpdateMoneyHistory(currentDay int) {
+func (e *Environment) UpdateMoneyHistory() {
 	for _, country := range e.Countries {
-		country.MoneyHistory[currentDay] = country.Money
+		country.MoneyHistory[e.CurrentDay] = country.Money
 	}
 }
 
-func (e *Environment) UpdateHabitantsHistory(day int) {
+func (e *Environment) UpdateHabitantsHistory() {
 	for _, territory := range e.World.Territories() {
-		territory.HabitantsHistory[day] = territory.Habitants
+		territory.HabitantsHistory[e.CurrentDay] = territory.Habitants
 	}
 }
 

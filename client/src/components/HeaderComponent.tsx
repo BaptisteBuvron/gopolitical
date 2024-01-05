@@ -33,7 +33,7 @@ function HeaderComponent({simulation}: HeaderComponentProps) {
                         simulation !== undefined && (
                             <div>
                                 <Navbar.Text>
-                                    Jour : <b>{simulation.currentDay}</b>
+                                    Jour : <b>{simulation.environment.currentDay}</b>
                                 </Navbar.Text>
                             </div>
                         )

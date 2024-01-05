@@ -2,8 +2,10 @@ package gopolitical
 
 import (
 	"log"
+	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 func PositiveModulus(a, b int) int {
@@ -33,3 +35,6 @@ func DebugEnabled() bool {
 	envVariable := os.Getenv("GOPOLITICAL_DEBUG")
 	return envVariable != "" && envVariable != "0"
 }
+
+// Global random generator
+var random = rand.New(rand.NewSource(time.Now().UnixNano()))

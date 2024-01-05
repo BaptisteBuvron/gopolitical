@@ -35,7 +35,7 @@ function TerritoryStockEvolutionComponent({ onHide, propsTerritory, simulation, 
                 <div className="d-flex justify-content-between align-items-center col-12">
                     <div className="col-10">
                         <h3 className="card-title">
-                            {country?.agent.name} | Territoire
+                            {country?.name} | Territoire
                             <OverlayTrigger
                                 placement="right"
                                 overlay={
@@ -50,7 +50,7 @@ function TerritoryStockEvolutionComponent({ onHide, propsTerritory, simulation, 
                         <h4 className={"text-warning"}>Evolution des stocks</h4>
                     </div>
                     <div className="col-2">
-                        <Image src={country?.flag} alt={country?.agent.name + " flag"} fluid />
+                        <Image src={country?.flag} alt={country?.name + " flag"} fluid />
                     </div>
                 </div>
             </Modal.Header>
