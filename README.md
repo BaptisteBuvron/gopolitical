@@ -4,8 +4,16 @@
 
 Gopolitical is a multi-agent project developped to simulate trade and diplomatic relationships between countries.
 
+- [Presentation](https://github.com/BaptisteBuvron/gopolitical/blob/527804f57558f642c1d0124dd35ae677e1a682bb/AI30%20-%20Pr%C3%A9sentation.pdf)
 - [Subject](https://docs.google.com/document/d/1H8QpU5dTMkJEEb2nTqgMNJ84rH7QNalC8CqPTC4qPV8)
 - [Repository](https://github.com/BaptisteBuvron/gopolitical)
+
+## Changement depuis la dernière version
+
+- L'environnement n'est plus lancé dans un thread.
+- La simulation exécute les actions des agents après que l'ensemble des agents aient donné leurs actions
+- Moins de bugs de concurrence
+- Les pays choisissent en priorité les pays proches à attaquer
 
 ## Installation
 
@@ -21,12 +29,6 @@ sudo go install .
 # Start-Process powershell -Verb runAs -ArgumentList "cd $(Get-Location); go install"
 ```
 
-#### Without git clone
-
-```bash
-go install github.com/BaptisteBuvron/gopolitical/server@v1.1.1
-```
-
 #### Customization of the Simulation Instance
 
 It is possible to change the `/server/resources/data.json` file that will be interpreted by the simulation by default at launch. This file instructs the simulation about various countries, territories, stock variations, consumptions, etc.
@@ -37,6 +39,7 @@ Run the server:
 
 ```bash
 cd server
+# $env:GOPOLITICAL_DEBUG=0
 go run .
 ```
 
@@ -53,21 +56,4 @@ go tool cover '-html=coverage.txt'
 cd client
 npm i
 npm run start
-```
-
-## Loop
-
-```mermaid
-flowchart TB
-    s1[Territory\ngenerate ressources and add them to country]
-    s2[Countries\nsell their object by sending request to environnement]
-    s3[Countries\nbuy what they need by sending request to environnement]
-    s4[Environnement\nmake transaction]
-    s5[Countries\nevaluate their new relations]
-
-    s1 --> s2
-    s2 --> s3
-    s3 --> s4
-    s4 --> s5
-    s5 --> s1
 ```
