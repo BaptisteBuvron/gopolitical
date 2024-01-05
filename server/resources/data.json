@@ -101,7 +101,7 @@
     {
       "name": "Romania",
       "id": "ro",
-      "color": "44C",
+      "color": "48C",
       "money": 683.7546362771865,
       "flag": "https://www.flagcdn.com/256x192/ro.png"
     },
@@ -2724,8 +2724,8 @@
       ]
     },
     {
-      "x": 35,
-      "y": 14,
+      "x": 10,
+      "y": 22,
       "country": "nl",
       "name": "West Carolyn",
       "habitants": 13,
@@ -2767,8 +2767,8 @@
       ]
     },
     {
-      "x": 35,
-      "y": 15,
+      "x": 11,
+      "y": 22,
       "country": "nl",
       "name": "Port Michael",
       "habitants": 48,
@@ -2810,8 +2810,8 @@
       ]
     },
     {
-      "x": 35,
-      "y": 16,
+      "x": 11,
+      "y": 23,
       "country": "nl",
       "name": "South Lindaview",
       "habitants": 46,
@@ -2853,8 +2853,8 @@
       ]
     },
     {
-      "x": 35,
-      "y": 17,
+      "x": 12,
+      "y": 23,
       "country": "nl",
       "name": "Kimberlybury",
       "habitants": 26,
@@ -2892,264 +2892,6 @@
         {
           "name": "armement",
           "value": 5
-        }
-      ]
-    },
-    {
-      "x": 34,
-      "y": 16,
-      "country": "nl",
-      "name": "Lake Timothy",
-      "habitants": 23,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 77
-        },
-        {
-          "name": "water",
-          "value": 85
-        },
-        {
-          "name": "food",
-          "value": 67
-        },
-        {
-          "name": "armement",
-          "value": 55
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 19
-        },
-        {
-          "name": "water",
-          "value": 20
-        },
-        {
-          "name": "food",
-          "value": 18
-        },
-        {
-          "name": "armement",
-          "value": 8
-        }
-      ]
-    },
-    {
-      "x": 36,
-      "y": 15,
-      "country": "nl",
-      "name": "East Mark",
-      "habitants": 46,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 132
-        },
-        {
-          "name": "water",
-          "value": 181
-        },
-        {
-          "name": "food",
-          "value": 135
-        },
-        {
-          "name": "armement",
-          "value": 140
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 19
-        },
-        {
-          "name": "water",
-          "value": 18
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 8
-        }
-      ]
-    },
-    {
-      "x": 34,
-      "y": 17,
-      "country": "nl",
-      "name": "Calebton",
-      "habitants": 32,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 110
-        },
-        {
-          "name": "water",
-          "value": 107
-        },
-        {
-          "name": "food",
-          "value": 128
-        },
-        {
-          "name": "armement",
-          "value": 80
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 23
-        },
-        {
-          "name": "water",
-          "value": 24
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 10
-        }
-      ]
-    },
-    {
-      "x": 33,
-      "y": 16,
-      "country": "nl",
-      "name": "Alvaradofurt",
-      "habitants": 15,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 55
-        },
-        {
-          "name": "water",
-          "value": 35
-        },
-        {
-          "name": "food",
-          "value": 32
-        },
-        {
-          "name": "armement",
-          "value": 40
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 15
-        },
-        {
-          "name": "water",
-          "value": 23
-        },
-        {
-          "name": "food",
-          "value": 15
-        },
-        {
-          "name": "armement",
-          "value": 6
-        }
-      ]
-    },
-    {
-      "x": 36,
-      "y": 14,
-      "country": "nl",
-      "name": "West Tracy",
-      "habitants": 12,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 41
-        },
-        {
-          "name": "water",
-          "value": 36
-        },
-        {
-          "name": "food",
-          "value": 47
-        },
-        {
-          "name": "armement",
-          "value": 29
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 16
-        },
-        {
-          "name": "water",
-          "value": 16
-        },
-        {
-          "name": "food",
-          "value": 17
-        },
-        {
-          "name": "armement",
-          "value": 8
-        }
-      ]
-    },
-    {
-      "x": 36,
-      "y": 16,
-      "country": "nl",
-      "name": "South Alexandra",
-      "habitants": 34,
-      "stocks": [
-        {
-          "name": "petrol",
-          "value": 75
-        },
-        {
-          "name": "water",
-          "value": 136
-        },
-        {
-          "name": "food",
-          "value": 71
-        },
-        {
-          "name": "armement",
-          "value": 123
-        }
-      ],
-      "variations": [
-        {
-          "name": "petrol",
-          "value": 16
-        },
-        {
-          "name": "water",
-          "value": 17
-        },
-        {
-          "name": "food",
-          "value": 20
-        },
-        {
-          "name": "armement",
-          "value": 10
         }
       ]
     },
@@ -3545,6 +3287,49 @@
       "y": 21,
       "country": "mp",
       "name": "Amymouth",
+      "habitants": 43,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 140
+        },
+        {
+          "name": "water",
+          "value": 168
+        },
+        {
+          "name": "food",
+          "value": 104
+        },
+        {
+          "name": "armement",
+          "value": 97
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 23
+        },
+        {
+          "name": "water",
+          "value": 21
+        },
+        {
+          "name": "food",
+          "value": 18
+        },
+        {
+          "name": "armement",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "x": 13,
+      "y": 24,
+      "country": "mp",
+      "name": "Amymouth beach",
       "habitants": 43,
       "stocks": [
         {
@@ -4405,6 +4190,49 @@
       "y": 21,
       "country": "ro",
       "name": "Port Edgar",
+      "habitants": 23,
+      "stocks": [
+        {
+          "name": "petrol",
+          "value": 82
+        },
+        {
+          "name": "water",
+          "value": 59
+        },
+        {
+          "name": "food",
+          "value": 57
+        },
+        {
+          "name": "armement",
+          "value": 86
+        }
+      ],
+      "variations": [
+        {
+          "name": "petrol",
+          "value": 17
+        },
+        {
+          "name": "water",
+          "value": 18
+        },
+        {
+          "name": "food",
+          "value": 22
+        },
+        {
+          "name": "armement",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "x": 9,
+      "y": 21,
+      "country": "ro",
+      "name": "Port Maritime",
       "habitants": 23,
       "stocks": [
         {
