@@ -117,6 +117,15 @@ func (c *Country) Start() {
 		c.WgStart.Wait()
 		Debug(c.Name, "Commence ses actions")
 
+		//remove history higher than 4 days
+		newHistory := make([]Event, 0)
+		for _, country := range c.History {
+			if country.(TransferResourceEvent).Day >= c.CurrentDay-4 {
+				newHistory = append(newHistory, country)
+			}
+		}
+		c.History = newHistory
+
 		c.Percept()
 		requests := c.Deliberate()
 		c.Act(requests)

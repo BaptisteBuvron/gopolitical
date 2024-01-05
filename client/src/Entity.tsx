@@ -29,7 +29,7 @@ class MarketSellEvent implements EventType{
 
     constructor(data: any) {
         this.resource = data.resourceType;
-        this.amount = data.amountExecuted;
+        this.amount = Math.ceil(data.amountExecuted);
         this.gain = data.gain;
         this.to = data.to;
     }
@@ -43,7 +43,7 @@ class MarketBuyEvent implements EventType{
 
     constructor(data: any) {
         this.resource = data.resourceType;
-        this.amount = data.amountExecuted;
+        this.amount = Math.ceil(data.amountExecuted);
         this.cost = data.cost;
         this.from = data.from;
     }

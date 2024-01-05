@@ -127,7 +127,7 @@ function CountriesComponent({simulation}: CountriesComponentProps) {
                                                             >
                                                                 <img src={getResourceIconPath(resource)} className="me-2" alt={resource + " icon"} />
                                                             </OverlayTrigger>
-                                                            Value: {quantity}
+                                                            Value: {Math.floor(quantity)}
                                                         </li>
                                                     ))}
                                                     <li style={{listStyle: "none"}}>

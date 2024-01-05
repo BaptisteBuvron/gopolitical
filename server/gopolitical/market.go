@@ -62,7 +62,16 @@ func (m *Market) HandleRequests() {
 		}
 	}
 
-	// REMOVE ME add fusion history to market history
+	//remove history higher than 4 days
+	newHistory := make([]*MarketInteraction, 0)
+	for _, country := range m.History {
+		if country.DateTransaction >= m.currentDay-4 {
+			newHistory = append(newHistory, country)
+		}
+	}
+	m.History = newHistory
+
+	//add fusion history to market history
 	for _, country := range fusionHistory {
 		for _, country2 := range country {
 			for _, marketInteraction := range country2 {
