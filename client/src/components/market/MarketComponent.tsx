@@ -47,21 +47,7 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
         });
 
     const pagesCount = Math.ceil(sortedMarketHistory.length / itemsPerPage);
-    const visiblePages = Array.from({ length: Math.min(3, pagesCount) }, (_, index) => index + 1);
 
-    const nextPage = () => {
-        if (currentPage < pagesCount) {
-            setCurrentPage(currentPage + 1);
-        }
-    };
-
-    const prevPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
-
-    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
     const handleResourceSelect = (resource: string | null) => setSelectedResource(resource);
     const handleBuyerSelect = (buyer: string | null) => setSelectedBuyer(buyer);
     const handleSellerSelect = (seller: string | null) => setSelectedSeller(seller);
@@ -116,9 +102,9 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
                                 />
                                 {interaction.resourceType}
                             </td>
-                            <td className="text-center">{interaction.amount}</td>
+                            <td className="text-center">{Math.ceil(interaction.amount)}</td>
                             <td className="text-center">{interaction.price}$/Unit</td>
-                            <td className="text-center">{interaction.price * interaction.amount}$</td>
+                            <td className="text-center">{interaction.price * Math.ceil(interaction.amount)}$</td>
                             <td>
                                 <Image
                                     src={countryService.getCountryByName(interaction.buyer)?.flag}
@@ -142,34 +128,32 @@ const MarketComponent: React.FC<MarketComponentProps> = ({ simulation }) => {
                 </tbody>
             </Table>
 
-            <div className="d-flex justify-content-center">
-                <Pagination>
-                    <Pagination.Prev onClick={prevPage} />
-                    {visiblePages.map((pageNumber) => (
-                        <Pagination.Item
-                            key={pageNumber}
-                            active={pageNumber === currentPage}
-                            onClick={() => paginate(pageNumber)}
-                        >
-                            {pageNumber}
-                        </Pagination.Item>
-                    ))}
-                    {currentPage < pagesCount - 2 && (
-                        <Pagination.Ellipsis disabled />
-                    )}
-                    {currentPage < pagesCount - 1 && (
-                        <Pagination.Item onClick={() => paginate(currentPage + 1)}>
-                            {currentPage + 1}
-                        </Pagination.Item>
-                    )}
-                    {currentPage < pagesCount && (
-                        <Pagination.Item onClick={() => paginate(currentPage + 2)}>
-                            {currentPage + 2}
-                        </Pagination.Item>
-                    )}
-                    <Pagination.Next onClick={nextPage} />
-                </Pagination>
-            </div>
+            {pagesCount > 1 && (
+                <div className="d-flex justify-content-center align-items-center">
+                    <Pagination>
+                        <Pagination.Prev
+                            disabled={currentPage === 1}
+                            onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
+                        />
+                        {Array.from({ length: Math.min(pagesCount, 5) }, (_, index) => {
+                            const startPage = Math.max(1, currentPage - 2);
+                            return (
+                                <Pagination.Item
+                                    key={startPage + index}
+                                    active={startPage + index === currentPage}
+                                    onClick={() => setCurrentPage(startPage + index)}
+                                >
+                                    {startPage + index}
+                                </Pagination.Item>
+                            );
+                        })}
+                        <Pagination.Next
+                            disabled={currentPage === pagesCount}
+                            onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
+                        />
+                    </Pagination>
+                </div>
+            )}
         </Col>
     );
 
