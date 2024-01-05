@@ -50,12 +50,8 @@ func (ws *WebSocket) handleWebSocket(writer http.ResponseWriter, request *http.R
 	// Ajouter la nouvelle connexion à la liste des clients
 	ws.mu.Lock()
 	ws.Clients[conn] = struct{}{}
-
-	// Envoyer la simulation actuelle à la nouvelle connexion
-	simulationJSON, _ := json.Marshal(ws.Simulation)
-	conn.WriteMessage(websocket.TextMessage, simulationJSON)
-
 	ws.mu.Unlock()
+
 	Debug("Websocket", "Connection au client")
 
 	// Attendre des mises à jour depuis la connexion
